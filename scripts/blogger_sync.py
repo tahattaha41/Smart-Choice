@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """
-مزامنة ملفات posts/*.md مع مدونة بلوجر عبر Blogger API v3.
+Smart Choice — مزامنة محتوى Blogger
+
+مزامنة ملفات posts/*.md مع مدونة Smart Choice على بلوجر عبر Blogger API v3.
 
 كل ملف مقال شكله:
 

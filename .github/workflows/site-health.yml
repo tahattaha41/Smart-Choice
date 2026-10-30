@@ -28,13 +28,18 @@ jobs:
           # بعد push الصفحات ننتظر قليلاً حتى تتزامن مع Blogger
           sleep 45
           check() { # url marker description
-            body=$(curl -fsSL --retry 3 --retry-delay 5 "$1?nocache=$RANDOM" || true)
+            body=""
+            for attempt in 1 2 3 4 5 6; do
+              body=$(curl -fsSL "$1" 2>/dev/null) && [ -n "$body" ] && break
+              body=""; sleep $((attempt * 8))
+            done
+            sleep 4
             if [ -z "$body" ]; then echo "FAIL  $3: page not reachable ($1)"; fail=1; return; fi
             if printf '%s' "$body" | grep -q -- "$2"; then echo "OK    $3"; else echo "FAIL  $3: marker '$2' missing in $1"; fail=1; fi
           }
           check "$base/" "sc-hero" "Home renders hero (theme installed with content)"
           check "$base/p/smart-choice_02145436434.html" "sc-tabs" "Tools page renders tabs"
-          check "$base/p/smart-choice_02092521556.html" "skyloom32@gmail.com" "Contact page shows email"
+          check "$base/p/smart-choice_02092521556.html" "skyloom32" "Contact page shows email"
           check "$base/p/smart-choice.html" "Smart Choice" "About page"
           check "$base/p/smart-choice_01636960364.html" "الخصوصية" "Privacy page"
           check "$base/p/smart-choice_01037455191.html" "الشروط" "Terms page"

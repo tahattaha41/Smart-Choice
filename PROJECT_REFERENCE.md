@@ -152,3 +152,23 @@
 - ما لم يمكن اختباره بعد: إنشاء جلسة Browser Run حقيقية أو فتح Blogger داخلها أو تسجيل الدخول أو رفع XML؛ يتطلب ذلك حساب Cloudflare وAPI Token بصلاحية Browser Rendering - Edit. لم تُنشأ موارد أو تُستخدم بيانات دخول.
 - النتيجة: إثبات أن البنية التقنية للمتصفح السحابي موجودة، وليس إثبات أن نشر قالب Blogger سينجح. لا ننصح المستخدم بإنشاء حساب أو إضافة وسيلة دفع قبل قبول هذا الاحتمال؛ يمكن بدء اختبار مجاني محدود إذا قرر المتابعة.
 - المصادر الرسمية: https://developers.cloudflare.com/browser-run/get-started/ ، https://developers.cloudflare.com/browser-run/limits/ ، https://developers.cloudflare.com/browser-run/playwright/ ، https://developers.cloudflare.com/browser-run/faq/ .
+
+
+### 2026-10-30 — تنفيذ تحديث التصميم والوظائف من GitHub مع الإبقاء على Blogger
+- موافقة المستخدم: اعتماد أن يظل Blogger هو الاستضافة، مع إدارة ملفات التصميم والوظائف المشتركة من GitHub وتحديثها دون إعادة رفع القالب لكل تعديل.
+- التنفيذ في المستودع:
+  - استخراج CSS الحالي من `theme/smart-choice-blogger.xml` إلى `assets/css/smart-choice.css` دون تغيير قواعد التصميم.
+  - إنشاء `assets/js/smart-choice.js` كملف مشترك أولي؛ لم ننقل وظائف الحاسبات الخاصة بصفحة الأدوات حتى الآن لتجنب كسرها قبل مراجعتها.
+  - تعديل مصدر XML ليحمّل CSS وJavaScript من jsDelivr المرتبط بفرع main.
+  - إنشاء Workflow `.github/workflows/frontend-assets.yml` لفحص الملفات، والتحقق من JavaScript، وطلب مسح ذاكرة CDN ثم التحقق من توفر الملفات.
+- الالتزامات:
+  - CSS: `9dc49f983805770c0ecdfafe145fc2862c19c4bf`
+  - JS: `a13656e36aa300e87d3d838016b741dad4d2972a`
+  - Workflow: `6d3d000e3a131b31bf240312c2fd6dab0f1e4973`
+  - تعديل مصدر القالب: `d262207b5cf874b351b5ba9bdf4d33063c96200e`
+- حدود النشر والتحقق:
+  - هذه التغييرات موجودة في GitHub فقط. Blogger الحي لن يستخدم روابط الملفات الخارجية قبل تثبيت نسخة XML المعدّلة مرة واحدة من لوحة Blogger.
+  - بعد تثبيت XML، تحديث CSS/JS يتم عبر GitHub Actions ومسح CDN، دون تعديل XML في كل مرة.
+  - لم نتحقق بعد من نجاح تشغيل Workflow أو تحميل الأصول على الصفحة الحية؛ يجب فحص سجل Actions وطلبات CDN، ثم اختبار المدونة بعد تثبيت القالب.
+  - الاعتماد على jsDelivr CDN يعني أن ظهور التغيير يعتمد على نجاح مسح الكاش وتوفر CDN؛ Workflow يفشل بوضوح عند فشل التحقق. هذا ليس نشرًا مضمونًا إذا تعطلت خدمة CDN.
+- التالي: التحقق من تشغيل Workflow، ثم المستخدم يثبت XML مرة واحدة فقط. بعد ذلك تُنقل الوظائف المشتركة تدريجياً إلى ملفات GitHub بعد اختبارها.

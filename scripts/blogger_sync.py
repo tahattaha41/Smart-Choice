@@ -95,7 +95,11 @@ def find_existing_post(service, blog_id, post):
         matches.extend(item for item in response.get("items", []) if item.get("title") == post["title"])
         request = service.posts().list_next(request, response)
     if len(matches) > 1:
-        raise RuntimeError("توجد مقالات متعددة بنفس العنوان؛ أوقفت المزامنة لمنع تحديث مقال خاطئ: " + post["title"])
+        exact = [item for item in matches if item.get("content", "").strip() == post["content"].strip()]
+        if len(exact) == 1:
+            return exact[0]
+        details = "; ".join("id=" + str(item.get("id")) + " url=" + str(item.get("url")) for item in matches)
+        raise RuntimeError("توجد مقالات متعددة بنفس العنوان ولا يوجد تطابق محتوى فريد؛ أوقفت المزامنة منعاً لتحديث مقال خاطئ. " + details)
     return matches[0] if matches else None
 
 

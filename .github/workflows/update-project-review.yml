@@ -1,61 +1,17 @@
 name: Smart Choice | Update project review log
 
 on:
-  push:
-    branches: [main]
-    paths-ignore:
-      - "docs/PROJECT_MASTER_PLAN.md"
-      - ".github/workflows/update-project-review.yml"
+  # Manual only: repository changes are already recorded in Git history.
   workflow_dispatch:
 
 permissions:
-  contents: write
-
-concurrency:
-  group: smart-choice-project-review
-  cancel-in-progress: false
+  contents: read
 
 jobs:
-  update-review:
+  status:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
-      - name: Append repository change record
-        env:
-          EVENT_NAME: ${{ github.event_name }}
-          COMMIT_SHA: ${{ github.sha }}
-          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-          COMMIT_AUTHOR: ${{ github.event.head_commit.author.name }}
+      - name: Explain verification boundary
         run: |
-          python - <<'PY'
-          import os, subprocess
-          from datetime import datetime, timezone
-          from pathlib import Path
-          path = Path('docs/PROJECT_MASTER_PLAN.md')
-          if not path.exists(): raise SystemExit('Master plan is missing')
-          event = os.getenv('EVENT_NAME', 'unknown')
-          sha = os.getenv('COMMIT_SHA', 'unknown')
-          message = (os.getenv('COMMIT_MESSAGE') or event).replace(chr(10), ' ').strip()
-          author = (os.getenv('COMMIT_AUTHOR') or 'unknown').replace(chr(10), ' ').strip()
-          changed = subprocess.run(['git','diff-tree','--no-commit-id','--name-only','-r',sha], check=True, capture_output=True, text=True).stdout.strip().splitlines()
-          if not changed: changed = ['(راجع commit يدويًا)']
-          timestamp = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')
-          lines = ['', f'#### رصد آلي — {timestamp}', f'- الحدث: {event}', f'- Commit: [{sha[:12]}](https://github.com/tahattaha41/Smart-Choice/commit/{sha})', f'- الرسالة: {message}', f'- الكاتب المسجل في Git: {author}', '- الملفات التي تغيرت:']
-          lines += [f'  - `{name}`' for name in changed]
-          lines += ['- حالة التحقق: **تغيير مستودع مرصود فقط؛ يلزم فحص Actions وBlogger قبل اعتبار الوظيفة مكتملة.**', '- حالة النشر على Blogger: **غير مثبتة بهذا السجل الآلي.**', '']
-          content = path.read_text(encoding='utf-8')
-          if '## سجل آلي للتغييرات' not in content: raise SystemExit('Automatic log section is missing')
-          path.write_text(content.rstrip() + '\n' + '\n'.join(lines) + '\n', encoding='utf-8')
-          PY
-      - name: Commit updated review log
-        run: |
-          if [ -n "$(git status --porcelain docs/PROJECT_MASTER_PLAN.md)" ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add docs/PROJECT_MASTER_PLAN.md
-            git commit -m "docs(smart-choice): record repository change [skip ci]"
-            git push
-          fi
+          echo "This workflow is manual-only. Git commits do not prove Blogger publication."
+          echo "Use the Blogger pages sync workflow and verify the public URLs separately."

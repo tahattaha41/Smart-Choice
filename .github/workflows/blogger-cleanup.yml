@@ -1,0 +1,50 @@
+name: Smart Choice | Blogger inventory and cleanup (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      delete_old_name_items:
+        description: "Delete unmanaged pages/posts whose title contains the old name (backup is committed first)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: smart-choice-blogger-sync-state
+  cancel-in-progress: false
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Inventory (and optional cleanup)
+        env:
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+        run: |
+          if [ "${{ inputs.delete_old_name_items }}" = "true" ]; then
+            python scripts/blogger_cleanup.py --delete
+          else
+            python scripts/blogger_cleanup.py
+          fi
+      - name: Commit report and backup
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports backup 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: Blogger inventory report [skip ci]"
+            for i in 1 2 3 4 5; do git pull --rebase origin main && git push origin HEAD:main && exit 0; sleep 2; done
+            exit 1
+          fi

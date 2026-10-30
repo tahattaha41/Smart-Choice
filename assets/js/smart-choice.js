@@ -123,7 +123,10 @@
   }
   function pages() {
     return getJson("/feeds/pages/default?alt=json&max-results=50").then(function (d) {
-      var list = ((d.feed && d.feed.entry) || []).map(function (e) {
+      var list = ((d.feed && d.feed.entry) || []).filter(function (e) {
+        // فقط صفحات Smart Choice: عنوانها ينتهي بـ "| Smart Choice"
+        return /\|\s*Smart Choice\s*$/i.test((e.title && e.title.$t) || "");
+      }).map(function (e) {
         return { title: clean(e.title && e.title.$t), url: entryUrl(e) };
       }).filter(function (p) { return p.title && p.url; });
       list.sort(function (a, b) { return rank(a.title) - rank(b.title); });
@@ -148,7 +151,7 @@
     var box = document.querySelector(".sc-latest-posts");
     if (!box) return;
     getJson("/feeds/posts/default?alt=json&max-results=6").then(function (d) {
-      var items = (d.feed && d.feed.entry) || [];
+      var items = ((d.feed && d.feed.entry) || []).filter(function (e) { return !/utilityra/i.test((e.title && e.title.$t) || ""); });
       if (!items.length) return;
       box.textContent = "";
       items.forEach(function (e) {

@@ -33,3 +33,8 @@
 .sc-page .sc-muted{color:#5c6c7e;font-size:14px}
 .sc-page .sc-tool[hidden]{display:none!important}
 @media(max-width:640px){.sc-page .sc-tools-hero{padding:22px}.sc-page .sc-tool-card{padding:15px}}
+
+.sc-skip{position:absolute;right:12px;top:-60px;background:#fff;color:#102b50;padding:10px 14px;border-radius:8px;z-index:1000}.sc-skip:focus{top:8px}
+.sc-page .sc-field input,.sc-page .sc-field select{width:100%;box-sizing:border-box;padding:12px;border:1px solid #cbd5df;border-radius:10px;font:inherit;background:#fff;color:#182338}
+.sc-page .sc-tabs button:focus-visible,.sc-page input:focus-visible,.sc-page select:focus-visible,.sc-nav a:focus-visible{outline:3px solid #e6a23c;outline-offset:2px}
+.sc-page .sc-tabs button{min-height:44px}

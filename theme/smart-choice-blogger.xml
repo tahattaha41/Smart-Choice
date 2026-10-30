@@ -80,7 +80,7 @@
                   <data:post.body/>
                 </div>
                 <div class='sc-post-meta'>
-                  <span><data:post.author/></span>
+                  <span><data:post.author.name/></span>
                   <time expr:datetime='data:post.timestampISO8601' itemprop='datePublished'><data:post.timestamp/></time>
                 </div>
                 <b:if cond='data:post.labels'>

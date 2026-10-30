@@ -3,9 +3,17 @@
     "hash": "ca7df069ac3d910dc17db36763657c9275d77ceef3189e1d590152ccc4f994f2",
     "id": "1756380009794106203"
   },
+  "compare.md": {
+    "hash": "d2ff929aaad777f37fe1a51f2bfb47ec84d9f3960b9e133eb0e7deaab37e5468",
+    "id": "2433954550684148113"
+  },
   "contact.md": {
     "hash": "4a5821c6cdde70ea2d130c950b14bfe85a37b87176c8a4c76015ae6f73c916b3",
     "id": "4725786218856491508"
+  },
+  "decide.md": {
+    "hash": "8e11dff1523d558fd2a83080731989bb2090bb9dffeccefa370219fcaa15e1e1",
+    "id": "4333271989185995858"
   },
   "privacy.md": {
     "hash": "0f31c9a01c5e9d097cfeeadb438fa4ba2b5906d149fb1fa2063bd94191d98945",
@@ -16,7 +24,7 @@
     "id": "1124457069603105510"
   },
   "tools.md": {
-    "hash": "d8761b9088373d0d063c9a5a8606f35e26afdbe71d1eb00e0f00798f5691b964",
+    "hash": "f8f43cabb5811687756f33e3b00dc24e60a913ce91247292a5298bbebd999633",
     "id": "5601245022679841555"
   }
 }

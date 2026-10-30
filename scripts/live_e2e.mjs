@@ -9,7 +9,7 @@ try {
 browser = await chromium.launch();
 const ctx = await browser.newContext({ locale: 'ar-EG', viewport: { width: 390, height: 800 } });
 const page = await ctx.newPage();
-const errors = []; page.on('pageerror', (e) => errors.push(e.message));
+const errors = []; page.on('pageerror', (e) => { if (!/solveSimpleChallenge/.test(e.message)) errors.push(e.message); }); // خطأ تصدره صفحات Blogger نفسها لمتصفحات الاختبار
 const go = async (url) => { for (let i = 0; i < 4; i++) { try { const r = await page.goto(url, { waitUntil: 'networkidle', timeout: 45000 }); if (r && r.ok()) return true; } catch {} await page.waitForTimeout(8000 * (i + 1)); } return false; };
 
 // نسخة الواجهة المنشورة على CDN
@@ -41,7 +41,7 @@ if ((await page.locator('#sc-price').count()) > 0) {
 } else rec(false, 'Tools: discount input missing');
 
 // صفحات أخرى ومقال
-for (const [key, label] of [['من نحن', 'About'], ['اتصل بنا', 'Contact'], ['الخصوصية', 'Privacy'], ['الشروط', 'Terms'], ['مركز القرار', 'Decision page'], ['مقارنة', 'Compare page']]) {
+for (const [key, label] of [['من نحن', 'About'], ['اتصل بنا', 'Contact'], ['الخصوصية', 'Privacy'], ['شروط', 'Terms'], ['مركز القرار', 'Decision page'], ['مقارنة', 'Compare page']]) {
   const u = find(key);
   if (!u) { rec(false, label + ': not in feed'); continue; }
   rec(await go(u), label + ' loads');

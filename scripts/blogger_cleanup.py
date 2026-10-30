@@ -57,4 +57,15 @@ def main():
             print("deleted", kind, it["id"], it.get("title"))
 
 if __name__ == "__main__":
-    main()
+    import traceback
+    try:
+        main()
+    except Exception as e:  # نكتب الخطأ في ملف لأن سجلات Actions قد لا تكون متاحة للمراجعة
+        Path("reports").mkdir(exist_ok=True)
+        msg = type(e).__name__ + ": " + str(e)
+        for secret in ("BLOGGER_CLIENT_SECRET", "BLOGGER_REFRESH_TOKEN"):
+            if os.environ.get(secret):
+                msg = msg.replace(os.environ[secret], "***")
+        Path("reports/last-error.txt").write_text(msg[:3000] + "\n", encoding="utf-8")
+        print(msg)
+        sys.exit(1)

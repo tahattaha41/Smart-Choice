@@ -35,8 +35,10 @@ def main():
                         scopes=["https://www.googleapis.com/auth/blogger"])
     svc = build("blogger", "v3", credentials=creds, cache_discovery=False)
     keep_posts, keep_pages = managed_ids(".blogger-state.json"), managed_ids(".blogger-pages-state.json")
-    pages = list(listing(svc.pages(), blogId=blog, fetchBodies=True, status=["LIVE", "DRAFT"]))
-    posts = list(listing(svc.posts(), blogId=blog, fetchBodies=True, status=["LIVE", "DRAFT"], maxResults=500))
+    pages, posts = [], []
+    for st in ("LIVE", "DRAFT"):
+        pages += list(listing(svc.pages(), blogId=blog, fetchBodies=True, status=st))
+        posts += list(listing(svc.posts(), blogId=blog, fetchBodies=True, status=st, maxResults=500))
     inv = {"pages": [], "posts": []}
     targets = []
     for kind, items, keep in (("pages", pages, keep_pages), ("posts", posts, keep_posts)):

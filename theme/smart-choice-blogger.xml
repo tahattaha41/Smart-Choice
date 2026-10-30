@@ -60,7 +60,7 @@
         <article class='sc-card'><h3><a href='https://smartchoicee1.blogspot.com/2026/10/blog-post_893.html'>إزاي تنظم ميزانيتك الشهرية؟</a></h3><p>قسّم دخلك ومصروفاتك واعرف المتبقي مع خطوات عملية.</p><a class='sc-btn' href='https://smartchoicee1.blogspot.com/2026/10/blog-post_893.html'>اقرأ المقال</a></article>
         <article class='sc-card'><h3><a href='https://smartchoicee1.blogspot.com/2026/10/blog-post_82.html'>مقارنة سعر الوحدة قبل الشراء</a></h3><p>قارن العبوات والأحجام المختلفة على أساس سعر الوحدة.</p><a class='sc-btn' href='https://smartchoicee1.blogspot.com/2026/10/blog-post_82.html'>اقرأ المقال</a></article>
       </div>
-    </b
+    </b:if>
   </main>
     <b:section id='main' class='sc-wrap sc-main' maxwidgets='1' showaddelement='no'>
       <b:widget id='Blog1' type='Blog' title='المحتوى' version='2' locked='true'>

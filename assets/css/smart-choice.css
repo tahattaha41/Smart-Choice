@@ -38,3 +38,9 @@
 .sc-page .sc-field input,.sc-page .sc-field select{width:100%;box-sizing:border-box;padding:12px;border:1px solid #cbd5df;border-radius:10px;font:inherit;background:#fff;color:#182338}
 .sc-page .sc-tabs button:focus-visible,.sc-page input:focus-visible,.sc-page select:focus-visible,.sc-nav a:focus-visible{outline:3px solid #e6a23c;outline-offset:2px}
 .sc-page .sc-tabs button{min-height:44px}
+
+.sc-page .sc-tbl{overflow-x:auto;margin:12px 0}
+.sc-page .sc-matrix{width:100%;border-collapse:collapse;min-width:560px}
+.sc-page .sc-matrix th,.sc-page .sc-matrix td{border:1px solid #e3eaf0;padding:6px;text-align:center}
+.sc-page .sc-matrix input{width:100%;min-width:70px;box-sizing:border-box;padding:8px;border:1px solid #cfd9e2;border-radius:8px;font:inherit}
+.sc-page .sc-matrix thead th{background:#f1f6f9}

@@ -12,6 +12,9 @@ publish: true
   <button type="button" data-tab="discount" aria-selected="true">حاسبة الخصم</button>
   <button type="button" data-tab="budget" aria-selected="false">الميزانية الشهرية</button>
   <button type="button" data-tab="unit" aria-selected="false">مقارنة سعر الوحدة</button>
+  <button type="button" data-tab="vat" aria-selected="false">الضريبة</button>
+  <button type="button" data-tab="compare" aria-selected="false">مقارنة المنتجات</button>
+  <button type="button" data-tab="decide" aria-selected="false">مركز القرار</button>
 </nav>
 <section class="sc-tool-card sc-tool" id="sc-discount">
   <h2>حاسبة الخصم والسعر النهائي</h2><p class="sc-muted">أدخل السعر والخصم لمعرفة ما ستدفعه وقيمة التوفير.</p>
@@ -91,6 +94,26 @@ publish: true
 <div class="sc-field"><label for="sc-date1">التاريخ الأول</label><input id="sc-date1" type="date"></div>
 <div class="sc-field"><label for="sc-date2">التاريخ الثاني</label><input id="sc-date2" type="date"></div>
 </div><div class="sc-tool-result" id="sc-dates-result" aria-live="polite">اختر تاريخين.</div>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-vat" hidden>
+<h2>حاسبة ضريبة القيمة المضافة</h2><p class="sc-muted">أضف الضريبة إلى سعر، أو استخرجها من سعر نهائي. النسبة تختلف حسب السلعة والبلد، فتأكد منها من مصدر رسمي.</p>
+<div class="sc-tool-grid">
+<div class="sc-field"><label for="sc-vat-amount">المبلغ</label><input id="sc-vat-amount" type="number" min="0" step="any" inputmode="decimal"></div>
+<div class="sc-field"><label for="sc-vat-rate">نسبة الضريبة %</label><input id="sc-vat-rate" type="number" min="0" step="any" inputmode="decimal"></div>
+<div class="sc-field"><label for="sc-vat-mode">العملية</label><select id="sc-vat-mode"><option value="add">إضافة الضريبة إلى السعر</option><option value="extract">استخراج الضريبة من السعر النهائي</option></select></div>
+</div><div class="sc-tool-result" id="sc-vat-result" aria-live="polite">أدخل المبلغ والنسبة.</div>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-compare" hidden>
+<h2>مقارنة منتجين بالتكلفة الشهرية الحقيقية</h2><p class="sc-muted">المنتج الأرخص اليوم قد يكون الأغلى على المدى الطويل. أدخل أرقامك أنت: السعر وتكاليف الملحقات والشحن وعمرك المتوقع للاستخدام بالأشهر.</p>
+<div class="sc-tool-grid">
+<div class="sc-field"><label for="sc-c-p1">سعر المنتج الأول</label><input id="sc-c-p1" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-c-e1">ملحقات/شحن المنتج الأول</label><input id="sc-c-e1" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-c-l1">عمر الاستخدام المتوقع (أشهر)</label><input id="sc-c-l1" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-c-w1">الضمان (أشهر)</label><input id="sc-c-w1" type="number" min="0" step="any" inputmode="decimal"></div>
+<div class="sc-field"><label for="sc-c-p2">سعر المنتج الثاني</label><input id="sc-c-p2" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-c-e2">ملحقات/شحن المنتج الثاني</label><input id="sc-c-e2" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-c-l2">عمر الاستخدام المتوقع (أشهر)</label><input id="sc-c-l2" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-c-w2">الضمان (أشهر)</label><input id="sc-c-w2" type="number" min="0" step="any" inputmode="decimal"></div>
+</div><div class="sc-tool-result" id="sc-compare-result" aria-live="polite">أدخل بيانات المنتجين.</div>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-decide" hidden>
+<h2>مركز القرار: مصفوفة قرار بأوزانك</h2><p class="sc-muted">اكتب خياراتك ومعايير مهمة لك، أعطِ كل معيار وزنًا من 0 إلى 10 ودرجة لكل خيار من 0 إلى 10. الترتيب يعتمد على تقديرك أنت، وليس على بيانات سوق.</p>
+<div class="sc-tbl"><table class="sc-matrix"><thead><tr><th scope="col">المعيار</th><th scope="col">الوزن</th><th scope="col"><input id="sc-d-o0" type="text" value="الخيار A" aria-label="اسم الخيار 1"></th><th scope="col"><input id="sc-d-o1" type="text" value="الخيار B" aria-label="اسم الخيار 2"></th><th scope="col"><input id="sc-d-o2" type="text" value="الخيار C" aria-label="اسم الخيار 3"></th></tr></thead><tbody><tr><th scope="row"><input id="sc-d-c0" type="text" value="السعر" aria-label="المعيار 1"></th><td><input id="sc-d-w0" type="number" min="0" max="10" step="1" value="3" aria-label="وزن المعيار 1"></td><td><input id="sc-d-s0-0" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 1 في المعيار 1"></td><td><input id="sc-d-s0-1" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 2 في المعيار 1"></td><td><input id="sc-d-s0-2" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 3 في المعيار 1"></td></tr><tr><th scope="row"><input id="sc-d-c1" type="text" value="الجودة" aria-label="المعيار 2"></th><td><input id="sc-d-w1" type="number" min="0" max="10" step="1" value="3" aria-label="وزن المعيار 2"></td><td><input id="sc-d-s1-0" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 1 في المعيار 2"></td><td><input id="sc-d-s1-1" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 2 في المعيار 2"></td><td><input id="sc-d-s1-2" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 3 في المعيار 2"></td></tr><tr><th scope="row"><input id="sc-d-c2" type="text" value="الضمان والدعم" aria-label="المعيار 3"></th><td><input id="sc-d-w2" type="number" min="0" max="10" step="1" value="3" aria-label="وزن المعيار 3"></td><td><input id="sc-d-s2-0" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 1 في المعيار 3"></td><td><input id="sc-d-s2-1" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 2 في المعيار 3"></td><td><input id="sc-d-s2-2" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 3 في المعيار 3"></td></tr><tr><th scope="row"><input id="sc-d-c3" type="text" value="الملاءمة لاحتياجي" aria-label="المعيار 4"></th><td><input id="sc-d-w3" type="number" min="0" max="10" step="1" value="3" aria-label="وزن المعيار 4"></td><td><input id="sc-d-s3-0" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 1 في المعيار 4"></td><td><input id="sc-d-s3-1" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 2 في المعيار 4"></td><td><input id="sc-d-s3-2" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 3 في المعيار 4"></td></tr></tbody></table></div>
+<div class="sc-tool-result" id="sc-decide-result" aria-live="polite">أدخل الدرجات لعرض الترتيب.</div>
 </section>
 
 <p class="sc-muted">ملاحظة: النتائج حسابية بناءً على البيانات التي تدخلها، ولا تمثل أسعار سوق مباشرة أو نصيحة مالية.</p>

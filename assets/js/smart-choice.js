@@ -73,6 +73,39 @@
       const days=Math.abs(Date.parse(a+"T00:00:00Z")-Date.parse(b+"T00:00:00Z"))/86400000;
       out.textContent="الفارق بين التاريخين: "+fmt(days)+" يومًا.";
     }
+    function vat() {
+      const a=value("sc-vat-amount"), r=value("sc-vat-rate"), mode=$("sc-vat-mode")?.value, out=$("sc-vat-result");
+      if(!out)return;
+      if(!Number.isFinite(a)||!Number.isFinite(r)||a<0||r<0||r>100){out.textContent="أدخل مبلغًا ونسبة صحيحين (النسبة من 0 إلى 100).";return;}
+      if(mode==="extract"){const net=a/(1+r/100);out.textContent="السعر قبل الضريبة: "+fmt(net)+" — قيمة الضريبة: "+fmt(a-net)+" — السعر النهائي: "+fmt(a);}
+      else{const tax=a*r/100;out.textContent="قيمة الضريبة: "+fmt(tax)+" — السعر شاملًا الضريبة: "+fmt(a+tax);}
+    }
+    function compare() {
+      const out=$("sc-compare-result"); if(!out)return;
+      const get=(n)=>({p:value("sc-c-p"+n),e:value("sc-c-e"+n),l:value("sc-c-l"+n),w:value("sc-c-w"+n)});
+      const x=get(1), y=get(2);
+      const ok=(o)=>[o.p,o.l].every(n=>Number.isFinite(n)&&n>=0)&&o.l>0&&(!Number.isFinite(o.e)||o.e>=0)&&(!Number.isFinite(o.w)||o.w>=0);
+      if(!ok(x)||!ok(y)){out.textContent="أدخل السعر وعمر الاستخدام (أكبر من صفر) لكل منتج.";return;}
+      const cost=(o)=>(o.p+(Number.isFinite(o.e)?o.e:0));
+      const ma=cost(x)/x.l, mb=cost(y)/y.l;
+      let msg="التكلفة الشهرية للمنتج الأول: "+fmt(ma)+" — للمنتج الثاني: "+fmt(mb)+" — ";
+      msg+=Math.abs(ma-mb)<1e-9?"التكلفة الشهرية متساوية.":ma<mb?"المنتج الأول أوفر شهريًا بفارق "+fmt(mb-ma)+".":"المنتج الثاني أوفر شهريًا بفارق "+fmt(ma-mb)+".";
+      if(Number.isFinite(x.w)&&Number.isFinite(y.w)&&x.w!==y.w)msg+=" الضمان أطول للمنتج "+(x.w>y.w?"الأول":"الثاني")+".";
+      out.textContent=msg;
+    }
+    function decide() {
+      const out=$("sc-decide-result"); if(!out)return;
+      const names=[0,1,2].map(j=>($("sc-d-o"+j)?.value||"").trim()||("الخيار "+(j+1)));
+      const totals=[0,0,0]; let wsum=0, filled=false;
+      for(let i=0;i<4;i++){
+        const w=value("sc-d-w"+i); if(!Number.isFinite(w)||w<0||w>10) continue;
+        wsum+=w;
+        for(let j=0;j<3;j++){const sc=value("sc-d-s"+i+"-"+j); if(Number.isFinite(sc)&&sc>=0&&sc<=10){totals[j]+=w*sc; filled=true;}}
+      }
+      if(!filled||wsum===0){out.textContent="أدخل أوزانًا ودرجات بين 0 و10.";return;}
+      const ranked=names.map((n,j)=>({n,v:totals[j]/wsum})).sort((a,b)=>b.v-a.v);
+      out.textContent="الترتيب حسب أوزانك: "+ranked.map((r,k)=>(k+1)+") "+r.n+" ("+fmt(r.v)+" من 10)").join(" — ")+(ranked[0].v===ranked[1].v?" — تعادل بين الأول والثاني.":"");
+    }
     const handlers = {
       "sc-price": discount, "sc-rate": discount,
       "sc-income": budget, "sc-expenses": budget,
@@ -81,20 +114,29 @@
       "sc-target": saving, "sc-saved": saving, "sc-monthly": saving,
       "sc-item": total, "sc-shipping": total, "sc-fees": total,
       "sc-cash": installment, "sc-down": installment, "sc-months": installment, "sc-monthpay": installment,
-      "sc-convert-value": convert, "sc-date1": dates, "sc-date2": dates
+      "sc-convert-value": convert, "sc-date1": dates, "sc-date2": dates,
+      "sc-vat-amount": vat, "sc-vat-rate": vat,
+      "sc-c-p1": compare, "sc-c-e1": compare, "sc-c-l1": compare, "sc-c-w1": compare, "sc-c-p2": compare, "sc-c-e2": compare, "sc-c-l2": compare, "sc-c-w2": compare
     };
     Object.keys(handlers).forEach(id => {
       const el=$(id);
       if (el) el.addEventListener("input", handlers[id]);
     });
+    const vatMode=$("sc-vat-mode"); if(vatMode) vatMode.addEventListener("change", vat);
+    const decideBox=$("sc-decide"); if(decideBox) decideBox.addEventListener("input", decide);
     const convertType=$("sc-convert-type");
     if(convertType) convertType.addEventListener("change", convert);
-    root.querySelectorAll("[data-tab]").forEach(btn => btn.addEventListener("click", () => {
-      const tab=btn.getAttribute("data-tab");
+    function showTab(tab) {
+      const btn=root.querySelector('[data-tab="'+tab+'"]'); if(!btn) return;
       root.querySelectorAll("[data-tab]").forEach(b => b.setAttribute("aria-selected", String(b===btn)));
       root.querySelectorAll(".sc-tool").forEach(section => { section.hidden = section.id !== "sc-" + tab; });
+    }
+    root.querySelectorAll("[data-tab]").forEach(btn => btn.addEventListener("click", () => {
+      const tab=btn.getAttribute("data-tab"); showTab(tab);
+      try { history.replaceState(null, "", "#" + tab); } catch (e) {}
     }));
-    discount(); budget(); unit(); percent(); saving(); total(); installment(); convert(); dates();
+    discount(); budget(); unit(); percent(); saving(); total(); installment(); convert(); dates(); vat(); compare(); decide();
+    const fromHash=(location.hash||"").replace("#",""); if(fromHash) showTab(fromHash);
   }
   function start() {
     document.querySelectorAll(".sc-page").forEach(init);
@@ -107,7 +149,7 @@
    Static markup in the theme remains as a fallback if a request fails. */
 (function () {
   "use strict";
-  var ORDER = ["الأدوات", "من نحن", "اتصل بنا", "سياسة الخصوصية", "الشروط"];
+  var ORDER = ["الأدوات", "مقارنة", "مركز القرار", "من نحن", "اتصل بنا", "سياسة الخصوصية", "الشروط"];
   function clean(title) { return String(title || "").replace(/\s*\|\s*Smart Choice\s*$/i, "").trim(); }
   function rank(title) {
     for (var i = 0; i < ORDER.length; i++) if (title.indexOf(ORDER[i]) === 0) return i;

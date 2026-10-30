@@ -1,0 +1,18 @@
+17544 bytes total
+<body>
+<div class='sc-top'><div class='sc-wrap'>أدوات مجانية تساعدك تحسب وتقارن وتختار بوعي</div></div>
+<header class='sc-head'><div class='sc-wrap sc-headin'>
+<a class='sc-brand' href='https://smartchoicee1.blogspot.com/'>Smart <span>Choice</span></a>
+<nav aria-label='القائمة الرئيسية' class='sc-nav'>
+<a href='https://smartchoicee1.blogspot.com/'>الرئيسية</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_02145436434.html'>الأدوات</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice.html'>من نحن</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_02092521556.html'>اتصل بنا</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_01037455191.html'>شروط الاستخدام</a>
+</nav>
+</div></header>
+<a class='sc-skip' href='#main-content'>تجاوز إلى المحتوى</a>
+<main class='sc-wrap sc-main' id='main-content'>
+</main>
+<div class='sc-wrap sc-main no-items section' id='main'></div>
+<footer class='sc-footer'><div class='sc-wrap'><strong>Smart Choice</strong><div>أدوات عملية لقرارات يومية أفضل.</div><div class='sc-footlinks'><a href='https://smartchoicee1.blogspot.com/p/smart-choice.html'>من نحن</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_01636960364.html'>سياسة الخصوصية</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_02092521556.html'>اتصل بنا</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_02145436434.html'>الأدوات</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_01037455191.html'>الشروط وإخلاء المسؤولية</a></div><small>&#169; Smart Choice &#183; Created by Taha</small></div></footer>
+
+<script/>
+<script/>
+</body></html>

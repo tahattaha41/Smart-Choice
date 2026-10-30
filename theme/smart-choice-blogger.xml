@@ -30,16 +30,16 @@
   <header class='sc-head'><div class='sc-wrap sc-headin'>
     <a class='sc-brand' expr:href='data:blog.homepageUrl'>Smart <span>Choice</span></a>
     <nav class='sc-nav' aria-label='القائمة الرئيسية'>
-      <a expr:href='data:blog.homepageUrl'>الرئيسية</a><a href='/p/tools.html'>الأدوات</a><a href='/p/about.html'>من نحن</a><a href='/p/contact.html'>اتصل بنا</a>
+      <a expr:href='data:blog.homepageUrl'>الرئيسية</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_02145436434.html'>الأدوات</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice.html'>من نحن</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_02092521556.html'>اتصل بنا</a>
     </nav>
   </div></header>
   <main class='sc-wrap sc-main'>
     <b:if cond='data:blog.url == data:blog.homepageUrl'>
-      <section class='sc-hero'><h1>اختيارات أذكى. قرارات أفضل.</h1><p>احسب ميزانيتك، قارن الأسعار، ونظّم قراراتك اليومية باستخدام أدوات مجانية واضحة وسهلة.</p><a class='sc-btn' href='/p/tools.html'>اكتشف الأدوات</a></section>
+      <section class='sc-hero'><h1>اختيارات أذكى. قرارات أفضل.</h1><p>احسب ميزانيتك، قارن الأسعار، ونظّم قراراتك اليومية باستخدام أدوات مجانية واضحة وسهلة.</p><a class='sc-btn' href='https://smartchoicee1.blogspot.com/p/smart-choice_02145436434.html'>اكتشف الأدوات</a></section>
       <h2 class='sc-sectiontitle'>ابدأ من هنا</h2>
       <div class='sc-cards'>
-        <article class='sc-card'><h3>الحاسبات الذكية</h3><p>احسب الخصومات والميزانية والتكاليف من بياناتك.</p><a class='sc-btn' href='/p/tools.html'>استخدم الحاسبات</a></article>
-        <article class='sc-card'><h3>المقارنات</h3><p>قارن سعر الوحدة والتكلفة الإجمالية قبل الشراء.</p><a class='sc-btn' href='/p/tools.html'>ابدأ المقارنة</a></article>
+        <article class='sc-card'><h3>الحاسبات الذكية</h3><p>احسب الخصومات والميزانية والتكاليف من بياناتك.</p><a class='sc-btn' href='https://smartchoicee1.blogspot.com/p/smart-choice_02145436434.html'>استخدم الحاسبات</a></article>
+        <article class='sc-card'><h3>المقارنات</h3><p>قارن سعر الوحدة والتكلفة الإجمالية قبل الشراء.</p><a class='sc-btn' href='https://smartchoicee1.blogspot.com/p/smart-choice_02145436434.html'>ابدأ المقارنة</a></article>
         <article class='sc-card'><h3>أدلة ومقالات</h3><p>شروحات عملية تساعدك على استخدام الأدوات واتخاذ قرار أوضح.</p><a class='sc-btn' href='/search'>اقرأ المقالات</a></article>
       </div>
       <h2 class='sc-sectiontitle'>أحدث المقالات</h2>
@@ -50,5 +50,5 @@
       </b:widget>
     </b:section>
   </main>
-  <footer class='sc-footer'><div class='sc-wrap'><strong>Smart Choice</strong><div>أدوات عملية لقرارات يومية أفضل.</div><div class='sc-footlinks'><a href='/p/about.html'>من نحن</a><a href='/p/privacy.html'>سياسة الخصوصية</a><a href='/p/contact.html'>اتصل بنا</a><a href='/p/tools.html'>الأدوات</a></div><small>© Smart Choice</small></div></footer>
+  <footer class='sc-footer'><div class='sc-wrap'><strong>Smart Choice</strong><div>أدوات عملية لقرارات يومية أفضل.</div><div class='sc-footlinks'><a href='https://smartchoicee1.blogspot.com/p/smart-choice.html'>من نحن</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_01636960364.html'>سياسة الخصوصية</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_02092521556.html'>اتصل بنا</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_02145436434.html'>الأدوات</a></div><small>© Smart Choice</small></div></footer>
 </body></html>

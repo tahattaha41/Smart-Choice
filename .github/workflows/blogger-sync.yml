@@ -12,7 +12,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: smart-choice-blogger-sync
+  group: smart-choice-blogger-sync-state
   cancel-in-progress: false
 
 jobs:

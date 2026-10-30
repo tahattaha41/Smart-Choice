@@ -6,6 +6,8 @@
   <meta content='IE=edge' http-equiv='X-UA-Compatible'/>
   <b:include data='blog' name='all-head-content'/>
   <title><data:blog.pageTitle/></title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tahattaha41/Smart-Choice@main/assets/css/smart-choice.css"/>
+  <script defer="defer" src="https://cdn.jsdelivr.net/gh/tahattaha41/Smart-Choice@main/assets/js/smart-choice.js"></script>
   <!-- Google Analytics 4: Smart Choice -->
   <script async='async' src='https://www.googletagmanager.com/gtag/js?id=G-BRZP957SQ4'></script>
   <script>
@@ -15,23 +17,8 @@
     gtag('config', 'G-BRZP957SQ4');
   </script>
   <b:skin><![CDATA[
-    :root{--navy:#102b50;--blue:#176b87;--ink:#182338;--muted:#607086;--line:#e3eaf0;--paper:#f6f9fc;--white:#fff}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.8}
-    a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}.sc-wrap{width:min(1120px,calc(100% - 32px));margin:auto}
-    .sc-top{background:var(--navy);color:#dceafa;font-size:13px;padding:6px 0}.sc-head{background:#fff;border-bottom:1px solid var(--line)}
-    .sc-headin{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 0;flex-wrap:wrap}
-    .sc-brand{font-size:25px;font-weight:850;color:var(--navy);letter-spacing:-.5px}.sc-brand span{color:var(--blue)}
-    .sc-nav{display:flex;gap:8px;flex-wrap:wrap}.sc-nav a{padding:8px 12px;border-radius:10px;color:var(--ink);font-weight:650}.sc-nav a:hover{background:#edf5f8;text-decoration:none}
-    .sc-main{min-height:55vh;padding:26px 0 52px}.sc-hero{background:linear-gradient(130deg,var(--navy),var(--blue));border-radius:24px;color:white;padding:clamp(24px,5vw,48px);margin:4px 0 26px}
-    .sc-hero h1{font-size:clamp(28px,5vw,44px);line-height:1.25;margin:0 0 12px}.sc-hero p{max-width:680px;color:#e4f1fa;margin:0}
-    .sc-sectiontitle{font-size:24px;margin:28px 0 14px}.sc-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-    .sc-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 5px 20px #102b5008}.sc-card h3{margin:0 0 7px;font-size:18px}.sc-card p{color:var(--muted);margin:0}
-    .sc-btn{display:inline-block;background:var(--blue);color:#fff;padding:10px 16px;border-radius:11px;font-weight:700;margin-top:14px}.sc-btn:hover{background:var(--navy);text-decoration:none}
-    .blog-posts{display:grid;gap:16px}.date-header{display:none}.post-outer,.post{background:white;border:1px solid var(--line);border-radius:18px;padding:clamp(16px,3vw,28px);margin:0 0 16px}.post-title{font-size:25px;line-height:1.4}.post-body{overflow-wrap:anywhere}.post-body img{max-width:100%;height:auto;border-radius:12px}
-    .sc-footer{background:var(--navy);color:#dceafa;padding:28px 0;margin-top:30px}.sc-footer a{color:#fff}.sc-footlinks{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px}
-    .blog-pager{display:flex;justify-content:space-between;padding:16px}.status-msg-wrap{padding:14px}
-    @media(max-width:640px){.sc-headin{align-items:flex-start}.sc-nav{width:100%;gap:3px}.sc-nav a{padding:7px 9px;font-size:14px}.sc-main{padding-top:16px}.sc-hero{border-radius:17px}}
-  ]]></b:skin>
+/* Smart Choice styles are maintained in GitHub: assets/css/smart-choice.css */
+]]></b:skin>
 </head>
 <body>
   <div class='sc-top'><div class='sc-wrap'>أدوات مجانية تساعدك تحسب وتقارن وتختار بوعي</div></div>

@@ -23,4 +23,9 @@ OK    Compare page: body text length 599
 OK    Posts in feed: 7
 OK    Latest post body length 1150
 OK    No JS errors
+OK    Mobile: home?m=1 loads
+OK    Mobile: home content length 1562
+OK    Mobile: tools?m=1 loads
+OK    Mobile: tools rendered
+OK    Mobile: about content length 443
 failed=0

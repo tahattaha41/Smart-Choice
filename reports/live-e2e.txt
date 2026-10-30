@@ -1,0 +1,22 @@
+OK    Home loads
+OK    Home shows hero
+OK    Nav has no old-brand pages: الرئيسية الأدوات الذكية مقارنة المنتجات مركز القرار من نحن اتصل بنا سياسة الخصوصية شروط الاستخدام وإخلاء المسؤولية
+OK    Tools page loads
+FAIL  Tools: NO tool section rendered (page is interface only)
+FAIL  Tools: discount input missing
+OK    About loads
+FAIL  About: body text length 0
+OK    Contact loads
+FAIL  Contact: body text length 0
+FAIL  Contact shows email
+OK    Privacy loads
+FAIL  Privacy: body text length 0
+FAIL  Terms: not in feed
+OK    Decision page loads
+FAIL  Decision page: body text length 0
+OK    Compare page loads
+FAIL  Compare page: body text length 0
+OK    Posts in feed: 7
+FAIL  Latest post body length 0
+FAIL  No JS errors: solveSimpleChallenge is not defined | solveSimpleChallenge is not defined | solveSimpleChallenge is not defined
+failed=11

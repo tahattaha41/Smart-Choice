@@ -45,7 +45,7 @@ def main():
         for it in items:
             managed = it["id"] in keep
             match = bool(PATTERN.search(it.get("title", "")))
-            inv[kind].append({"id": it["id"], "title": it.get("title"), "url": it.get("url"), "status": it.get("status"), "managed": managed, "matches_old_name": match})
+            inv[kind].append({"id": it["id"], "title": it.get("title"), "url": it.get("url"), "status": it.get("status"), "managed": managed, "matches_old_name": match, "has_contact_email": "skyloom32" in (it.get("content") or "")})
             if match and not managed:
                 targets.append((kind, it))
     Path("reports").mkdir(exist_ok=True)

@@ -39,6 +39,7 @@ def main():
     for st in ("LIVE", "DRAFT"):
         pages += list(listing(svc.pages(), blogId=blog, fetchBodies=True, status=st))
         posts += list(listing(svc.posts(), blogId=blog, fetchBodies=True, status=st, maxResults=500))
+    managed_titles = {it.get("title") for it in posts if it["id"] in keep_posts}
     inv = {"pages": [], "posts": []}
     targets = []
     for kind, items, keep in (("pages", pages, keep_pages), ("posts", posts, keep_posts)):
@@ -46,14 +47,15 @@ def main():
             managed = it["id"] in keep
             match = bool(PATTERN.search(it.get("title", "")))
             inv[kind].append({"id": it["id"], "title": it.get("title"), "url": it.get("url"), "status": it.get("status"), "managed": managed, "matches_old_name": match, "has_contact_email": "skyloom32" in (it.get("content") or "")})
-            if match and not managed:
+            duplicate = kind == "posts" and not managed and it.get("title") in managed_titles  # نسخة مكررة من مقال مُدار
+            if (match or duplicate) and not managed:
                 targets.append((kind, it))
     Path("reports").mkdir(exist_ok=True)
     Path("reports/blogger-inventory.json").write_text(json.dumps(inv, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"pages={len(pages)} posts={len(posts)} deletion-candidates={len(targets)} delete={DELETE}")
     if DELETE and targets:
         Path("backup").mkdir(exist_ok=True)
-        Path("backup/removed-blogger-items.json").write_text(json.dumps([{"kind": k, **it} for k, it in targets], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        Path(f"backup/removed-{__import__('datetime').datetime.utcnow():%Y%m%d-%H%M%S}.json").write_text(json.dumps([{"kind": k, **it} for k, it in targets], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         for kind, it in targets:
             (svc.pages().delete(blogId=blog, pageId=it["id"]) if kind == "pages" else svc.posts().delete(blogId=blog, postId=it["id"])).execute()
             print("deleted", kind, it["id"], it.get("title"))

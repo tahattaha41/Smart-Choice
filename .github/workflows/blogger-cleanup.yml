@@ -32,6 +32,7 @@ jobs:
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          CLEANUP_PATTERN: "utilityra|flarivo|toolora"
         run: |
           if [ "${{ inputs.delete_old_name_items }}" = "true" ]; then
             python scripts/blogger_cleanup.py --delete

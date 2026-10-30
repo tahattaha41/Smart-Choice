@@ -16,6 +16,8 @@
     gtag('js', new Date());
     gtag('config', 'G-BRZP957SQ4');
   </script>
+  <!-- Google AdSense — site-wide loader -->
+  <script async='async' src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1235197294708204' crossorigin='anonymous'></script>
   <b:skin><![CDATA[
 /* Smart Choice styles are maintained in GitHub: assets/css/smart-choice.css */
 ]]></b:skin>

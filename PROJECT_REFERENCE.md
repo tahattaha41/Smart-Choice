@@ -133,3 +133,13 @@
 - البديل الممكن نظرياً: وسيط نشر سحابي يعمل عند push إلى GitHub، لكنه يحتاج آلية مصادقة آمنة ومستقرة لواجهة Blogger؛ لا توجد حالياً واجهة Blogger رسمية لتحديث القالب، وأتمتة المتصفح السحابية تتطلب جلسة Google وقد تتعطل بسبب MFA/CAPTCHA أو تغييرات الواجهة.
 - الحالة: لم يتم إعداد وسيط سحابي ولم تُمنح أي صلاحيات لحساب Google. لا نعد المستخدم بالنشر السحابي التلقائي قبل إثبات مسار آمن قابل للتشغيل.
 - الوضع الحالي: المقالات والصفحات تستمر في المزامنة عبر Blogger API؛ القالب يتطلب حالياً رفعاً من لوحة Blogger عند تغييره.
+
+
+### 2026-10-30 — تجربة مسار متصفح سحابي لنشر القالب
+- طلب المستخدم: البدء بتجربة أي حل سحابي يجعل تحديث القالب من GitHub يصل إلى Blogger دون تشغيل كمبيوتر المستخدم.
+- البحث الفني: وثائق Cloudflare Browser Run تؤكد تشغيل جلسات Chrome سحابية والتحكم بها عبر Playwright/CDP من CI/CD، وتوفر Live View وHuman-in-the-loop لتدخل المستخدم عند تسجيل الدخول أو CAPTCHA. وثائق Browserless تؤكد إمكانية حفظ حالة المتصفح/ملفات تعريف الارتباط في ملفات تعريف مصادقة دائمة.
+- المسار المرشح للتجربة: GitHub Actions عند تغيير `theme/smart-choice-blogger.xml` ثم متصفح سحابي عبر Cloudflare Browser Run/Playwright. لم يُعتمد النشر بعد؛ لا توجد في المستودع بيانات حساب Cloudflare أو نقطة اتصال Browser Run أو جلسة Blogger مصادق عليها.
+- قرار الأمان: لن نطلب كلمة مرور Google، ولن نضع ملفات تعريف الارتباط أو جلسة Google في GitHub أو نرسلها في المحادثة. يلزم إعداد حساب Cloudflare وتوكن محدود الصلاحية، ثم تسجيل دخول يدوي آمن داخل جلسة Live View إذا أمكن، واختبار عملية حفظ القالب على Blogger. قد ترفض Google الجلسة الآلية أو تطلب تحققاً إضافياً؛ لا نتجاوز ذلك.
+- الحالة: بحث واختيار مسار تجريبي فقط؛ لم يحدث أي اتصال بحساب Blogger ولم يتغير القالب المنشور. لا يوجد حتى الآن إثبات أن Cloudflare Browser Run قادر على إتمام تسجيل الدخول وحفظ القالب في Blogger.
+- المصادر: Cloudflare Browser Run https://developers.cloudflare.com/browser-run/ ، دليل البدء https://developers.cloudflare.com/browser-run/get-started/ ، Playwright/CDP https://developers.cloudflare.com/browser-run/cdp/playwright/ ، Browserless session persistence https://docs.browserless.io/baas/session-management .
+- الإجراء التالي المطلوب: إنشاء حساب Cloudflare (إن لم يكن موجوداً) وإنشاء API Token مخصص بصلاحية Browser Rendering فقط؛ بعدها نجهز اختبار اتصال آمن وننفذ خطوة تسجيل الدخول يدوياً في الجلسة السحابية دون مشاركة كلمة المرور معنا.

@@ -54,6 +54,24 @@ const posts = await page.evaluate(async () => (await (await fetch('/feeds/posts/
 rec(posts.length >= 6, 'Posts in feed: ' + posts.length);
 if (posts[0]) { await go(posts[0]); await page.waitForTimeout(2500); const len = (await page.locator('.post-body, .entry-content').first().innerText().catch(() => '')).length; rec(len > 300, 'Latest post body length ' + len); }
 rec(errors.length === 0, 'No JS errors' + (errors.length ? ': ' + errors.slice(0, 3).join(' | ') : ''));
+
+// سيناريو الهاتف مع ?m=1 (القالب المحمول في Blogger)
+{
+  const { devices } = await import('playwright');
+  const mctx = await browser.newContext({ ...devices['Pixel 7'], locale: 'ar-EG' });
+  const mp = await mctx.newPage();
+  const mgo = async (url) => { for (let i = 0; i < 4; i++) { try { const r = await mp.goto(url, { waitUntil: 'networkidle', timeout: 45000 }); if (r && r.ok()) return true; } catch {} await mp.waitForTimeout(8000 * (i + 1)); } return false; };
+  rec(await mgo(BASE + '/?m=1'), 'Mobile: home?m=1 loads');
+  await mp.waitForTimeout(3000);
+  const hl = (await mp.locator('#main-content').innerText().catch(() => '')).length;
+  rec(hl > 200, 'Mobile: home content length ' + hl);
+  const tu = feed.find((p) => p.t.includes('الأدوات'))?.u;
+  rec(!!tu && (await mgo(tu + '?m=1')), 'Mobile: tools?m=1 loads');
+  try { await mp.waitForSelector('.sc-tool', { timeout: 20000 }); rec(true, 'Mobile: tools rendered'); } catch { rec(false, 'Mobile: tools NOT rendered'); }
+  const du = feed.find((p) => p.t.includes('من نحن'))?.u;
+  if (du) { await mgo(du + '?m=1'); await mp.waitForTimeout(3000); const l = (await mp.locator('#main-content').innerText().catch(() => '')).length; rec(l > 150, 'Mobile: about content length ' + l); }
+  await mctx.close();
+}
 } catch (e) { rec(false, 'Test crashed: ' + String(e && e.message || e).split('\n')[0].slice(0, 300)); }
 finally { if (browser) await browser.close().catch(() => {}); }
 mkdirSync('reports', { recursive: true });

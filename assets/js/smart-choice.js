@@ -208,6 +208,8 @@
       });
     }).catch(function () {});
   }
+  window.__scFillLatest = fillLatest;
+  window.__scPages = pages;
   function start() {
     pages().then(fillNav).catch(function () {});
     fillLatest();
@@ -262,6 +264,33 @@
         if (m) { render(title, m.html); return; }
         if (hit.content) render(title, hit.content.$t);
       }).catch(function () { if (hit.content) render(title, hit.content.$t); });
+    }).catch(function () {});
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
+  else run();
+})();
+
+/* Smart Choice — home page fallback: if the theme printed no home content (e.g. the mobile ?m=1 view or an
+   older theme), build it here from the blog's own pages and posts feeds. */
+(function () {
+  "use strict";
+  function run() {
+    var path = location.pathname.replace(/index\.html$/, "");
+    if (path !== "/" || document.querySelector(".sc-hero")) return;
+    var host = document.getElementById("main-content") || document.querySelector("main");
+    if (!host || !window.__scPages) return;
+    window.__scPages().then(function (list) {
+      if (document.querySelector(".sc-hero")) return;
+      var by = function (k) { var m = list.filter(function (p) { return p.title.indexOf(k) === 0; })[0]; return m ? m.url : "#"; };
+      var cards = [["الأدوات الذكية", "احسب الخصم والتقسيط والضريبة والميزانية وغيرها من بياناتك.", by("الأدوات")],
+        ["مقارنة المنتجات", "قارن التكلفة الشهرية الحقيقية لمنتجين مع الضمان وعمر الاستخدام.", by("مقارنة")],
+        ["مركز القرار", "رتّب خياراتك بمعايير وأوزان تحددها أنت.", by("مركز القرار")]];
+      var html = "<section class='sc-hero'><h1>اختيارات أذكى. قرارات أفضل.</h1><p>احسب ميزانيتك، قارن الأسعار، ونظّم قراراتك اليومية باستخدام أدوات مجانية واضحة وسهلة.</p><a class='sc-btn' href='" + by("الأدوات") + "'>ابدأ باستخدام الأدوات</a></section>";
+      html += "<h2 class='sc-sectiontitle'>ابدأ من هنا</h2><div class='sc-cards'>" + cards.map(function (c) {
+        return "<article class='sc-card'><h3>" + c[0] + "</h3><p>" + c[1] + "</p><a class='sc-btn' href='" + c[2] + "'>افتح</a></article>";
+      }).join("") + "</div><h2 class='sc-sectiontitle'>أحدث المقالات</h2><div class='sc-cards sc-latest-posts'></div>";
+      var wrap = document.createElement("div"); wrap.className = "sc-injected"; wrap.innerHTML = html; host.appendChild(wrap);
+      if (window.__scFillLatest) window.__scFillLatest();
     }).catch(function () {});
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);

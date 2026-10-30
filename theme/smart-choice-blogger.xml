@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:version='2' class='v2' expr:dir='data:blog.languageDirection' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+  <meta content='width=device-width, initial-scale=1' name='viewport'/>
+  <meta content='IE=edge' http-equiv='X-UA-Compatible'/>
+  <b:include data='blog' name='all-head-content'/>
+  <title><data:blog.pageTitle/></title>
+  <b:skin><![CDATA[
+    :root{--navy:#102b50;--blue:#176b87;--ink:#182338;--muted:#607086;--line:#e3eaf0;--paper:#f6f9fc;--white:#fff}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.8}
+    a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}.sc-wrap{width:min(1120px,calc(100% - 32px));margin:auto}
+    .sc-top{background:var(--navy);color:#dceafa;font-size:13px;padding:6px 0}.sc-head{background:#fff;border-bottom:1px solid var(--line)}
+    .sc-headin{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 0;flex-wrap:wrap}
+    .sc-brand{font-size:25px;font-weight:850;color:var(--navy);letter-spacing:-.5px}.sc-brand span{color:var(--blue)}
+    .sc-nav{display:flex;gap:8px;flex-wrap:wrap}.sc-nav a{padding:8px 12px;border-radius:10px;color:var(--ink);font-weight:650}.sc-nav a:hover{background:#edf5f8;text-decoration:none}
+    .sc-main{min-height:55vh;padding:26px 0 52px}.sc-hero{background:linear-gradient(130deg,var(--navy),var(--blue));border-radius:24px;color:white;padding:clamp(24px,5vw,48px);margin:4px 0 26px}
+    .sc-hero h1{font-size:clamp(28px,5vw,44px);line-height:1.25;margin:0 0 12px}.sc-hero p{max-width:680px;color:#e4f1fa;margin:0}
+    .sc-sectiontitle{font-size:24px;margin:28px 0 14px}.sc-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+    .sc-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 5px 20px #102b5008}.sc-card h3{margin:0 0 7px;font-size:18px}.sc-card p{color:var(--muted);margin:0}
+    .sc-btn{display:inline-block;background:var(--blue);color:#fff;padding:10px 16px;border-radius:11px;font-weight:700;margin-top:14px}.sc-btn:hover{background:var(--navy);text-decoration:none}
+    .blog-posts{display:grid;gap:16px}.date-header{display:none}.post-outer,.post{background:white;border:1px solid var(--line);border-radius:18px;padding:clamp(16px,3vw,28px);margin:0 0 16px}.post-title{font-size:25px;line-height:1.4}.post-body{overflow-wrap:anywhere}.post-body img{max-width:100%;height:auto;border-radius:12px}
+    .sc-footer{background:var(--navy);color:#dceafa;padding:28px 0;margin-top:30px}.sc-footer a{color:#fff}.sc-footlinks{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px}
+    .blog-pager{display:flex;justify-content:space-between;padding:16px}.status-msg-wrap{padding:14px}
+    @media(max-width:640px){.sc-headin{align-items:flex-start}.sc-nav{width:100%;gap:3px}.sc-nav a{padding:7px 9px;font-size:14px}.sc-main{padding-top:16px}.sc-hero{border-radius:17px}}
+  ]]></b:skin>
+</head>
+<body>
+  <div class='sc-top'><div class='sc-wrap'>أدوات مجانية تساعدك تحسب وتقارن وتختار بوعي</div></div>
+  <header class='sc-head'><div class='sc-wrap sc-headin'>
+    <a class='sc-brand' expr:href='data:blog.homepageUrl'>Smart <span>Choice</span></a>
+    <nav class='sc-nav' aria-label='القائمة الرئيسية'>
+      <a expr:href='data:blog.homepageUrl'>الرئيسية</a><a href='/p/tools.html'>الأدوات</a><a href='/p/about.html'>من نحن</a><a href='/p/contact.html'>اتصل بنا</a>
+    </nav>
+  </div></header>
+  <main class='sc-wrap sc-main'>
+    <b:if cond='data:blog.url == data:blog.homepageUrl'>
+      <section class='sc-hero'><h1>اختيارات أذكى. قرارات أفضل.</h1><p>احسب ميزانيتك، قارن الأسعار، ونظّم قراراتك اليومية باستخدام أدوات مجانية واضحة وسهلة.</p><a class='sc-btn' href='/p/tools.html'>اكتشف الأدوات</a></section>
+      <h2 class='sc-sectiontitle'>ابدأ من هنا</h2>
+      <div class='sc-cards'>
+        <article class='sc-card'><h3>الحاسبات الذكية</h3><p>احسب الخصومات والميزانية والتكاليف من بياناتك.</p><a class='sc-btn' href='/p/tools.html'>استخدم الحاسبات</a></article>
+        <article class='sc-card'><h3>المقارنات</h3><p>قارن سعر الوحدة والتكلفة الإجمالية قبل الشراء.</p><a class='sc-btn' href='/p/tools.html'>ابدأ المقارنة</a></article>
+        <article class='sc-card'><h3>أدلة ومقالات</h3><p>شروحات عملية تساعدك على استخدام الأدوات واتخاذ قرار أوضح.</p><a class='sc-btn' href='/search'>اقرأ المقالات</a></article>
+      </div>
+      <h2 class='sc-sectiontitle'>أحدث المقالات</h2>
+    </b:if>
+    <b:section id='main' class='main' maxwidgets='1' showaddelement='no'>
+      <b:widget id='Blog1' type='Blog' title='المحتوى' version='2' locked='true'>
+        <b:widget-settings><b:widget-setting name='showDateHeader'>false</b:widget-setting><b:widget-setting name='showShareButtons'>true</b:widget-setting><b:widget-setting name='showCommentLink'>false</b:widget-setting></b:widget-settings>
+      </b:widget>
+    </b:section>
+  </main>
+  <footer class='sc-footer'><div class='sc-wrap'><strong>Smart Choice</strong><div>أدوات عملية لقرارات يومية أفضل.</div><div class='sc-footlinks'><a href='/p/about.html'>من نحن</a><a href='/p/privacy.html'>سياسة الخصوصية</a><a href='/p/contact.html'>اتصل بنا</a><a href='/p/tools.html'>الأدوات</a></div><small>© Smart Choice</small></div></footer>
+</body></html>

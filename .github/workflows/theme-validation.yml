@@ -18,6 +18,21 @@ jobs:
       - uses: actions/checkout@v4
       - name: Check XML well-formedness
         run: python -c "import xml.etree.ElementTree as ET; ET.parse('theme/smart-choice-blogger.xml'); print('Blogger theme XML is well-formed.')"
+      - name: Check Blogger section is a direct body child
+        run: |
+          python - <<'PY'
+          import xml.etree.ElementTree as ET
+          root = ET.parse('theme/smart-choice-blogger.xml').getroot()
+          ns = {'b': 'http://www.google.com/2005/gml/b'}
+          body = root.find('{http://www.w3.org/1999/xhtml}body')
+          assert body is not None, 'Missing body element'
+          sections = body.findall('b:section', ns)
+          assert any(section.attrib.get('id') == 'main' for section in sections), 'Blog1 main section must be a direct child of body'
+          main = root.find(".//b:section[@id='main']/b:widget[@id='Blog1']/b:includable[@id='main']", ns)
+          assert main is not None, 'Blog1 main includable is missing'
+          assert main.find('b:loop[@values="data:posts"]', ns) is not None, 'Blog1 main must loop through data:posts'
+          print('Blogger Blog1 section placement and main loop are valid.')
+          PY
       - name: Check required theme features
         run: |
           grep -q "application/ld+json" theme/smart-choice-blogger.xml

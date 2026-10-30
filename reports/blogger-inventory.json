@@ -1,0 +1,886 @@
+{
+  "pages": [
+    {
+      "id": "1124457069603105510",
+      "title": "شروط الاستخدام وإخلاء المسؤولية | Smart Choice",
+      "url": "https://smartchoicee1.blogspot.com/p/smart-choice_01037455191.html",
+      "status": null,
+      "managed": true,
+      "matches_old_name": false
+    },
+    {
+      "id": "5601245022679841555",
+      "title": "الأدوات الذكية | Smart Choice",
+      "url": "https://smartchoicee1.blogspot.com/p/smart-choice_02145436434.html",
+      "status": null,
+      "managed": true,
+      "matches_old_name": false
+    },
+    {
+      "id": "6189319338313393937",
+      "title": "سياسة الخصوصية | Smart Choice",
+      "url": "https://smartchoicee1.blogspot.com/p/smart-choice_01636960364.html",
+      "status": null,
+      "managed": true,
+      "matches_old_name": false
+    },
+    {
+      "id": "4725786218856491508",
+      "title": "اتصل بنا | Smart Choice",
+      "url": "https://smartchoicee1.blogspot.com/p/smart-choice_02092521556.html",
+      "status": null,
+      "managed": true,
+      "matches_old_name": false
+    },
+    {
+      "id": "1756380009794106203",
+      "title": "من نحن | Smart Choice",
+      "url": "https://smartchoicee1.blogspot.com/p/smart-choice.html",
+      "status": null,
+      "managed": true,
+      "matches_old_name": false
+    },
+    {
+      "id": "6964926606429512613",
+      "title": "AI Assistant | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/ai-assistant-utilityra.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "157964364221855873",
+      "title": "File Metadata Inspector | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/file-metadata-inspector-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "3065388641749953820",
+      "title": "Image Watermark Tool | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/image-watermark-tool-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "8850856554031105642",
+      "title": "Image Cropper | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/image-cropper-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "988012000616122778",
+      "title": "PDF Page Counter and Info | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/pdf-page-counter-and-info-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "2104482233985453102",
+      "title": "PDF Page Extractor | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/pdf-page-extractor-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "4541137678689296055",
+      "title": "PDF Merge | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/pdf-merge-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "2621295167475385331",
+      "title": "Image to Base64 Data URI | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/image-to-base64-data-uri-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "7849460364683292208",
+      "title": "Image Rotate and Flip | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/image-rotate-and-flip-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "8421132918541259895",
+      "title": "Image Filter Studio | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/image-filter-studio-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "3542483046232016069",
+      "title": "Citation Formatter | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/citation-formatter-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "8299287617052068611",
+      "title": "Time Zone Converter | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/time-zone-converter-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "4843561564758716375",
+      "title": "Excel Formula Helper | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/excel-formula-helper-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "1469396595183890701",
+      "title": "CSV Validator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/csv-validator-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "3604653715052275869",
+      "title": "Password Strength Checker | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/password-strength-checker-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "152673640170196308",
+      "title": "Random Number Generator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/random-number-generator-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "8311582953773679266",
+      "title": "File Size Converter | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/file-size-converter-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "2406910317370506949",
+      "title": "Markdown Table Generator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/markdown-table-generator-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "7155066959874259395",
+      "title": "CSV to Markdown Table | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/csv-to-markdown-table-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "5860711669082783594",
+      "title": "Cron Expression Validator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/cron-expression-validator-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "9017737159295559697",
+      "title": "URL Inspector | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/url-inspector-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "7446412264077260463",
+      "title": "Sitemap URL List Builder | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/sitemap-url-list-builder-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "5893173326139095336",
+      "title": "Robots.txt Builder | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/robotstxt-builder-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "6450498469892932452",
+      "title": "SEO Meta Tag Generator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/seo-meta-tag-generator-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "3966243554101139623",
+      "title": "CSS Box Shadow Generator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/css-box-shadow-generator-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "2042318887762887388",
+      "title": "CSS Gradient Generator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/css-gradient-generator-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "4495538038143639836",
+      "title": "Color Format Converter | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/color-format-converter-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "485817867845690889",
+      "title": "CSS Formatter | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/css-formatter-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "5745499105943876025",
+      "title": "HTML Formatter | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/html-formatter-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "7533844642933180646",
+      "title": "JSON Difference Checker | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/json-difference-checker-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "155058439681867228",
+      "title": "SHA-256 Hash Generator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/sha-256-hash-generator-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "7137618994029608255",
+      "title": "JWT Decoder | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/jwt-decoder-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "8052318315191914514",
+      "title": "Regular Expression Tester | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/regular-expression-tester-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "75007171165889412",
+      "title": "SQL Query Formatter | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/sql-query-formatter-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "1307543122549135902",
+      "title": "XML Formatter and Validator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/xml-formatter-and-validator-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "4151528552707953492",
+      "title": "JSON to XML Converter | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/json-to-xml-converter-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "3373308407928561140",
+      "title": "Binary and Hex Converter | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/binary-and-hex-converter-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "5895583193080021806",
+      "title": "Number Base Converter | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/number-base-converter-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "4570088630547272054",
+      "title": "Statistics Calculator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/statistics-calculator-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "3466390669110033182",
+      "title": "Hourly Pay Calculator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/hourly-pay-calculator-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "5960168868695915087",
+      "title": "VAT and Tax Calculator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/vat-and-tax-calculator-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "4496838681612774193",
+      "title": "Scientific Calculator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/scientific-calculator-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "2853035473341555662",
+      "title": "Everyday Unit Converter | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/everyday-unit-converter-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "6686571667424701116",
+      "title": "Date Difference Calculator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/date-difference-calculator-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "5226896117343429721",
+      "title": "Age Calculator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/age-calculator-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "2351416333139268829",
+      "title": "Study Plan Builder | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/study-plan-builder-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "5317454073040784967",
+      "title": "Weighted Grade Calculator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/weighted-grade-calculator-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "4711827936206125148",
+      "title": "GPA Estimator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/gpa-estimator-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "713068937325966565",
+      "title": "Grade Average Calculator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/grade-average-calculator-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "7167517048264887867",
+      "title": "Study Flashcard Maker | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/study-flashcard-maker-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "1895740682876504584",
+      "title": "Reading Time Estimator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/reading-time-estimator-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "7749257819320246527",
+      "title": "Word Frequency Counter | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/word-frequency-counter-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "2392806751915743290",
+      "title": "Lorem Ipsum Generator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/lorem-ipsum-generator-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "7468455142282511931",
+      "title": "Text Difference Checker | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/text-difference-checker-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "1274529709557999242",
+      "title": "Find and Replace Text | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/find-and-replace-text-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "1220155131768712930",
+      "title": "Duplicate Line Remover | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/duplicate-line-remover-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "7012180722794750787",
+      "title": "Sort Text Lines | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/sort-text-lines-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "2439101906278915348",
+      "title": "Text Case Converter | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/text-case-converter-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "2252055543591051410",
+      "title": "Disclaimer | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/disclaimer-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "7183104188927439699",
+      "title": "Contact | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/contact-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "6785630462896136471",
+      "title": "Privacy Policy | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/privacy-policy-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "9003043391300247566",
+      "title": "About | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/about-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "603485431729045231",
+      "title": "Image Compressor and Resizer | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/image-compressor-and-resizer-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "8751783564985299476",
+      "title": "HTML Entities Encoder and Decoder | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/html-entities-encoder-and-decoder.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "2210059687737606548",
+      "title": "Percentage and Discount Calculator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/percentage-and-discount-calculator.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "1852895339089472296",
+      "title": "Unix Timestamp Converter | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/unix-timestamp-converter-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "4091569424963460010",
+      "title": "Secure Password Generator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/secure-password-generator-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "5177832241651085579",
+      "title": "UUID v4 Generator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/uuid-v4-generator-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "8581185298893468057",
+      "title": "Base64 Encoder and Decoder | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/base64-encoder-and-decoder-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "5304362962325239429",
+      "title": "URL Encoder and Decoder | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/url-encoder-and-decoder-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "228458230734628671",
+      "title": "Text Cleaner and Formatter | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/text-cleaner-and-formatter-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "8450491284692612774",
+      "title": "CSV to JSON Converter | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/csv-to-json-converter-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "2366585961217291339",
+      "title": "JSON Formatter and Validator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/json-formatter-and-validator-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "3568831102803813441",
+      "title": "Word Counter | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/p/word-counter-flarivo.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "4910126758658247602",
+      "title": "Reading Time Estimator | Flarivo",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "4398480929572829484",
+      "title": "Word Frequency Counter | Flarivo",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "5712111565507532143",
+      "title": "Lorem Ipsum Generator | Flarivo",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "5414748212184372912",
+      "title": "Text Difference Checker | Flarivo",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "1568401099362062023",
+      "title": "Find and Replace Text | Flarivo",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "4274592704818873052",
+      "title": "Duplicate Line Remover | Flarivo",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "1989212429138162963",
+      "title": "Sort Text Lines | Flarivo",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "4323461721766767039",
+      "title": "Text Case Converter | Flarivo",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "909224043721666399",
+      "title": "Disclaimer | Flarivo",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "9061043843124816329",
+      "title": "Contact | Flarivo",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "4452203642574255876",
+      "title": "Privacy Policy | Flarivo",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "7193752618898941596",
+      "title": "About | Flarivo",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "8572315865261196914",
+      "title": "Image Compressor and Resizer | Flarivo",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "8933195579379063633",
+      "title": "HTML Entities Encoder and Decoder | Flarivo",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "3341589818429954593",
+      "title": "Percentage and Discount Calculator | Toolora",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "7978516061136479514",
+      "title": "Unix Timestamp Converter | Toolora",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "8620200685320321532",
+      "title": "Secure Password Generator | Toolora",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "6699902100152478289",
+      "title": "UUID v4 Generator | Toolora",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "2785243530499787106",
+      "title": "Base64 Encoder and Decoder | Toolora",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "7126331015767586633",
+      "title": "URL Encoder and Decoder | Toolora",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "3268921506017342585",
+      "title": "Text Cleaner and Formatter | Toolora",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "4414775880186354014",
+      "title": "CSV to JSON Converter | Toolora",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "8390527615500731237",
+      "title": "JSON Formatter and Validator | Toolora",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "7533255331804389929",
+      "title": "Word Counter | Toolora",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "2659861095762879671",
+      "title": "JSON Formatter and Validator | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": true
+    },
+    {
+      "id": "8436346250197086348",
+      "title": "Word Counter | Utilityra",
+      "url": "https://smartchoicee1.blogspot.com/",
+      "status": "DRAFT",
+      "managed": false,
+      "matches_old_name": true
+    }
+  ],
+  "posts": [
+    {
+      "id": "913463412489209651",
+      "title": "كيف تعرف العرض الأوفر؟ قارن سعر الوحدة بدل حجم العبوة",
+      "url": "https://smartchoicee1.blogspot.com/2026/10/blog-post_82.html",
+      "status": null,
+      "managed": true,
+      "matches_old_name": false
+    },
+    {
+      "id": "8130123378139429871",
+      "title": "طريقة تنظيم ميزانية شهرية بسيطة ومعرفة أين يذهب دخلك",
+      "url": "https://smartchoicee1.blogspot.com/2026/10/blog-post_893.html",
+      "status": null,
+      "managed": true,
+      "matches_old_name": false
+    },
+    {
+      "id": "872243094425519867",
+      "title": "كيف تحسب الخصم الحقيقي والسعر النهائي قبل الشراء؟",
+      "url": "https://smartchoicee1.blogspot.com/2026/10/blog-post_971.html",
+      "status": null,
+      "managed": true,
+      "matches_old_name": false
+    },
+    {
+      "id": "3370761600435262571",
+      "title": "كيف تحسب الخصم الحقيقي والسعر النهائي قبل الشراء؟",
+      "url": "https://smartchoicee1.blogspot.com/2026/10/blog-post_30.html",
+      "status": null,
+      "managed": false,
+      "matches_old_name": false
+    },
+    {
+      "id": "6199903947814616533",
+      "title": "أهلاً بك في Smart Choice",
+      "url": "https://smartchoicee1.blogspot.com/2026/10/smart-choice.html",
+      "status": null,
+      "managed": true,
+      "matches_old_name": false
+    }
+  ]
+}

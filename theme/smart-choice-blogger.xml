@@ -60,9 +60,9 @@
         <article class='sc-card'><h3><a href='https://smartchoicee1.blogspot.com/2026/10/blog-post_893.html'>إزاي تنظم ميزانيتك الشهرية؟</a></h3><p>قسّم دخلك ومصروفاتك واعرف المتبقي مع خطوات عملية.</p><a class='sc-btn' href='https://smartchoicee1.blogspot.com/2026/10/blog-post_893.html'>اقرأ المقال</a></article>
         <article class='sc-card'><h3><a href='https://smartchoicee1.blogspot.com/2026/10/blog-post_82.html'>مقارنة سعر الوحدة قبل الشراء</a></h3><p>قارن العبوات والأحجام المختلفة على أساس سعر الوحدة.</p><a class='sc-btn' href='https://smartchoicee1.blogspot.com/2026/10/blog-post_82.html'>اقرأ المقال</a></article>
       </div>
-    </b:if>
-    <b:if cond='data:blog.url != data:blog.homepageUrl'>
-    <b:section id='main' class='main' maxwidgets='1' showaddelement='no'>
+    </b
+  </main>
+    <b:section id='main' class='sc-wrap sc-main' maxwidgets='1' showaddelement='no'>
       <b:widget id='Blog1' type='Blog' title='المحتوى' version='2' locked='true'>
         <b:widget-settings>
           <b:widget-setting name='showDateHeader'>false</b:widget-setting>
@@ -70,6 +70,7 @@
           <b:widget-setting name='showCommentLink'>false</b:widget-setting>
         </b:widget-settings>
         <b:includable id='main' var='top'>
+          <b:if cond='data:blog.url != data:blog.homepageUrl'>
           <div class='blog-posts hfeed'>
             <b:loop values='data:posts' var='post'>
               <article class='post-outer sc-post' itemscope='itemscope' itemtype='https://schema.org/BlogPosting'>
@@ -105,10 +106,9 @@
               <b:if cond='data:olderPageUrl'><a expr:href='data:olderPageUrl'>الأقدم</a></b:if>
             </nav>
           </b:if>
+          </b:if>
         </b:includable>
       </b:widget>
-    </b:section>
-    </b:if>
-  </main>
+    </b:sect
   <footer class='sc-footer'><div class='sc-wrap'><strong>Smart Choice</strong><div>أدوات عملية لقرارات يومية أفضل.</div><div class='sc-footlinks'><a href='https://smartchoicee1.blogspot.com/p/smart-choice.html'>من نحن</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_01636960364.html'>سياسة الخصوصية</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_02092521556.html'>اتصل بنا</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_02145436434.html'>الأدوات</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_01037455191.html'>الشروط وإخلاء المسؤولية</a></div><small>© Smart Choice · Created by Taha</small></div></footer>
 </body></html>

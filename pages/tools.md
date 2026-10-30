@@ -19,7 +19,7 @@ publish: true
     <div class="sc-field"><label for="sc-price">السعر الأصلي</label><input id="sc-price" type="number" min="0" step="0.01" inputmode="decimal"></div>
     <div class="sc-field"><label for="sc-rate">نسبة الخصم %</label><input id="sc-rate" type="number" min="0" max="100" step="0.1" inputmode="decimal"></div>
   </div>
-  <div class="sc-tool-result" aria-live="polite">السعر بعد الخصم: <strong id="sc-final">أدخل البيانات</strong><br>قيمة التوفير: <b id="sc-saving">—</b></div>
+  <div class="sc-tool-result" aria-live="polite">السعر بعد الخصم: <strong id="sc-final">أدخل البيانات</strong><br>قيمة التوفير: <b id="sc-discount-saved">—</b></div>
 </section>
 <section class="sc-tool-card sc-tool" id="sc-budget" hidden>
   <h2>حاسبة الميزانية الشهرية</h2><p class="sc-muted">اكتب دخلك ومصروفاتك لتعرف المتبقي ونسبة ما تنفقه.</p>

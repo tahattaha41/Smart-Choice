@@ -15,7 +15,7 @@
       const price = value("sc-price"), rate = value("sc-rate");
       const valid = Number.isFinite(price) && Number.isFinite(rate) && price >= 0 && rate >= 0 && rate <= 100;
       put("sc-final", valid ? fmt(price * (1 - rate / 100)) : "تحقق من المدخلات");
-      put("sc-saving", valid ? fmt(price * rate / 100) : "—");
+      put("sc-discount-saved", valid ? fmt(price * rate / 100) : "—");
     }
     function budget() {
       const income = value("sc-income"), expenses = value("sc-expenses");
@@ -98,6 +98,73 @@
   }
   function start() {
     document.querySelectorAll(".sc-page").forEach(init);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
+  else start();
+})();
+/* Smart Choice — dynamic navigation, footer links and latest posts.
+   Read from the blog's public feeds so new pages/posts appear without re-uploading the Blogger theme.
+   Static markup in the theme remains as a fallback if a request fails. */
+(function () {
+  "use strict";
+  var ORDER = ["الأدوات", "من نحن", "اتصل بنا", "سياسة الخصوصية", "الشروط"];
+  function clean(title) { return String(title || "").replace(/\s*\|\s*Smart Choice\s*$/i, "").trim(); }
+  function rank(title) {
+    for (var i = 0; i < ORDER.length; i++) if (title.indexOf(ORDER[i]) === 0) return i;
+    return ORDER.length;
+  }
+  function link(url, text) { var a = document.createElement("a"); a.href = url; a.textContent = text; return a; }
+  function entryUrl(e) {
+    var l = (e.link || []).filter(function (x) { return x.rel === "alternate"; })[0];
+    return l ? l.href : null;
+  }
+  function getJson(path) {
+    return fetch(path, { credentials: "omit" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+  }
+  function pages() {
+    return getJson("/feeds/pages/default?alt=json&max-results=50").then(function (d) {
+      var list = ((d.feed && d.feed.entry) || []).map(function (e) {
+        return { title: clean(e.title && e.title.$t), url: entryUrl(e) };
+      }).filter(function (p) { return p.title && p.url; });
+      list.sort(function (a, b) { return rank(a.title) - rank(b.title); });
+      return list;
+    });
+  }
+  function fillNav(list) {
+    var nav = document.querySelector(".sc-nav");
+    if (nav && list.length) {
+      var home = nav.querySelector("a");
+      nav.textContent = "";
+      if (home) nav.appendChild(home);
+      list.forEach(function (p) { nav.appendChild(link(p.url, p.title)); });
+    }
+    var foot = document.querySelector(".sc-footlinks");
+    if (foot && list.length) {
+      foot.textContent = "";
+      list.forEach(function (p) { foot.appendChild(link(p.url, p.title)); });
+    }
+  }
+  function fillLatest() {
+    var box = document.querySelector(".sc-latest-posts");
+    if (!box) return;
+    getJson("/feeds/posts/default?alt=json&max-results=6").then(function (d) {
+      var items = (d.feed && d.feed.entry) || [];
+      if (!items.length) return;
+      box.textContent = "";
+      items.forEach(function (e) {
+        var url = entryUrl(e); if (!url) return;
+        var card = document.createElement("article"); card.className = "sc-card";
+        var h = document.createElement("h3"); h.appendChild(link(url, e.title.$t));
+        var p = document.createElement("p");
+        var text = (e.summary && e.summary.$t) || String((e.content && e.content.$t) || "").replace(/<[^>]*>/g, " ");
+        p.textContent = text.replace(/\s+/g, " ").trim().slice(0, 140);
+        card.appendChild(h); card.appendChild(p); box.appendChild(card);
+      });
+    }).catch(function () {});
+  }
+  function start() {
+    pages().then(fillNav).catch(function () {});
+    fillLatest();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
   else start();

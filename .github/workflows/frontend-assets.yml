@@ -1,0 +1,39 @@
+name: Smart Choice | Validate and publish front-end assets
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "assets/**"
+      - ".github/workflows/frontend-assets.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: smart-choice-frontend-assets
+  cancel-in-progress: false
+
+jobs:
+  validate-and-purge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate asset files
+        run: |
+          test -s assets/css/smart-choice.css
+          test -s assets/js/smart-choice.js
+          node --check assets/js/smart-choice.js
+          grep -q "Smart Choice" assets/css/smart-choice.css
+      - name: Purge jsDelivr CDN cache
+        run: |
+          curl --fail --silent --show-error "https://purge.jsdelivr.net/gh/tahattaha41/Smart-Choice@main/assets/css/smart-choice.css"
+          curl --fail --silent --show-error "https://purge.jsdelivr.net/gh/tahattaha41/Smart-Choice@main/assets/js/smart-choice.js"
+      - name: Verify published assets
+        run: |
+          for url in \
+            "https://cdn.jsdelivr.net/gh/tahattaha41/Smart-Choice@main/assets/css/smart-choice.css" \
+            "https://cdn.jsdelivr.net/gh/tahattaha41/Smart-Choice@main/assets/js/smart-choice.js"; do
+            curl --fail --silent --show-error --retry 5 --retry-delay 3 "$url" -o /dev/null
+          done

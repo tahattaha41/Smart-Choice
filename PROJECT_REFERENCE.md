@@ -398,3 +398,14 @@
 - تم تحديث الخطة الرئيسية `docs/PROJECT_MASTER_PLAN.md` بالحالة الفعلية. commit `d7c5bdebdfa8041ed2be4a79c458c5d216086956`.
 - تعذر التحقق من واجهة Blogger العامة وملفي sitemap.xml وrobots.txt عبر أداة التصفح؛ الوصول أعاد Internal Error، لذلك لا توجد نتيجة مؤكدة لاختبار الزائر أو SEO الحي.
 - المتبقي خارج GitHub: تركيب/تحديث قالب XML داخل Blogger (لا يوجد endpoint رسمي في Blogger API v3 لذلك)، تفعيل واختبار Contact Form من واجهة Blogger، اختبار الأدوات على الهاتف بعد تركيب القالب، التحقق من GA4/AdSense من لوحتي الحساب، ثم Search Console والفهرسة.
+
+
+### 2026-10-30 — تحسينات القالب قبل التسليم
+- أضيفت وسوم وصف الصفحة وrobots وOpen Graph وTwitter Card وبيانات Schema.org من نوع WebSite، ورابط تجاوز إلى المحتوى. commit `6db81961daf63dccd22a3f74dc0937a515f955e6`.
+- حسّنت CSS لحقول select ومؤشرات التركيز بلوحة المفاتيح ورابط تجاوز المحتوى. commit `535cdfaad5d9ef01f03aea023e84ef71f8a17634`.
+- أضيف workflow مستقل للتحقق من XML ووجود عناصر SEO/الأصول. فشل التشغيل الأول بسبب صياغة heredoc في YAML، وتم إصلاحه في commit `3427ae015de297ccdecd12c097e4d00adf6a84ca`.
+- تحقق نهائي: Theme validation workflow run `41001165091` — success؛ فحص XML well-formedness وعناصر القالب نجح.
+- Frontend assets workflow run `41001106570` — success بعد تحديث CSS.
+- ملف الرفع النهائي هو `theme/smart-choice-blogger.xml` في GitHub main. الرابط الخام: `https://raw.githubusercontent.com/tahattaha41/Smart-Choice/main/theme/smart-choice-blogger.xml`.
+- ملاحظة مهمة: نجاح فحص XML لا يضمن قبول Blogger لكل خصائص القالب أو صحة عرضه النهائي؛ يلزم استيراد تجريبي/رفع من لوحة Blogger ثم فحص الواجهة العامة قبل بدء الفهرسة.
+- لم أضف وسوم `noindex` أو أي منع للفهرسة، ولم أغيّر حالة نشر المقالات أو أحذف محتوى.

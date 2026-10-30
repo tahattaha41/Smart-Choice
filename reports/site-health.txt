@@ -10,4 +10,5 @@ OK    Post: unit price
 OK    Sitemap
 OK    robots.txt
 OK    Front-end JS via CDN
+--- contact page diagnostics ---
 exit=1

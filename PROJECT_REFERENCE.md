@@ -143,3 +143,12 @@
 - الحالة: بحث واختيار مسار تجريبي فقط؛ لم يحدث أي اتصال بحساب Blogger ولم يتغير القالب المنشور. لا يوجد حتى الآن إثبات أن Cloudflare Browser Run قادر على إتمام تسجيل الدخول وحفظ القالب في Blogger.
 - المصادر: Cloudflare Browser Run https://developers.cloudflare.com/browser-run/ ، دليل البدء https://developers.cloudflare.com/browser-run/get-started/ ، Playwright/CDP https://developers.cloudflare.com/browser-run/cdp/playwright/ ، Browserless session persistence https://docs.browserless.io/baas/session-management .
 - الإجراء التالي المطلوب: إنشاء حساب Cloudflare (إن لم يكن موجوداً) وإنشاء API Token مخصص بصلاحية Browser Rendering فقط؛ بعدها نجهز اختبار اتصال آمن وننفذ خطوة تسجيل الدخول يدوياً في الجلسة السحابية دون مشاركة كلمة المرور معنا.
+
+
+### 2026-10-30 — طلب اختبار Cloudflare قبل إنشاء الحساب
+- طلب المستخدم: اختبار الحل المقترح قبل أن يبدأ إنشاء حساب Cloudflare.
+- ما أمكن اختباره دون حساب/توكن: مراجعة وثائق Cloudflare الرسمية الحالية. تؤكد الوثائق وجود جلسات متصفح سحابية قابلة للتحكم عبر Playwright/CDP، وإمكانية فتح Live View والتدخل البشري لإتمام تسجيل الدخول أو CAPTCHA. الخطة المجانية محدودة بـ10 دقائق متصفح يومياً، والجلسة الافتراضية تنتهي بعد دقيقة خمول ويمكن تمديدها حتى 20 دقيقة.
+- قيد مهم اكتُشف: توثيق Cloudflare يذكر أن Browser Run يعرّف الطلبات على أنها آلية، وأن تغيير User-Agent لا يتجاوز حماية البوتات. لذلك لا يوجد ضمان أن Google/Blogger سيسمحان بتسجيل الدخول أو حفظ القالب من هذا المتصفح.
+- ما لم يمكن اختباره بعد: إنشاء جلسة Browser Run حقيقية أو فتح Blogger داخلها أو تسجيل الدخول أو رفع XML؛ يتطلب ذلك حساب Cloudflare وAPI Token بصلاحية Browser Rendering - Edit. لم تُنشأ موارد أو تُستخدم بيانات دخول.
+- النتيجة: إثبات أن البنية التقنية للمتصفح السحابي موجودة، وليس إثبات أن نشر قالب Blogger سينجح. لا ننصح المستخدم بإنشاء حساب أو إضافة وسيلة دفع قبل قبول هذا الاحتمال؛ يمكن بدء اختبار مجاني محدود إذا قرر المتابعة.
+- المصادر الرسمية: https://developers.cloudflare.com/browser-run/get-started/ ، https://developers.cloudflare.com/browser-run/limits/ ، https://developers.cloudflare.com/browser-run/playwright/ ، https://developers.cloudflare.com/browser-run/faq/ .

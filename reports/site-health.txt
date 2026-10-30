@@ -1,0 +1,26 @@
+curl: (22) The requested URL returned error: 429
+OK    Home renders hero (theme installed with content)
+curl: (22) The requested URL returned error: 429
+curl: (22) The requested URL returned error: 429
+curl: (22) The requested URL returned error: 429
+curl: (22) The requested URL returned error: 429
+FAIL  Tools page renders tabs: page not reachable (https://smartchoicee1.blogspot.com/p/smart-choice_02145436434.html)
+curl: (22) The requested URL returned error: 429
+FAIL  Contact page shows email: marker 'skyloom32@gmail.com' missing in https://smartchoicee1.blogspot.com/p/smart-choice_02092521556.html
+curl: (22) The requested URL returned error: 429
+OK    About page
+OK    Privacy page
+curl: (22) The requested URL returned error: 429
+curl: (22) The requested URL returned error: 429
+curl: (22) The requested URL returned error: 429
+curl: (22) The requested URL returned error: 429
+FAIL  Terms page: page not reachable (https://smartchoicee1.blogspot.com/p/smart-choice_01037455191.html)
+OK    Post: discount
+curl: (22) The requested URL returned error: 429
+OK    Post: budget
+curl: (22) The requested URL returned error: 429
+OK    Post: unit price
+OK    Sitemap
+OK    robots.txt
+OK    Front-end JS via CDN
+exit=1

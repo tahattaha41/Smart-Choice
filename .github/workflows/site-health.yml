@@ -57,6 +57,7 @@ jobs:
           printf '%s' "$cbody" | grep -o -i -E '.{0,60}(gmail|mailto|البريد الإلكتروني|email-protection).{0,80}' | head -8
           printf '%s' "$cbody" | tr '\n' ' ' | grep -o -E 'entry-content.{0,700}' | head -2
           printf '%s' "$cbody" | grep -o -E 'تاريخ|Updated|datePublished[^,]*|dateModified[^,]*' | head -3
+          python3 scripts/capture_live.py || true
           echo "exit=$fail"
           ) 2>&1 | tee site-health.out
           mkdir -p reports; cp site-health.out reports/site-health.txt
@@ -66,7 +67,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add reports/site-health.txt || true
+          git add reports/site-health.txt reports/live-*.txt || true
           if ! git diff --cached --quiet; then
             git commit -m "chore: live site health report [skip ci]"
             for i in 1 2 3 4 5; do git pull --rebase origin main && git push origin HEAD:main && exit 0; sleep 2; done

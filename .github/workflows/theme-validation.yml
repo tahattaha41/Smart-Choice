@@ -17,12 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Check XML well-formedness
-        run: python - <<'PY'
-          import xml.etree.ElementTree as ET
-          path = "theme/smart-choice-blogger.xml"
-          ET.parse(path)
-          print("Blogger theme XML is well-formed.")
-          PY
+        run: python -c "import xml.etree.ElementTree as ET; ET.parse('theme/smart-choice-blogger.xml'); print('Blogger theme XML is well-formed.')"
       - name: Check required theme features
         run: |
           grep -q "application/ld+json" theme/smart-choice-blogger.xml

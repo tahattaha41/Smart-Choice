@@ -14,12 +14,13 @@ OK    Contact: body text length 420
 OK    Contact shows email
 OK    Privacy loads
 OK    Privacy: body text length 1751
-FAIL  Terms: not in feed
+OK    Terms loads
+OK    Terms: body text length 941
 OK    Decision page loads
 OK    Decision page: body text length 413
 OK    Compare page loads
 OK    Compare page: body text length 599
 OK    Posts in feed: 7
 OK    Latest post body length 1150
-FAIL  No JS errors: solveSimpleChallenge is not defined | solveSimpleChallenge is not defined | solveSimpleChallenge is not defined
-failed=2
+OK    No JS errors
+failed=0

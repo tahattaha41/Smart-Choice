@@ -49,6 +49,10 @@ jobs:
           check "$base/sitemap.xml" "<loc>" "Sitemap"
           check "$base/robots.txt" "Sitemap" "robots.txt"
           check "https://cdn.jsdelivr.net/gh/tahattaha41/Smart-Choice@main/assets/js/smart-choice.js" "sc-" "Front-end JS via CDN"
+          echo "--- contact page diagnostics ---"
+          cbody=$(curl -fsSL "$base/p/smart-choice_02092521556.html" 2>/dev/null)
+          printf '%s' "$cbody" | grep -o -i -E '.{0,60}(gmail|mailto|البريد الإلكتروني|email-protection).{0,80}' | head -8
+          printf '%s' "$cbody" | grep -o -E 'تاريخ|Updated|datePublished[^,]*|dateModified[^,]*' | head -3
           echo "exit=$fail"
           ) 2>&1 | tee site-health.out
           mkdir -p reports; cp site-health.out reports/site-health.txt

@@ -7,7 +7,7 @@
     const $ = (id) => root.querySelector("#" + id);
     const value = (id) => {
       const el = $(id);
-      return el ? Number(el.value) : NaN;
+      return el && el.value.trim() !== "" ? Number(el.value) : NaN;
     };
     const fmt = (n) => new Intl.NumberFormat("ar-EG", { maximumFractionDigits: 2 }).format(n);
     const put = (id, text) => { const el = $(id); if (el) el.textContent = text; };

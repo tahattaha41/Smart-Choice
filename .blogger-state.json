@@ -1,4 +1,12 @@
 {
+  "how-to-calculate-discount.md": {
+    "hash": "a9c5de3d8b502e3ebd95ffa547bb87380e4df7297b9f5f109479a684057ecc10",
+    "id": "872243094425519867"
+  },
+  "monthly-budget-practical-guide.md": {
+    "hash": "5d1d332a14b18aa8be39d2c4c70672cc5047a64d0dc48656200fce812363c471",
+    "id": "8130123378139429871"
+  },
   "smart-choice-welcome.md": {
     "hash": "18abe9d387976bda33d581d7ced6946f764915c05670b0f17e9192b86c2b1095",
     "id": "6199903947814616533"
@@ -7,16 +15,8 @@
     "hash": "aeb4c90eb0631ebae3141345364774c289c8953bcc26248340113a63bb40443a",
     "id": "5527047068448456402"
   },
-  "how-to-calculate-discount.md": {
-    "id": "971",
-    "hash": ""
-  },
-  "monthly-budget-practical-guide.md": {
-    "id": "893",
-    "hash": ""
-  },
   "unit-price-comparison-guide.md": {
-    "id": "82",
-    "hash": ""
+    "hash": "88033100538d69c9759e6bc22101173d197d17486650d4f5f6bb486007d9c888",
+    "id": "913463412489209651"
   }
 }

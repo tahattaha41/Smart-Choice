@@ -1,22 +1,25 @@
 OK    Home loads
 OK    Home shows hero
+OK    CDN serves latest front-end JS (self-heal present)
 OK    Nav has no old-brand pages: الرئيسية الأدوات الذكية مقارنة المنتجات مركز القرار من نحن اتصل بنا سياسة الخصوصية شروط الاستخدام وإخلاء المسؤولية
 OK    Tools page loads
-FAIL  Tools: NO tool section rendered (page is interface only)
-FAIL  Tools: discount input missing
+OK    Tools: tool sections rendered
+OK    Tools: discount calculator works -> السعر بعد الخصم: ١٬٦٠٠ قيمة التوفير: ٤٠٠
+OK    Tools: decision tab opens
+OK    Tools: compare tab opens
 OK    About loads
-FAIL  About: body text length 0
+OK    About: body text length 436
 OK    Contact loads
-FAIL  Contact: body text length 0
-FAIL  Contact shows email
+OK    Contact: body text length 420
+OK    Contact shows email
 OK    Privacy loads
-FAIL  Privacy: body text length 0
+OK    Privacy: body text length 1751
 FAIL  Terms: not in feed
 OK    Decision page loads
-FAIL  Decision page: body text length 0
+OK    Decision page: body text length 413
 OK    Compare page loads
-FAIL  Compare page: body text length 0
+OK    Compare page: body text length 599
 OK    Posts in feed: 7
-FAIL  Latest post body length 0
+OK    Latest post body length 1150
 FAIL  No JS errors: solveSimpleChallenge is not defined | solveSimpleChallenge is not defined | solveSimpleChallenge is not defined
-failed=11
+failed=2

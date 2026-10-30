@@ -1,0 +1,32 @@
+name: Smart Choice | Validate Blogger theme
+on:
+  push:
+    branches: [main]
+    paths:
+      - "theme/smart-choice-blogger.xml"
+      - ".github/workflows/theme-validation.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: smart-choice-theme-validation
+  cancel-in-progress: false
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check XML well-formedness
+        run: python - <<'PY'
+          import xml.etree.ElementTree as ET
+          path = "theme/smart-choice-blogger.xml"
+          ET.parse(path)
+          print("Blogger theme XML is well-formed.")
+          PY
+      - name: Check required theme features
+        run: |
+          grep -q "application/ld+json" theme/smart-choice-blogger.xml
+          grep -q "name='description'" theme/smart-choice-blogger.xml
+          grep -q "id='main-content'" theme/smart-choice-blogger.xml
+          grep -q "smart-choice.css" theme/smart-choice-blogger.xml
+          grep -q "smart-choice.js" theme/smart-choice-blogger.xml

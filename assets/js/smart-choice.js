@@ -35,21 +35,66 @@
       const conclusion = Math.abs(a-b) < 1e-10 ? "السعر متساوٍ لكل وحدة" : a < b ? "المنتج الأول أوفر لكل وحدة" : "المنتج الثاني أوفر لكل وحدة";
       out.textContent = "سعر وحدة المنتج الأول: " + fmt(a) + " — سعر وحدة المنتج الثاني: " + fmt(b) + " — " + conclusion;
     }
+
+    function percent() {
+      const a=value("sc-base"), b=value("sc-new"), out=$("sc-percent-result");
+      if(!out) return;
+      out.textContent = Number.isFinite(a)&&Number.isFinite(b)&&a!==0 ? "التغير: "+fmt(b-a)+" — نسبة التغير: "+fmt((b-a)/Math.abs(a)*100)+"%" : "أدخل قيمتين صحيحتين، ويجب ألا تكون القيمة الأصلية صفرًا.";
+    }
+    function saving() {
+      const target=value("sc-target"), saved=value("sc-saved"), monthly=value("sc-monthly"), out=$("sc-saving-result");
+      if(!out)return;
+      if([target,saved,monthly].some(n=>!Number.isFinite(n)||n<0)){out.textContent="أدخل أرقامًا غير سالبة.";return;}
+      const remain=Math.max(0,target-saved);
+      out.textContent=remain===0?"وصلت إلى هدفك أو تجاوزته.":monthly>0?"المتبقي: "+fmt(remain)+" — المدة المتوقعة: "+fmt(Math.ceil(remain/monthly))+" شهرًا.":"حدد ادخارًا شهريًا أكبر من صفر لحساب المدة.";
+    }
+    function total() {
+      const vals=["sc-item","sc-shipping","sc-fees"].map(id=>value(id)), out=$("sc-total-result");
+      if(!out)return;
+      out.textContent=vals.every(n=>Number.isFinite(n)&&n>=0)?"التكلفة الإجمالية: "+fmt(vals.reduce((a,b)=>a+b,0)):"أدخل كل القيم كأرقام غير سالبة.";
+    }
+    function installment() {
+      const cash=value("sc-cash"), down=value("sc-down"), months=value("sc-months"), pay=value("sc-monthpay"), out=$("sc-installment-result");
+      if(!out)return;
+      if([cash,down,months,pay].some(n=>!Number.isFinite(n)||n<0)||months<1||!Number.isInteger(months)||down>cash){out.textContent="راجع القيم؛ المقدم لا يتجاوز السعر النقدي وعدد الشهور عدد صحيح موجب.";return;}
+      const totalPaid=down+months*pay, diff=totalPaid-cash;
+      out.textContent="إجمالي المدفوع: "+fmt(totalPaid)+" — الفرق عن النقدي: "+fmt(diff)+(diff>0?" زيادة":diff<0?" أقل":" مساوي");
+    }
+    function convert() {
+      const n=value("sc-convert-value"), type=$("sc-convert-type")?.value, out=$("sc-convert-result");
+      if(!out)return;
+      const factors={"kg-g":1000,"g-kg":.001,"l-ml":1000,"ml-l":.001,"m-cm":100,"cm-m":.01,"km-m":1000,"m-km":.001};
+      out.textContent=Number.isFinite(n)&&Object.prototype.hasOwnProperty.call(factors,type)?"النتيجة: "+fmt(n*factors[type]):"أدخل قيمة صحيحة.";
+    }
+    function dates() {
+      const a=$("sc-date1")?.value,b=$("sc-date2")?.value,out=$("sc-dates-result");
+      if(!out)return;
+      if(!a||!b){out.textContent="اختر التاريخين.";return;}
+      const days=Math.abs(Date.parse(a+"T00:00:00Z")-Date.parse(b+"T00:00:00Z"))/86400000;
+      out.textContent="الفارق بين التاريخين: "+fmt(days)+" يومًا.";
+    }
     const handlers = {
       "sc-price": discount, "sc-rate": discount,
       "sc-income": budget, "sc-expenses": budget,
-      "sc-p1": unit, "sc-q1": unit, "sc-p2": unit, "sc-q2": unit
+      "sc-p1": unit, "sc-q1": unit, "sc-p2": unit, "sc-q2": unit,
+      "sc-base": percent, "sc-new": percent,
+      "sc-target": saving, "sc-saved": saving, "sc-monthly": saving,
+      "sc-item": total, "sc-shipping": total, "sc-fees": total,
+      "sc-cash": installment, "sc-down": installment, "sc-months": installment, "sc-monthpay": installment,
+      "sc-convert-value": convert, "sc-date1": dates, "sc-date2": dates
     };
     Object.keys(handlers).forEach(id => {
       const el=$(id);
       if (el) el.addEventListener("input", handlers[id]);
     });
+    const convertType=$("sc-convert-type");
+    if(convertType) convertType.addEventListener("change", convert);
     root.querySelectorAll("[data-tab]").forEach(btn => btn.addEventListener("click", () => {
       const tab=btn.getAttribute("data-tab");
       root.querySelectorAll("[data-tab]").forEach(b => b.setAttribute("aria-selected", String(b===btn)));
       root.querySelectorAll(".sc-tool").forEach(section => { section.hidden = section.id !== "sc-" + tab; });
     }));
-    discount(); budget(); unit();
+    discount(); budget(); unit(); percent(); saving(); total(); installment(); convert(); dates();
   }
   function start() {
     document.querySelectorAll(".sc-page").forEach(init);

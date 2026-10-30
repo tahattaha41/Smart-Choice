@@ -58,7 +58,48 @@
     </b:if>
     <b:section id='main' class='main' maxwidgets='1' showaddelement='no'>
       <b:widget id='Blog1' type='Blog' title='المحتوى' version='2' locked='true'>
-        <b:widget-settings><b:widget-setting name='showDateHeader'>false</b:widget-setting><b:widget-setting name='showShareButtons'>true</b:widget-setting><b:widget-setting name='showCommentLink'>false</b:widget-setting></b:widget-settings>
+        <b:widget-settings>
+          <b:widget-setting name='showDateHeader'>false</b:widget-setting>
+          <b:widget-setting name='showShareButtons'>true</b:widget-setting>
+          <b:widget-setting name='showCommentLink'>false</b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main' var='top'>
+          <div class='blog-posts hfeed'>
+            <b:loop values='data:posts' var='post'>
+              <article class='post-outer sc-post' itemscope='itemscope' itemtype='https://schema.org/BlogPosting'>
+                <b:if cond='data:post.title'>
+                  <h2 class='post-title entry-title' itemprop='headline'>
+                    <b:if cond='data:blog.pageType == &quot;index&quot; or data:blog.pageType == &quot;archive&quot;'>
+                      <a expr:href='data:post.url'><data:post.title/></a>
+                    <b:else/>
+                      <data:post.title/>
+                    </b:if>
+                  </h2>
+                </b:if>
+                <div class='post-body entry-content' itemprop='articleBody'>
+                  <data:post.body/>
+                </div>
+                <div class='sc-post-meta'>
+                  <span><data:post.author/></span>
+                  <time expr:datetime='data:post.timestampISO8601' itemprop='datePublished'><data:post.timestamp/></time>
+                </div>
+                <b:if cond='data:post.labels'>
+                  <div class='sc-post-labels'>
+                    <b:loop values='data:post.labels' var='label'>
+                      <a expr:href='data:label.url' rel='tag'><data:label.name/></a>
+                    </b:loop>
+                  </div>
+                </b:if>
+              </article>
+            </b:loop>
+          </div>
+          <b:if cond='data:blog.pageType != &quot;item&quot; and data:blog.pageType != &quot;static_page&quot;'>
+            <nav class='blog-pager' aria-label='التنقل بين الصفحات'>
+              <b:if cond='data:newerPageUrl'><a expr:href='data:newerPageUrl'>الأحدث</a></b:if>
+              <b:if cond='data:olderPageUrl'><a expr:href='data:olderPageUrl'>الأقدم</a></b:if>
+            </nav>
+          </b:if>
+        </b:includable>
       </b:widget>
     </b:section>
   </main>

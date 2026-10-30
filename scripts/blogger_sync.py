@@ -86,6 +86,19 @@ def get_service():
     return build("blogger", "v3", credentials=creds, cache_discovery=False)
 
 
+def find_existing_post(service, blog_id, post):
+    """Recover a Blogger post by exact title; stop on ambiguity."""
+    matches = []
+    request = service.posts().list(blogId=blog_id, fetchBodies=True, maxResults=500, status=["LIVE", "DRAFT"])
+    while request is not None:
+        response = request.execute()
+        matches.extend(item for item in response.get("items", []) if item.get("title") == post["title"])
+        request = service.posts().list_next(request, response)
+    if len(matches) > 1:
+        raise RuntimeError("توجد مقالات متعددة بنفس العنوان؛ أوقفت المزامنة لمنع تحديث مقال خاطئ: " + post["title"])
+    return matches[0] if matches else None
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
@@ -113,7 +126,7 @@ def main():
     for name, post in current.items():
         h = digest(post)
         entry = state.get(name)
-        if entry and entry["hash"] == h:
+        if entry and entry.get("hash") == h and entry.get("id"):
             print(f"= بدون تغيير: {name}")
             continue
 
@@ -126,18 +139,22 @@ def main():
         if args.dry_run:
             continue
 
-        if entry:
-            result = service.posts().update(
-                blogId=blog_id, postId=entry["id"], body=body
-            ).execute()
+        existing = None
+        if entry and entry.get("id") and entry.get("hash"):
+            try:
+                existing = service.posts().get(blogId=blog_id, postId=entry["id"]).execute()
+            except Exception:
+                existing = None
+        if existing is None:
+            existing = find_existing_post(service, blog_id, post)
+        if existing:
+            post_id = existing["id"]
+            result = service.posts().update(blogId=blog_id, postId=post_id, body=body).execute()
             if post["publish"] and result.get("status") == "DRAFT":
-                result = service.posts().publish(
-                    blogId=blog_id, postId=entry["id"]
-                ).execute()
+                result = service.posts().publish(blogId=blog_id, postId=post_id).execute()
+            print("  -> استعادة/تحديث مقال موجود دون إنشاء نسخة جديدة")
         else:
-            result = service.posts().insert(
-                blogId=blog_id, body=body, isDraft=not post["publish"]
-            ).execute()
+            result = service.posts().insert(blogId=blog_id, body=body, isDraft=not post["publish"]).execute()
         state[name] = {"id": result["id"], "hash": h}
         print(f"  -> {result.get('url', result['id'])}")
         changed = True

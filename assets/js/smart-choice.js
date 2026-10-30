@@ -141,6 +141,7 @@
   function start() {
     document.querySelectorAll(".sc-page").forEach(init);
   }
+  window.__scInitTools = start;
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
   else start();
 })();
@@ -213,4 +214,41 @@
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
   else start();
+})();
+
+/* Smart Choice — self-healing content renderer.
+   If the installed Blogger theme does not print a page/post body (empty content area), fetch the same
+   item from the blog's public feed and render it, then start the tools. Does nothing when the theme
+   already rendered the body, so it is safe with any theme version. */
+(function () {
+  "use strict";
+  function run() {
+    var path = location.pathname;
+    var isPage = /^\/p\//.test(path), isPost = /^\/\d{4}\/\d{2}\//.test(path);
+    if (!isPage && !isPost) return;
+    if (document.querySelector(".post-body, .entry-content, .sc-page")) return;
+    var host = document.getElementById("main-content") || document.querySelector("main") || document.body;
+    var feed = isPage ? "/feeds/pages/default?alt=json&max-results=150" : "/feeds/posts/default?alt=json&max-results=500";
+    fetch(feed, { credentials: "omit" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (d) {
+      var entries = (d.feed && d.feed.entry) || [];
+      var hit = entries.filter(function (e) {
+        return (e.link || []).some(function (l) { if (l.rel !== "alternate") return false; try { return new URL(l.href).pathname === path; } catch (x) { return false; } });
+      })[0];
+      if (!hit || !hit.content) return;
+      if (document.querySelector(".post-body, .entry-content, .sc-page")) return;
+      var art = document.createElement("article");
+      art.className = "sc-post sc-injected";
+      var h = document.createElement("h1");
+      h.className = "post-title entry-title";
+      h.textContent = String(hit.title && hit.title.$t || "").replace(/\s*\|\s*Smart Choice\s*$/i, "");
+      var body = document.createElement("div");
+      body.className = "post-body entry-content";
+      body.innerHTML = hit.content.$t; // محتوى المالك نفسه من خلاصة مدونته
+      art.appendChild(h); art.appendChild(body);
+      host.appendChild(art);
+      if (window.__scInitTools) window.__scInitTools();
+    }).catch(function () {});
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
+  else run();
 })();

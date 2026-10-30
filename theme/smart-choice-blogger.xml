@@ -6,6 +6,20 @@
   <meta content='IE=edge' http-equiv='X-UA-Compatible'/>
   <b:include data='blog' name='all-head-content'/>
   <title><data:blog.pageTitle/></title>
+  <meta expr:content='data:blog.metaDescription' name='description'/>
+  <meta content='index,follow,max-image-preview:large' name='robots'/>
+  <meta expr:content='data:blog.pageTitle' property='og:title'/>
+  <meta expr:content='data:blog.url' property='og:url'/>
+  <meta content='website' property='og:type'/>
+  <meta content='Smart Choice' property='og:site_name'/>
+  <meta content='ar_EG' property='og:locale'/>
+  <meta content='summary' name='twitter:card'/>
+  <meta expr:content='data:blog.pageTitle' name='twitter:title'/>
+  <meta expr:content='data:blog.metaDescription' name='twitter:description'/>
+  <link href='https://cdn.jsdelivr.net' rel='preconnect' crossorigin='anonymous'/>
+  <script type='application/ld+json'>
+  {"@context":"https://schema.org","@type":"WebSite","name":"Smart Choice","url":"https://smartchoicee1.blogspot.com/","inLanguage":"ar-EG","description":"أدوات مجانية تساعدك تحسب وتقارن وتختار بوعي"}
+  </script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tahattaha41/Smart-Choice@main/assets/css/smart-choice.css"/>
   <script defer="defer" src="https://cdn.jsdelivr.net/gh/tahattaha41/Smart-Choice@main/assets/js/smart-choice.js"></script>
   <!-- Google Analytics 4: Smart Choice -->
@@ -30,7 +44,8 @@
       <a expr:href='data:blog.homepageUrl'>الرئيسية</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_02145436434.html'>الأدوات</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice.html'>من نحن</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_02092521556.html'>اتصل بنا</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_01037455191.html'>شروط الاستخدام</a>
     </nav>
   </div></header>
-  <main class='sc-wrap sc-main'>
+  <a class='sc-skip' href='#main-content'>تجاوز إلى المحتوى</a>
+  <main id='main-content' class='sc-wrap sc-main'>
     <b:if cond='data:blog.url == data:blog.homepageUrl'>
       <section class='sc-hero'><h1>اختيارات أذكى. قرارات أفضل.</h1><p>احسب ميزانيتك، قارن الأسعار، ونظّم قراراتك اليومية باستخدام أدوات مجانية واضحة وسهلة.</p><a class='sc-btn' href='https://smartchoicee1.blogspot.com/p/smart-choice_02145436434.html'>اكتشف الأدوات</a></section>
       <h2 class='sc-sectiontitle'>ابدأ من هنا</h2>

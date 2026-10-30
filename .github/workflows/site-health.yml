@@ -55,6 +55,7 @@ jobs:
           echo "--- contact page diagnostics ---"
           cbody=$(curl -fsSL "$base/p/smart-choice_02092521556.html" 2>/dev/null)
           printf '%s' "$cbody" | grep -o -i -E '.{0,60}(gmail|mailto|البريد الإلكتروني|email-protection).{0,80}' | head -8
+          printf '%s' "$cbody" | tr '\n' ' ' | grep -o -E 'entry-content.{0,700}' | head -2
           printf '%s' "$cbody" | grep -o -E 'تاريخ|Updated|datePublished[^,]*|dateModified[^,]*' | head -3
           echo "exit=$fail"
           ) 2>&1 | tee site-health.out

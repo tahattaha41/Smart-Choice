@@ -4,7 +4,9 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 const BASE = 'https://smartchoicee1.blogspot.com';
 const out = []; let failed = 0;
 const rec = (ok, msg) => { out.push((ok ? 'OK    ' : 'FAIL  ') + msg); if (!ok) failed++; };
-const browser = await chromium.launch();
+let browser;
+try {
+browser = await chromium.launch();
 const ctx = await browser.newContext({ locale: 'ar-EG', viewport: { width: 390, height: 800 } });
 const page = await ctx.newPage();
 const errors = []; page.on('pageerror', (e) => errors.push(e.message));
@@ -47,7 +49,8 @@ const posts = await page.evaluate(async () => (await (await fetch('/feeds/posts/
 rec(posts.length >= 6, 'Posts in feed: ' + posts.length);
 if (posts[0]) { await go(posts[0]); await page.waitForTimeout(2500); const len = (await page.locator('.post-body, .entry-content').first().innerText().catch(() => '')).length; rec(len > 300, 'Latest post body length ' + len); }
 rec(errors.length === 0, 'No JS errors' + (errors.length ? ': ' + errors.slice(0, 3).join(' | ') : ''));
-await browser.close();
+} catch (e) { rec(false, 'Test crashed: ' + String(e && e.message || e).split('\n')[0].slice(0, 300)); }
+finally { if (browser) await browser.close().catch(() => {}); }
 mkdirSync('reports', { recursive: true });
 writeFileSync('reports/live-e2e.txt', out.join('\n') + `\nfailed=${failed}\n`);
 console.log(out.join('\n'));

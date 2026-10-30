@@ -86,8 +86,15 @@ def get_service():
     return build("blogger", "v3", credentials=creds, cache_discovery=False)
 
 
-def find_existing_post(service, blog_id, post):
-    """Recover a Blogger post by exact title; stop on ambiguity."""
+PREFERRED_POST_PATHS = {
+    "how-to-calculate-discount.md": "/2026/10/blog-post_971.html",
+    "monthly-budget-practical-guide.md": "/2026/10/blog-post_893.html",
+    "unit-price-comparison-guide.md": "/2026/10/blog-post_82.html",
+}
+
+
+def find_existing_post(service, blog_id, post, filename):
+    """Recover a Blogger post by title and known published URL; stop on ambiguity."""
     matches = []
     request = service.posts().list(blogId=blog_id, fetchBodies=True, maxResults=500, status=["LIVE", "DRAFT"])
     while request is not None:
@@ -95,6 +102,10 @@ def find_existing_post(service, blog_id, post):
         matches.extend(item for item in response.get("items", []) if item.get("title") == post["title"])
         request = service.posts().list_next(request, response)
     if len(matches) > 1:
+        preferred_path = PREFERRED_POST_PATHS.get(filename)
+        preferred = [item for item in matches if preferred_path and item.get("url", "").endswith(preferred_path)]
+        if len(preferred) == 1:
+            return preferred[0]
         exact = [item for item in matches if item.get("content", "").strip() == post["content"].strip()]
         if len(exact) == 1:
             return exact[0]
@@ -150,7 +161,7 @@ def main():
             except Exception:
                 existing = None
         if existing is None:
-            existing = find_existing_post(service, blog_id, post)
+            existing = find_existing_post(service, blog_id, post, name)
         if existing:
             post_id = existing["id"]
             result = service.posts().update(blogId=blog_id, postId=post_id, body=body).execute()

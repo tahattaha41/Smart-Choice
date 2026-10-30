@@ -6,6 +6,14 @@
   <meta content='IE=edge' http-equiv='X-UA-Compatible'/>
   <b:include data='blog' name='all-head-content'/>
   <title><data:blog.pageTitle/></title>
+  <!-- Google Analytics 4: Smart Choice -->
+  <script async='async' src='https://www.googletagmanager.com/gtag/js?id=G-BRZP957SQ4'></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BRZP957SQ4');
+  </script>
   <b:skin><![CDATA[
     :root{--navy:#102b50;--blue:#176b87;--ink:#182338;--muted:#607086;--line:#e3eaf0;--paper:#f6f9fc;--white:#fff}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.8}

@@ -12,9 +12,14 @@ const page = await ctx.newPage();
 const errors = []; page.on('pageerror', (e) => errors.push(e.message));
 const go = async (url) => { for (let i = 0; i < 4; i++) { try { const r = await page.goto(url, { waitUntil: 'networkidle', timeout: 45000 }); if (r && r.ok()) return true; } catch {} await page.waitForTimeout(8000 * (i + 1)); } return false; };
 
+// نسخة الواجهة المنشورة على CDN
+const cdn = await page.evaluate(async () => { try { return await (await fetch('https://cdn.jsdelivr.net/gh/tahattaha41/Smart-Choice@main/assets/js/smart-choice.js')).text(); } catch { return ''; } }).catch(() => '');
+// (يُقيَّم بعد فتح الصفحة الأولى)
 // الرئيسية
 rec(await go(BASE + '/'), 'Home loads');
 rec((await page.locator('.sc-hero').count()) > 0, 'Home shows hero');
+const cdn2 = await page.evaluate(async () => { try { return await (await fetch('https://cdn.jsdelivr.net/gh/tahattaha41/Smart-Choice@main/assets/js/smart-choice.js')).text(); } catch { return ''; } });
+rec(cdn2.includes('content bundle'), 'CDN serves latest front-end JS (self-heal present)');
 await page.waitForTimeout(2500);
 const nav = (await page.locator('.sc-nav').innerText()).replace(/\s+/g, ' ');
 rec(!/utilityra|flarivo|toolora/i.test(nav), 'Nav has no old-brand pages: ' + nav.slice(0, 120));

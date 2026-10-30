@@ -1,0 +1,40 @@
+name: Smart Choice | Build content bundle
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "pages/**"
+      - "posts/**"
+      - "scripts/build_content_bundle.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: smart-choice-blogger-sync-state
+  cancel-in-progress: false
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: python3 scripts/build_content_bundle.py
+      - name: Commit bundle
+        run: |
+          if [ -n "$(git status --porcelain assets/content)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add assets/content
+            git commit -m "chore: update content bundle [skip ci]"
+            for i in 1 2 3 4 5; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 2; done
+          fi
+      - name: Purge CDN caches
+        run: |
+          for f in assets/content/bundle.json assets/js/smart-choice.js assets/css/smart-choice.css; do
+            curl --silent --show-error "https://purge.jsdelivr.net/gh/tahattaha41/Smart-Choice@main/$f" >/dev/null || true
+          done

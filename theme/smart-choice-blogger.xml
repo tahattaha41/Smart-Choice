@@ -55,7 +55,13 @@
         <article class='sc-card'><h3>أدلة ومقالات</h3><p>شروحات عملية تساعدك على استخدام الأدوات واتخاذ قرار أوضح.</p><a class='sc-btn' href='/search'>اقرأ المقالات</a></article>
       </div>
       <h2 class='sc-sectiontitle'>أحدث المقالات</h2>
+      <div class='sc-cards sc-latest-posts'>
+        <article class='sc-card'><h3><a href='https://smartchoicee1.blogspot.com/2026/10/blog-post_971.html'>إزاي تحسب الخصم والسعر بعد التخفيض؟</a></h3><p>طريقة سهلة لحساب قيمة الخصم والسعر النهائي قبل الشراء.</p><a class='sc-btn' href='https://smartchoicee1.blogspot.com/2026/10/blog-post_971.html'>اقرأ المقال</a></article>
+        <article class='sc-card'><h3><a href='https://smartchoicee1.blogspot.com/2026/10/blog-post_893.html'>إزاي تنظم ميزانيتك الشهرية؟</a></h3><p>قسّم دخلك ومصروفاتك واعرف المتبقي مع خطوات عملية.</p><a class='sc-btn' href='https://smartchoicee1.blogspot.com/2026/10/blog-post_893.html'>اقرأ المقال</a></article>
+        <article class='sc-card'><h3><a href='https://smartchoicee1.blogspot.com/2026/10/blog-post_82.html'>مقارنة سعر الوحدة قبل الشراء</a></h3><p>قارن العبوات والأحجام المختلفة على أساس سعر الوحدة.</p><a class='sc-btn' href='https://smartchoicee1.blogspot.com/2026/10/blog-post_82.html'>اقرأ المقال</a></article>
+      </div>
     </b:if>
+    <b:if cond='data:blog.url != data:blog.homepageUrl'>
     <b:section id='main' class='main' maxwidgets='1' showaddelement='no'>
       <b:widget id='Blog1' type='Blog' title='المحتوى' version='2' locked='true'>
         <b:widget-settings>
@@ -102,6 +108,7 @@
         </b:includable>
       </b:widget>
     </b:section>
+    </b:if>
   </main>
   <footer class='sc-footer'><div class='sc-wrap'><strong>Smart Choice</strong><div>أدوات عملية لقرارات يومية أفضل.</div><div class='sc-footlinks'><a href='https://smartchoicee1.blogspot.com/p/smart-choice.html'>من نحن</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_01636960364.html'>سياسة الخصوصية</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_02092521556.html'>اتصل بنا</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_02145436434.html'>الأدوات</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_01037455191.html'>الشروط وإخلاء المسؤولية</a></div><small>© Smart Choice · Created by Taha</small></div></footer>
 </body></html>

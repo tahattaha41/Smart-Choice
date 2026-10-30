@@ -1,0 +1,246 @@
+[
+ {
+  "id": "phones",
+  "name": {
+   "ar": "الموبايلات",
+   "en": "Phones"
+  },
+  "defaultPriceWeight": 4,
+  "specs": [
+   {
+    "key": "ram_gb",
+    "label": {
+     "ar": "الرام",
+     "en": "RAM"
+    },
+    "unit": {
+     "ar": "جيجا",
+     "en": "GB"
+    },
+    "better": "higher",
+    "priority": true,
+    "defaultWeight": 3,
+    "filter": [
+     4,
+     6,
+     8,
+     12
+    ]
+   },
+   {
+    "key": "storage_gb",
+    "label": {
+     "ar": "التخزين",
+     "en": "Storage"
+    },
+    "unit": {
+     "ar": "جيجا",
+     "en": "GB"
+    },
+    "better": "higher",
+    "priority": true,
+    "defaultWeight": 3,
+    "filter": [
+     64,
+     128,
+     256,
+     512
+    ]
+   },
+   {
+    "key": "battery_mah",
+    "label": {
+     "ar": "البطارية",
+     "en": "Battery"
+    },
+    "unit": {
+     "ar": "مللي أمبير",
+     "en": "mAh"
+    },
+    "better": "higher",
+    "priority": true,
+    "defaultWeight": 4
+   },
+   {
+    "key": "camera_mp",
+    "label": {
+     "ar": "الكاميرا الرئيسية",
+     "en": "Main camera"
+    },
+    "unit": {
+     "ar": "ميجابكسل",
+     "en": "MP"
+    },
+    "better": "higher",
+    "priority": true,
+    "defaultWeight": 2
+   },
+   {
+    "key": "refresh_hz",
+    "label": {
+     "ar": "معدل تحديث الشاشة",
+     "en": "Refresh rate"
+    },
+    "unit": {
+     "ar": "هرتز",
+     "en": "Hz"
+    },
+    "better": "higher",
+    "priority": true,
+    "defaultWeight": 2
+   },
+   {
+    "key": "screen_in",
+    "label": {
+     "ar": "حجم الشاشة",
+     "en": "Screen size"
+    },
+    "unit": {
+     "ar": "بوصة",
+     "en": "in"
+    },
+    "better": null
+   },
+   {
+    "key": "weight_g",
+    "label": {
+     "ar": "الوزن",
+     "en": "Weight"
+    },
+    "unit": {
+     "ar": "جرام",
+     "en": "g"
+    },
+    "better": "lower",
+    "priority": true,
+    "defaultWeight": 1
+   },
+   {
+    "key": "warranty_months",
+    "label": {
+     "ar": "الضمان",
+     "en": "Warranty"
+    },
+    "unit": {
+     "ar": "شهر",
+     "en": "months"
+    },
+    "better": "higher"
+   }
+  ]
+ },
+ {
+  "id": "laptops",
+  "name": {
+   "ar": "اللابتوبات",
+   "en": "Laptops"
+  },
+  "defaultPriceWeight": 4,
+  "specs": [
+   {
+    "key": "perf_index",
+    "label": {
+     "ar": "مؤشر الأداء (تقديري)",
+     "en": "Performance index (est.)"
+    },
+    "unit": {
+     "ar": "من 10",
+     "en": "/10"
+    },
+    "better": "higher",
+    "priority": true,
+    "defaultWeight": 4
+   },
+   {
+    "key": "ram_gb",
+    "label": {
+     "ar": "الرام",
+     "en": "RAM"
+    },
+    "unit": {
+     "ar": "جيجا",
+     "en": "GB"
+    },
+    "better": "higher",
+    "priority": true,
+    "defaultWeight": 3,
+    "filter": [
+     8,
+     16,
+     32
+    ]
+   },
+   {
+    "key": "storage_gb",
+    "label": {
+     "ar": "التخزين (SSD)",
+     "en": "Storage (SSD)"
+    },
+    "unit": {
+     "ar": "جيجا",
+     "en": "GB"
+    },
+    "better": "higher",
+    "priority": true,
+    "defaultWeight": 2,
+    "filter": [
+     256,
+     512,
+     1024
+    ]
+   },
+   {
+    "key": "battery_wh",
+    "label": {
+     "ar": "البطارية",
+     "en": "Battery"
+    },
+    "unit": {
+     "ar": "وات/ساعة",
+     "en": "Wh"
+    },
+    "better": "higher",
+    "priority": true,
+    "defaultWeight": 3
+   },
+   {
+    "key": "weight_kg",
+    "label": {
+     "ar": "الوزن",
+     "en": "Weight"
+    },
+    "unit": {
+     "ar": "كجم",
+     "en": "kg"
+    },
+    "better": "lower",
+    "priority": true,
+    "defaultWeight": 2
+   },
+   {
+    "key": "screen_in",
+    "label": {
+     "ar": "حجم الشاشة",
+     "en": "Screen size"
+    },
+    "unit": {
+     "ar": "بوصة",
+     "en": "in"
+    },
+    "better": null
+   },
+   {
+    "key": "warranty_months",
+    "label": {
+     "ar": "الضمان",
+     "en": "Warranty"
+    },
+    "unit": {
+     "ar": "شهر",
+     "en": "months"
+    },
+    "better": "higher"
+   }
+  ]
+ }
+]

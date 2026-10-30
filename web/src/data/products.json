@@ -1,0 +1,483 @@
+[
+ {
+  "slug": "p1",
+  "category": "phones",
+  "name": {
+   "ar": "هاتف تجريبي ١",
+   "en": "Demo phone 1"
+  },
+  "brand": {
+   "ar": "علامة تجريبية أ",
+   "en": "Sample brand A"
+  },
+  "demo": true,
+  "specs": {
+   "ram_gb": 4,
+   "storage_gb": 64,
+   "battery_mah": 5000,
+   "camera_mp": 13,
+   "refresh_hz": 60,
+   "screen_in": 6.5,
+   "weight_g": 195,
+   "warranty_months": 12
+  },
+  "offers": [
+   {
+    "store": {
+     "ar": "متجر تجريبي 1",
+     "en": "Sample store 1"
+    },
+    "price": 4200,
+    "url": "#",
+    "verifiedAt": "2026-10-27",
+    "source": "demo",
+    "inStock": true
+   },
+   {
+    "store": {
+     "ar": "متجر تجريبي 2",
+     "en": "Sample store 2"
+    },
+    "price": 4450,
+    "url": "#",
+    "verifiedAt": "2026-10-20",
+    "source": "demo",
+    "inStock": true
+   }
+  ]
+ },
+ {
+  "slug": "p2",
+  "category": "phones",
+  "name": {
+   "ar": "هاتف تجريبي ٢",
+   "en": "Demo phone 2"
+  },
+  "brand": {
+   "ar": "علامة تجريبية أ",
+   "en": "Sample brand A"
+  },
+  "demo": true,
+  "specs": {
+   "ram_gb": 6,
+   "storage_gb": 128,
+   "battery_mah": 5000,
+   "camera_mp": 50,
+   "refresh_hz": 90,
+   "screen_in": 6.6,
+   "weight_g": 190,
+   "warranty_months": 12
+  },
+  "offers": [
+   {
+    "store": {
+     "ar": "متجر تجريبي 1",
+     "en": "Sample store 1"
+    },
+    "price": 6900,
+    "url": "#",
+    "verifiedAt": "2026-10-27",
+    "source": "demo",
+    "inStock": true
+   },
+   {
+    "store": {
+     "ar": "متجر تجريبي 2",
+     "en": "Sample store 2"
+    },
+    "price": 6750,
+    "url": "#",
+    "verifiedAt": "2026-08-20",
+    "source": "demo",
+    "inStock": true
+   }
+  ]
+ },
+ {
+  "slug": "p3",
+  "category": "phones",
+  "name": {
+   "ar": "هاتف تجريبي ٣",
+   "en": "Demo phone 3"
+  },
+  "brand": {
+   "ar": "علامة تجريبية ب",
+   "en": "Sample brand B"
+  },
+  "demo": true,
+  "specs": {
+   "ram_gb": 8,
+   "storage_gb": 128,
+   "battery_mah": 5500,
+   "camera_mp": 50,
+   "refresh_hz": 120,
+   "screen_in": 6.7,
+   "weight_g": 205,
+   "warranty_months": 24
+  },
+  "offers": [
+   {
+    "store": {
+     "ar": "متجر تجريبي 1",
+     "en": "Sample store 1"
+    },
+    "price": 9800,
+    "url": "#",
+    "verifiedAt": "2026-10-25",
+    "source": "demo",
+    "inStock": true
+   }
+  ]
+ },
+ {
+  "slug": "p4",
+  "category": "phones",
+  "name": {
+   "ar": "هاتف تجريبي ٤",
+   "en": "Demo phone 4"
+  },
+  "brand": {
+   "ar": "علامة تجريبية ب",
+   "en": "Sample brand B"
+  },
+  "demo": true,
+  "specs": {
+   "ram_gb": 8,
+   "storage_gb": 256,
+   "battery_mah": 4600,
+   "camera_mp": 64,
+   "refresh_hz": 120,
+   "screen_in": 6.4,
+   "weight_g": 178,
+   "warranty_months": 24
+  },
+  "offers": [
+   {
+    "store": {
+     "ar": "متجر تجريبي 1",
+     "en": "Sample store 1"
+    },
+    "price": 12900,
+    "url": "#",
+    "verifiedAt": "2026-10-26",
+    "source": "demo",
+    "inStock": true
+   },
+   {
+    "store": {
+     "ar": "متجر تجريبي 2",
+     "en": "Sample store 2"
+    },
+    "price": 12500,
+    "url": "#",
+    "verifiedAt": "2026-10-10",
+    "source": "demo",
+    "inStock": true
+   }
+  ]
+ },
+ {
+  "slug": "p5",
+  "category": "phones",
+  "name": {
+   "ar": "هاتف تجريبي ٥",
+   "en": "Demo phone 5"
+  },
+  "brand": {
+   "ar": "علامة تجريبية ج",
+   "en": "Sample brand C"
+  },
+  "demo": true,
+  "specs": {
+   "ram_gb": 12,
+   "storage_gb": 256,
+   "battery_mah": 5200,
+   "camera_mp": 108,
+   "refresh_hz": 120,
+   "screen_in": 6.8,
+   "weight_g": 212,
+   "warranty_months": 24
+  },
+  "offers": [
+   {
+    "store": {
+     "ar": "متجر تجريبي 1",
+     "en": "Sample store 1"
+    },
+    "price": 17900,
+    "url": "#",
+    "verifiedAt": "2026-10-24",
+    "source": "demo",
+    "inStock": true
+   }
+  ]
+ },
+ {
+  "slug": "p6",
+  "category": "phones",
+  "name": {
+   "ar": "هاتف تجريبي ٦",
+   "en": "Demo phone 6"
+  },
+  "brand": {
+   "ar": "علامة تجريبية ج",
+   "en": "Sample brand C"
+  },
+  "demo": true,
+  "specs": {
+   "ram_gb": 12,
+   "storage_gb": 512,
+   "battery_mah": 4900,
+   "camera_mp": 200,
+   "refresh_hz": 144,
+   "screen_in": 6.8,
+   "weight_g": 225,
+   "warranty_months": 24
+  },
+  "offers": [
+   {
+    "store": {
+     "ar": "متجر تجريبي 1",
+     "en": "Sample store 1"
+    },
+    "price": 27500,
+    "url": "#",
+    "verifiedAt": "2026-09-01",
+    "source": "demo",
+    "inStock": true
+   }
+  ]
+ },
+ {
+  "slug": "l1",
+  "category": "laptops",
+  "name": {
+   "ar": "لابتوب تجريبي ١",
+   "en": "Demo laptop 1"
+  },
+  "brand": {
+   "ar": "علامة تجريبية أ",
+   "en": "Sample brand A"
+  },
+  "demo": true,
+  "specs": {
+   "perf_index": 3,
+   "ram_gb": 8,
+   "storage_gb": 256,
+   "battery_wh": 42,
+   "weight_kg": 1.7,
+   "screen_in": 15.6,
+   "warranty_months": 12
+  },
+  "offers": [
+   {
+    "store": {
+     "ar": "متجر تجريبي 1",
+     "en": "Sample store 1"
+    },
+    "price": 15500,
+    "url": "#",
+    "verifiedAt": "2026-10-27",
+    "source": "demo",
+    "inStock": true
+   }
+  ]
+ },
+ {
+  "slug": "l2",
+  "category": "laptops",
+  "name": {
+   "ar": "لابتوب تجريبي ٢",
+   "en": "Demo laptop 2"
+  },
+  "brand": {
+   "ar": "علامة تجريبية أ",
+   "en": "Sample brand A"
+  },
+  "demo": true,
+  "specs": {
+   "perf_index": 5,
+   "ram_gb": 8,
+   "storage_gb": 512,
+   "battery_wh": 50,
+   "weight_kg": 1.5,
+   "screen_in": 14,
+   "warranty_months": 12
+  },
+  "offers": [
+   {
+    "store": {
+     "ar": "متجر تجريبي 1",
+     "en": "Sample store 1"
+    },
+    "price": 21900,
+    "url": "#",
+    "verifiedAt": "2026-10-27",
+    "source": "demo",
+    "inStock": true
+   },
+   {
+    "store": {
+     "ar": "متجر تجريبي 2",
+     "en": "Sample store 2"
+    },
+    "price": 22400,
+    "url": "#",
+    "verifiedAt": "2026-10-01",
+    "source": "demo",
+    "inStock": true
+   }
+  ]
+ },
+ {
+  "slug": "l3",
+  "category": "laptops",
+  "name": {
+   "ar": "لابتوب تجريبي ٣",
+   "en": "Demo laptop 3"
+  },
+  "brand": {
+   "ar": "علامة تجريبية ب",
+   "en": "Sample brand B"
+  },
+  "demo": true,
+  "specs": {
+   "perf_index": 6,
+   "ram_gb": 16,
+   "storage_gb": 512,
+   "battery_wh": 56,
+   "weight_kg": 1.4,
+   "screen_in": 14,
+   "warranty_months": 24
+  },
+  "offers": [
+   {
+    "store": {
+     "ar": "متجر تجريبي 1",
+     "en": "Sample store 1"
+    },
+    "price": 29900,
+    "url": "#",
+    "verifiedAt": "2026-10-25",
+    "source": "demo",
+    "inStock": true
+   }
+  ]
+ },
+ {
+  "slug": "l4",
+  "category": "laptops",
+  "name": {
+   "ar": "لابتوب تجريبي ٤",
+   "en": "Demo laptop 4"
+  },
+  "brand": {
+   "ar": "علامة تجريبية ب",
+   "en": "Sample brand B"
+  },
+  "demo": true,
+  "specs": {
+   "perf_index": 7,
+   "ram_gb": 16,
+   "storage_gb": 1024,
+   "battery_wh": 70,
+   "weight_kg": 1.3,
+   "screen_in": 13.3,
+   "warranty_months": 24
+  },
+  "offers": [
+   {
+    "store": {
+     "ar": "متجر تجريبي 1",
+     "en": "Sample store 1"
+    },
+    "price": 38500,
+    "url": "#",
+    "verifiedAt": "2026-10-26",
+    "source": "demo",
+    "inStock": true
+   }
+  ]
+ },
+ {
+  "slug": "l5",
+  "category": "laptops",
+  "name": {
+   "ar": "لابتوب تجريبي ٥",
+   "en": "Demo laptop 5"
+  },
+  "brand": {
+   "ar": "علامة تجريبية ج",
+   "en": "Sample brand C"
+  },
+  "demo": true,
+  "specs": {
+   "perf_index": 9,
+   "ram_gb": 32,
+   "storage_gb": 1024,
+   "battery_wh": 72,
+   "weight_kg": 2.2,
+   "screen_in": 16,
+   "warranty_months": 24
+  },
+  "offers": [
+   {
+    "store": {
+     "ar": "متجر تجريبي 1",
+     "en": "Sample store 1"
+    },
+    "price": 52000,
+    "url": "#",
+    "verifiedAt": "2026-10-20",
+    "source": "demo",
+    "inStock": true
+   },
+   {
+    "store": {
+     "ar": "متجر تجريبي 2",
+     "en": "Sample store 2"
+    },
+    "price": 50900,
+    "url": "#",
+    "verifiedAt": "2026-07-30",
+    "source": "demo",
+    "inStock": true
+   }
+  ]
+ },
+ {
+  "slug": "l6",
+  "category": "laptops",
+  "name": {
+   "ar": "لابتوب تجريبي ٦",
+   "en": "Demo laptop 6"
+  },
+  "brand": {
+   "ar": "علامة تجريبية ج",
+   "en": "Sample brand C"
+  },
+  "demo": true,
+  "specs": {
+   "perf_index": 8,
+   "ram_gb": 16,
+   "storage_gb": 512,
+   "battery_wh": 62,
+   "weight_kg": 1.9,
+   "screen_in": 15.6,
+   "warranty_months": 24
+  },
+  "offers": [
+   {
+    "store": {
+     "ar": "متجر تجريبي 1",
+     "en": "Sample store 1"
+    },
+    "price": 36000,
+    "url": "#",
+    "verifiedAt": "2026-10-22",
+    "source": "demo",
+    "inStock": true
+   }
+  ]
+ }
+]

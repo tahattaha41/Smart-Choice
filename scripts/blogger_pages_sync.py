@@ -4,6 +4,7 @@ import hashlib, json, os, sys
 from pathlib import Path
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
 
 ROOT=Path("pages")
 STATE=Path(".blogger-pages-state.json")
@@ -42,9 +43,17 @@ def main():
         body={"title":page["title"],"content":page["content"]}
         print(("update" if old else "create"),"published page" if page["publish"] else "draft page",name)
         if dry: continue
+        result=None
         if old:
-            result=service.pages().update(blogId=blog,pageId=old["id"],body=body).execute()
-        else:
+            try:
+                result=service.pages().update(blogId=blog,pageId=old["id"],body=body).execute()
+                if page["publish"] and result.get("status")=="DRAFT":
+                    result=service.pages().publish(blogId=blog,pageId=old["id"]).execute()
+            except HttpError as e:
+                if getattr(e.resp,"status",None)!=404: raise
+                print(" ! page was deleted on Blogger; recreating:",name)
+                result=None
+        if result is None:
             result=service.pages().insert(blogId=blog,body=body,isDraft=not page["publish"]).execute()
         state[name]={"id":result["id"],"hash":digest}
         print(" ->",result.get("url",result["id"]))

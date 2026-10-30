@@ -30,7 +30,7 @@ jobs:
           assert any(section.attrib.get('id') == 'main' for section in sections), 'Blog1 main section must be a direct child of body'
           main = root.find(".//b:section[@id='main']/b:widget[@id='Blog1']/b:includable[@id='main']", ns)
           assert main is not None, 'Blog1 main includable is missing'
-          assert main.find('b:loop[@values="data:posts"]', ns) is not None, 'Blog1 main must loop through data:posts'
+          assert main.find('.//b:loop[@values="data:posts"]', ns) is not None, 'Blog1 main must loop through data:posts'
           assert len(body.findall(".//b:section[@id='main']", ns)) == 1, 'Expected exactly one main section'
           print('Blogger Blog1 section placement and main loop are valid.')
           PY

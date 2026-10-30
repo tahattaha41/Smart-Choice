@@ -120,7 +120,7 @@
         </div>
         <div class="sc-tool-result" aria-live="polite">السعر بعد الخصم: <strong id="sc-final">أدخل البيانات</strong><br/>قيمة التوفير: <b id="sc-saving">—</b></div>
       </section>
-      <section class="sc-tool-card sc-tool" id="sc-budget" hidden>
+      <section class="sc-tool-card sc-tool" id="sc-budget" hidden="hidden">
         <h2>حاسبة الميزانية الشهرية</h2><p class="sc-muted">اكتب دخلك ومصروفاتك لتعرف المتبقي ونسبة ما تنفقه.</p>
         <div class="sc-tool-grid">
           <div class="sc-field"><label for="sc-income">الدخل الشهري</label><input id="sc-income" type="number" min="0" step="0.01" inputmode="decimal"/></div>
@@ -128,7 +128,7 @@
         </div>
         <div class="sc-tool-result" aria-live="polite">المتبقي: <strong id="sc-balance">أدخل البيانات</strong><br/>نسبة الإنفاق: <b id="sc-ratio">—</b></div>
       </section>
-      <section class="sc-tool-card sc-tool" id="sc-unit" hidden>
+      <section class="sc-tool-card sc-tool" id="sc-unit" hidden="hidden">
         <h2>مقارنة سعر الوحدة</h2><p class="sc-muted">قارن منتجين على أساس السعر لكل وحدة قياس. استخدم نفس نوع الوحدة للمنتجين.</p>
         <div class="sc-tool-grid">
           <div><h3>المنتج الأول</h3><div class="sc-field"><label for="sc-p1">السعر</label><input id="sc-p1" type="number" min="0" step="0.01" inputmode="decimal"/></div><div class="sc-field"><label for="sc-q1">الكمية</label><input id="sc-q1" type="number" min="0" step="0.01" inputmode="decimal"/></div></div>
@@ -145,14 +145,14 @@
         <button type="button" data-tab="convert" aria-selected="false">تحويل الوحدات</button>
         <button type="button" data-tab="dates" aria-selected="false">فرق الأيام</button>
       </nav>
-      <section class="sc-tool-card sc-tool" id="sc-percent" hidden>
+      <section class="sc-tool-card sc-tool" id="sc-percent" hidden="hidden">
       <h2>حاسبة النسبة المئوية والتغير</h2>
       <div class="sc-tool-grid">
       <div class="sc-field"><label for="sc-base">القيمة الأصلية</label><input id="sc-base" type="number" step="any" inputmode="decimal"/></div>
       <div class="sc-field"><label for="sc-new">القيمة الجديدة</label><input id="sc-new" type="number" step="any" inputmode="decimal"/></div>
       </div><div class="sc-tool-result" id="sc-percent-result" aria-live="polite">أدخل القيمتين.</div>
       </section>
-      <section class="sc-tool-card sc-tool" id="sc-saving" hidden>
+      <section class="sc-tool-card sc-tool" id="sc-saving" hidden="hidden">
       <h2>حاسبة هدف الادخار</h2>
       <div class="sc-tool-grid">
       <div class="sc-field"><label for="sc-target">المبلغ المستهدف</label><input id="sc-target" type="number" min="0" step="any"/></div>
@@ -160,7 +160,7 @@
       <div class="sc-field"><label for="sc-monthly">الادخار الشهري</label><input id="sc-monthly" type="number" min="0" step="any"/></div>
       </div><div class="sc-tool-result" id="sc-saving-result" aria-live="polite">أدخل البيانات لمعرفة المدة المتوقعة.</div>
       </section>
-      <section class="sc-tool-card sc-tool" id="sc-total" hidden>
+      <section class="sc-tool-card sc-tool" id="sc-total" hidden="hidden">
       <h2>حاسبة التكلفة الإجمالية</h2>
       <div class="sc-tool-grid">
       <div class="sc-field"><label for="sc-item">السعر الأساسي</label><input id="sc-item" type="number" min="0" step="any"/></div>
@@ -168,7 +168,7 @@
       <div class="sc-field"><label for="sc-fees">رسوم إضافية</label><input id="sc-fees" type="number" min="0" step="any"/></div>
       </div><div class="sc-tool-result" id="sc-total-result" aria-live="polite">أدخل القيم لحساب الإجمالي.</div>
       </section>
-      <section class="sc-tool-card sc-tool" id="sc-installment" hidden>
+      <section class="sc-tool-card sc-tool" id="sc-installment" hidden="hidden">
       <h2>حاسبة التقسيط</h2>
       <div class="sc-tool-grid">
       <div class="sc-field"><label for="sc-cash">السعر النقدي</label><input id="sc-cash" type="number" min="0" step="any"/></div>
@@ -177,14 +177,14 @@
       <div class="sc-field"><label for="sc-monthpay">قيمة القسط الشهري</label><input id="sc-monthpay" type="number" min="0" step="any"/></div>
       </div><div class="sc-tool-result" id="sc-installment-result" aria-live="polite">أدخل بيانات العرض.</div>
       </section>
-      <section class="sc-tool-card sc-tool" id="sc-convert" hidden>
+      <section class="sc-tool-card sc-tool" id="sc-convert" hidden="hidden">
       <h2>محول الوحدات</h2>
       <div class="sc-tool-grid">
       <div class="sc-field"><label for="sc-convert-value">القيمة</label><input id="sc-convert-value" type="number" step="any"/></div>
       <div class="sc-field"><label for="sc-convert-type">نوع التحويل</label><select id="sc-convert-type"><option value="kg-g">كيلوجرام إلى جرام</option><option value="g-kg">جرام إلى كيلوجرام</option><option value="l-ml">لتر إلى ملليلتر</option><option value="ml-l">ملليلتر إلى لتر</option><option value="m-cm">متر إلى سنتيمتر</option><option value="cm-m">سنتيمتر إلى متر</option><option value="km-m">كيلومتر إلى متر</option><option value="m-km">متر إلى كيلومتر</option></select></div>
       </div><div class="sc-tool-result" id="sc-convert-result" aria-live="polite">أدخل القيمة واختر التحويل.</div>
       </section>
-      <section class="sc-tool-card sc-tool" id="sc-dates" hidden>
+      <section class="sc-tool-card sc-tool" id="sc-dates" hidden="hidden">
       <h2>حاسبة فرق الأيام</h2>
       <div class="sc-tool-grid">
       <div class="sc-field"><label for="sc-date1">التاريخ الأول</label><input id="sc-date1" type="date"/></div>

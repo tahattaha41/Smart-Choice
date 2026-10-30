@@ -7,8 +7,9 @@ OK    Terms page
 OK    Post: discount
 OK    Post: budget
 OK    Post: unit price
+/home/runner/work/_temp/929e4660-b73a-474b-8675-c12f67b4ef8b.sh: line 15: printf: write error: Broken pipe
 OK    New page: decision center (in feed)
-/home/runner/work/_temp/1440f275-9bc5-4310-8732-cc515df3534f.sh: line 15: printf: write error: Broken pipe
+/home/runner/work/_temp/929e4660-b73a-474b-8675-c12f67b4ef8b.sh: line 15: printf: write error: Broken pipe
 OK    New page: product comparison (in feed)
 OK    New post: installment (in feed)
 OK    Sitemap

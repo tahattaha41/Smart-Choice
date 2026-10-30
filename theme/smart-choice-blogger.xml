@@ -27,7 +27,7 @@
   <header class='sc-head'><div class='sc-wrap sc-headin'>
     <a class='sc-brand' expr:href='data:blog.homepageUrl'>Smart <span>Choice</span></a>
     <nav class='sc-nav' aria-label='القائمة الرئيسية'>
-      <a expr:href='data:blog.homepageUrl'>الرئيسية</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_02145436434.html'>الأدوات</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice.html'>من نحن</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_02092521556.html'>اتصل بنا</a>
+      <a expr:href='data:blog.homepageUrl'>الرئيسية</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_02145436434.html'>الأدوات</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice.html'>من نحن</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_02092521556.html'>اتصل بنا</a><a href='https://smartchoicee1.blogspot.com/p/terms.html'>شروط الاستخدام</a>
     </nav>
   </div></header>
   <main class='sc-wrap sc-main'>
@@ -47,5 +47,5 @@
       </b:widget>
     </b:section>
   </main>
-  <footer class='sc-footer'><div class='sc-wrap'><strong>Smart Choice</strong><div>أدوات عملية لقرارات يومية أفضل.</div><div class='sc-footlinks'><a href='https://smartchoicee1.blogspot.com/p/smart-choice.html'>من نحن</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_01636960364.html'>سياسة الخصوصية</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_02092521556.html'>اتصل بنا</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_02145436434.html'>الأدوات</a></div><small>© Smart Choice · Created by Taha</small></div></footer>
+  <footer class='sc-footer'><div class='sc-wrap'><strong>Smart Choice</strong><div>أدوات عملية لقرارات يومية أفضل.</div><div class='sc-footlinks'><a href='https://smartchoicee1.blogspot.com/p/smart-choice.html'>من نحن</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_01636960364.html'>سياسة الخصوصية</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_02092521556.html'>اتصل بنا</a><a href='https://smartchoicee1.blogspot.com/p/smart-choice_02145436434.html'>الأدوات</a><a href='https://smartchoicee1.blogspot.com/p/terms.html'>الشروط وإخلاء المسؤولية</a></div><small>© Smart Choice · Created by Taha</small></div></footer>
 </body></html>

@@ -3,6 +3,14 @@
     "hash": "a9c5de3d8b502e3ebd95ffa547bb87380e4df7297b9f5f109479a684057ecc10",
     "id": "872243094425519867"
   },
+  "how-to-compare-before-buying.md": {
+    "hash": "049b9c4785c6e6092d5442de6b2602fcdb912e2c6eb122f097622223ec4bd428",
+    "id": "8185540992280531721"
+  },
+  "installment-real-cost.md": {
+    "hash": "8c312f4b4fbaf1c7454ef89f10d3bfcd850e54b8704cacf3659d6115fd066a70",
+    "id": "4732811459462744640"
+  },
   "monthly-budget-practical-guide.md": {
     "hash": "5d1d332a14b18aa8be39d2c4c70672cc5047a64d0dc48656200fce812363c471",
     "id": "8130123378139429871"
@@ -14,5 +22,9 @@
   "unit-price-comparison-guide.md": {
     "hash": "88033100538d69c9759e6bc22101173d197d17486650d4f5f6bb486007d9c888",
     "id": "913463412489209651"
+  },
+  "vat-and-discount-explained.md": {
+    "hash": "b272e13d9864fa757c519c5066fd17ac393d4c3fdcd064d73dc38918a69a4bda",
+    "id": "5400434139166311685"
   }
 }

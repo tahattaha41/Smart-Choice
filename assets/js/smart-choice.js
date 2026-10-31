@@ -106,7 +106,15 @@
       }
       if(!filled||wsum===0){out.textContent="أدخل أوزانًا ودرجات بين 0 و10.";return;}
       const ranked=names.map((n,j)=>({n,v:totals[j]/wsum})).sort((a,b)=>b.v-a.v);
-      out.textContent="الترتيب حسب أوزانك: "+ranked.map((r,k)=>(k+1)+") "+r.n+" ("+fmt(r.v)+" من 10)").join(" — ")+(ranked[0].v===ranked[1].v?" — تعادل بين الأول والثاني.":"");
+      out.textContent="";
+      ranked.forEach((r,k)=>{
+        const row=document.createElement("div"); row.className="rank"+(k===0?" first":"");
+        const name=document.createElement("span"); name.className="rname"; name.textContent=(k+1)+") "+r.n;
+        const bar=document.createElement("span"); bar.className="rbar"; const fill=document.createElement("i"); fill.style.width=Math.max(2,r.v*10)+"%"; bar.appendChild(fill);
+        const val=document.createElement("b"); val.textContent=fmt(r.v)+" / 10";
+        row.appendChild(name); row.appendChild(bar); row.appendChild(val); out.appendChild(row);
+      });
+      if(ranked[0].v===ranked[1].v){const n=document.createElement("p"); n.className="rnote"; n.textContent="تعادل بين الأول والثاني؛ راجع الأوزان أو أضف معياراً."; out.appendChild(n);}
     }
     function loan() {
       const P=value("sc-loan-amount"), ar=value("sc-loan-rate"), n=value("sc-loan-months"), out=$("sc-loan-result"); if(!out)return;
@@ -126,6 +134,44 @@
       const all=t*(1+tip/100);
       out.textContent="الإجمالي مع الإكرامية: "+fmt(all)+" — نصيب كل شخص: "+fmt(all/n);
     }
+    function decorate(out) {
+      if (out.dataset.static || out.children.length) return;
+      const text = out.textContent.trim(); if (!text) return;
+      const parts = text.split(" — ").map(x => x.trim()).filter(Boolean);
+      const re = /^([^:]{1,40}):\s*(.+)$/;
+      if (!parts.some(x => re.test(x))) { out.classList.remove("sc-kpis"); out.classList.add("is-note"); return; }
+      out.classList.add("sc-kpis"); out.classList.remove("is-note"); out.textContent = "";
+      parts.forEach(x => {
+        const m = re.exec(x), d = document.createElement("div");
+        if (m) { d.className = "kpi"; const a = document.createElement("span"); a.textContent = m[1]; const b = document.createElement("b"); b.textContent = m[2]; d.appendChild(a); d.appendChild(b); }
+        else { d.className = "kpi note"; d.textContent = x; }
+        out.appendChild(d);
+      });
+    }
+    function decorateAll() { root.querySelectorAll(".sc-tool-result").forEach(decorate); }
+    const EXAMPLES = {
+      "sc-discount": {"sc-price":2000,"sc-rate":20}, "sc-budget": {"sc-income":10000,"sc-expenses":6500},
+      "sc-unit": {"sc-p1":45,"sc-q1":500,"sc-p2":80,"sc-q2":1000}, "sc-percent": {"sc-base":200,"sc-new":250},
+      "sc-saving": {"sc-target":30000,"sc-saved":6000,"sc-monthly":2000}, "sc-total": {"sc-item":1200,"sc-shipping":60,"sc-fees":40},
+      "sc-installment": {"sc-cash":20000,"sc-down":0,"sc-months":12,"sc-monthpay":1750}, "sc-convert": {"sc-convert-value":2.5},
+      "sc-dates": {"sc-date1":"2026-01-01","sc-date2":"2026-12-31"}, "sc-vat": {"sc-vat-amount":1000,"sc-vat-rate":14},
+      "sc-compare": {"sc-c-p1":10000,"sc-c-e1":500,"sc-c-l1":36,"sc-c-w1":24,"sc-c-p2":8000,"sc-c-e2":300,"sc-c-l2":24,"sc-c-w2":12},
+      "sc-decide": {"sc-d-w0":5,"sc-d-s0-0":8,"sc-d-s0-1":6,"sc-d-s0-2":9,"sc-d-s1-0":7,"sc-d-s1-1":9,"sc-d-s1-2":5,"sc-d-s2-0":6,"sc-d-s2-1":8,"sc-d-s2-2":6,"sc-d-s3-0":7,"sc-d-s3-1":8,"sc-d-s3-2":4},
+      "sc-loan": {"sc-loan-amount":100000,"sc-loan-rate":12,"sc-loan-months":24}, "sc-margin": {"sc-margin-cost":80,"sc-margin-price":100},
+      "sc-split": {"sc-split-total":900,"sc-split-tip":10,"sc-split-people":3}
+    };
+    function fire(el) { el.dispatchEvent(new Event("input", { bubbles: true })); el.dispatchEvent(new Event("change", { bubbles: true })); }
+    root.querySelectorAll(".sc-tool").forEach(section => {
+      if (section.querySelector(".sc-actions")) return;
+      const ex = EXAMPLES[section.id]; if (!ex) return;
+      const box = document.createElement("div"); box.className = "sc-actions";
+      const b1 = document.createElement("button"); b1.type = "button"; b1.className = "sc-ghost"; b1.textContent = "جرّب مثالاً (أرقام افتراضية)";
+      const b2 = document.createElement("button"); b2.type = "button"; b2.className = "sc-ghost"; b2.textContent = "مسح";
+      b1.addEventListener("click", () => { Object.keys(ex).forEach(id => { const el = section.querySelector("#" + id); if (el) { el.value = ex[id]; fire(el); } }); });
+      b2.addEventListener("click", () => { section.querySelectorAll("input").forEach(el => { if (el.id !== "sc-split-people" && el.type !== "text") { el.value = ""; } fire(el); }); });
+      box.appendChild(b1); box.appendChild(b2);
+      const res = section.querySelector(".sc-tool-result"); if (res) section.insertBefore(box, res); else section.appendChild(box);
+    });
     const handlers = {
       "sc-price": discount, "sc-rate": discount,
       "sc-income": budget, "sc-expenses": budget,
@@ -143,12 +189,12 @@
     };
     Object.keys(handlers).forEach(id => {
       const el=$(id);
-      if (el) el.addEventListener("input", handlers[id]);
+      if (el) el.addEventListener("input", () => { handlers[id](); decorateAll(); });
     });
-    const vatMode=$("sc-vat-mode"); if(vatMode) vatMode.addEventListener("change", vat);
+    const vatMode=$("sc-vat-mode"); if(vatMode) vatMode.addEventListener("change", () => { vat(); decorateAll(); });
     const decideBox=$("sc-decide"); if(decideBox) decideBox.addEventListener("input", decide);
     const convertType=$("sc-convert-type");
-    if(convertType) convertType.addEventListener("change", convert);
+    if(convertType) convertType.addEventListener("change", () => { convert(); decorateAll(); });
     function showTab(tab) {
       const btn=root.querySelector('[data-tab="'+tab+'"]'); if(!btn) return;
       root.querySelectorAll("[data-tab]").forEach(b => b.setAttribute("aria-selected", String(b===btn)));
@@ -158,7 +204,7 @@
       const tab=btn.getAttribute("data-tab"); showTab(tab);
       try { history.replaceState(null, "", "#" + tab); } catch (e) {}
     }));
-    discount(); budget(); unit(); percent(); saving(); total(); installment(); convert(); dates(); vat(); compare(); decide(); loan(); margin(); split();
+    discount(); budget(); unit(); percent(); saving(); total(); installment(); convert(); dates(); vat(); compare(); decide(); loan(); margin(); split(); decorateAll();
     const fromHash=(location.hash||"").replace("#",""); if(fromHash) showTab(fromHash);
   }
   function start() {
@@ -199,6 +245,11 @@
       return list;
     });
   }
+  function markCurrent() {
+    document.querySelectorAll(".sc-nav a").forEach(function (x) {
+      try { var u = new URL(x.href); if (u.pathname === location.pathname) x.setAttribute("aria-current", "page"); } catch (e) {}
+    });
+  }
   function fillNav(list) {
     var nav = document.querySelector(".sc-nav");
     if (nav && list.length) {
@@ -206,6 +257,7 @@
       nav.textContent = "";
       if (home) nav.appendChild(home);
       list.forEach(function (p) { if (p.title.indexOf("لوحة الإدارة") !== 0) nav.appendChild(link(p.url, p.title)); });
+      markCurrent();
     }
     var foot = document.querySelector(".sc-footlinks");
     if (foot && list.length) {
@@ -220,14 +272,17 @@
       var items = ((d.feed && d.feed.entry) || []).filter(function (e) { return !/utilityra/i.test((e.title && e.title.$t) || ""); });
       if (!items.length) return;
       box.textContent = "";
-      items.forEach(function (e) {
+      items.slice(0, 6).forEach(function (e) {
         var url = entryUrl(e); if (!url) return;
-        var card = document.createElement("article"); card.className = "sc-card";
+        var card = document.createElement("article"); card.className = "sc-card sc-post-card";
+        var cats = (e.category || []).map(function (c) { return c.term; }).filter(Boolean);
+        if (cats[0]) { var chip = document.createElement("span"); chip.className = "chip"; chip.textContent = cats[0]; card.appendChild(chip); }
         var h = document.createElement("h3"); h.appendChild(link(url, e.title.$t));
         var p = document.createElement("p");
         var text = (e.summary && e.summary.$t) || String((e.content && e.content.$t) || "").replace(/<[^>]*>/g, " ");
-        p.textContent = text.replace(/\s+/g, " ").trim().slice(0, 140);
-        card.appendChild(h); card.appendChild(p); box.appendChild(card);
+        p.textContent = text.replace(/\s+/g, " ").trim().slice(0, 130) + "…";
+        var more = link(url, "اقرأ المقال ←"); more.className = "more";
+        card.appendChild(h); card.appendChild(p); card.appendChild(more); box.appendChild(card);
       });
     }).catch(function () {});
   }
@@ -294,31 +349,53 @@
   else run();
 })();
 
-/* Smart Choice — home page fallback: if the theme printed no home content (e.g. the mobile ?m=1 view or an
-   older theme), build it here from the blog's own pages and posts feeds. */
+/* Smart Choice — home page. Built here (not in the Blogger theme) so the design can be changed from GitHub
+   without re-uploading the theme. The theme's own static home block stays as a no-JS fallback. */
 (function () {
   "use strict";
+  var isHome = location.pathname.replace(/index\.html$/, "") === "/";
+  if (isHome) document.documentElement.classList.add("sc-home");
+  var TOOLS = [
+    ["🏷️", "حاسبة الخصم", "السعر بعد الخصم وقيمة التوفير الحقيقية.", "discount"],
+    ["🆚", "مقارنة المنتجات", "التكلفة الشهرية الحقيقية مع الضمان وعمر الاستخدام.", "compare"],
+    ["🧭", "مركز القرار", "رتّب خياراتك بمعايير وأوزان تحددها أنت.", "decide"],
+    ["💳", "التقسيط", "كم تدفع زيادة عن السعر النقدي فعلاً؟", "installment"],
+    ["🏦", "القرض", "القسط الشهري وإجمالي الفوائد.", "loan"],
+    ["💰", "الميزانية الشهرية", "المتبقي ونسبة الإنفاق من دخلك.", "budget"],
+    ["⚖️", "سعر الوحدة", "أي عبوة أوفر لكل جرام أو لتر؟", "unit"],
+    ["🎯", "هدف الادخار", "كم شهراً تحتاج للوصول إلى هدفك؟", "saving"]
+  ];
+  function esc(t) { var d = document.createElement("div"); d.textContent = t; return d.innerHTML; }
   function run() {
-    var path = location.pathname.replace(/index\.html$/, "");
-    if (path !== "/" || document.querySelector(".sc-hero")) return;
+    if (!isHome) return;
     var host = document.getElementById("main-content") || document.querySelector("main");
-    if (!host || !window.__scPages) return;
+    if (!host || host.querySelector(".sc-home-root") || !window.__scPages) return;
     window.__scPages().then(function (list) {
-      if (document.querySelector(".sc-hero")) return;
+      if (host.querySelector(".sc-home-root")) return;
       var by = function (k) { var m = list.filter(function (p) { return p.title.indexOf(k) === 0; })[0]; return m ? m.url : "#"; };
-      var cards = [["الأدوات الذكية", "احسب الخصم والتقسيط والضريبة والميزانية وغيرها من بياناتك.", by("الأدوات")],
-        ["مقارنة المنتجات", "قارن التكلفة الشهرية الحقيقية لمنتجين مع الضمان وعمر الاستخدام.", by("مقارنة")],
-        ["مركز القرار", "رتّب خياراتك بمعايير وأوزان تحددها أنت.", by("مركز القرار")]];
-      var html = "<section class='sc-hero'><h1>اختيارات أذكى. قرارات أفضل.</h1><p>احسب ميزانيتك، قارن الأسعار، ونظّم قراراتك اليومية باستخدام أدوات مجانية واضحة وسهلة.</p><a class='sc-btn' href='" + by("الأدوات") + "'>ابدأ باستخدام الأدوات</a></section>";
-      html += "<h2 class='sc-sectiontitle'>ابدأ من هنا</h2><div class='sc-cards'>" + cards.map(function (c) {
-        return "<article class='sc-card'><h3>" + c[0] + "</h3><p>" + c[1] + "</p><a class='sc-btn' href='" + c[2] + "'>افتح</a></article>";
-      }).join("") + "</div><h2 class='sc-sectiontitle'>أحدث المقالات</h2><div class='sc-cards sc-latest-posts'></div>";
-      var wrap = document.createElement("div"); wrap.className = "sc-injected"; wrap.innerHTML = html; host.appendChild(wrap);
+      var tools = by("الأدوات");
+      var html = "<div class='sc-home-root'>" +
+        "<section class='sc-hero2'><div class='sc-hero2-text'>" +
+        "<span class='sc-badge'>مجاني • بدون تسجيل • بياناتك تبقى في متصفحك</span>" +
+        "<h1>اتخذ قرار الشراء <span>بالأرقام</span> لا بالانطباع</h1>" +
+        "<p>أدوات حساب ومقارنة واضحة: الخصم، التقسيط، القرض، الضريبة، الميزانية، وتكلفة امتلاك المنتج على المدى الطويل.</p>" +
+        "<div class='sc-hero2-cta'><a class='sc-btn' href='" + tools + "'>ابدأ بالأدوات</a><a class='sc-btn alt' href='/search'>اقرأ الأدلة</a></div></div>" +
+        "<div class='sc-hero2-art' aria-hidden='true'><div class='sc-demo'><small>مثال توضيحي (أرقام افتراضية)</small><div class='row'><span>السعر الأصلي</span><b>2,000</b></div><div class='row'><span>الخصم</span><b>20%</b></div><div class='bar'><i></i></div><div class='row big'><span>تدفع</span><b>1,600</b></div><div class='row save'><span>توفير</span><b>400</b></div></div><span class='orb o1'></span><span class='orb o2'></span></div></section>" +
+        "<section class='sc-sec'><h2 class='sc-h2'>أدواتنا الأكثر استخداماً</h2><p class='sc-sub'>اختر الأداة، جرّب مثالاً جاهزاً أو أدخل أرقامك.</p><div class='sc-toolgrid'>" +
+        TOOLS.map(function (t) { return "<a class='sc-tool-tile' href='" + tools + "#" + t[3] + "'><span class='ico'>" + t[0] + "</span><b>" + esc(t[1]) + "</b><small>" + esc(t[2]) + "</small></a>"; }).join("") +
+        "</div><p class='sc-more'><a href='" + tools + "'>عرض كل الأدوات (15 أداة) ←</a></p></section>" +
+        "<section class='sc-sec sc-steps'><h2 class='sc-h2'>كيف تستفيد؟</h2><div class='sc-stepgrid'>" +
+        "<div><span>1</span><b>أدخل أرقامك</b><small>السعر، الخصم، الضمان، الدخل… ما تعرفه أنت.</small></div>" +
+        "<div><span>2</span><b>شاهد النتيجة فوراً</b><small>تُحسب داخل متصفحك بمعادلات معروفة.</small></div>" +
+        "<div><span>3</span><b>قارن وقرر</b><small>استخدم مركز القرار لترتيب خياراتك بأوزانك.</small></div></div></section>" +
+        "<section class='sc-sec'><h2 class='sc-h2'>أحدث الأدلة والمقالات</h2><p class='sc-sub'>شروحات عملية بأمثلة رقمية مبسطة.</p><div class='sc-cards sc-latest-posts'></div><p class='sc-more'><a href='/search'>كل المقالات ←</a></p></section>" +
+        "<section class='sc-sec sc-trust'><div><b>🔒 خصوصيتك أولاً</b><small>لا نطلب تسجيلاً ولا نرسل مدخلاتك إلى أي جهة.</small></div><div><b>🧾 بلا أرقام مختلقة</b><small>لا نعرض أسعاراً أو تقييمات لا نملك مصدرها.</small></div><div><b>✍️ محتوى نكتبه بأنفسنا</b><small>اطّلع على <a href='" + by("سياسة المحتوى") + "'>سياسة المحتوى والتحرير</a>.</small></div></section></div>";
+      var wrap = document.createElement("div"); wrap.innerHTML = html; host.appendChild(wrap.firstChild);
+      document.documentElement.classList.add("sc-home-ready");
       if (window.__scFillLatest) window.__scFillLatest();
     }).catch(function () {});
   }
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
-  else run();
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
 })();
 
 /* Smart Choice — admin status board (read-only). Shows only public, non-secret information:

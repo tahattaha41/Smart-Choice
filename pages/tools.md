@@ -9,15 +9,21 @@ publish: true
   <p>احسب، قارن، وخطط ببياناتك أنت. النتائج تُحسب داخل متصفحك ولا تحتاج إلى تسجيل.</p>
 </section>
 <nav class="sc-tabs" aria-label="اختيار الأداة">
-  <button type="button" data-tab="discount" aria-selected="true">حاسبة الخصم</button>
-  <button type="button" data-tab="budget" aria-selected="false">الميزانية الشهرية</button>
-  <button type="button" data-tab="unit" aria-selected="false">مقارنة سعر الوحدة</button>
-  <button type="button" data-tab="vat" aria-selected="false">الضريبة</button>
-  <button type="button" data-tab="compare" aria-selected="false">مقارنة المنتجات</button>
-  <button type="button" data-tab="decide" aria-selected="false">مركز القرار</button>
-  <button type="button" data-tab="loan" aria-selected="false">القرض</button>
-  <button type="button" data-tab="margin" aria-selected="false">هامش الربح</button>
-  <button type="button" data-tab="split" aria-selected="false">قسمة الفاتورة</button>
+  <button type="button" data-tab="discount" aria-selected="true">🏷️ حاسبة الخصم</button>
+  <button type="button" data-tab="budget" aria-selected="false">💰 الميزانية الشهرية</button>
+  <button type="button" data-tab="unit" aria-selected="false">⚖️ مقارنة سعر الوحدة</button>
+  <button type="button" data-tab="vat" aria-selected="false">🧮 الضريبة</button>
+  <button type="button" data-tab="compare" aria-selected="false">🆚 مقارنة المنتجات</button>
+  <button type="button" data-tab="decide" aria-selected="false">🧭 مركز القرار</button>
+  <button type="button" data-tab="loan" aria-selected="false">🏦 القرض</button>
+  <button type="button" data-tab="margin" aria-selected="false">📊 هامش الربح</button>
+  <button type="button" data-tab="split" aria-selected="false">🍽️ قسمة الفاتورة</button>
+  <button type="button" data-tab="percent" aria-selected="false">📈 النسبة المئوية</button>
+  <button type="button" data-tab="saving" aria-selected="false">🎯 هدف الادخار</button>
+  <button type="button" data-tab="total" aria-selected="false">🧾 التكلفة الإجمالية</button>
+  <button type="button" data-tab="installment" aria-selected="false">💳 التقسيط</button>
+  <button type="button" data-tab="convert" aria-selected="false">🔄 تحويل الوحدات</button>
+  <button type="button" data-tab="dates" aria-selected="false">📅 فرق الأيام</button>
 </nav>
 <section class="sc-tool-card sc-tool" id="sc-discount">
   <h2>حاسبة الخصم والسعر النهائي</h2><p class="sc-muted">أدخل السعر والخصم لمعرفة ما ستدفعه وقيمة التوفير.</p>
@@ -25,7 +31,7 @@ publish: true
     <div class="sc-field"><label for="sc-price">السعر الأصلي</label><input id="sc-price" type="number" min="0" step="0.01" inputmode="decimal"></div>
     <div class="sc-field"><label for="sc-rate">نسبة الخصم %</label><input id="sc-rate" type="number" min="0" max="100" step="0.1" inputmode="decimal"></div>
   </div>
-  <div class="sc-tool-result" aria-live="polite">السعر بعد الخصم: <strong id="sc-final">أدخل البيانات</strong><br>قيمة التوفير: <b id="sc-discount-saved">—</b></div>
+  <div class="sc-tool-result sc-kpis" data-static="1" aria-live="polite"><div class="kpi"><span>السعر بعد الخصم</span><strong id="sc-final">أدخل البيانات</strong></div><div class="kpi"><span>قيمة التوفير</span><b id="sc-discount-saved">—</b></div></div>
 </section>
 <section class="sc-tool-card sc-tool" id="sc-budget" hidden>
   <h2>حاسبة الميزانية الشهرية</h2><p class="sc-muted">اكتب دخلك ومصروفاتك لتعرف المتبقي ونسبة ما تنفقه.</p>
@@ -33,7 +39,7 @@ publish: true
     <div class="sc-field"><label for="sc-income">الدخل الشهري</label><input id="sc-income" type="number" min="0" step="0.01" inputmode="decimal"></div>
     <div class="sc-field"><label for="sc-expenses">إجمالي المصروفات</label><input id="sc-expenses" type="number" min="0" step="0.01" inputmode="decimal"></div>
   </div>
-  <div class="sc-tool-result" aria-live="polite">المتبقي: <strong id="sc-balance">أدخل البيانات</strong><br>نسبة الإنفاق: <b id="sc-ratio">—</b></div>
+  <div class="sc-tool-result sc-kpis" data-static="1" aria-live="polite"><div class="kpi"><span>المتبقي</span><strong id="sc-balance">أدخل البيانات</strong></div><div class="kpi"><span>نسبة الإنفاق</span><b id="sc-ratio">—</b></div></div>
 </section>
 <section class="sc-tool-card sc-tool" id="sc-unit" hidden>
   <h2>مقارنة سعر الوحدة</h2><p class="sc-muted">قارن منتجين على أساس السعر لكل وحدة قياس. استخدم نفس نوع الوحدة للمنتجين.</p>
@@ -44,14 +50,6 @@ publish: true
   <div class="sc-tool-result" aria-live="polite" id="sc-unit-result">أدخل الأسعار والكميات للمقارنة.</div>
 </section>
 
-<nav class="sc-tabs" aria-label="المزيد من الأدوات">
-  <button type="button" data-tab="percent" aria-selected="false">النسبة المئوية</button>
-  <button type="button" data-tab="saving" aria-selected="false">هدف الادخار</button>
-  <button type="button" data-tab="total" aria-selected="false">التكلفة الإجمالية</button>
-  <button type="button" data-tab="installment" aria-selected="false">التقسيط</button>
-  <button type="button" data-tab="convert" aria-selected="false">تحويل الوحدات</button>
-  <button type="button" data-tab="dates" aria-selected="false">فرق الأيام</button>
-</nav>
 <section class="sc-tool-card sc-tool" id="sc-percent" hidden>
 <h2>حاسبة النسبة المئوية والتغير</h2>
 <div class="sc-tool-grid">
@@ -116,7 +114,7 @@ publish: true
 <section class="sc-tool-card sc-tool" id="sc-decide" hidden>
 <h2>مركز القرار: مصفوفة قرار بأوزانك</h2><p class="sc-muted">اكتب خياراتك ومعايير مهمة لك، أعطِ كل معيار وزنًا من 0 إلى 10 ودرجة لكل خيار من 0 إلى 10. الترتيب يعتمد على تقديرك أنت، وليس على بيانات سوق.</p>
 <div class="sc-tbl"><table class="sc-matrix"><thead><tr><th scope="col">المعيار</th><th scope="col">الوزن</th><th scope="col"><input id="sc-d-o0" type="text" value="الخيار A" aria-label="اسم الخيار 1"></th><th scope="col"><input id="sc-d-o1" type="text" value="الخيار B" aria-label="اسم الخيار 2"></th><th scope="col"><input id="sc-d-o2" type="text" value="الخيار C" aria-label="اسم الخيار 3"></th></tr></thead><tbody><tr><th scope="row"><input id="sc-d-c0" type="text" value="السعر" aria-label="المعيار 1"></th><td><input id="sc-d-w0" type="number" min="0" max="10" step="1" value="3" aria-label="وزن المعيار 1"></td><td><input id="sc-d-s0-0" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 1 في المعيار 1"></td><td><input id="sc-d-s0-1" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 2 في المعيار 1"></td><td><input id="sc-d-s0-2" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 3 في المعيار 1"></td></tr><tr><th scope="row"><input id="sc-d-c1" type="text" value="الجودة" aria-label="المعيار 2"></th><td><input id="sc-d-w1" type="number" min="0" max="10" step="1" value="3" aria-label="وزن المعيار 2"></td><td><input id="sc-d-s1-0" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 1 في المعيار 2"></td><td><input id="sc-d-s1-1" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 2 في المعيار 2"></td><td><input id="sc-d-s1-2" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 3 في المعيار 2"></td></tr><tr><th scope="row"><input id="sc-d-c2" type="text" value="الضمان والدعم" aria-label="المعيار 3"></th><td><input id="sc-d-w2" type="number" min="0" max="10" step="1" value="3" aria-label="وزن المعيار 3"></td><td><input id="sc-d-s2-0" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 1 في المعيار 3"></td><td><input id="sc-d-s2-1" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 2 في المعيار 3"></td><td><input id="sc-d-s2-2" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 3 في المعيار 3"></td></tr><tr><th scope="row"><input id="sc-d-c3" type="text" value="الملاءمة لاحتياجي" aria-label="المعيار 4"></th><td><input id="sc-d-w3" type="number" min="0" max="10" step="1" value="3" aria-label="وزن المعيار 4"></td><td><input id="sc-d-s3-0" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 1 في المعيار 4"></td><td><input id="sc-d-s3-1" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 2 في المعيار 4"></td><td><input id="sc-d-s3-2" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 3 في المعيار 4"></td></tr></tbody></table></div>
-<div class="sc-tool-result" id="sc-decide-result" aria-live="polite">أدخل الدرجات لعرض الترتيب.</div>
+<div class="sc-tool-result" id="sc-decide-result" data-static="1" aria-live="polite">أدخل الدرجات لعرض الترتيب.</div>
 </section>
 <section class="sc-tool-card sc-tool" id="sc-loan" hidden>
 <h2>حاسبة القسط الشهري للقرض</h2><p class="sc-muted">قرض بفائدة سنوية ثابتة ومدة بالأشهر. النتيجة تقديرية ولا تشمل الرسوم أو التأمين.</p>

@@ -24,13 +24,13 @@ OK    Compare page: body text length 599
 OK    Editorial page loads
 OK    Editorial page: body text length 955
 OK    Admin page loads
-OK    Admin page: body text length 2827
+OK    Admin page: body text length 2904
 OK    Admin: status tables rendered
-FAIL  Posts in feed: 7
-OK    Latest post body length 1150
+FAIL  Posts in feed: 12
+OK    Latest post body length 1125
 OK    No JS errors
 OK    Mobile: home?m=1 loads
-OK    Mobile: home content length 1562
+OK    Mobile: home content length 1561
 OK    Mobile: tools?m=1 loads
 OK    Mobile: tools rendered
 OK    Mobile: about content length 443

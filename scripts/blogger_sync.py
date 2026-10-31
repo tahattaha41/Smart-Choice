@@ -28,6 +28,7 @@ import hashlib
 import json
 import os
 import sys
+import time
 from pathlib import Path
 
 POSTS_DIR = Path("posts")
@@ -154,24 +155,41 @@ def main():
         if args.dry_run:
             continue
 
+        if not entry:
+            time.sleep(8)  # تجنّب حدّ معدل Blogger عند إنشاء عدة مقالات
         existing = None
         if entry and entry.get("id") and entry.get("hash"):
             try:
                 existing = service.posts().get(blogId=blog_id, postId=entry["id"]).execute()
             except Exception:
                 existing = None
-        if existing is None:
-            existing = find_existing_post(service, blog_id, post, name)
-        if existing:
-            post_id = existing["id"]
-            result = service.posts().update(blogId=blog_id, postId=post_id, body=body).execute()
-            if post["publish"] and result.get("status") == "DRAFT":
-                result = service.posts().publish(blogId=blog_id, postId=post_id).execute()
-            print("  -> استعادة/تحديث مقال موجود دون إنشاء نسخة جديدة")
-        else:
-            result = service.posts().insert(blogId=blog_id, body=body, isDraft=not post["publish"]).execute()
+        def write_post(existing=existing):
+            if existing is None:
+                existing = find_existing_post(service, blog_id, post, name)
+            if existing:
+                post_id = existing["id"]
+                result = service.posts().update(blogId=blog_id, postId=post_id, body=body).execute()
+                if post["publish"] and result.get("status") == "DRAFT":
+                    result = service.posts().publish(blogId=blog_id, postId=post_id).execute()
+                print("  -> استعادة/تحديث مقال موجود دون إنشاء نسخة جديدة")
+            else:
+                result = service.posts().insert(blogId=blog_id, body=body, isDraft=not post["publish"]).execute()
+            return result
+
+        for attempt in range(1, 6):
+            try:
+                result = write_post()
+                break
+            except Exception as exc:
+                if attempt == 5:
+                    save_state(state)
+                    raise
+                wait = 30 * attempt
+                print(f"  ! خطأ مؤقت ({exc.__class__.__name__}) — إعادة المحاولة بعد {wait}ث")
+                time.sleep(wait)
         state[name] = {"id": result["id"], "hash": h}
         print(f"  -> {result.get('url', result['id'])}")
+        save_state(state)
         changed = True
 
     for name in [n for n in state if n not in current]:

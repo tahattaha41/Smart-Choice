@@ -184,7 +184,7 @@
       var home = nav.querySelector("a");
       nav.textContent = "";
       if (home) nav.appendChild(home);
-      list.forEach(function (p) { nav.appendChild(link(p.url, p.title)); });
+      list.forEach(function (p) { if (p.title.indexOf("لوحة الإدارة") !== 0) nav.appendChild(link(p.url, p.title)); });
     }
     var foot = document.querySelector(".sc-footlinks");
     if (foot && list.length) {
@@ -248,6 +248,7 @@
     art.appendChild(h); art.appendChild(body);
     host.appendChild(art);
     if (window.__scInitTools) window.__scInitTools();
+    if (window.__scInitAdmin) window.__scInitAdmin();
   }
   function run() {
     var path = location.pathname;
@@ -297,4 +298,73 @@
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
   else run();
+})();
+
+/* Smart Choice — admin status board (read-only). Shows only public, non-secret information:
+   the latest automated live-site test, the Blogger inventory report, configured tracking IDs and quick links.
+   It never shows invented analytics or earnings numbers. */
+(function () {
+  "use strict";
+  var RAW = "https://raw.githubusercontent.com/tahattaha41/Smart-Choice/main/";
+  var REPO = "https://github.com/tahattaha41/Smart-Choice";
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function card(title) { var c = el("section", "sc-tool-card"); c.appendChild(el("h2", null, title)); return c; }
+  function a(href, text) { var x = el("a", null, text); x.href = href; x.target = "_blank"; x.rel = "noopener"; return x; }
+  function get(path, json) {
+    return fetch(RAW + path + "?t=" + Math.floor(Date.now() / 300000), { credentials: "omit" })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return json ? r.json() : r.text(); });
+  }
+  function row(table, cells) { var tr = el("tr"); cells.forEach(function (c) { var td = el("td"); if (c && c.nodeType) td.appendChild(c); else td.textContent = c; tr.appendChild(td); }); table.appendChild(tr); }
+  function tableOf(head) { var t = el("table", "sc-admin-table"); var h = el("tr"); head.forEach(function (x) { h.appendChild(el("th", null, x)); }); t.appendChild(h); return t; }
+  function wrap(t) { var d = el("div", "sc-tbl"); d.appendChild(t); return d; }
+
+  function statusCard(root) {
+    var c = card("نتيجة آخر فحص آلي للموقع الحي"); root.appendChild(c);
+    get("reports/live-e2e.txt", false).then(function (txt) {
+      var lines = txt.split("\n").filter(function (l) { return /^(OK|FAIL) /.test(l); });
+      var fail = lines.filter(function (l) { return l.indexOf("FAIL") === 0; });
+      c.appendChild(el("p", fail.length ? "sc-bad" : "sc-good", fail.length ? ("يوجد " + fail.length + " فحص فاشل من " + lines.length) : ("كل الفحوصات ناجحة (" + lines.length + ")")));
+      var t = tableOf(["الحالة", "الفحص"]);
+      lines.forEach(function (l) { row(t, [l.indexOf("OK") === 0 ? "✓ ناجح" : "✗ فاشل", l.replace(/^(OK|FAIL)\s+/, "")]); });
+      c.appendChild(wrap(t));
+      c.appendChild(el("p", "sc-muted", "الفحص يعمل تلقائياً كل يوم وعند أي تعديل على المحتوى."));
+    }).catch(function () { c.appendChild(el("p", "sc-muted", "تعذر تحميل تقرير الفحص الآن.")); });
+  }
+  function inventoryCard(root) {
+    var c = card("محتوى المدونة"); root.appendChild(c);
+    get("reports/blogger-inventory.json", true).then(function (d) {
+      c.appendChild(el("p", null, "الصفحات: " + d.pages.length + " — المقالات: " + d.posts.length));
+      var t = tableOf(["النوع", "العنوان", "الحالة"]);
+      d.pages.forEach(function (x) { row(t, ["صفحة", x.title, x.status || "منشورة"]); });
+      d.posts.forEach(function (x) { row(t, ["مقال", x.title, x.status || "منشور"]); });
+      c.appendChild(wrap(t));
+    }).catch(function () { c.appendChild(el("p", "sc-muted", "تعذر تحميل تقرير المحتوى الآن.")); });
+  }
+  function connectionsCard(root) {
+    var c = card("الربط والإحصائيات والإعلانات"); root.appendChild(c);
+    var t = tableOf(["الخدمة", "المعرّف", "الحالة المسجلة"]);
+    row(t, ["Google Analytics 4", "G-BRZP957SQ4", "الكود مثبت في القالب. لم يُتحقق بعد من وصول البيانات إلى الحساب."]);
+    row(t, ["Google AdSense", "ca-pub-1235197294708204", "كود التحميل مثبت في القالب. القبول يتم من جوجل ولا يُعتبر مضموناً."]);
+    row(t, ["Google Tag Manager", "GTM-WGSK7LQC", "مسجل في مرجع المشروع فقط، وغير مثبت في القالب لتجنب تكرار القياس."]);
+    c.appendChild(wrap(t));
+    c.appendChild(el("p", "sc-muted", "لا تُعرض هنا أرقام زيارات أو أرباح لأنها تتطلب ربطاً آمناً بحساب Google من خادم، ولن نعرض أرقاماً تجريبية. تابع الأرقام الحقيقية من لوحتَي Analytics وAdSense."));
+  }
+  function linksCard(root) {
+    var c = card("روابط الإدارة السريعة"); root.appendChild(c);
+    var ul = el("ul");
+    [["المستودع على GitHub", REPO], ["تعديل الصفحات والأدوات", REPO + "/tree/main/pages"], ["إضافة/تعديل المقالات", REPO + "/tree/main/posts"],
+     ["سجل العمليات (Actions)", REPO + "/actions"], ["لوحة Blogger", "https://www.blogger.com"], ["Google Analytics", "https://analytics.google.com"],
+     ["Google AdSense", "https://adsense.google.com"], ["Google Search Console", "https://search.google.com/search-console"]
+    ].forEach(function (x) { var li = el("li"); li.appendChild(a(x[1], x[0])); ul.appendChild(li); });
+    c.appendChild(ul);
+    c.appendChild(el("p", "sc-muted", "التعديل يتم من GitHub، ثم تصل التغييرات إلى المدونة تلقائياً."));
+  }
+  function run() {
+    var root = document.getElementById("sc-admin-root");
+    if (!root || root.dataset.scReady) return;
+    root.dataset.scReady = "1"; root.textContent = "";
+    statusCard(root); inventoryCard(root); connectionsCard(root); linksCard(root);
+  }
+  window.__scInitAdmin = run;
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
 })();

@@ -44,3 +44,8 @@
 .sc-page .sc-matrix th,.sc-page .sc-matrix td{border:1px solid #e3eaf0;padding:6px;text-align:center}
 .sc-page .sc-matrix input{width:100%;min-width:70px;box-sizing:border-box;padding:8px;border:1px solid #cfd9e2;border-radius:8px;font:inherit}
 .sc-page .sc-matrix thead th{background:#f1f6f9}
+
+.sc-admin .sc-admin-table{width:100%;border-collapse:collapse;min-width:420px}
+.sc-admin .sc-admin-table th,.sc-admin .sc-admin-table td{border:1px solid #e3eaf0;padding:8px 10px;text-align:right;vertical-align:top}
+.sc-admin .sc-admin-table th{background:#f1f6f9}
+.sc-admin .sc-good{color:#0a7a3d;font-weight:700}.sc-admin .sc-bad{color:#b42318;font-weight:700}

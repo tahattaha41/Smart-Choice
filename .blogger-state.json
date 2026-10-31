@@ -1,4 +1,8 @@
 {
+  "budget-50-30-20-rule.md": {
+    "hash": "98c103316a260d258b0b4e11fbeb463f6047d28c255c58ca38e8b5a5e26b86c8",
+    "id": "5189435229926293807"
+  },
   "how-to-calculate-discount.md": {
     "hash": "a9c5de3d8b502e3ebd95ffa547bb87380e4df7297b9f5f109479a684057ecc10",
     "id": "872243094425519867"
@@ -11,9 +15,33 @@
     "hash": "8c312f4b4fbaf1c7454ef89f10d3bfcd850e54b8704cacf3659d6115fd066a70",
     "id": "4732811459462744640"
   },
+  "loan-monthly-payment-explained.md": {
+    "hash": "54404340c0950a52a0587cc07538202cd716f5d27cf409d5a30aa3a092e80262",
+    "id": "3770937531084855076"
+  },
+  "margin-vs-markup-explained.md": {
+    "hash": "5062000afe0766291e31863f1aaa1f263622688d649cf765164d9ef281f45ac9",
+    "id": "2837349304651225195"
+  },
   "monthly-budget-practical-guide.md": {
     "hash": "5d1d332a14b18aa8be39d2c4c70672cc5047a64d0dc48656200fce812363c471",
     "id": "8130123378139429871"
+  },
+  "online-store-trust-checklist.md": {
+    "hash": "002d87208e02afdb124bf447a09515174a8657624bb7eedd0a95dd1386ab2e6b",
+    "id": "5915404578915976844"
+  },
+  "sales-and-discount-traps.md": {
+    "hash": "e2bb3e87760e13abc0642f4ac18778f9dc3592667303db9dbe3f9781dcbc842d",
+    "id": "8065403004303173233"
+  },
+  "saving-goal-plan.md": {
+    "hash": "ada76837cc7ba02b1f65e521c23eb762d7e9f151209a2c23a60a2a22fc3bb27c",
+    "id": "2608035351549179954"
+  },
+  "smart-choice-tools-guide.md": {
+    "hash": "a1c788616f519392efd3ce6797195dc674361134778ae52805c317730ca74f82",
+    "id": "3701429245746374833"
   },
   "smart-choice-welcome.md": {
     "hash": "18abe9d387976bda33d581d7ced6946f764915c05670b0f17e9192b86c2b1095",
@@ -26,5 +54,9 @@
   "vat-and-discount-explained.md": {
     "hash": "b272e13d9864fa757c519c5066fd17ac393d4c3fdcd064d73dc38918a69a4bda",
     "id": "5400434139166311685"
+  },
+  "warranty-and-return-policy-guide.md": {
+    "hash": "ac62b93841d79d5d5df80fd90708534c22d1c4b31eec6bf5434a64195ef48abb",
+    "id": "2135822609687395060"
   }
 }

@@ -10,7 +10,7 @@ browser = await chromium.launch();
 const ctx = await browser.newContext({ locale: 'ar-EG', viewport: { width: 390, height: 800 } });
 const page = await ctx.newPage();
 const errors = []; page.on('pageerror', (e) => { if (!/solveSimpleChallenge/.test(e.message)) errors.push(e.message); }); // خطأ تصدره صفحات Blogger نفسها لمتصفحات الاختبار
-const go = async (url) => { for (let i = 0; i < 4; i++) { try { const r = await page.goto(url, { waitUntil: 'networkidle', timeout: 45000 }); if (r && r.ok()) return true; } catch {} await page.waitForTimeout(8000 * (i + 1)); } return false; };
+const go = async (url) => { await page.waitForTimeout(2500); for (let i = 0; i < 6; i++) { try { const r = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 }); if (r && r.ok()) { await page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {}); return true; } } catch {} await page.waitForTimeout(15000 * (i + 1)); } return false; };
 
 // نسخة الواجهة المنشورة على CDN
 const cdn = await page.evaluate(async () => { try { return await (await fetch('https://cdn.jsdelivr.net/gh/tahattaha41/Smart-Choice@main/assets/js/smart-choice.js')).text(); } catch { return ''; } }).catch(() => '');

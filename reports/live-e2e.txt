@@ -20,6 +20,9 @@ OK    Decision page loads
 OK    Decision page: body text length 413
 OK    Compare page loads
 OK    Compare page: body text length 599
+OK    Admin page loads
+OK    Admin page: body text length 2626
+OK    Admin: status tables rendered
 OK    Posts in feed: 7
 OK    Latest post body length 1150
 OK    No JS errors

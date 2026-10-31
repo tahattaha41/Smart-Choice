@@ -14,13 +14,15 @@
     function discount() {
       const price = value("sc-price"), rate = value("sc-rate");
       const valid = Number.isFinite(price) && Number.isFinite(rate) && price >= 0 && rate >= 0 && rate <= 100;
-      put("sc-final", valid ? fmt(price * (1 - rate / 100)) : "تحقق من المدخلات");
+      const empty = !Number.isFinite(price) && !Number.isFinite(rate);
+      put("sc-final", valid ? fmt(price * (1 - rate / 100)) : (empty ? "أدخل البيانات" : "تحقق من المدخلات"));
       put("sc-discount-saved", valid ? fmt(price * rate / 100) : "—");
     }
     function budget() {
       const income = value("sc-income"), expenses = value("sc-expenses");
       const valid = Number.isFinite(income) && Number.isFinite(expenses) && income >= 0 && expenses >= 0;
-      put("sc-balance", valid ? fmt(income - expenses) : "تحقق من المدخلات");
+      const emptyB = !Number.isFinite(income) && !Number.isFinite(expenses);
+      put("sc-balance", valid ? fmt(income - expenses) : (emptyB ? "أدخل البيانات" : "تحقق من المدخلات"));
       put("sc-ratio", valid ? (income ? fmt(expenses / income * 100) + "%" : (expenses ? "غير متاح" : "0%")) : "—");
     }
     function unit() {

@@ -24,8 +24,8 @@ OK    Compare page: body text length 632
 OK    Editorial page loads
 OK    Editorial page: body text length 955
 OK    Admin page loads
-OK    Admin page: body text length 4150
-OK    Admin: status tables rendered
+OK    Admin page: body text length 180
+OK    Admin: password gate shown and no data exposed before login
 OK    Posts in feed: 15
 OK    Latest post body length 1366
 OK    No JS errors

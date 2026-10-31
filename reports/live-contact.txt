@@ -1,4 +1,4 @@
-16499 bytes total
+17279 bytes total
 <body>
 <div class='sc-top'><div class='sc-wrap'>أدوات مجانية تساعدك تحسب وتقارن وتختار بوعي</div></div>
 <header class='sc-head'><div class='sc-wrap sc-headin'>

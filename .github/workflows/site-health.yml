@@ -1,15 +1,8 @@
 name: Smart Choice | Live site health check
 
 on:
+  # قديم: يفحص HTML الخام فقط ولا يرى المحتوى المرسوم بالـ JavaScript؛ الفحص الأساسي صار live-e2e.yml
   workflow_dispatch:
-  schedule:
-    - cron: "40 5 * * *"
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/site-health.yml"
-      - "theme/**"
-      - "pages/**"
 
 permissions:
   contents: write

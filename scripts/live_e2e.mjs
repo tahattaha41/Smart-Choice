@@ -18,6 +18,7 @@ const cdn = await page.evaluate(async () => { try { return await (await fetch('h
 // الرئيسية
 rec(await go(BASE + '/'), 'Home loads');
 rec((await page.locator('.sc-hero').count()) > 0, 'Home shows hero');
+rec((await page.content()).includes('Smart Choice loader'), 'Installed theme has the GitHub loader (if FAIL: upload theme/smart-choice-blogger.xml once)');
 const cdn2 = await page.evaluate(async () => { try { return await (await fetch('https://cdn.jsdelivr.net/gh/tahattaha41/Smart-Choice@main/assets/js/smart-choice.js')).text(); } catch { return ''; } });
 rec(cdn2.includes('content bundle'), 'CDN serves latest front-end JS (self-heal present)');
 await page.waitForTimeout(2500);

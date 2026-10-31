@@ -1,0 +1,22 @@
+name: Smart Choice | Delete a branch (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch to delete (never main)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  delete:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Delete branch
+        run: |
+          b="${{ inputs.branch }}"
+          if [ "$b" = "main" ] || [ -z "$b" ]; then echo "Refusing to delete '$b'"; exit 1; fi
+          git push origin --delete "$b"

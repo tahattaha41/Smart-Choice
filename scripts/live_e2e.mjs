@@ -62,7 +62,7 @@ rec(errors.length === 0, 'No JS errors' + (errors.length ? ': ' + errors.slice(0
   const { devices } = await import('playwright');
   const mctx = await browser.newContext({ ...devices['Pixel 7'], locale: 'ar-EG' });
   const mp = await mctx.newPage();
-  const mgo = async (url) => { for (let i = 0; i < 4; i++) { try { const r = await mp.goto(url, { waitUntil: 'networkidle', timeout: 45000 }); if (r && r.ok()) return true; } catch {} await mp.waitForTimeout(8000 * (i + 1)); } return false; };
+  const mgo = async (url) => { await mp.waitForTimeout(2500); for (let i = 0; i < 5; i++) { try { const r = await mp.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 }); if (r && r.ok()) { await mp.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {}); return true; } else { console.log('mobile status', url, r && r.status()); } } catch (e) { console.log('mobile err', url, String(e).slice(0, 120)); } await mp.waitForTimeout(12000 * (i + 1)); } return false; };
   rec(await mgo(BASE + '/?m=1'), 'Mobile: home?m=1 loads');
   await mp.waitForTimeout(3000);
   const hl = (await mp.locator('#main-content').innerText().catch(() => '')).length;

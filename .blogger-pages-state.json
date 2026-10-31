@@ -19,6 +19,10 @@
     "hash": "8e11dff1523d558fd2a83080731989bb2090bb9dffeccefa370219fcaa15e1e1",
     "id": "4333271989185995858"
   },
+  "editorial.md": {
+    "hash": "d22ea75575f38f5811f1574f1b3308f4c50822f24007e39715b9af1c07dd9bda",
+    "id": "2597977210797189212"
+  },
   "privacy.md": {
     "hash": "0f31c9a01c5e9d097cfeeadb438fa4ba2b5906d149fb1fa2063bd94191d98945",
     "id": "6189319338313393937"
@@ -28,7 +32,7 @@
     "id": "1124457069603105510"
   },
   "tools.md": {
-    "hash": "f8f43cabb5811687756f33e3b00dc24e60a913ce91247292a5298bbebd999633",
+    "hash": "c30c6a937feab5629afcf2f80a7fb210a08db7b4f3c5c352d84d28ccaa53bbf9",
     "id": "5601245022679841555"
   }
 }

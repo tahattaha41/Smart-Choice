@@ -15,6 +15,9 @@ publish: true
   <button type="button" data-tab="vat" aria-selected="false">الضريبة</button>
   <button type="button" data-tab="compare" aria-selected="false">مقارنة المنتجات</button>
   <button type="button" data-tab="decide" aria-selected="false">مركز القرار</button>
+  <button type="button" data-tab="loan" aria-selected="false">القرض</button>
+  <button type="button" data-tab="margin" aria-selected="false">هامش الربح</button>
+  <button type="button" data-tab="split" aria-selected="false">قسمة الفاتورة</button>
 </nav>
 <section class="sc-tool-card sc-tool" id="sc-discount">
   <h2>حاسبة الخصم والسعر النهائي</h2><p class="sc-muted">أدخل السعر والخصم لمعرفة ما ستدفعه وقيمة التوفير.</p>
@@ -114,6 +117,21 @@ publish: true
 <h2>مركز القرار: مصفوفة قرار بأوزانك</h2><p class="sc-muted">اكتب خياراتك ومعايير مهمة لك، أعطِ كل معيار وزنًا من 0 إلى 10 ودرجة لكل خيار من 0 إلى 10. الترتيب يعتمد على تقديرك أنت، وليس على بيانات سوق.</p>
 <div class="sc-tbl"><table class="sc-matrix"><thead><tr><th scope="col">المعيار</th><th scope="col">الوزن</th><th scope="col"><input id="sc-d-o0" type="text" value="الخيار A" aria-label="اسم الخيار 1"></th><th scope="col"><input id="sc-d-o1" type="text" value="الخيار B" aria-label="اسم الخيار 2"></th><th scope="col"><input id="sc-d-o2" type="text" value="الخيار C" aria-label="اسم الخيار 3"></th></tr></thead><tbody><tr><th scope="row"><input id="sc-d-c0" type="text" value="السعر" aria-label="المعيار 1"></th><td><input id="sc-d-w0" type="number" min="0" max="10" step="1" value="3" aria-label="وزن المعيار 1"></td><td><input id="sc-d-s0-0" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 1 في المعيار 1"></td><td><input id="sc-d-s0-1" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 2 في المعيار 1"></td><td><input id="sc-d-s0-2" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 3 في المعيار 1"></td></tr><tr><th scope="row"><input id="sc-d-c1" type="text" value="الجودة" aria-label="المعيار 2"></th><td><input id="sc-d-w1" type="number" min="0" max="10" step="1" value="3" aria-label="وزن المعيار 2"></td><td><input id="sc-d-s1-0" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 1 في المعيار 2"></td><td><input id="sc-d-s1-1" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 2 في المعيار 2"></td><td><input id="sc-d-s1-2" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 3 في المعيار 2"></td></tr><tr><th scope="row"><input id="sc-d-c2" type="text" value="الضمان والدعم" aria-label="المعيار 3"></th><td><input id="sc-d-w2" type="number" min="0" max="10" step="1" value="3" aria-label="وزن المعيار 3"></td><td><input id="sc-d-s2-0" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 1 في المعيار 3"></td><td><input id="sc-d-s2-1" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 2 في المعيار 3"></td><td><input id="sc-d-s2-2" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 3 في المعيار 3"></td></tr><tr><th scope="row"><input id="sc-d-c3" type="text" value="الملاءمة لاحتياجي" aria-label="المعيار 4"></th><td><input id="sc-d-w3" type="number" min="0" max="10" step="1" value="3" aria-label="وزن المعيار 4"></td><td><input id="sc-d-s3-0" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 1 في المعيار 4"></td><td><input id="sc-d-s3-1" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 2 في المعيار 4"></td><td><input id="sc-d-s3-2" type="number" min="0" max="10" step="1" aria-label="درجة الخيار 3 في المعيار 4"></td></tr></tbody></table></div>
 <div class="sc-tool-result" id="sc-decide-result" aria-live="polite">أدخل الدرجات لعرض الترتيب.</div>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-loan" hidden>
+<h2>حاسبة القسط الشهري للقرض</h2><p class="sc-muted">قرض بفائدة سنوية ثابتة ومدة بالأشهر. النتيجة تقديرية ولا تشمل الرسوم أو التأمين.</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-loan-amount">مبلغ القرض</label><input id="sc-loan-amount" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-loan-rate">الفائدة السنوية %</label><input id="sc-loan-rate" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-loan-months">المدة (أشهر)</label><input id="sc-loan-months" type="number" min="0" step="any" inputmode="decimal"></div></div>
+<div class="sc-tool-result" id="sc-loan-result" aria-live="polite">أدخل بيانات القرض.</div>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-margin" hidden>
+<h2>حاسبة هامش الربح</h2><p class="sc-muted">أدخل التكلفة وسعر البيع لمعرفة الربح والهامش ونسبة الزيادة على التكلفة.</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-margin-cost">التكلفة</label><input id="sc-margin-cost" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-margin-price">سعر البيع</label><input id="sc-margin-price" type="number" min="0" step="any" inputmode="decimal"></div></div>
+<div class="sc-tool-result" id="sc-margin-result" aria-live="polite">أدخل التكلفة وسعر البيع.</div>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-split" hidden>
+<h2>قسمة الفاتورة</h2><p class="sc-muted">قسّم إجمالي الفاتورة بين عدة أشخاص مع نسبة إكرامية اختيارية.</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-split-total">إجمالي الفاتورة</label><input id="sc-split-total" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-split-tip">الإكرامية %</label><input id="sc-split-tip" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-split-people">عدد الأشخاص</label><input id="sc-split-people" type="number" min="0" step="any" inputmode="decimal" value="2"></div></div>
+<div class="sc-tool-result" id="sc-split-result" aria-live="polite">أدخل إجمالي الفاتورة.</div>
 </section>
 
 <p class="sc-muted">ملاحظة: النتائج حسابية بناءً على البيانات التي تدخلها، ولا تمثل أسعار سوق مباشرة أو نصيحة مالية.</p>

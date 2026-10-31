@@ -108,6 +108,24 @@
       const ranked=names.map((n,j)=>({n,v:totals[j]/wsum})).sort((a,b)=>b.v-a.v);
       out.textContent="الترتيب حسب أوزانك: "+ranked.map((r,k)=>(k+1)+") "+r.n+" ("+fmt(r.v)+" من 10)").join(" — ")+(ranked[0].v===ranked[1].v?" — تعادل بين الأول والثاني.":"");
     }
+    function loan() {
+      const P=value("sc-loan-amount"), ar=value("sc-loan-rate"), n=value("sc-loan-months"), out=$("sc-loan-result"); if(!out)return;
+      if(![P,ar,n].every(Number.isFinite)||P<=0||ar<0||ar>100||n<1||!Number.isInteger(n)){out.textContent="أدخل مبلغاً أكبر من صفر، وفائدة من 0 إلى 100، ومدة بالأشهر (عدد صحيح).";return;}
+      const r=ar/12/100, pay=r===0?P/n:P*r/(1-Math.pow(1+r,-n)), total=pay*n;
+      out.textContent="القسط الشهري: "+fmt(pay)+" — إجمالي المدفوع: "+fmt(total)+" — إجمالي الفوائد: "+fmt(total-P);
+    }
+    function margin() {
+      const c=value("sc-margin-cost"), p=value("sc-margin-price"), out=$("sc-margin-result"); if(!out)return;
+      if(![c,p].every(Number.isFinite)||c<0||p<=0){out.textContent="أدخل تكلفة غير سالبة وسعر بيع أكبر من صفر.";return;}
+      const profit=p-c;
+      out.textContent="الربح: "+fmt(profit)+" — هامش الربح: "+fmt(profit/p*100)+"%"+(c>0?" — نسبة الزيادة على التكلفة: "+fmt(profit/c*100)+"%":"");
+    }
+    function split() {
+      const t=value("sc-split-total"), tip=Number.isFinite(value("sc-split-tip"))?value("sc-split-tip"):0, n=value("sc-split-people"), out=$("sc-split-result"); if(!out)return;
+      if(!Number.isFinite(t)||t<0||tip<0||!Number.isFinite(n)||n<1||!Number.isInteger(n)){out.textContent="أدخل إجمالياً غير سالب، وعدد أشخاص صحيحاً (1 أو أكثر).";return;}
+      const all=t*(1+tip/100);
+      out.textContent="الإجمالي مع الإكرامية: "+fmt(all)+" — نصيب كل شخص: "+fmt(all/n);
+    }
     const handlers = {
       "sc-price": discount, "sc-rate": discount,
       "sc-income": budget, "sc-expenses": budget,
@@ -118,6 +136,9 @@
       "sc-cash": installment, "sc-down": installment, "sc-months": installment, "sc-monthpay": installment,
       "sc-convert-value": convert, "sc-date1": dates, "sc-date2": dates,
       "sc-vat-amount": vat, "sc-vat-rate": vat,
+      "sc-loan-amount": loan, "sc-loan-rate": loan, "sc-loan-months": loan,
+      "sc-margin-cost": margin, "sc-margin-price": margin,
+      "sc-split-total": split, "sc-split-tip": split, "sc-split-people": split,
       "sc-c-p1": compare, "sc-c-e1": compare, "sc-c-l1": compare, "sc-c-w1": compare, "sc-c-p2": compare, "sc-c-e2": compare, "sc-c-l2": compare, "sc-c-w2": compare
     };
     Object.keys(handlers).forEach(id => {
@@ -137,7 +158,7 @@
       const tab=btn.getAttribute("data-tab"); showTab(tab);
       try { history.replaceState(null, "", "#" + tab); } catch (e) {}
     }));
-    discount(); budget(); unit(); percent(); saving(); total(); installment(); convert(); dates(); vat(); compare(); decide();
+    discount(); budget(); unit(); percent(); saving(); total(); installment(); convert(); dates(); vat(); compare(); decide(); loan(); margin(); split();
     const fromHash=(location.hash||"").replace("#",""); if(fromHash) showTab(fromHash);
   }
   function start() {
@@ -152,7 +173,7 @@
    Static markup in the theme remains as a fallback if a request fails. */
 (function () {
   "use strict";
-  var ORDER = ["الأدوات", "مقارنة", "مركز القرار", "من نحن", "اتصل بنا", "سياسة الخصوصية", "الشروط"];
+  var ORDER = ["الأدوات", "مقارنة", "مركز القرار", "من نحن", "سياسة المحتوى", "اتصل بنا", "سياسة الخصوصية", "الشروط"];
   function clean(title) { return String(title || "").replace(/\s*\|\s*Smart Choice\s*$/i, "").trim(); }
   function rank(title) {
     for (var i = 0; i < ORDER.length; i++) if (title.indexOf(ORDER[i]) === 0) return i;

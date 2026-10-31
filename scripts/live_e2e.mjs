@@ -42,7 +42,7 @@ if ((await page.locator('#sc-price').count()) > 0) {
 } else rec(false, 'Tools: discount input missing');
 
 // صفحات أخرى ومقال
-for (const [key, label] of [['من نحن', 'About'], ['اتصل بنا', 'Contact'], ['الخصوصية', 'Privacy'], ['شروط', 'Terms'], ['مركز القرار', 'Decision page'], ['مقارنة', 'Compare page'], ['لوحة الإدارة', 'Admin page']]) {
+for (const [key, label] of [['من نحن', 'About'], ['اتصل بنا', 'Contact'], ['الخصوصية', 'Privacy'], ['شروط', 'Terms'], ['مركز القرار', 'Decision page'], ['مقارنة', 'Compare page'], ['سياسة المحتوى', 'Editorial page'], ['لوحة الإدارة', 'Admin page']]) {
   const u = find(key);
   if (!u) { rec(false, label + ': not in feed'); continue; }
   rec(await go(u), label + ' loads');
@@ -53,7 +53,7 @@ for (const [key, label] of [['من نحن', 'About'], ['اتصل بنا', 'Conta
   if (label === 'Contact') rec((await page.content()).includes('skyloom32'), 'Contact shows email');
 }
 const posts = await page.evaluate(async () => (await (await fetch('/feeds/posts/default?alt=json&max-results=20')).json()).feed.entry.map((e) => e.link.find((l) => l.rel === 'alternate').href));
-rec(posts.length >= 6, 'Posts in feed: ' + posts.length);
+rec(posts.length >= 14, 'Posts in feed: ' + posts.length);
 if (posts[0]) { await go(posts[0]); await page.waitForTimeout(2500); const len = (await page.locator('.post-body, .entry-content').first().innerText().catch(() => '')).length; rec(len > 300, 'Latest post body length ' + len); }
 rec(errors.length === 0, 'No JS errors' + (errors.length ? ': ' + errors.slice(0, 3).join(' | ') : ''));
 

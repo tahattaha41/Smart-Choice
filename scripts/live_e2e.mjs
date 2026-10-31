@@ -48,8 +48,8 @@ for (const [key, label] of [['من نحن', 'About'], ['اتصل بنا', 'Conta
   rec(await go(u), label + ' loads');
   await page.waitForTimeout(2500);
   const len = (await page.locator('.post-body, .entry-content, .sc-page').first().innerText().catch(() => '')).length;
-  rec(len > 150, `${label}: body text length ${len}`);
-  if (label === 'Admin page') { try { await page.waitForSelector('.sc-admin-table', { timeout: 20000 }); rec(true, 'Admin: status tables rendered'); } catch { rec(false, 'Admin: status tables NOT rendered'); } }
+  rec(len > (label === 'Admin page' ? 40 : 150), `${label}: body text length ${len}`);
+  if (label === 'Admin page') { try { await page.waitForSelector('#sc-admin-root input[type=password]', { timeout: 20000 }); const leaked = await page.locator('.sc-admin-table').count(); rec(leaked === 0, 'Admin: password gate shown and no data exposed before login'); } catch { rec(false, 'Admin: password gate NOT shown'); } }
   if (label === 'Contact') rec((await page.content()).includes('skyloom32'), 'Contact shows email');
 }
 const posts = await page.evaluate(async () => (await (await fetch('/feeds/posts/default?alt=json&max-results=20')).json()).feed.entry.map((e) => e.link.find((l) => l.rel === 'alternate').href));

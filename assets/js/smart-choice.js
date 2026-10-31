@@ -257,7 +257,7 @@
         return /\|\s*Smart Choice\s*$/i.test((e.title && e.title.$t) || "");
       }).map(function (e) {
         return { title: clean(e.title && e.title.$t), url: entryUrl(e) };
-      }).filter(function (p) { return p.title && p.url; });
+      }).filter(function (p) { return p.title && p.url && p.title.indexOf("لوحة الإدارة") !== 0; });
       list.sort(function (a, b) { return rank(a.title) - rank(b.title); });
       return list;
     });
@@ -492,11 +492,59 @@
     c.appendChild(ul);
     c.appendChild(el("p", "sc-muted", "التعديل يتم من GitHub، ثم تصل التغييرات إلى المدونة تلقائياً."));
   }
+  /* بوابة كلمة السر: تحجب اللوحة عن الزوار العاديين. ملاحظة أمنية: هذه حماية واجهة فقط (لا يوجد خادم)،
+     ولذلك لا تعرض اللوحة أي سر؛ الكتابة الفعلية تتم عبر تسجيل دخول GitHub. */
+  var SALT = "smart-choice-admin-v1", HASH = "173dfb3f1c7e2cee058339a0f15d64ece03ee923d205e0eb9fa0c68d76a6f8a1", ITER = 150000;
+  function hex(buf) { return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ("0" + b.toString(16)).slice(-2); }).join(""); }
+  function check(pw) {
+    var enc = new TextEncoder();
+    return Promise.resolve().then(function () { return crypto.subtle.importKey("raw", enc.encode(pw), "PBKDF2", false, ["deriveBits"]); }).then(function (k) {
+      return crypto.subtle.deriveBits({ name: "PBKDF2", salt: enc.encode(SALT), iterations: ITER, hash: "SHA-256" }, k, 256);
+    }).then(function (bits) { return hex(bits) === HASH; });
+  }
+  function unlocked() { try { return sessionStorage.getItem("sc-admin") === HASH; } catch (e) { return false; } }
+  function composerCard(root) {
+    var c = card("كتابة مقال جديد"); root.appendChild(c);
+    c.appendChild(el("p", "sc-muted", "اكتب المقال هنا ثم اضغط الزر: يفتح GitHub بملف جاهز، وبعد الحفظ (Commit) يُنشر تلقائياً على المدونة. الكتابة محمية بتسجيل دخولك إلى GitHub."));
+    var f = el("div", "sc-tool-grid");
+    function field(label, tag, ph) { var l = el("label", null, label); var i = el(tag); if (ph) i.placeholder = ph; if (tag === "textarea") i.rows = 9; l.appendChild(i); f.appendChild(l); return i; }
+    var title = field("عنوان المقال", "input", "مثال: كيف تقارن بين عرضين");
+    var labels = field("التصنيف (اختياري)", "input", "التسوق الذكي");
+    var body = field("نص المقال (HTML بسيط: <p> و<h2>)", "textarea", "<p>…</p>");
+    c.appendChild(f);
+    var go = el("button", "sc-btn", "فتح GitHub لنشر المقال"); go.type = "button";
+    go.addEventListener("click", function () {
+      var t = title.value.trim(), b = body.value.trim();
+      if (!t || !b) { alert("اكتب العنوان والنص أولاً."); return; }
+      var slug = "post-" + new Date().toISOString().slice(0, 10) + "-" + Math.random().toString(36).slice(2, 6);
+      var md = "---\ntitle: " + t + "\nlabels: " + (labels.value.trim() || "Smart Choice") + "\npublish: true\n---\n" + b + "\n";
+      window.open(REPO + "/new/main/posts?filename=" + encodeURIComponent(slug + ".md") + "&value=" + encodeURIComponent(md), "_blank", "noopener");
+    });
+    c.appendChild(go);
+  }
+  function panels(root) {
+    root.textContent = "";
+    overview(root); composerCard(root); statusCard(root); inventoryCard(root); connectionsCard(root); todoCard(root); linksCard(root);
+  }
   function run() {
     var root = document.getElementById("sc-admin-root");
     if (!root || root.dataset.scReady) return;
-    root.dataset.scReady = "1"; root.textContent = "";
-    overview(root); statusCard(root); inventoryCard(root); connectionsCard(root); todoCard(root); linksCard(root);
+    root.dataset.scReady = "1";
+    var m = document.createElement("meta"); m.name = "robots"; m.content = "noindex,nofollow"; document.head.appendChild(m);
+    if (unlocked()) { panels(root); return; }
+    root.textContent = "";
+    var c = card("دخول الإدارة"); root.appendChild(c);
+    c.appendChild(el("p", "sc-muted", "هذه الصفحة خاصة بمالك الموقع. أدخل كلمة السر للمتابعة."));
+    var inp = el("input"); inp.type = "password"; inp.autocomplete = "current-password"; inp.placeholder = "كلمة السر"; inp.setAttribute("aria-label", "كلمة السر");
+    var btn = el("button", "sc-btn", "دخول"); btn.type = "button"; var msg = el("p", "sc-bad", "");
+    function submit() {
+      check(inp.value).then(function (ok) {
+        if (ok) { try { sessionStorage.setItem("sc-admin", HASH); } catch (e) {} panels(root); }
+        else { msg.textContent = "كلمة السر غير صحيحة."; inp.value = ""; }
+      }).catch(function () { msg.textContent = "المتصفح لا يدعم التحقق."; });
+    }
+    btn.addEventListener("click", submit); inp.addEventListener("keydown", function (e) { if (e.key === "Enter") submit(); });
+    c.appendChild(inp); c.appendChild(btn); c.appendChild(msg);
   }
   window.__scInitAdmin = run;
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();

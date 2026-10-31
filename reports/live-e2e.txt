@@ -8,13 +8,13 @@ OK    Tools: tool sections rendered
 OK    Tools: discount calculator works -> السعر بعد الخصم ١٬٦٠٠ قيمة التوفير ٤٠٠
 OK    Tools: decision tab opens
 OK    Tools: compare tab opens
-FAIL  About loads
-FAIL  About: body text length 0
+OK    About loads
+OK    About: body text length 436
 OK    Contact loads
 OK    Contact: body text length 420
 OK    Contact shows email
-OK    Privacy loads
-OK    Privacy: body text length 1751
+FAIL  Privacy loads
+FAIL  Privacy: body text length 0
 OK    Terms loads
 OK    Terms: body text length 941
 OK    Decision page loads
@@ -24,7 +24,7 @@ OK    Compare page: body text length 632
 OK    Editorial page loads
 OK    Editorial page: body text length 955
 OK    Admin page loads
-OK    Admin page: body text length 3036
+OK    Admin page: body text length 4151
 OK    Admin: status tables rendered
 OK    Posts in feed: 15
 OK    Latest post body length 1366

@@ -1,3 +1,20 @@
+/* Smart Choice — أحدث CSS دائماً: يُحقن من GitHub مباشرة لتجاوز كاش CDN القديم */
+(function () {
+  "use strict";
+  try {
+    var key = Math.floor(Date.now() / 300000);
+    fetch("https://raw.githubusercontent.com/tahattaha41/Smart-Choice/main/assets/css/smart-choice.css?t=" + key, { credentials: "omit" })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+      .then(function (css) {
+        css = css.split("\n").filter(function (l) { return l.indexOf("@import") !== 0; }).join("\n");
+        var st = document.getElementById("sc-css-live");
+        if (!st) { st = document.createElement("style"); st.id = "sc-css-live"; document.head.appendChild(st); }
+        st.textContent = css;
+        if (!document.getElementById("sc-font-live")) { var fl = document.createElement("link"); fl.id = "sc-font-live"; fl.rel = "stylesheet"; fl.href = "https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap"; document.head.appendChild(fl); }
+      }).catch(function () {});
+  } catch (e) {}
+})();
+
 /* Smart Choice tools — shared, scoped, dependency-free */
 (function () {
   "use strict";
@@ -266,7 +283,7 @@
     }
   }
   function fillLatest() {
-    var box = document.querySelector(".sc-latest-posts");
+    var box = document.querySelector(".sc-home-root .sc-latest-posts") || document.querySelector(".sc-latest-posts");
     if (!box) return;
     getJson("/feeds/posts/default?alt=json&max-results=6").then(function (d) {
       var items = ((d.feed && d.feed.entry) || []).filter(function (e) { return !/utilityra/i.test((e.title && e.title.$t) || ""); });
@@ -445,12 +462,14 @@
   }
   function inventoryCard(root) {
     var c = card("محتوى المدونة"); root.appendChild(c);
-    get("reports/blogger-inventory.json", true).then(function (d) {
+    function feed(kind) { return fetch("/feeds/" + kind + "/default?alt=json&max-results=150", { credentials: "omit" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (j) { return ((j.feed && j.feed.entry) || []).map(function (e) { var l = (e.link || []).filter(function (x) { return x.rel === "alternate"; })[0]; return { title: e.title.$t, url: l ? l.href : "" }; }); }); }
+    Promise.all([feed("pages"), feed("posts")]).then(function (r) {
+      var d = { pages: r[0], posts: r[1] };
       if (KP.set) { KP.set("pages", "الصفحات", String(d.pages.length)); KP.set("posts", "المقالات", String(d.posts.length)); }
-      c.appendChild(el("p", null, "الصفحات: " + d.pages.length + " — المقالات: " + d.posts.length));
+      c.appendChild(el("p", null, "الصفحات: " + d.pages.length + " — المقالات: " + d.posts.length + " (من خلاصة المدونة الحية)"));
       var t = tableOf(["النوع", "العنوان", "الحالة"]);
-      d.pages.forEach(function (x) { row(t, ["صفحة", x.title, x.status || "منشورة"]); });
-      d.posts.forEach(function (x) { row(t, ["مقال", x.title, x.status || "منشور"]); });
+      d.pages.forEach(function (x) { var cell = el("span"); cell.appendChild(a(x.url, x.title)); row(t, ["صفحة", cell, "منشورة"]); });
+      d.posts.forEach(function (x) { var cell = el("span"); cell.appendChild(a(x.url, x.title)); row(t, ["مقال", cell, "منشور"]); });
       c.appendChild(wrap(t));
     }).catch(function () { c.appendChild(el("p", "sc-muted", "تعذر تحميل تقرير المحتوى الآن.")); });
   }

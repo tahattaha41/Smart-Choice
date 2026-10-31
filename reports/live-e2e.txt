@@ -2,7 +2,7 @@ OK    Home loads
 OK    Home shows hero
 OK    Installed theme has the GitHub loader (if FAIL: upload theme/smart-choice-blogger.xml once)
 OK    CDN serves latest front-end JS (self-heal present)
-OK    Nav has no old-brand pages: الرئيسية الأدوات الذكية مقارنة المنتجات مركز القرار من نحن اتصل بنا سياسة الخصوصية شروط الاستخدام وإخلاء المسؤولية
+OK    Nav has no old-brand pages: الرئيسية الأدوات الذكية مقارنة المنتجات مركز القرار من نحن سياسة المحتوى والتحرير اتصل بنا سياسة الخصوصية شروط الاستخدام
 OK    Tools page loads
 OK    Tools: tool sections rendered
 OK    Tools: discount calculator works -> السعر بعد الخصم: ١٬٦٠٠ قيمة التوفير: ٤٠٠
@@ -21,10 +21,12 @@ OK    Decision page loads
 OK    Decision page: body text length 413
 OK    Compare page loads
 OK    Compare page: body text length 599
+OK    Editorial page loads
+OK    Editorial page: body text length 955
 OK    Admin page loads
-OK    Admin page: body text length 2728
+OK    Admin page: body text length 2827
 OK    Admin: status tables rendered
-OK    Posts in feed: 7
+FAIL  Posts in feed: 7
 OK    Latest post body length 1150
 OK    No JS errors
 OK    Mobile: home?m=1 loads
@@ -32,4 +34,4 @@ OK    Mobile: home content length 1562
 OK    Mobile: tools?m=1 loads
 OK    Mobile: tools rendered
 OK    Mobile: about content length 443
-failed=0
+failed=1

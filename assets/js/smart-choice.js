@@ -208,6 +208,14 @@
       const el=$(id);
       if (el) el.addEventListener("input", () => { handlers[id](); decorateAll(); });
     });
+    root.querySelectorAll(".sc-tool").forEach(section => {
+      const ex = EXAMPLES[section.id]; if (!ex) return;
+      const inputs = Array.from(section.querySelectorAll("input")).filter(el => el.type !== "button");
+      if (inputs.some(el => el.value !== "" && el.id !== "sc-split-people")) return;
+      Object.keys(ex).forEach(id => { const el = section.querySelector("#" + id); if (el) { el.value = ex[id]; fire(el); } });
+      const note = document.createElement("p"); note.className = "sc-demo-note"; note.textContent = "الأرقام الظاهرة أمثلة افتراضية للتوضيح — غيّرها بأرقامك أو اضغط «مسح».";
+      const acts = section.querySelector(".sc-actions"); if (acts) section.insertBefore(note, acts);
+    });
     const vatMode=$("sc-vat-mode"); if(vatMode) vatMode.addEventListener("change", () => { vat(); decorateAll(); });
     const decideBox=$("sc-decide"); if(decideBox) decideBox.addEventListener("input", decide);
     const convertType=$("sc-convert-type");
@@ -236,7 +244,7 @@
    Static markup in the theme remains as a fallback if a request fails. */
 (function () {
   "use strict";
-  var ORDER = ["الأدوات", "مقارنة", "مركز القرار", "من نحن", "سياسة المحتوى", "اتصل بنا", "سياسة الخصوصية", "الشروط"];
+  var ORDER = ["الأدوات", "مقارنة", "مركز القرار", "من نحن", "سياسة المحتوى", "اتصل بنا", "سياسة الخصوصية", "الشروط", "لوحة الإدارة"];
   function clean(title) { return String(title || "").replace(/\s*\|\s*Smart Choice\s*$/i, "").trim(); }
   function rank(title) {
     for (var i = 0; i < ORDER.length; i++) if (title.indexOf(ORDER[i]) === 0) return i;
@@ -257,7 +265,7 @@
         return /\|\s*Smart Choice\s*$/i.test((e.title && e.title.$t) || "");
       }).map(function (e) {
         return { title: clean(e.title && e.title.$t), url: entryUrl(e) };
-      }).filter(function (p) { return p.title && p.url && p.title.indexOf("لوحة الإدارة") !== 0; });
+      }).filter(function (p) { return p.title && p.url; });
       list.sort(function (a, b) { return rank(a.title) - rank(b.title); });
       return list;
     });
@@ -273,7 +281,7 @@
       var home = nav.querySelector("a");
       nav.textContent = "";
       if (home) nav.appendChild(home);
-      list.forEach(function (p) { if (p.title.indexOf("لوحة الإدارة") !== 0) nav.appendChild(link(p.url, p.title)); });
+      list.forEach(function (p) { nav.appendChild(link(p.url, p.title)); });
       markCurrent();
     }
     var foot = document.querySelector(".sc-footlinks");
@@ -494,7 +502,7 @@
   }
   /* بوابة كلمة السر: تحجب اللوحة عن الزوار العاديين. ملاحظة أمنية: هذه حماية واجهة فقط (لا يوجد خادم)،
      ولذلك لا تعرض اللوحة أي سر؛ الكتابة الفعلية تتم عبر تسجيل دخول GitHub. */
-  var SALT = "smart-choice-admin-v1", HASH = "173dfb3f1c7e2cee058339a0f15d64ece03ee923d205e0eb9fa0c68d76a6f8a1", ITER = 150000;
+  var SALT = "smart-choice-admin-v1", HASH = "c8601e15655da80fa3388e066a0c6aa4b63d6cc287d3183b454efa82e9be1d5c", ITER = 150000;
   function hex(buf) { return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ("0" + b.toString(16)).slice(-2); }).join(""); }
   function check(pw) {
     var enc = new TextEncoder();

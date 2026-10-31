@@ -3,8 +3,9 @@ title: سياسة المحتوى والتحرير | Smart Choice
 labels: Smart Choice, سياسة المحتوى
 publish: true
 ---
-<div dir="rtl" lang="ar"><h1>سياسة المحتوى والتحرير</h1>
-<p>نريد أن يخرج الزائر من Smart Choice بمعلومة أو حساب يفيده فعلاً. هذه هي القواعد التي نلتزم بها في كل ما ننشره.</p>
+<div class="sc-page sc-doc" dir="rtl" lang="ar">
+<section class="sc-tools-hero"><h1>سياسة المحتوى والتحرير</h1><p>نريد أن يخرج الزائر من Smart Choice بمعلومة أو حساب يفيده فعلاً. هذه هي القواعد التي نلتزم بها في كل ما ننشره.</p></section>
+<section class="sc-tool-card sc-prose">
 <h2>كيف نكتب</h2>
 <ul>
 <li>نكتب مقالاتنا بأنفسنا لمساعدة القارئ على اتخاذ قرار شراء أو تخطيط مالي أوضح، ولا ننسخ نصوص مواقع أخرى.</li>
@@ -19,4 +20,5 @@ publish: true
 <p>قد يعرض الموقع إعلانات من Google AdSense. الإعلانات لا تؤثر على ما نكتبه، ولا نقبل مقابلاً للحكم على منتج. إذا أضفنا روابط تسويق بالعمولة مستقبلاً فسنوضح ذلك بجوار الرابط.</p>
 <h2>من يدير الموقع</h2>
 <p>يدير Smart Choice صاحب الموقع (Taha). للتواصل: <a href="mailto:skyloom32@gmail.com">skyloom32@gmail.com</a>.</p>
+</section>
 </div>

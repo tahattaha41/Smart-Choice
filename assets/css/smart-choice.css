@@ -141,3 +141,16 @@ html body .sc-footer small{display:block;opacity:.7;margin-top:10px}
 
 @media print{.sc-head,.sc-top,.sc-footer,.sc-tabs{display:none}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* مقياس خطوط موحّد: عنوان الصفحة 40، قسم 24، فرعي 19، نص 17 */
+.sc-page .sc-tools-hero h1{font-size:clamp(28px,4.4vw,40px)}
+.sc-page .sc-tools-hero p{font-size:17px;line-height:1.8;margin:0}
+.sc-page .sc-prose h2{font-size:24px;line-height:1.5;margin:26px 0 8px;color:var(--sc-navy);font-weight:800;padding-inline-start:12px;border-inline-start:5px solid var(--sc-teal)}
+.sc-page .sc-prose h2:first-child{margin-top:0}
+.sc-page .sc-prose h3{font-size:19px;margin:18px 0 6px;color:var(--sc-navy)}
+.sc-page .sc-prose p,.sc-page .sc-prose li{font-size:17px;line-height:2;color:var(--sc-ink)}
+.sc-page .sc-prose ul{padding-inline-start:22px}
+.sc-page .sc-tool-card h2{font-size:24px}
+.sc-page .sc-demo-note{margin:4px 0 10px;font-size:14px;color:var(--sc-muted)}
+.sc-h2{font-size:clamp(24px,3.4vw,30px)}
+.sc-page input,.sc-page select,.sc-page textarea{font-size:17px}

@@ -416,14 +416,29 @@
   function tableOf(head) { var t = el("table", "sc-admin-table"); var h = el("tr"); head.forEach(function (x) { h.appendChild(el("th", null, x)); }); t.appendChild(h); return t; }
   function wrap(t) { var d = el("div", "sc-tbl"); d.appendChild(t); return d; }
 
+  var KP = {};
+  function kpi(label, value, cls) { var k = el("div", "kpi" + (cls ? " " + cls : "")); k.appendChild(el("span", null, label)); k.appendChild(el("b", null, value)); return k; }
+  function overview(root) {
+    var c = el("section", "sc-tool-card"); c.appendChild(el("h2", null, "نظرة عامة")); var g = el("div", "sc-kpis"); c.appendChild(g); root.appendChild(c);
+    KP.set = function (id, label, value, cls) { var old = g.querySelector("[data-k='" + id + "']"); var k = kpi(label, value, cls); k.setAttribute("data-k", id); if (old) g.replaceChild(k, old); else g.appendChild(k); };
+    KP.set("checks", "الفحص الآلي", "جارٍ التحميل…"); KP.set("pages", "الصفحات", "…"); KP.set("posts", "المقالات", "…");
+  }
+  function todoCard(root) {
+    var c = card("خطوات يقوم بها المالك (لا يمكن أتمتتها)"); root.appendChild(c);
+    var ul = el("ul");
+    ["طلب مراجعة الموقع في Google AdSense بعد اكتمال المحتوى.", "إضافة سطر ads.txt من إعدادات بلوجر (الصيغة في docs/ADSENSE_READINESS.md).", "تسجيل الموقع في Google Search Console وإرسال sitemap.xml.", "تنظيف حسابات Utilityra القديمة في AdSense وAnalytics.", "إلغاء أي مفاتيح سرية سبق تسريبها وإنشاء بدائل."]
+      .forEach(function (x) { ul.appendChild(el("li", null, x)); });
+    c.appendChild(ul);
+  }
   function statusCard(root) {
     var c = card("نتيجة آخر فحص آلي للموقع الحي"); root.appendChild(c);
     get("reports/live-e2e.txt", false).then(function (txt) {
       var lines = txt.split("\n").filter(function (l) { return /^(OK|FAIL) /.test(l); });
       var fail = lines.filter(function (l) { return l.indexOf("FAIL") === 0; });
       c.appendChild(el("p", fail.length ? "sc-bad" : "sc-good", fail.length ? ("يوجد " + fail.length + " فحص فاشل من " + lines.length) : ("كل الفحوصات ناجحة (" + lines.length + ")")));
+      if (KP.set) KP.set("checks", "الفحص الآلي", (lines.length - fail.length) + " / " + lines.length, "");
       var t = tableOf(["الحالة", "الفحص"]);
-      lines.forEach(function (l) { row(t, [l.indexOf("OK") === 0 ? "✓ ناجح" : "✗ فاشل", l.replace(/^(OK|FAIL)\s+/, "")]); });
+      lines.forEach(function (l) { row(t, [el("span", l.indexOf("OK") === 0 ? "sc-good" : "sc-bad", l.indexOf("OK") === 0 ? "✓ ناجح" : "✗ فاشل"), l.replace(/^(OK|FAIL)\s+/, "")]); });
       c.appendChild(wrap(t));
       c.appendChild(el("p", "sc-muted", "الفحص يعمل تلقائياً كل يوم وعند أي تعديل على المحتوى."));
     }).catch(function () { c.appendChild(el("p", "sc-muted", "تعذر تحميل تقرير الفحص الآن.")); });
@@ -431,6 +446,7 @@
   function inventoryCard(root) {
     var c = card("محتوى المدونة"); root.appendChild(c);
     get("reports/blogger-inventory.json", true).then(function (d) {
+      if (KP.set) { KP.set("pages", "الصفحات", String(d.pages.length)); KP.set("posts", "المقالات", String(d.posts.length)); }
       c.appendChild(el("p", null, "الصفحات: " + d.pages.length + " — المقالات: " + d.posts.length));
       var t = tableOf(["النوع", "العنوان", "الحالة"]);
       d.pages.forEach(function (x) { row(t, ["صفحة", x.title, x.status || "منشورة"]); });
@@ -461,7 +477,7 @@
     var root = document.getElementById("sc-admin-root");
     if (!root || root.dataset.scReady) return;
     root.dataset.scReady = "1"; root.textContent = "";
-    statusCard(root); inventoryCard(root); connectionsCard(root); linksCard(root);
+    overview(root); statusCard(root); inventoryCard(root); connectionsCard(root); todoCard(root); linksCard(root);
   }
   window.__scInitAdmin = run;
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();

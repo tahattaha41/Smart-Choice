@@ -186,7 +186,13 @@
       const b2 = document.createElement("button"); b2.type = "button"; b2.className = "sc-ghost"; b2.textContent = "مسح";
       b1.addEventListener("click", () => { Object.keys(ex).forEach(id => { const el = section.querySelector("#" + id); if (el) { el.value = ex[id]; fire(el); } }); });
       b2.addEventListener("click", () => { section.querySelectorAll("input").forEach(el => { if (el.id !== "sc-split-people" && el.type !== "text") { el.value = ""; } fire(el); }); });
-      box.appendChild(b1); box.appendChild(b2);
+      const b3 = document.createElement("button"); b3.type = "button"; b3.className = "sc-ghost"; b3.textContent = "نسخ النتيجة";
+      b3.addEventListener("click", () => {
+        const r = section.querySelector(".sc-tool-result"); const txt = r ? r.innerText.replace(/\n+/g, " — ").trim() : "";
+        const done = () => { b3.textContent = "تم النسخ ✓"; setTimeout(() => { b3.textContent = "نسخ النتيجة"; }, 1800); };
+        if (navigator.clipboard && txt) navigator.clipboard.writeText(txt).then(done).catch(() => {});
+      });
+      box.appendChild(b1); box.appendChild(b2); box.appendChild(b3);
       const res = section.querySelector(".sc-tool-result"); if (res) section.insertBefore(box, res); else section.appendChild(box);
     });
     const handlers = {
@@ -555,5 +561,72 @@
     c.appendChild(inp); c.appendChild(btn); c.appendChild(msg);
   }
   window.__scInitAdmin = run;
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
+})();
+
+
+/* Smart Choice — ميزات عامة: بحث، العودة للأعلى، وتحسينات صفحات المقالات (وقت القراءة، مشاركة، مقالات ذات صلة، بيانات منظمة) */
+(function () {
+  "use strict";
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function addSearch() {
+    var inner = document.querySelector(".sc-headin");
+    if (!inner || inner.querySelector(".sc-search")) return;
+    var f = el("form", "sc-search"); f.action = "/search"; f.method = "get"; f.setAttribute("role", "search");
+    var i = el("input"); i.type = "search"; i.name = "q"; i.placeholder = "ابحث في المقالات…"; i.setAttribute("aria-label", "بحث");
+    var b = el("button", null, "بحث"); b.type = "submit";
+    f.appendChild(i); f.appendChild(b); inner.appendChild(f);
+  }
+  function addTop() {
+    if (document.querySelector(".sc-totop")) return;
+    var b = el("button", "sc-totop", "↑"); b.type = "button"; b.setAttribute("aria-label", "العودة للأعلى");
+    b.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
+    document.body.appendChild(b);
+    window.addEventListener("scroll", function () { b.classList.toggle("show", window.scrollY > 700); }, { passive: true });
+  }
+  function enhancePost(body) {
+    if (body.dataset.scEnh) return; body.dataset.scEnh = "1";
+    var titleEl = document.querySelector(".post-title, .entry-title, h1");
+    var title = titleEl ? titleEl.textContent.trim() : document.title;
+    var words = (body.innerText || "").trim().split(/\s+/).length;
+    var mins = Math.max(1, Math.round(words / 180));
+    var meta = el("p", "sc-readtime", "⏱ وقت القراءة: " + mins + (mins === 1 ? " دقيقة" : " دقائق") + " · " + words + " كلمة");
+    body.parentNode.insertBefore(meta, body);
+    var url = location.href.split("?")[0].split("#")[0];
+    var share = el("div", "sc-share"); share.appendChild(el("b", null, "شارك المقال: "));
+    [["واتساب", "https://wa.me/?text=" + encodeURIComponent(title + " " + url)], ["فيسبوك", "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url)], ["إكس", "https://twitter.com/intent/tweet?url=" + encodeURIComponent(url) + "&text=" + encodeURIComponent(title)]].forEach(function (x) {
+      var a = el("a", null, x[0]); a.href = x[1]; a.target = "_blank"; a.rel = "noopener"; share.appendChild(a);
+    });
+    var cp = el("button", null, "نسخ الرابط"); cp.type = "button";
+    cp.addEventListener("click", function () { if (navigator.clipboard) navigator.clipboard.writeText(url).then(function () { cp.textContent = "تم النسخ ✓"; }); });
+    share.appendChild(cp); body.parentNode.insertBefore(share, body.nextSibling);
+    // مقالات ذات صلة
+    fetch("/feeds/posts/default?alt=json&max-results=50", { credentials: "omit" }).then(function (r) { return r.json(); }).then(function (d) {
+      var all = ((d.feed && d.feed.entry) || []).map(function (e) {
+        var l = (e.link || []).filter(function (x) { return x.rel === "alternate"; })[0];
+        return { t: e.title.$t, u: l ? l.href : "", c: (e.category || []).map(function (c) { return c.term; }) };
+      }).filter(function (x) { return x.u && x.u.split("?")[0] !== url && !/أهلاً بك/.test(x.t); });
+      var mine = ((document.querySelector(".sc-post-labels") || {}).textContent) || "";
+      all.sort(function (a, b) { return (b.c.some(function (c) { return mine.indexOf(c) > -1; }) ? 1 : 0) - (a.c.some(function (c) { return mine.indexOf(c) > -1; }) ? 1 : 0); });
+      var rel = all.slice(0, 3); if (!rel.length) return;
+      var box = el("section", "sc-related"); box.appendChild(el("h2", null, "قد يهمّك أيضاً"));
+      var g = el("div", "sc-cards");
+      rel.forEach(function (x) { var c = el("article", "sc-card"); var h = el("h3"); var a = el("a", null, x.t); a.href = x.u; h.appendChild(a); c.appendChild(h); g.appendChild(c); });
+      box.appendChild(g); share.parentNode.insertBefore(box, share.nextSibling);
+    }).catch(function () {});
+    // بيانات منظمة Article
+    try {
+      var ld = el("script"); ld.type = "application/ld+json";
+      ld.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "Article", "headline": title, "inLanguage": "ar", "mainEntityOfPage": url, "publisher": { "@type": "Organization", "name": "Smart Choice" } });
+      document.head.appendChild(ld);
+    } catch (e) {}
+  }
+  function tryPost(n) {
+    if (!/^\/\d{4}\/\d{2}\//.test(location.pathname)) return;
+    var body = document.querySelector(".post-body, .entry-content");
+    if (body && (body.innerText || "").trim().length > 200) { enhancePost(body); return; }
+    if (n < 25) setTimeout(function () { tryPost(n + 1); }, 400);
+  }
+  function run() { addSearch(); addTop(); tryPost(0); }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
 })();

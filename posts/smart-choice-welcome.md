@@ -1,7 +1,7 @@
 ---
 title: أهلاً بك في Smart Choice
 labels: Smart Choice, ترحيب, دليل الاستخدام
-publish: true
+publish: false
 ---
 <h2>أهلاً بك في Smart Choice</h2>
 <p><strong>Smart Choice</strong> مساحة لمساعدتك على المقارنة واتخاذ قرار شراء أذكى، بناءً على السعر والجودة والمواصفات ومدى ملاءمة المنتج لاحتياجاتك.</p>

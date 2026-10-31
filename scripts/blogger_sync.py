@@ -171,6 +171,8 @@ def main():
                 result = service.posts().update(blogId=blog_id, postId=post_id, body=body).execute()
                 if post["publish"] and result.get("status") == "DRAFT":
                     result = service.posts().publish(blogId=blog_id, postId=post_id).execute()
+                elif not post["publish"] and result.get("status") == "LIVE":
+                    result = service.posts().revert(blogId=blog_id, postId=post_id).execute()
                 print("  -> استعادة/تحديث مقال موجود دون إنشاء نسخة جديدة")
             else:
                 result = service.posts().insert(blogId=blog_id, body=body, isDraft=not post["publish"]).execute()

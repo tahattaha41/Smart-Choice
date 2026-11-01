@@ -573,7 +573,7 @@
    Static markup in the theme remains as a fallback if a request fails. */
 (function () {
   "use strict";
-  var ORDER = ["الأدوات", "مقارنة", "مركز القرار", "من نحن", "سياسة المحتوى", "اتصل بنا", "سياسة الخصوصية", "الشروط", "لوحة الإدارة"];
+  var ORDER = ["الأدوات", "مقارنة", "مركز القرار", "من نحن", "سياسة المحتوى", "إعلن معنا", "اتصل بنا", "سياسة الخصوصية", "الشروط", "لوحة الإدارة"];
   function clean(title) { return String(title || "").replace(/\s*\|\s*Smart Choice\s*$/i, "").trim(); }
   function rank(title) {
     for (var i = 0; i < ORDER.length; i++) if (title.indexOf(ORDER[i]) === 0) return i;
@@ -909,7 +909,29 @@
       .forEach(function (x) { g.appendChild(a(x[1], x[0], "adm-link")); });
     c2.appendChild(g); root.appendChild(c2);
   }
-  var TABS = [["overview", "نظرة عامة", tabOverview, "grid"], ["content", "المحتوى", tabContent, "file"], ["quality", "الجودة وAdSense", tabQuality, "shieldok"], ["tech", "الفحص الفني", tabTech, "activity"], ["links", "الروابط والخدمات", tabLinks, "link"]];
+  function tabRevenue(root) {
+    var s = D.stats, pv30 = s ? Math.max(0, s.d30 - botSince(30)) : 0;
+    var e2e = D.e2e || [], adsOk = e2e.some(function (x) { return /ads\.txt/.test(x.msg) && x.lvl === "OK"; });
+    var c = panel("جاهزية الربح", "ما يعمل الآن وما ينقص");
+    c.appendChild(table(["المصدر", "الحالة", "ماذا تفعل"], [
+      ["Google AdSense (إعلانات تلقائية)", badge("الكود مثبّت", "good"), "بعد موافقة جوجل: AdSense ← الإعلانات ← حسب الموقع ← فعّل الإعلانات التلقائية."],
+      ["ملف ads.txt", badge(adsOk ? "مفعّل" : "تحقق", adsOk ? "good" : "warn"), "بلوجر ← الإعدادات ← الأرباح ← ads.txt المخصص، والصق سطر الناشر."],
+      ["وحدات إعلانية يدوية", badge("اختياري", "warn"), "أنشئ وحدة داخل المقال في AdSense وضع رقمها في assets/content/monetization.json (adSlots)."],
+      ["روابط شراكة (Affiliate)", badge("جاهز للتفعيل", "warn"), "سجّل في برنامج شراكة (أمازون مصر/السعودية، نون، جوميا…) وأضف عروضك في monetization.json ← offers."],
+      ["رعايات ومقالات مدفوعة", badge("صفحة «إعلن معنا» منشورة", "good"), "اعرضها على الشركات الصغيرة في مجالات المال والتسوق."],
+      ["دعم مباشر", badge("اختياري", "warn"), "أضف رابط تبرع/دعم في donateUrl ليظهر زر في التذييل."]
+    ])); root.appendChild(c);
+    var c2 = panel("تقدير الدخل (للتخطيط فقط)", "RPM = ربح كل 1000 مشاهدة؛ يختلف كثيراً حسب الجمهور والدولة");
+    var rows = [1, 2, 4].map(function (r) { return ["RPM " + r + "$", NF.format(Math.round(pv30 / 1000 * r * 100) / 100) + " $ شهرياً", "عند " + NF.format(pv30) + " مشاهدة/30 يوماً"]; });
+    c2.appendChild(table(["السيناريو", "الدخل التقديري", "الأساس"], rows));
+    c2.appendChild(el("p", "adm-sub", "أرقام تقديرية وليست وعداً ولا قياساً لحسابك. الدخل الفعلي يظهر في لوحة AdSense فقط."));
+    root.appendChild(c2);
+    var c3 = panel("خطة زيادة الدخل", "بالترتيب");
+    var ul = el("ul", "adm-list");
+    ["زيادة الزيارات أولاً: مقالان أسبوعياً على الأقل بعناوين من أسئلة يبحث عنها الناس، وربط كل مقال بأداة مناسبة.", "Search Console: أرسل sitemap.xml وراقب الاستعلامات، وحسّن الصفحات التي تظهر ولا يُنقر عليها.", "بعد موافقة AdSense: فعّل الإعلانات التلقائية، ثم جرّب وحدة داخل المقال ووحدة بعد نتيجة الأداة.", "الشراكات: اربط كل مقال مقارنة بمنتجات حقيقية، وأضف وسم الإفصاح (يضيفه الموقع تلقائياً).", "الرعايات: عندما تتجاوز 5,000 مشاهدة شهرياً تقريباً، تواصل مع شركات ناشئة لمقالات برعاية.", "منتج رقمي: قوالب ميزانية/تتبع مصروفات PDF أو Excel تُباع عبر منصة دفع مجانية التسجيل."].forEach(function (t) { ul.appendChild(el("li", null, t)); });
+    c3.appendChild(ul); root.appendChild(c3);
+  }
+  var TABS = [["overview", "نظرة عامة", tabOverview, "grid"], ["content", "المحتوى", tabContent, "file"], ["quality", "الجودة وAdSense", tabQuality, "shieldok"], ["tech", "الفحص الفني", tabTech, "activity"], ["revenue", "الأرباح", tabRevenue, "banknote"], ["links", "الروابط والخدمات", tabLinks, "link"]];
   function dashboard(root) {
     root.textContent = ""; root.className = "adm adm-app";
     var bar = el("div", "adm-tabs"), body = el("div", "adm-body");
@@ -1091,4 +1113,69 @@
   }
   function run() { add(); setTimeout(add, 800); setTimeout(add, 2500); }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
+})();
+
+/* Smart Choice — طبقة الربح: وحدات إعلانية يدوية (عند ضبط الأرقام)، توصيات شراكة موسومة، رابط دعم. الإعدادات في assets/content/monetization.json */
+(function () {
+  "use strict";
+  var CFG_URL = "https://raw.githubusercontent.com/tahattaha41/Smart-Choice/main/assets/content/monetization.json";
+  function el(t, c, x) { var e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; }
+  function safeUrl(u) { return /^https:\/\//i.test(u || ""); }
+  function slot(id) {
+    var w = el("div", "sc-ad"); w.appendChild(el("small", null, "إعلان"));
+    var ins = document.createElement("ins"); ins.className = "adsbygoogle"; ins.style.display = "block"; ins.setAttribute("data-ad-client", "ca-pub-1235197294708204"); ins.setAttribute("data-ad-slot", id); ins.setAttribute("data-ad-format", "auto"); ins.setAttribute("data-full-width-responsive", "true");
+    w.appendChild(ins); setTimeout(function () { try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {} }, 50); return w;
+  }
+  function offersBox(offers) {
+    var b = el("section", "sc-offers"); b.appendChild(el("h2", null, "أدوات ومصادر نوصي بها"));
+    var g = el("div", "sc-offers-grid");
+    offers.slice(0, 6).forEach(function (o) {
+      if (!o || !o.title || !safeUrl(o.url)) return;
+      var a = el("a", "sc-offer"); a.href = o.url; a.target = "_blank"; a.rel = "sponsored nofollow noopener";
+      a.appendChild(el("b", null, o.title)); if (o.desc) a.appendChild(el("small", null, o.desc)); a.appendChild(el("span", null, o.cta || "اطّلع على العرض ←")); g.appendChild(a);
+    });
+    if (!g.children.length) return null;
+    b.appendChild(g); b.appendChild(el("p", "sc-disc", "إفصاح: قد نحصل على عمولة إذا اشتريت عبر هذه الروابط دون أي تكلفة إضافية عليك، ولا تؤثر على نتائج الأدوات أو تقييماتنا."));
+    return b;
+  }
+  function apply(cfg) {
+    var slots = cfg.adSlots || {}, offers = cfg.offers || [];
+    var isPost = /^\/\d{4}\/\d{2}\//.test(location.pathname), isTools = /^\/p\/tools/.test(location.pathname);
+    function tryPlace(n) {
+      var body = document.querySelector(".post-body, .entry-content"), page = document.querySelector(".sc-tool-card.sc-tool:not([hidden])");
+      if (isPost && body && (body.innerText || "").length > 300 && !body.dataset.scMon) {
+        body.dataset.scMon = "1";
+        var ps = body.querySelectorAll(":scope > p"); if (slots.inArticle && ps.length > 4) ps[2].parentNode.insertBefore(slot(slots.inArticle), ps[2].nextSibling);
+        var ob = offers.length ? offersBox(offers) : null; if (ob) body.appendChild(ob);
+        return;
+      }
+      if (isTools && page && !document.querySelector(".sc-tool-ad-done")) {
+        var marker = el("i", "sc-tool-ad-done"); marker.hidden = true; document.body.appendChild(marker);
+        var host = page.parentNode;
+        if (slots.afterTool) host.appendChild(slot(slots.afterTool));
+        var ob2 = offers.length ? offersBox(offers) : null; if (ob2) host.appendChild(ob2);
+        return;
+      }
+      if (n < 20) setTimeout(function () { tryPlace(n + 1); }, 500);
+    }
+    tryPlace(0);
+    if (safeUrl(cfg.donateUrl)) {
+      var f = document.querySelector(".sc-footer .sc-wrap"); if (f && !f.querySelector(".sc-donate")) { var a = el("a", "sc-donate", "ادعم الموقع ♥"); a.href = cfg.donateUrl; a.target = "_blank"; a.rel = "noopener"; f.appendChild(a); }
+    }
+  }
+  function run() {
+    if (/^\/p\/(admin|privacy|terms)/.test(location.pathname)) return;
+    fetch(CFG_URL + "?t=" + Math.floor(Date.now() / 300000), { credentials: "omit" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (c) { if (c) apply(c); }).catch(function () {});
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
+})();
+
+/* Smart Choice — بيانات منظمة للأدوات (SoftwareApplication) لتحسين الظهور في البحث */
+(function () {
+  if (!/^\/p\/tools/.test(location.pathname)) return;
+  try {
+    var ld = document.createElement("script"); ld.type = "application/ld+json";
+    ld.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "WebApplication", "name": "Smart Choice — أدوات ذكية", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "inLanguage": "ar", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "url": location.origin + location.pathname });
+    document.head.appendChild(ld);
+  } catch (e) {}
 })();

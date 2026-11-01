@@ -323,3 +323,12 @@ html[data-sc-theme="dark"] body .sc-nav a[aria-current=page],html[data-sc-theme=
 html[data-sc-theme="dark"] body .sc-nav a:hover{background:#1a2a4d}
 html[data-sc-theme="dark"] .adm-stat b,html[data-sc-theme="dark"] .sc-page .kpi b,html[data-sc-theme="dark"] .sc-page .kpi strong{color:var(--sc-ink)}
 html[data-sc-theme="dark"] .adm-stat.ok b,html[data-sc-theme="dark"] .adm-stat.good b{color:#34d399}
+/* ===== الربح: إعلانات وتوصيات ===== */
+.sc-ad{margin:26px 0;text-align:center;min-height:100px}.sc-ad small{display:block;color:var(--sc-muted);font-size:12px;margin-bottom:4px}
+.sc-offers{margin:30px 0;padding:22px;border:1px solid var(--sc-line);border-radius:var(--sc-radius);background:var(--sc-card)}
+.sc-offers h2{margin:0 0 14px!important;font-size:21px}
+.sc-offers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.sc-offer{display:flex;flex-direction:column;gap:6px;padding:14px 16px;border:1px solid var(--sc-line);border-radius:14px;text-decoration:none;color:var(--sc-ink);transition:transform .2s,box-shadow .2s}
+.sc-offer:hover{transform:translateY(-3px);box-shadow:var(--sc-shadow)}.sc-offer small{color:var(--sc-muted)}.sc-offer span{color:var(--sc-blue);font-weight:700}
+.sc-disc{margin:12px 0 0;font-size:13px;color:var(--sc-muted)}
+.sc-donate{display:inline-block;margin-top:10px;padding:8px 16px;border-radius:999px;background:linear-gradient(90deg,var(--sc-blue),var(--sc-violet));color:#fff!important;font-weight:700;text-decoration:none}

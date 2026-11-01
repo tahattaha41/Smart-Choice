@@ -98,6 +98,24 @@
    "title": "Google Analytics مثبت",
    "detail": "",
    "fix": ""
+  },
+  {
+   "level": "pass",
+   "title": "ملف ads.txt",
+   "detail": "",
+   "fix": "Blogger › الإعدادات › الأرباح › ads.txt مخصص، والصق: google.com, pub-1235197294708204, DIRECT, f08c47fec0942fa0"
+  },
+  {
+   "level": "pass",
+   "title": "robots.txt متاح",
+   "detail": "",
+   "fix": ""
+  },
+  {
+   "level": "pass",
+   "title": "sitemap.xml متاح",
+   "detail": "",
+   "fix": ""
   }
  ],
  "manual": [

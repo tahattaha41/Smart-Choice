@@ -501,7 +501,7 @@
     function showTab(tab) {
       const btn=root.querySelector('[data-tab="'+tab+'"]'); if(!btn) return;
       root.querySelectorAll("[data-tab]").forEach(b => b.setAttribute("aria-selected", String(b===btn)));
-      root.querySelectorAll(".sc-tool").forEach(section => { section.hidden = section.id !== "sc-" + tab; });
+      root.querySelectorAll(".sc-tool").forEach(section => { const show = section.id === "sc-" + tab; if (show && section.hidden) { section.classList.remove("sc-swap"); void section.offsetWidth; section.classList.add("sc-swap"); } section.hidden = !show; });
     }
     root.querySelectorAll("[data-tab]").forEach(btn => btn.addEventListener("click", () => {
       const tab=btn.getAttribute("data-tab"); showTab(tab);
@@ -953,6 +953,67 @@
     if (body && (body.innerText || "").trim().length > 200) { enhancePost(body); return; }
     if (n < 25) setTimeout(function () { tryPost(n + 1); }, 400);
   }
-  function run() { addSearch(); addTop(); tryPost(0); }
+  function trimGaps() {
+    document.querySelectorAll(".sc-main").forEach(function (m) { if (!m.querySelector(".sc-home-root, article, .post, .sc-page, .post-body, .entry-content, .sc-injected") && (m.innerText || "").trim() === "") m.style.display = "none"; });
+  }
+  function run() { addSearch(); addTop(); tryPost(0); trimGaps(); setTimeout(trimGaps, 1500); setTimeout(trimGaps, 4000); }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
+})();
+
+
+/* Smart Choice — طبقة الحركة: ظهور تدريجي عند التمرير، شريط تقدم، عدّادات، ميلان البطاقات، وميض النتائج، وشريط أدوات متحرك.
+   تحترم prefers-reduced-motion، ولا تُخفي أي محتوى بشكل دائم (احتياط زمني 8 ثوانٍ). */
+(function () {
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var doc = document.documentElement;
+  function init() {
+    var bar = document.createElement("div"); bar.className = "sc-progress"; document.body.appendChild(bar);
+    function onScroll() {
+      var max = doc.scrollHeight - doc.clientHeight; bar.style.transform = "scaleX(" + (max > 0 ? Math.min(1, window.scrollY / max) : 0) + ")";
+      var head = document.querySelector(".sc-head"); if (head) head.classList.toggle("is-stuck", window.scrollY > 10);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
+    if (reduce || !("IntersectionObserver" in window)) return;
+    doc.classList.add("sc-motion");
+    var NAMES = [["tag", "حاسبة الخصم"], ["wallet", "الميزانية"], ["bank", "القرض"], ["card", "التقسيط"], ["compass", "مركز القرار"], ["scale", "سعر الوحدة"], ["chart", "هامش الربح"], ["sprout", "نمو الادخار"], ["timer", "قيمة ساعتك"], ["car", "تكلفة الرحلة"], ["heart", "كتلة الجسم"], ["moon", "هجري/ميلادي"], ["lock", "كلمات المرور"], ["bot", "المساعد الذكي"]];
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); if (e.target.matches(".sc-demo,.adm-stat")) countAll(e.target); } }); }, { threshold: 0.08, rootMargin: "0px 0px -5% 0px" });
+    var SEL = ".sc-sec,.sc-tool-tile,.sc-post-card,.sc-stepgrid>div,.sc-trust>div,.sc-page .sc-tool-card,.sc-hero2,.post-body>h2,.sc-related,.sc-share,.adm-card,.adm-stat,.sc-prose>h2";
+    function toLatin(t) { return t.replace(/[٠-٩]/g, function (d) { return "٠١٢٣٤٥٦٧٨٩".indexOf(d); }).replace(/[٬،]/g, ",").replace(/٫/g, "."); }
+    function countOne(el) {
+      if (el.dataset.scCnt) return; var raw = el.textContent.trim(); if (!/^[\d٠-٩][\d٠-٩,٬.٫]*(%)?$/.test(raw)) return; el.dataset.scCnt = "1";
+      var ar = /[٠-٩]/.test(raw), pct = /%$/.test(raw), n = parseFloat(toLatin(raw).replace(/[,%]/g, "")); if (!isFinite(n)) return;
+      var dec = (toLatin(raw).split(".")[1] || "").replace("%", "").length, t0 = null, dur = 900;
+      var f = new Intl.NumberFormat(ar ? "ar-EG" : "en-US", { maximumFractionDigits: dec, minimumFractionDigits: dec });
+      function step(ts) { if (!t0) t0 = ts; var k = Math.min(1, (ts - t0) / dur), v = n * (1 - Math.pow(1 - k, 3)); el.textContent = f.format(v) + (pct ? "%" : ""); if (k < 1) requestAnimationFrame(step); else el.textContent = raw; }
+      requestAnimationFrame(step);
+    }
+    function countAll(root) { root.querySelectorAll("b,strong").forEach(countOne); }
+    window.__scCount = countAll;
+    function scan() {
+      var i = 0;
+      document.querySelectorAll(SEL).forEach(function (el) { if (el.dataset.scR) return; el.dataset.scR = "1"; el.classList.add("sc-rv"); el.style.setProperty("--d", (Math.min(i++ % 9, 8) * 55) + "ms"); io.observe(el); });
+      document.querySelectorAll(".sc-demo").forEach(function (el) { if (!el.dataset.scR) { el.dataset.scR = "1"; io.observe(el); } });
+      var hero = document.querySelector(".sc-hero2");
+      if (hero && !document.querySelector(".sc-marquee")) {
+        var m = document.createElement("div"); m.className = "sc-marquee"; m.setAttribute("aria-hidden", "true");
+        var tr = document.createElement("div"); tr.className = "track";
+        var html = NAMES.map(function (n) { return "<span>" + window.SCI.svg(n[0], 18) + n[1] + "</span>"; }).join("");
+        tr.innerHTML = html + html; m.appendChild(tr); hero.parentNode.insertBefore(m, hero.nextSibling);
+        ["tag", "wallet", "bank"].forEach(function (n, k) { var c = document.createElement("span"); c.className = "sc-chip3 c" + (k + 1); c.innerHTML = window.SCI.svg(n, 22); var art = hero.querySelector(".sc-hero2-art"); if (art) art.appendChild(c); });
+      }
+    }
+    scan(); new MutationObserver(function () { scan(); }).observe(document.body, { childList: true, subtree: true });
+    setTimeout(function () { document.querySelectorAll(".sc-rv:not(.in)").forEach(function (e) { e.classList.add("in"); }); }, 8000);
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      document.addEventListener("pointermove", function (e) {
+        var c = e.target.closest && e.target.closest(".sc-tool-tile,.sc-post-card"); if (!c) return;
+        var r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+        c.style.setProperty("--rx", (-y * 6).toFixed(2) + "deg"); c.style.setProperty("--ry", (x * 8).toFixed(2) + "deg");
+      }, { passive: true });
+      document.addEventListener("pointerout", function (e) { var c = e.target.closest && e.target.closest(".sc-tool-tile,.sc-post-card"); if (c) { c.style.setProperty("--rx", "0deg"); c.style.setProperty("--ry", "0deg"); } });
+    }
+    new MutationObserver(function (ms) { ms.forEach(function (m) { var t = m.target.nodeType === 1 ? m.target : m.target.parentNode; var r = t && t.closest && t.closest(".sc-tool-result"); if (r && r.id !== "sc-password-result") { r.classList.remove("sc-flash"); void r.offsetWidth; r.classList.add("sc-flash"); } }); }).observe(document.body, { childList: true, subtree: true, characterData: true });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();

@@ -2,7 +2,7 @@ OK    Home loads
 OK    Home shows hero
 OK    Installed theme has the GitHub loader (if FAIL: upload theme/smart-choice-blogger.xml once)
 OK    CDN serves latest front-end JS (self-heal present)
-OK    Nav has no old-brand pages: الرئيسية الأدوات الذكية مقارنة المنتجات مركز القرار من نحن سياسة المحتوى والتحرير اتصل بنا سياسة الخصوصية لوحة الإدارة ش
+OK    Nav has no old-brand pages: الرئيسية الأدوات الذكية مقارنة المنتجات مركز القرار من نحن سياسة المحتوى والتحرير إعلن معنا اتصل بنا سياسة الخصوصية لوحة
 OK    ads.txt يحتوي معرّف الناشر
 OK    Tools page loads
 OK    Tools: tool sections rendered
@@ -15,9 +15,9 @@ OK    Contact loads
 OK    Contact: body text length 787
 OK    Contact shows email
 OK    Privacy loads
-OK    Privacy: body text length 1751
+OK    Privacy: body text length 2032
 OK    Terms loads
-OK    Terms: body text length 941
+OK    Terms: body text length 1131
 OK    Decision page loads
 OK    Decision page: body text length 579
 OK    Compare page loads

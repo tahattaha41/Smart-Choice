@@ -1,5 +1,5 @@
 {
- "score": 89,
+ "score": 84,
  "posts": 20,
  "avg_words": 708,
  "checks": [
@@ -118,9 +118,9 @@
    "fix": ""
   },
   {
-   "level": "pass",
+   "level": "fail",
    "title": "الصفحة الرئيسية تعمل (HTTPS)",
-   "detail": "",
+   "detail": "None",
    "fix": ""
   }
  ],

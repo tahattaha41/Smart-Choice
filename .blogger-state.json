@@ -1,62 +1,86 @@
 {
   "budget-50-30-20-rule.md": {
-    "hash": "98c103316a260d258b0b4e11fbeb463f6047d28c255c58ca38e8b5a5e26b86c8",
+    "hash": "80049d4f044510babdee04d7ffaef7a7817f4c2de262c621b7217db265b64e61",
     "id": "5189435229926293807"
   },
+  "emergency-fund-guide.md": {
+    "hash": "b709c2272379d9ae5bcd24b488e9aca166473a13ea1547d22038c58a64bdc6cc",
+    "id": "7711448163846881059"
+  },
   "how-to-calculate-discount.md": {
-    "hash": "a9c5de3d8b502e3ebd95ffa547bb87380e4df7297b9f5f109479a684057ecc10",
+    "hash": "ef78a0b7d11ed7b2ec33db303ecf76902944c0906c4def8d24ff4e779bb84d49",
     "id": "872243094425519867"
   },
   "how-to-compare-before-buying.md": {
-    "hash": "049b9c4785c6e6092d5442de6b2602fcdb912e2c6eb122f097622223ec4bd428",
+    "hash": "0eb319e18e47772c0ef7a95fe43b6909d92097d11ff6955b0907cff10defe541",
     "id": "8185540992280531721"
   },
   "installment-real-cost.md": {
-    "hash": "8c312f4b4fbaf1c7454ef89f10d3bfcd850e54b8704cacf3659d6115fd066a70",
+    "hash": "d0d551b6c26532bc1663183dac03a36f19f86525d4d801839cda24eb4d23780d",
     "id": "4732811459462744640"
   },
   "loan-monthly-payment-explained.md": {
-    "hash": "54404340c0950a52a0587cc07538202cd716f5d27cf409d5a30aa3a092e80262",
+    "hash": "845e0e572ecd12fac3fdfb66ffdfd3e4e621a88a716e6797da6ae2d803816bf5",
     "id": "3770937531084855076"
   },
   "margin-vs-markup-explained.md": {
-    "hash": "5062000afe0766291e31863f1aaa1f263622688d649cf765164d9ef281f45ac9",
+    "hash": "c1271d14f9bdfa78b83b9e377f15c8e90e0e4d7fead919d1c2397b8b2c931e7a",
     "id": "2837349304651225195"
   },
   "monthly-budget-practical-guide.md": {
-    "hash": "5d1d332a14b18aa8be39d2c4c70672cc5047a64d0dc48656200fce812363c471",
+    "hash": "39cd6b62b1cc19284258b516a2a59282526d29c4e023574aa9ee1c55111ef786",
     "id": "8130123378139429871"
   },
   "online-store-trust-checklist.md": {
-    "hash": "002d87208e02afdb124bf447a09515174a8657624bb7eedd0a95dd1386ab2e6b",
+    "hash": "fc1c1beccc4f47b8efc6a68f68dd0be141c4ca1930b72a35d7e79e0c0634a93c",
     "id": "5915404578915976844"
   },
+  "price-negotiation-guide.md": {
+    "hash": "3f1d8920ed1334be19450b42c11585d832f2b8846d9e4f457b2449b896bd3ca9",
+    "id": "3844151873950779198"
+  },
   "sales-and-discount-traps.md": {
-    "hash": "e2bb3e87760e13abc0642f4ac18778f9dc3592667303db9dbe3f9781dcbc842d",
+    "hash": "adca5c1cb5827e5330272622787e9131b1cbfbd44916786ccbca3c1669705d26",
     "id": "8065403004303173233"
   },
   "saving-goal-plan.md": {
-    "hash": "ada76837cc7ba02b1f65e521c23eb762d7e9f151209a2c23a60a2a22fc3bb27c",
+    "hash": "ef63ddab417df916400178b10c4a4c31eac80b01da0db0d4b794f3bee374b01e",
     "id": "2608035351549179954"
   },
+  "second-hand-vs-new-decision.md": {
+    "hash": "fc68eb218e4c684cb0b8e5c86d076eb2757993c46bd0b9e552efaad97c11ce51",
+    "id": "2715902669318843701"
+  },
+  "small-business-pricing-basics.md": {
+    "hash": "919be0338f02e4315932a64aa5bb5621df02fdbc8d048927db2c05713ce7e3cc",
+    "id": "3871546281216920355"
+  },
   "smart-choice-tools-guide.md": {
-    "hash": "a1c788616f519392efd3ce6797195dc674361134778ae52805c317730ca74f82",
+    "hash": "08007db33dd5e8e50c7d0da2001b890af8ac9722c1d56daac07e57c0083b0a5c",
     "id": "3701429245746374833"
   },
   "smart-choice-welcome.md": {
     "hash": "28028dcd02c13322fb06e834281b0b9a810d0b0266fea357faeb511250218cb1",
     "id": "6199903947814616533"
   },
+  "subscriptions-audit-guide.md": {
+    "hash": "864a762fa03a958e311335688d0e9f9d344bb3488144668a8d7cc8813a4d07cb",
+    "id": "3116601897917746846"
+  },
+  "total-cost-of-ownership-guide.md": {
+    "hash": "2f91357e68e6924ee2cd9e5516de0cc4e283f2c017468a4a4031275f1523b5f0",
+    "id": "4810307020228302864"
+  },
   "unit-price-comparison-guide.md": {
-    "hash": "88033100538d69c9759e6bc22101173d197d17486650d4f5f6bb486007d9c888",
+    "hash": "968e8c3259d16829911bf1ad7da82854009f43f7696bfc50ac82b54db8b8dfcb",
     "id": "913463412489209651"
   },
   "vat-and-discount-explained.md": {
-    "hash": "b272e13d9864fa757c519c5066fd17ac393d4c3fdcd064d73dc38918a69a4bda",
+    "hash": "87d048c2e6b98a77fb2840b09de381318ca2c766e0a06ee4fe4ca1863e9a8b65",
     "id": "5400434139166311685"
   },
   "warranty-and-return-policy-guide.md": {
-    "hash": "ac62b93841d79d5d5df80fd90708534c22d1c4b31eec6bf5434a64195ef48abb",
+    "hash": "361ee9fece62507137b4b9be384f1c817a052cbf2f479050e8d8435e893abb75",
     "id": "2135822609687395060"
   }
 }

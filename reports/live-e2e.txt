@@ -9,9 +9,9 @@ OK    Tools: discount calculator works -> السعر بعد الخصم ١٬٦٠�
 OK    Tools: decision tab opens
 OK    Tools: compare tab opens
 OK    About loads
-OK    About: body text length 436
+OK    About: body text length 1242
 OK    Contact loads
-OK    Contact: body text length 420
+OK    Contact: body text length 787
 OK    Contact shows email
 OK    Privacy loads
 OK    Privacy: body text length 1751
@@ -26,12 +26,12 @@ OK    Editorial page: body text length 955
 OK    Admin page loads
 OK    Admin page: body text length 180
 OK    Admin: password gate shown and no data exposed before login
-OK    Posts in feed: 14
-OK    Latest post body length 1366
+OK    Posts in feed: 20
+OK    Latest post body length 4367
 OK    No JS errors
 OK    Mobile: home?m=1 loads
-OK    Mobile: home content length 2502
+OK    Mobile: home content length 2530
 OK    Mobile: tools?m=1 loads
 OK    Mobile: tools rendered
-OK    Mobile: about content length 443
+OK    Mobile: about content length 1249
 failed=0

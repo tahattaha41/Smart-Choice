@@ -1340,3 +1340,14 @@
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();
+
+/* Smart Choice — أيقونة الموقع (favicon) */
+(function () {
+  try {
+    var B = "https://raw.githubusercontent.com/tahattaha41/Smart-Choice/main/assets/img/";
+    document.querySelectorAll('link[rel~="icon"],link[rel="apple-touch-icon"],link[rel="shortcut icon"]').forEach(function (l) { l.parentNode.removeChild(l); });
+    [["icon", "image/svg+xml", "favicon.svg", ""], ["icon", "image/png", "favicon-32.png", "32x32"], ["apple-touch-icon", "", "apple-touch-icon.png", "180x180"]].forEach(function (d) {
+      var l = document.createElement("link"); l.rel = d[0]; if (d[1]) l.type = d[1]; if (d[3]) l.sizes = d[3]; l.href = B + d[2]; document.head.appendChild(l);
+    });
+  } catch (e) {}
+})();

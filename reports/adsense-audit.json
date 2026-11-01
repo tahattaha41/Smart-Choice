@@ -1,5 +1,5 @@
 {
- "score": 84,
+ "score": 95,
  "posts": 20,
  "avg_words": 708,
  "checks": [
@@ -106,9 +106,9 @@
    "fix": "Blogger › الإعدادات › الأرباح › ads.txt مخصص، والصق: google.com, pub-1235197294708204, DIRECT, f08c47fec0942fa0"
   },
   {
-   "level": "warn",
+   "level": "pass",
    "title": "robots.txt متاح",
-   "detail": "None",
+   "detail": "",
    "fix": ""
   },
   {
@@ -118,9 +118,9 @@
    "fix": ""
   },
   {
-   "level": "fail",
+   "level": "pass",
    "title": "الصفحة الرئيسية تعمل (HTTPS)",
-   "detail": "None",
+   "detail": "",
    "fix": ""
   }
  ],

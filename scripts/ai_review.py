@@ -54,6 +54,8 @@ try:
                 errs.append("%s -> HTTP %s: %s" % (url.split("/")[2], status, raw[:120].replace("\n", " ")))
         except urllib.error.HTTPError as e:
             errs.append("%s -> HTTP %s %s" % (url.split("/")[2], e.code, e.read().decode("utf-8", "ignore")[:120].replace("\n", " ")))
+        except Exception as e:
+            errs.append("%s -> %s" % (url.split("/")[2], type(e).__name__))
     if text is None:
         raise RuntimeError(" | ".join(errs))
     OUT.write_text(f"# مراجعة الذكاء الاصطناعي ({now})\n\n> توصيات استشارية تُراجع يدوياً ولا تُطبَّق تلقائياً.\n\n{text}\n", encoding="utf-8")

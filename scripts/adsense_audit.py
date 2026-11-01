@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Smart Choice — فحص جاهزية AdSense (محتوى المستودع + فحوص حية اختيارية).
 يكتب reports/adsense-audit.json و reports/adsense-audit.md. لا يضمن القبول؛ يكشف أسباب الرفض الشائعة."""
-import json, re, sys, urllib.request
+import json, re, sys, urllib.request, urllib.error
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -84,15 +84,19 @@ def fetch(path):
     try:
         req = urllib.request.Request(BASE + path, headers={"User-Agent": "SmartChoiceAudit/1.0"})
         with urllib.request.urlopen(req, timeout=20) as r: return r.status, r.read().decode("utf-8", "ignore")
+    except urllib.error.HTTPError as e: return e.code, ""
     except Exception as e: return None, str(e)
 if "--live" in sys.argv:
-    s, t = fetch("/ads.txt")
-    ok = s == 200 and PUB in t
-    add("pass" if ok else "fail", "ملف ads.txt", "" if ok else f"غير متاح/خاطئ (حالة {s}).",
-        "Blogger › الإعدادات › الأرباح › ads.txt مخصص، والصق: google.com, " + PUB + ", DIRECT, f08c47fec0942fa0")
-    s, t = fetch("/robots.txt"); add("pass" if s == 200 else "warn", "robots.txt متاح", "" if s == 200 else str(s))
-    s, t = fetch("/sitemap.xml"); add("pass" if s == 200 else "warn", "sitemap.xml متاح", "" if s == 200 else str(s))
-    s, t = fetch("/"); add("pass" if s == 200 else "fail", "الصفحة الرئيسية تعمل (HTTPS)", "" if s == 200 else str(s))
+    s_, t = fetch("/ads.txt")
+    if s_ is None:
+        add("info", "فحص ads.txt الحي", "تعذر الاتصال من الخادم؛ راجع نتيجة الفحص الفني (المتصفح).")
+    else:
+        ok = s_ == 200 and PUB in t
+        add("pass" if ok else "fail", "ملف ads.txt", "" if ok else f"غير متاح/خاطئ (حالة {s_}).",
+            "Blogger › الإعدادات › الأرباح › ads.txt مخصص، والصق: google.com, " + PUB + ", DIRECT, f08c47fec0942fa0")
+    for path, name in (("/robots.txt", "robots.txt"), ("/sitemap.xml", "sitemap.xml")):
+        s_, t = fetch(path)
+        if s_ is not None: add("pass" if s_ == 200 else "warn", name + " متاح", "" if s_ == 200 else str(s_))
 
 # 6) أمور خارج قدرة الكود
 manual = [

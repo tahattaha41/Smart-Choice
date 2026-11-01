@@ -25,6 +25,8 @@ await page.waitForTimeout(2500);
 const nav = (await page.locator('.sc-nav').innerText()).replace(/\s+/g, ' ');
 rec(!/utilityra|flarivo|toolora/i.test(nav), 'Nav has no old-brand pages: ' + nav.slice(0, 120));
 
+// ads.txt (تحذير فقط: إجراء على المالك في إعدادات بلوجر)
+try { const ar = await page.request.get(BASE + '/ads.txt'); const at = ar.ok() ? await ar.text() : ''; out.push((at.includes('pub-1235197294708204') ? 'OK    ' : 'WARN  ') + 'ads.txt ' + (at.includes('pub-1235197294708204') ? 'يحتوي معرّف الناشر' : 'غير مفعّل بعد في إعدادات بلوجر')); } catch { out.push('WARN  ads.txt تعذر الفحص'); }
 // الصفحات من الخلاصة
 const feed = await page.evaluate(async () => (await (await fetch('/feeds/pages/default?alt=json&max-results=50')).json()).feed.entry.map((e) => ({ t: e.title.$t, u: e.link.find((l) => l.rel === 'alternate').href })));
 const find = (s) => feed.find((p) => p.t.includes(s))?.u;

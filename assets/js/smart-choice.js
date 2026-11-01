@@ -227,6 +227,72 @@
     root.querySelectorAll("[data-q]").forEach(b=>b.addEventListener("click",()=>{const a=$("sc-ask"); if(a){a.value=b.getAttribute("data-q"); assistant();}}));
     const askGo=$("sc-ask-go"); if(askGo) askGo.addEventListener("click",assistant);
     const askBox=$("sc-ask"); if(askBox) askBox.addEventListener("keydown",e=>{ if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();assistant();} });
+    function bmi() {
+      const w=value("sc-bmi-w"), h=value("sc-bmi-h"), out=$("sc-bmi-result"); if(!out)return;
+      if(![w,h].every(Number.isFinite)||w<=0||h<=0||h<50||h>250||w>500){out.textContent="أدخل وزناً (كجم) وطولاً (50–250 سم) صحيحين.";return;}
+      const v=w/Math.pow(h/100,2); const cat=v<18.5?"نحافة":(v<25?"وزن طبيعي":(v<30?"زيادة وزن":"سمنة"));
+      const lo=18.5*Math.pow(h/100,2), hi=24.9*Math.pow(h/100,2);
+      out.textContent="مؤشر كتلة الجسم: "+fmt(v)+" — التصنيف: "+cat+" — الوزن الطبيعي لطولك: "+fmt(lo)+" إلى "+fmt(hi)+" كجم";
+    }
+    function age() {
+      const bEl=$("sc-age-birth"), tEl=$("sc-age-to"), out=$("sc-age-result"); if(!out||!bEl)return;
+      if(!bEl.value){out.textContent="أدخل تاريخ الميلاد.";return;}
+      const b=new Date(bEl.value+"T00:00:00"), now=new Date(); const t=tEl&&tEl.value?new Date(tEl.value+"T00:00:00"):new Date(now.getFullYear(),now.getMonth(),now.getDate());
+      if(isNaN(b)||t<b){out.textContent="تاريخ الميلاد يجب أن يسبق التاريخ المقارن.";return;}
+      let y=t.getFullYear()-b.getFullYear(), m=t.getMonth()-b.getMonth(), d=t.getDate()-b.getDate();
+      if(d<0){m--; d+=new Date(t.getFullYear(),t.getMonth(),0).getDate();} if(m<0){y--; m+=12;}
+      const days=Math.floor((t-b)/86400000); let next=new Date(t.getFullYear(),b.getMonth(),b.getDate()); if(next<t) next=new Date(t.getFullYear()+1,b.getMonth(),b.getDate());
+      out.textContent="العمر: "+y+" سنة و"+m+" شهراً و"+d+" يوماً — إجمالي الأيام: "+fmt(days)+" — يوم على عيد ميلادك القادم: "+fmt(Math.round((next-t)/86400000));
+    }
+    function zakat() {
+      const g=(id)=>Number.isFinite(value(id))?value(id):0, nis=value("sc-z-nisab"), out=$("sc-zakat-result"); if(!out)return;
+      if(!Number.isFinite(nis)||nis<=0){out.textContent="أدخل قيمة النصاب الحالية (أكبر من صفر).";return;}
+      const gross=g("sc-z-cash")+g("sc-z-gold")+g("sc-z-trade"), debt=g("sc-z-debt"), net=Math.max(0,gross-debt);
+      if(net<nis){out.textContent="صافي المال: "+fmt(net)+" — لم يبلغ النصاب ("+fmt(nis)+") — الزكاة المقدّرة: 0";return;}
+      out.textContent="صافي المال: "+fmt(net)+" — بلغ النصاب — الزكاة المقدّرة (2.5%): "+fmt(net*0.025);
+    }
+    function grade() {
+      const c=value("sc-g-cur"), w=value("sc-g-weight"), tg=value("sc-g-target"), out=$("sc-grade-result"); if(!out)return;
+      if(![c,w,tg].every(Number.isFinite)||c<0||c>100||w<=0||w>100||tg<0||tg>100){out.textContent="أدخل نسباً بين 0 و100 (وزن الاختبار أكبر من صفر).";return;}
+      const need=(tg-c*(1-w/100))/(w/100);
+      out.textContent=need>100?"الدرجة المطلوبة في النهائي: "+fmt(need)+"% — أعلى من 100%، لا يمكن بلوغ الهدف":(need<=0?"الدرجة المطلوبة في النهائي: 0% — هدفك محقق مسبقاً":"الدرجة المطلوبة في النهائي: "+fmt(need)+"%");
+    }
+    const HJ=(d)=>{ const p=new Intl.DateTimeFormat("en-u-ca-islamic-umalqura-nu-latn",{day:"numeric",month:"numeric",year:"numeric"}).formatToParts(d); const o={}; p.forEach(x=>{o[x.type]=parseInt(x.value,10);}); return o; };
+    const HM=["محرم","صفر","ربيع الأول","ربيع الآخر","جمادى الأولى","جمادى الآخرة","رجب","شعبان","رمضان","شوال","ذو القعدة","ذو الحجة"];
+    function hijri(ev) {
+      const out=$("sc-hijri-result"), gEl=$("sc-h-greg"), yEl=$("sc-h-y"), mEl=$("sc-h-m"), dEl=$("sc-h-d"); if(!out||!gEl)return;
+      try {
+        const src=ev&&ev.target?ev.target.id:"sc-h-greg";
+        if(src==="sc-h-greg"&&gEl.value){ const d=new Date(gEl.value+"T12:00:00"); const h=HJ(d); out.textContent="التاريخ الهجري: "+h.day+" "+HM[h.month-1]+" "+h.year+"هـ"; return; }
+        const y=value("sc-h-y"), m=value("sc-h-m"), dd=value("sc-h-d");
+        if([y,m,dd].every(Number.isFinite)){
+          const est=new Date(Date.UTC(622,6,16)+(y-1)*354.367*86400000+(m-1)*29.53*86400000+(dd-1)*86400000);
+          for(let k=-45;k<=45;k++){ const c=new Date(est.getTime()+k*86400000+43200000); const h=HJ(c); if(h.year===y&&h.month===m&&h.day===dd){ out.textContent="التاريخ الميلادي: "+new Intl.DateTimeFormat("ar-EG",{day:"numeric",month:"long",year:"numeric",calendar:"gregory"}).format(c); return; } }
+          out.textContent="تاريخ هجري غير صالح (تحقق من اليوم والشهر)."; return;
+        }
+        if(gEl.value){ const h=HJ(new Date(gEl.value+"T12:00:00")); out.textContent="التاريخ الهجري: "+h.day+" "+HM[h.month-1]+" "+h.year+"هـ"; } else out.textContent="اختر تاريخاً ميلادياً أو أدخل تاريخاً هجرياً كاملاً.";
+      } catch(e){ out.textContent="متصفحك لا يدعم التقويم الهجري."; }
+    }
+    function wordcount() {
+      const el=$("sc-wc-text"), out=$("sc-wordcount-result"); if(!el||!out)return; const t=el.value;
+      if(!t.trim()){out.textContent="ابدأ بالكتابة.";return;}
+      const words=(t.match(/[\p{L}\p{N}]+(?:['’\-][\p{L}\p{N}]+)*/gu)||[]).length, chars=t.length, nos=t.replace(/\s/g,"").length, sent=(t.match(/[^.!؟?\n]+[.!؟?]+|[^.!؟?\n]+$/g)||[]).filter(x=>x.trim()).length;
+      const mins=Math.max(1,Math.round(words/180));
+      out.textContent="الكلمات: "+fmt(words)+" — الحروف: "+fmt(chars)+" — بدون مسافات: "+fmt(nos)+" — الجمل: "+fmt(sent)+" — وقت القراءة: "+mins+" دقيقة";
+    }
+    function genPassword() {
+      const out=$("sc-password-result"), st=$("sc-pw-strength"); if(!out)return;
+      let n=Math.round(value("sc-pw-len")); if(!Number.isFinite(n)) n=16; n=Math.min(64,Math.max(8,n));
+      const sets=[["sc-pw-up","ABCDEFGHJKLMNPQRSTUVWXYZ"],["sc-pw-lo","abcdefghijkmnpqrstuvwxyz"],["sc-pw-di","23456789"],["sc-pw-sy","!@#$%^&*-_=+?"]].filter(x=>$(x[0])&&$(x[0]).checked);
+      if(!sets.length){out.textContent="اختر نوعاً واحداً على الأقل من المحارف.";return;}
+      const pool=sets.map(x=>x[1]).join(""); const rnd=(max)=>{ const a=new Uint32Array(1), lim=Math.floor(4294967296/max)*max; do{ crypto.getRandomValues(a); }while(a[0]>=lim); return a[0]%max; };
+      const chars=sets.map(x=>x[1][rnd(x[1].length)]); while(chars.length<n) chars.push(pool[rnd(pool.length)]);
+      for(let i=chars.length-1;i>0;i--){ const j=rnd(i+1); [chars[i],chars[j]]=[chars[j],chars[i]]; }
+      out.textContent=chars.join("");
+      const bits=Math.round(n*Math.log2(pool.length)); if(st) st.textContent="القوة التقديرية: "+bits+" بت — "+(bits<60?"ضعيفة":(bits<80?"متوسطة":(bits<110?"قوية":"قوية جداً")));
+    }
+    const pwGo=$("sc-pw-go"); if(pwGo) pwGo.addEventListener("click",genPassword);
+    const pwCopy=$("sc-pw-copy"); if(pwCopy) pwCopy.addEventListener("click",()=>{ const r=$("sc-password-result"); if(r&&navigator.clipboard&&r.textContent.length>=8) navigator.clipboard.writeText(r.textContent).then(()=>{pwCopy.textContent="تم النسخ ✓";setTimeout(()=>{pwCopy.textContent="نسخ";},1500);}); });
     function decorate(out) {
       if (out.dataset.static || out.children.length) return;
       const text = out.textContent.trim(); if (!text) return;
@@ -253,7 +319,9 @@
       "sc-loan": {"sc-loan-amount":100000,"sc-loan-rate":12,"sc-loan-months":24}, "sc-margin": {"sc-margin-cost":80,"sc-margin-price":100},
       "sc-split": {"sc-split-total":900,"sc-split-tip":10,"sc-split-people":3},
       "sc-compound": {"sc-cp-start":10000,"sc-cp-add":1000,"sc-cp-rate":8,"sc-cp-years":5}, "sc-breakeven": {"sc-be-fixed":6000,"sc-be-price":100,"sc-be-var":40},
-      "sc-hourly": {"sc-hr-income":9000,"sc-hr-hours":8,"sc-hr-days":5,"sc-hr-price":3000}, "sc-trip": {"sc-trip-km":250,"sc-trip-cons":8,"sc-trip-price":10,"sc-trip-people":3}, "sc-fx": {"sc-fx-amount":500,"sc-fx-rate":48,"sc-fx-fee":1.5}
+      "sc-hourly": {"sc-hr-income":9000,"sc-hr-hours":8,"sc-hr-days":5,"sc-hr-price":3000}, "sc-trip": {"sc-trip-km":250,"sc-trip-cons":8,"sc-trip-price":10,"sc-trip-people":3}, "sc-fx": {"sc-fx-amount":500,"sc-fx-rate":48,"sc-fx-fee":1.5},
+      "sc-bmi": {"sc-bmi-w":78,"sc-bmi-h":175}, "sc-age": {"sc-age-birth":"1995-06-15"}, "sc-zakat": {"sc-z-cash":120000,"sc-z-gold":30000,"sc-z-trade":0,"sc-z-debt":10000,"sc-z-nisab":85000},
+      "sc-grade": {"sc-g-cur":78,"sc-g-weight":40,"sc-g-target":85}, "sc-hijri": {"sc-h-greg":"2026-03-20"}, "sc-wordcount": {"sc-wc-text":"اكتب نصك هنا. هذا مثال بسيط لعدّ الكلمات والحروف والجمل في النص."}, "sc-password": {"sc-pw-len":16}
     };
     function fire(el) { el.dispatchEvent(new Event("input", { bubbles: true })); el.dispatchEvent(new Event("change", { bubbles: true })); }
     root.querySelectorAll(".sc-tool").forEach(section => {
@@ -291,11 +359,15 @@
       "sc-hr-income": hourly, "sc-hr-hours": hourly, "sc-hr-days": hourly, "sc-hr-price": hourly,
       "sc-trip-km": trip, "sc-trip-cons": trip, "sc-trip-price": trip, "sc-trip-people": trip, "sc-trip-way": trip,
       "sc-fx-amount": fx, "sc-fx-rate": fx, "sc-fx-fee": fx,
+      "sc-bmi-w": bmi, "sc-bmi-h": bmi, "sc-age-birth": age, "sc-age-to": age,
+      "sc-z-cash": zakat, "sc-z-gold": zakat, "sc-z-trade": zakat, "sc-z-debt": zakat, "sc-z-nisab": zakat,
+      "sc-g-cur": grade, "sc-g-weight": grade, "sc-g-target": grade,
+      "sc-h-greg": hijri, "sc-h-y": hijri, "sc-h-m": hijri, "sc-h-d": hijri, "sc-wc-text": wordcount,
       "sc-c-p1": compare, "sc-c-e1": compare, "sc-c-l1": compare, "sc-c-w1": compare, "sc-c-p2": compare, "sc-c-e2": compare, "sc-c-l2": compare, "sc-c-w2": compare
     };
     Object.keys(handlers).forEach(id => {
       const el=$(id);
-      if (el) el.addEventListener("input", () => { handlers[id](); decorateAll(); });
+      if (el) el.addEventListener("input", (ev) => { handlers[id](ev); decorateAll(); });
     });
     root.querySelectorAll(".sc-tool").forEach(section => {
       const ex = EXAMPLES[section.id]; if (!ex) return;
@@ -309,6 +381,31 @@
     const decideBox=$("sc-decide"); if(decideBox) decideBox.addEventListener("input", decide);
     const convertType=$("sc-convert-type");
     if(convertType) convertType.addEventListener("change", () => { convert(); decorateAll(); });
+    /* تصنيفات وبحث الأدوات */
+    const CATS = [["all","الكل"],["shop","🛒 تسوق"],["money","💰 مال"],["biz","📊 أعمال"],["life","🧭 حياة وصحة"],["text","🔤 نصوص وأمان"]];
+    const TAB_CAT = {discount:"shop",unit:"shop",vat:"shop",compare:"shop",decide:"shop",total:"shop",installment:"shop",split:"shop",budget:"money",loan:"money",saving:"money",compound:"money",percent:"money",fx:"money",hourly:"money",margin:"biz",breakeven:"biz",bmi:"life",age:"life",zakat:"life",hijri:"life",trip:"life",dates:"life",convert:"life",grade:"life",wordcount:"text",password:"text"};
+    const tabNav = root.querySelector(".sc-tabs");
+    if (tabNav && root.querySelectorAll("[data-tab]").length > 12 && !root.querySelector(".sc-filter")) {
+      const bar = document.createElement("div"); bar.className = "sc-filter";
+      const q = document.createElement("input"); q.type = "search"; q.placeholder = "ابحث عن أداة…"; q.setAttribute("aria-label", "ابحث عن أداة");
+      const chips = document.createElement("div"); chips.className = "sc-chips";
+      let curCat = "all";
+      const apply = () => { const term = q.value.trim();
+        root.querySelectorAll("[data-tab]").forEach(b => { const tab = b.getAttribute("data-tab"); const okCat = curCat === "all" || tab === "assistant" || TAB_CAT[tab] === curCat; const okQ = !term || b.textContent.indexOf(term) > -1; b.style.display = okCat && okQ ? "" : "none"; }); };
+      CATS.forEach(([id, label]) => { const c = document.createElement("button"); c.type = "button"; c.textContent = label; c.setAttribute("aria-pressed", String(id === "all")); c.addEventListener("click", () => { curCat = id; chips.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x === c))); apply(); }); chips.appendChild(c); });
+      q.addEventListener("input", apply); bar.appendChild(chips); bar.appendChild(q); tabNav.parentNode.insertBefore(bar, tabNav);
+    }
+    /* مقالات مرتبطة بكل أداة */
+    const REL = {discount:["الخصم"],vat:["ضريبة"],unit:["سعر الوحدة"],budget:["ميزانية"],saving:["ادخار","طوارئ"],loan:["القرض"],installment:["التقسيط"],margin:["هامش","تسعير"],breakeven:["تسعير","التعادل"],compare:["تقارن"],decide:["تقارن","الكلية"],total:["الكلية","مستعمل"],compound:["ادخار","طوارئ"],hourly:["اشتراكات","ميزانية"],split:["ميزانية"],trip:["الكلية"],fx:["ميزانية"]};
+    if (typeof fetch === "function" && /\/p\//.test(location.pathname)) {
+      fetch("/feeds/posts/default?alt=json&max-results=60", { credentials: "omit" }).then(r => r.json()).then(d => {
+        const posts = ((d.feed && d.feed.entry) || []).map(e => { const l = (e.link || []).filter(x => x.rel === "alternate")[0]; return { t: e.title.$t, u: l ? l.href : "" }; }).filter(x => x.u);
+        root.querySelectorAll(".sc-tool").forEach(sec => { const key = sec.id.replace("sc-", ""); const kws = REL[key]; if (!kws || sec.querySelector(".sc-readmore")) return;
+          const m = posts.filter(p => kws.some(k => p.t.indexOf(k) > -1)).slice(0, 2); if (!m.length) return;
+          const box = document.createElement("div"); box.className = "sc-readmore"; const b = document.createElement("b"); b.textContent = "اقرأ أيضاً: "; box.appendChild(b);
+          m.forEach((p, i) => { const a = document.createElement("a"); a.href = p.u; a.textContent = p.t; box.appendChild(a); if (i < m.length - 1) box.appendChild(document.createTextNode(" · ")); }); sec.appendChild(box); });
+      }).catch(() => {});
+    }
     function showTab(tab) {
       const btn=root.querySelector('[data-tab="'+tab+'"]'); if(!btn) return;
       root.querySelectorAll("[data-tab]").forEach(b => b.setAttribute("aria-selected", String(b===btn)));
@@ -318,7 +415,7 @@
       const tab=btn.getAttribute("data-tab"); showTab(tab);
       try { history.replaceState(null, "", "#" + tab); } catch (e) {}
     }));
-    discount(); budget(); unit(); percent(); saving(); total(); installment(); convert(); dates(); vat(); compare(); decide(); loan(); margin(); split(); compound(); breakeven(); hourly(); trip(); fx(); decorateAll();
+    discount(); budget(); unit(); percent(); saving(); total(); installment(); convert(); dates(); vat(); compare(); decide(); loan(); margin(); split(); compound(); breakeven(); hourly(); trip(); fx(); bmi(); age(); zakat(); grade(); wordcount(); genPassword(); decorateAll();
     const fromHash=(location.hash||"").replace("#",""); if(fromHash) showTab(fromHash);
   }
   function start() {
@@ -497,7 +594,7 @@
         "<div class='sc-hero2-art' aria-hidden='true'><div class='sc-demo'><small>مثال توضيحي (أرقام افتراضية)</small><div class='row'><span>السعر الأصلي</span><b>2,000</b></div><div class='row'><span>الخصم</span><b>20%</b></div><div class='bar'><i></i></div><div class='row big'><span>تدفع</span><b>1,600</b></div><div class='row save'><span>توفير</span><b>400</b></div></div><span class='orb o1'></span><span class='orb o2'></span></div></section>" +
         "<section class='sc-sec'><h2 class='sc-h2'>أدواتنا الأكثر استخداماً</h2><p class='sc-sub'>اختر الأداة، جرّب مثالاً جاهزاً أو أدخل أرقامك.</p><div class='sc-toolgrid'>" +
         TOOLS.map(function (t) { return "<a class='sc-tool-tile' href='" + tools + "#" + t[3] + "'><span class='ico'>" + t[0] + "</span><b>" + esc(t[1]) + "</b><small>" + esc(t[2]) + "</small></a>"; }).join("") +
-        "</div><p class='sc-more'><a href='" + tools + "'>عرض كل الأدوات (21 أداة) ←</a></p></section>" +
+        "</div><p class='sc-more'><a href='" + tools + "'>عرض كل الأدوات (28 أداة) ←</a></p></section>" +
         "<section class='sc-sec sc-steps'><h2 class='sc-h2'>كيف تستفيد؟</h2><div class='sc-stepgrid'>" +
         "<div><span>1</span><b>أدخل أرقامك</b><small>السعر، الخصم، الضمان، الدخل… ما تعرفه أنت.</small></div>" +
         "<div><span>2</span><b>شاهد النتيجة فوراً</b><small>تُحسب داخل متصفحك بمعادلات معروفة.</small></div>" +
@@ -512,105 +609,34 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
 })();
 
-/* Smart Choice — admin status board (read-only). Shows only public, non-secret information:
-   the latest automated live-site test, the Blogger inventory report, configured tracking IDs and quick links.
-   It never shows invented analytics or earnings numbers. */
+/* Smart Choice — لوحة الإدارة (للمالك). تعرض بيانات عامة غير سرية فقط: زيارات Blogger الحقيقية، الفحص الفني، جاهزية AdSense،
+   المحتوى وروابط الإدارة. لا تعرض أرقاماً تجريبية أو أرباحاً (تحتاج ربطاً بحساب AdSense من خادم). */
 (function () {
   "use strict";
   var RAW = "https://raw.githubusercontent.com/tahattaha41/Smart-Choice/main/";
   var REPO = "https://github.com/tahattaha41/Smart-Choice";
+  var SALT = "smart-choice-admin-v1", HASH = "c8601e15655da80fa3388e066a0c6aa4b63d6cc287d3183b454efa82e9be1d5c", ITER = 150000;
+  var NF = new Intl.NumberFormat("ar-EG");
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
-  function card(title) { var c = el("section", "sc-tool-card"); c.appendChild(el("h2", null, title)); return c; }
-  function a(href, text) { var x = el("a", null, text); x.href = href; x.target = "_blank"; x.rel = "noopener"; return x; }
+  function a(href, text, cls) { var x = el("a", cls || null, text); x.href = href; x.target = "_blank"; x.rel = "noopener"; return x; }
   function get(path, json) {
     return fetch(RAW + path + "?t=" + Math.floor(Date.now() / 300000), { credentials: "omit" })
       .then(function (r) { if (!r.ok) throw new Error(r.status); return json ? r.json() : r.text(); });
   }
-  function row(table, cells) { var tr = el("tr"); cells.forEach(function (c) { var td = el("td"); if (c && c.nodeType) td.appendChild(c); else td.textContent = c; tr.appendChild(td); }); table.appendChild(tr); }
-  function tableOf(head) { var t = el("table", "sc-admin-table"); var h = el("tr"); head.forEach(function (x) { h.appendChild(el("th", null, x)); }); t.appendChild(h); return t; }
-  function wrap(t) { var d = el("div", "sc-tbl"); d.appendChild(t); return d; }
+  function feed(kind) {
+    return fetch("/feeds/" + kind + "/default?alt=json&max-results=150", { credentials: "omit" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (j) { return ((j.feed && j.feed.entry) || []).map(function (e) { var l = (e.link || []).filter(function (x) { return x.rel === "alternate"; })[0]; return { title: e.title.$t, url: l ? l.href : "", date: (e.published && e.published.$t || "").slice(0, 10), labels: (e.category || []).map(function (c) { return c.term; }) }; }); });
+  }
+  function panel(title, sub) { var c = el("section", "adm-card"); if (title) { var h = el("div", "adm-h"); h.appendChild(el("h2", null, title)); if (sub) h.appendChild(el("span", "adm-sub", sub)); c.appendChild(h); } return c; }
+  function stat(label, value, hint, tone) { var k = el("div", "adm-stat" + (tone ? " " + tone : "")); k.appendChild(el("span", "adm-lbl", label)); k.appendChild(el("b", null, value)); if (hint) k.appendChild(el("small", null, hint)); return k; }
+  function badge(text, tone) { return el("span", "adm-badge " + (tone || ""), text); }
+  function table(head, rows) {
+    var t = el("table", "adm-table"), h = el("tr"); head.forEach(function (x) { h.appendChild(el("th", null, x)); }); t.appendChild(h);
+    rows.forEach(function (r) { var tr = el("tr"); r.forEach(function (c) { var td = el("td"); if (c && c.nodeType) td.appendChild(c); else td.textContent = c; tr.appendChild(td); }); t.appendChild(tr); });
+    var w = el("div", "adm-tbl"); w.appendChild(t); return w;
+  }
 
-  var KP = {};
-  function kpi(label, value, cls) { var k = el("div", "kpi" + (cls ? " " + cls : "")); k.appendChild(el("span", null, label)); k.appendChild(el("b", null, value)); return k; }
-  function auditCard(root) {
-    var c = card("جاهزية AdSense (فحص آلي)"); root.appendChild(c);
-    get("reports/adsense-audit.json", true).then(function (d) {
-      if (KP.set) KP.set("adsense", "جاهزية AdSense", d.score + "%", d.score < 80 ? "" : "");
-      c.appendChild(el("p", d.score >= 85 ? "sc-good" : "sc-bad", "النتيجة: " + d.score + "% — مقالات: " + d.posts + " — متوسط الكلمات: " + d.avg_words));
-      var t = tableOf(["الحالة", "الفحص", "التفاصيل / الحل"]);
-      d.checks.filter(function (x) { return x.level !== "info"; }).forEach(function (x) {
-        row(t, [el("span", x.level === "pass" ? "sc-good" : "sc-bad", x.level === "pass" ? "✓" : (x.level === "warn" ? "⚠" : "✗")), x.title, (x.detail || "") + (x.level !== "pass" && x.fix ? " — الحل: " + x.fix : "")]);
-      });
-      c.appendChild(wrap(t));
-      c.appendChild(el("p", "sc-muted", "الفحص لا يضمن القبول؛ القرار النهائي لجوجل. أمور يدوية: " + d.manual.join(" ")));
-    }).catch(function () { c.appendChild(el("p", "sc-muted", "لم يُنشأ تقرير الفحص بعد؛ يعمل تلقائياً عند أي تعديل وأسبوعياً.")); });
-  }
-  function aiCard(root) {
-    var c = card("مراجعة الذكاء الاصطناعي"); root.appendChild(c);
-    get("reports/ai-review.md", false).then(function (txt) {
-      var pre = el("div", "sc-ai-text", txt.trim()); c.appendChild(pre);
-    }).catch(function () { c.appendChild(el("p", "sc-muted", "لا توجد مراجعة بعد؛ تعمل تلقائياً أسبوعياً وعند تعديل المحتوى.")); });
-  }
-  function overview(root) {
-    var c = el("section", "sc-tool-card"); c.appendChild(el("h2", null, "نظرة عامة")); var g = el("div", "sc-kpis"); c.appendChild(g); root.appendChild(c);
-    KP.set = function (id, label, value, cls) { var old = g.querySelector("[data-k='" + id + "']"); var k = kpi(label, value, cls); k.setAttribute("data-k", id); if (old) g.replaceChild(k, old); else g.appendChild(k); };
-    KP.set("checks", "الفحص الآلي", "جارٍ التحميل…"); KP.set("pages", "الصفحات", "…"); KP.set("posts", "المقالات", "…");
-  }
-  function todoCard(root) {
-    var c = card("خطوات يقوم بها المالك (لا يمكن أتمتتها)"); root.appendChild(c);
-    var ul = el("ul");
-    ["طلب مراجعة الموقع في Google AdSense بعد اكتمال المحتوى.", "إضافة سطر ads.txt من إعدادات بلوجر (الصيغة في docs/ADSENSE_READINESS.md).", "تسجيل الموقع في Google Search Console وإرسال sitemap.xml.", "تنظيف حسابات Utilityra القديمة في AdSense وAnalytics.", "إلغاء أي مفاتيح سرية سبق تسريبها وإنشاء بدائل."]
-      .forEach(function (x) { ul.appendChild(el("li", null, x)); });
-    c.appendChild(ul);
-  }
-  function statusCard(root) {
-    var c = card("نتيجة آخر فحص آلي للموقع الحي"); root.appendChild(c);
-    get("reports/live-e2e.txt", false).then(function (txt) {
-      var lines = txt.split("\n").filter(function (l) { return /^(OK|FAIL) /.test(l); });
-      var fail = lines.filter(function (l) { return l.indexOf("FAIL") === 0; });
-      c.appendChild(el("p", fail.length ? "sc-bad" : "sc-good", fail.length ? ("يوجد " + fail.length + " فحص فاشل من " + lines.length) : ("كل الفحوصات ناجحة (" + lines.length + ")")));
-      if (KP.set) KP.set("checks", "الفحص الآلي", (lines.length - fail.length) + " / " + lines.length, "");
-      var t = tableOf(["الحالة", "الفحص"]);
-      lines.forEach(function (l) { row(t, [el("span", l.indexOf("OK") === 0 ? "sc-good" : "sc-bad", l.indexOf("OK") === 0 ? "✓ ناجح" : "✗ فاشل"), l.replace(/^(OK|FAIL)\s+/, "")]); });
-      c.appendChild(wrap(t));
-      c.appendChild(el("p", "sc-muted", "الفحص يعمل تلقائياً كل يوم وعند أي تعديل على المحتوى."));
-    }).catch(function () { c.appendChild(el("p", "sc-muted", "تعذر تحميل تقرير الفحص الآن.")); });
-  }
-  function inventoryCard(root) {
-    var c = card("محتوى المدونة"); root.appendChild(c);
-    function feed(kind) { return fetch("/feeds/" + kind + "/default?alt=json&max-results=150", { credentials: "omit" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (j) { return ((j.feed && j.feed.entry) || []).map(function (e) { var l = (e.link || []).filter(function (x) { return x.rel === "alternate"; })[0]; return { title: e.title.$t, url: l ? l.href : "" }; }); }); }
-    Promise.all([feed("pages"), feed("posts")]).then(function (r) {
-      var d = { pages: r[0], posts: r[1] };
-      if (KP.set) { KP.set("pages", "الصفحات", String(d.pages.length)); KP.set("posts", "المقالات", String(d.posts.length)); }
-      c.appendChild(el("p", null, "الصفحات: " + d.pages.length + " — المقالات: " + d.posts.length + " (من خلاصة المدونة الحية)"));
-      var t = tableOf(["النوع", "العنوان", "الحالة"]);
-      d.pages.forEach(function (x) { var cell = el("span"); cell.appendChild(a(x.url, x.title)); row(t, ["صفحة", cell, "منشورة"]); });
-      d.posts.forEach(function (x) { var cell = el("span"); cell.appendChild(a(x.url, x.title)); row(t, ["مقال", cell, "منشور"]); });
-      c.appendChild(wrap(t));
-    }).catch(function () { c.appendChild(el("p", "sc-muted", "تعذر تحميل تقرير المحتوى الآن.")); });
-  }
-  function connectionsCard(root) {
-    var c = card("الربط والإحصائيات والإعلانات"); root.appendChild(c);
-    var t = tableOf(["الخدمة", "المعرّف", "الحالة المسجلة"]);
-    row(t, ["Google Analytics 4", "G-BRZP957SQ4", "الكود مثبت في القالب. لم يُتحقق بعد من وصول البيانات إلى الحساب."]);
-    row(t, ["Google AdSense", "ca-pub-1235197294708204", "كود التحميل مثبت في القالب. القبول يتم من جوجل ولا يُعتبر مضموناً."]);
-    row(t, ["Google Tag Manager", "GTM-WGSK7LQC", "مسجل في مرجع المشروع فقط، وغير مثبت في القالب لتجنب تكرار القياس."]);
-    c.appendChild(wrap(t));
-    c.appendChild(el("p", "sc-muted", "لا تُعرض هنا أرقام زيارات أو أرباح لأنها تتطلب ربطاً آمناً بحساب Google من خادم، ولن نعرض أرقاماً تجريبية. تابع الأرقام الحقيقية من لوحتَي Analytics وAdSense."));
-  }
-  function linksCard(root) {
-    var c = card("روابط الإدارة السريعة"); root.appendChild(c);
-    var ul = el("ul");
-    [["المستودع على GitHub", REPO], ["تعديل الصفحات والأدوات", REPO + "/tree/main/pages"], ["إضافة/تعديل المقالات", REPO + "/tree/main/posts"],
-     ["سجل العمليات (Actions)", REPO + "/actions"], ["لوحة Blogger", "https://www.blogger.com"], ["Google Analytics", "https://analytics.google.com"],
-     ["Google AdSense", "https://adsense.google.com"], ["Google Search Console", "https://search.google.com/search-console"]
-    ].forEach(function (x) { var li = el("li"); li.appendChild(a(x[1], x[0])); ul.appendChild(li); });
-    c.appendChild(ul);
-    c.appendChild(el("p", "sc-muted", "التعديل يتم من GitHub، ثم تصل التغييرات إلى المدونة تلقائياً."));
-  }
-  /* بوابة كلمة السر: تحجب اللوحة عن الزوار العاديين. ملاحظة أمنية: هذه حماية واجهة فقط (لا يوجد خادم)،
-     ولذلك لا تعرض اللوحة أي سر؛ الكتابة الفعلية تتم عبر تسجيل دخول GitHub. */
-  var SALT = "smart-choice-admin-v1", HASH = "c8601e15655da80fa3388e066a0c6aa4b63d6cc287d3183b454efa82e9be1d5c", ITER = 150000;
+  /* ---------- بوابة كلمة السر ---------- */
   function hex(buf) { return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ("0" + b.toString(16)).slice(-2); }).join(""); }
   function check(pw) {
     var enc = new TextEncoder();
@@ -619,53 +645,151 @@
     }).then(function (bits) { return hex(bits) === HASH; });
   }
   function unlocked() { try { return sessionStorage.getItem("sc-admin") === HASH; } catch (e) { return false; } }
-  function composerCard(root) {
-    var c = card("كتابة مقال جديد"); root.appendChild(c);
-    c.appendChild(el("p", "sc-muted", "اكتب المقال هنا ثم اضغط الزر: يفتح GitHub بملف جاهز، وبعد الحفظ (Commit) يُنشر تلقائياً على المدونة. الكتابة محمية بتسجيل دخولك إلى GitHub."));
-    var f = el("div", "sc-tool-grid");
-    function field(label, tag, ph) { var l = el("label", null, label); var i = el(tag); if (ph) i.placeholder = ph; if (tag === "textarea") i.rows = 9; l.appendChild(i); f.appendChild(l); return i; }
-    var title = field("عنوان المقال", "input", "مثال: كيف تقارن بين عرضين");
-    var labels = field("التصنيف (اختياري)", "input", "التسوق الذكي");
-    var body = field("نص المقال (HTML بسيط: <p> و<h2>)", "textarea", "<p>…</p>");
+
+  /* ---------- البيانات ---------- */
+  var D = { stats: null, hist: [], audit: null, e2e: null, posts: [], pages: [] };
+  function load() {
+    return Promise.all([
+      get("reports/stats.json", true).then(function (x) { D.stats = x; }).catch(function () {}),
+      get("reports/stats-history.json", true).then(function (x) { D.hist = x; }).catch(function () {}),
+      get("reports/adsense-audit.json", true).then(function (x) { D.audit = x; }).catch(function () {}),
+      get("reports/live-e2e.txt", false).then(function (t) {
+        D.e2e = t.split("\n").filter(function (l) { return /^(OK|FAIL|WARN) /.test(l); }).map(function (l) { return { lvl: l.split(/\s/)[0], msg: l.replace(/^(OK|FAIL|WARN)\s+/, "") }; });
+      }).catch(function () {}),
+      feed("posts").then(function (x) { D.posts = x; }).catch(function () {}),
+      feed("pages").then(function (x) { D.pages = x; }).catch(function () {})
+    ]);
+  }
+  function attention() {
+    var items = [];
+    (D.e2e || []).forEach(function (x) { if (x.lvl === "FAIL") items.push({ tone: "bad", text: "فحص فني فاشل: " + x.msg }); if (x.lvl === "WARN") items.push({ tone: "warn", text: x.msg }); });
+    ((D.audit && D.audit.checks) || []).forEach(function (x) { if (x.level === "fail" || x.level === "warn") items.push({ tone: x.level === "fail" ? "bad" : "warn", text: x.title + (x.detail ? " — " + x.detail : "") + (x.fix ? " (الحل: " + x.fix + ")" : "") }); });
+    return items;
+  }
+
+  /* ---------- التبويبات ---------- */
+  function chart(host) {
+    var h = D.hist || []; if (h.length < 2) { host.appendChild(el("p", "adm-muted", "يتراكم الرسم البياني يوماً بعد يوم؛ تظهر المقارنة بعد يومين من التشغيل.")); return; }
+    var days = []; for (var i = 1; i < h.length; i++) days.push({ d: h[i].date, v: Math.max(0, h[i].all - h[i - 1].all) });
+    days = days.slice(-30); var max = Math.max.apply(null, days.map(function (x) { return x.v; }).concat([1]));
+    var box = el("div", "adm-bars");
+    days.forEach(function (x) { var b = el("div", "adm-bar"); var f = el("i"); f.style.height = Math.max(3, Math.round(x.v / max * 100)) + "%"; f.title = x.d + ": " + x.v; b.appendChild(f); box.appendChild(b); });
+    host.appendChild(box); host.appendChild(el("p", "adm-muted", "مشاهدات الصفحات يومياً (آخر " + days.length + " يوماً)."));
+  }
+  function tabOverview(root) {
+    var s = D.stats, kp = el("div", "adm-stats");
+    if (s) {
+      kp.appendChild(stat("مشاهدات 7 أيام", NF.format(s.d7), "آخر أسبوع"));
+      kp.appendChild(stat("مشاهدات 30 يوماً", NF.format(s.d30), "آخر شهر"));
+      kp.appendChild(stat("إجمالي المشاهدات", NF.format(s.all), "منذ إنشاء المدونة"));
+    } else kp.appendChild(stat("المشاهدات", "—", "تُحدَّث يومياً؛ لم يصدر أول تقرير بعد"));
+    kp.appendChild(stat("المقالات", NF.format(D.posts.length), "منشورة"));
+    var fails = (D.e2e || []).filter(function (x) { return x.lvl === "FAIL"; }).length, tot = (D.e2e || []).filter(function (x) { return x.lvl !== "WARN"; }).length;
+    kp.appendChild(stat("الفحص الفني", D.e2e ? (tot - fails) + "/" + tot : "—", fails ? "فحوص تحتاج مراجعة" : "كل شيء يعمل", fails ? "bad" : "good"));
+    var sc = D.audit ? D.audit.score : null;
+    kp.appendChild(stat("جاهزية AdSense", sc != null ? sc + "%" : "—", "فحص آلي للمعايير", sc != null && sc >= 90 ? "good" : "warn"));
+    root.appendChild(kp);
+    var c1 = panel("الزيارات", "مصدر الأرقام: Blogger (لا تشمل زياراتك أنت)"); chart(c1);
+    if (s) c1.appendChild(el("p", "adm-muted", "آخر تحديث: " + s.updated));
+    root.appendChild(c1);
+    var c2 = panel("يحتاج انتباهك"), it = attention();
+    if (!it.length) c2.appendChild(el("p", "adm-ok", "لا توجد مشكلات مكتشفة. ✓"));
+    else { var ul = el("ul", "adm-list"); it.forEach(function (x) { var li = el("li"); li.appendChild(badge(x.tone === "bad" ? "عاجل" : "تنبيه", x.tone)); li.appendChild(el("span", null, " " + x.text)); ul.appendChild(li); }); c2.appendChild(ul); }
+    root.appendChild(c2);
+  }
+  function composer(root) {
+    var c = panel("كتابة مقال جديد", "يُنشر تلقائياً بعد الحفظ في GitHub");
+    var f = el("div", "adm-form");
+    function field(label, tag, ph) { var l = el("label", null, label); var i = el(tag); if (ph) i.placeholder = ph; if (tag === "textarea") i.rows = 10; l.appendChild(i); f.appendChild(l); return i; }
+    var title = field("عنوان المقال", "input", "عنوان واضح يصف الفائدة"), labels = field("التصنيف", "input", "التسوق الذكي"), body = field("نص المقال (HTML بسيط: ‎<p> ‎<h2> ‎<ul>)", "textarea", "<p>…</p>");
     c.appendChild(f);
-    var go = el("button", "sc-btn", "فتح GitHub لنشر المقال"); go.type = "button";
+    var go = el("button", "adm-btn", "فتح GitHub لنشر المقال"); go.type = "button";
     go.addEventListener("click", function () {
-      var t = title.value.trim(), b = body.value.trim();
-      if (!t || !b) { alert("اكتب العنوان والنص أولاً."); return; }
+      var t = title.value.trim(), b = body.value.trim(); if (!t || !b) { alert("اكتب العنوان والنص أولاً."); return; }
       var slug = "post-" + new Date().toISOString().slice(0, 10) + "-" + Math.random().toString(36).slice(2, 6);
       var md = "---\ntitle: " + t + "\nlabels: " + (labels.value.trim() || "Smart Choice") + "\npublish: true\n---\n" + b + "\n";
       window.open(REPO + "/new/main/posts?filename=" + encodeURIComponent(slug + ".md") + "&value=" + encodeURIComponent(md), "_blank", "noopener");
     });
-    c.appendChild(go);
+    c.appendChild(go); root.appendChild(c);
   }
-  function panels(root) {
-    root.textContent = "";
-    overview(root); composerCard(root); auditCard(root); aiCard(root); statusCard(root); inventoryCard(root); connectionsCard(root); todoCard(root); linksCard(root);
+  function tabContent(root) {
+    composer(root);
+    var c = panel("المقالات (" + NF.format(D.posts.length) + ")", "من خلاصة المدونة الحية");
+    c.appendChild(table(["العنوان", "التصنيف", "التاريخ"], D.posts.map(function (p) { return [a(p.url, p.title), p.labels.join("، "), p.date]; })));
+    root.appendChild(c);
+    var c2 = panel("الصفحات (" + NF.format(D.pages.length) + ")");
+    c2.appendChild(table(["العنوان", "الرابط"], D.pages.map(function (p) { return [p.title.replace(/\s*\|\s*Smart Choice\s*$/i, ""), a(p.url, "فتح")]; })));
+    root.appendChild(c2);
+  }
+  function tabQuality(root) {
+    var d = D.audit;
+    var c = panel("جاهزية AdSense", d ? "النتيجة " + d.score + "% — " + d.posts + " مقالاً بمتوسط " + d.avg_words + " كلمة" : "لم يصدر التقرير بعد");
+    if (d) {
+      var bad = d.checks.filter(function (x) { return x.level === "fail" || x.level === "warn"; }), good = d.checks.filter(function (x) { return x.level === "pass"; });
+      if (bad.length) { var ul = el("ul", "adm-list"); bad.forEach(function (x) { var li = el("li"); li.appendChild(badge(x.level === "fail" ? "إصلاح" : "تحسين", x.level === "fail" ? "bad" : "warn")); li.appendChild(el("span", null, " " + x.title + (x.detail ? " — " + x.detail : "") + (x.fix ? " | الحل: " + x.fix : ""))); ul.appendChild(li); }); c.appendChild(ul); }
+      else c.appendChild(el("p", "adm-ok", "كل معايير الفحص الآلي مستوفاة. ✓"));
+      var det = el("details"); det.appendChild(el("summary", null, "المعايير المستوفاة (" + good.length + ")")); var ul2 = el("ul", "adm-list"); good.forEach(function (x) { ul2.appendChild(el("li", null, "✓ " + x.title)); }); det.appendChild(ul2); c.appendChild(det);
+    }
+    root.appendChild(c);
+    var c2 = panel("خطوات المالك قبل/بعد التقديم", "تُحفظ علاماتك في هذا المتصفح");
+    var steps = ["تفعيل ads.txt في إعدادات بلوجر (الأرباح).", "تسجيل الموقع في Search Console وإرسال sitemap.xml.", "انتظار فهرسة الصفحات في جوجل (أسبوع إلى أسبوعين).", "طلب مراجعة الموقع من حساب AdSense.", "تنظيف حسابات Utilityra القديمة في AdSense وAnalytics.", "إلغاء أي مفاتيح سرية سبق تسريبها وإنشاء بدائل."];
+    var ul3 = el("ul", "adm-checks"), store = {}; try { store = JSON.parse(localStorage.getItem("sc-adm-steps") || "{}"); } catch (e) {}
+    steps.forEach(function (t, i) { var li = el("li"), lb = el("label"), cb = el("input"); cb.type = "checkbox"; cb.checked = !!store[i];
+      cb.addEventListener("change", function () { store[i] = cb.checked; try { localStorage.setItem("sc-adm-steps", JSON.stringify(store)); } catch (e) {} });
+      lb.appendChild(cb); lb.appendChild(el("span", null, " " + t)); li.appendChild(lb); ul3.appendChild(li); });
+    c2.appendChild(ul3); root.appendChild(c2);
+  }
+  function tabTech(root) {
+    var e = D.e2e || [], fails = e.filter(function (x) { return x.lvl === "FAIL"; });
+    var c = panel("الفحص الفني للموقع الحي", "يعمل تلقائياً يومياً وعند كل تعديل");
+    c.appendChild(el("p", fails.length ? "adm-bad" : "adm-ok", e.length ? (fails.length ? fails.length + " فحص فاشل" : "كل الفحوصات ناجحة ✓") : "لا يوجد تقرير بعد"));
+    if (fails.length) { var ul = el("ul", "adm-list"); fails.forEach(function (x) { ul.appendChild(el("li", null, "✗ " + x.msg)); }); c.appendChild(ul); }
+    var det = el("details"); det.appendChild(el("summary", null, "عرض كل الفحوصات (" + e.length + ")")); det.appendChild(table(["الحالة", "الفحص"], e.map(function (x) { return [badge(x.lvl === "OK" ? "ناجح" : (x.lvl === "WARN" ? "تنبيه" : "فاشل"), x.lvl === "OK" ? "good" : (x.lvl === "WARN" ? "warn" : "bad")), x.msg.length > 140 ? x.msg.slice(0, 140) + "…" : x.msg]; }))); c.appendChild(det);
+    root.appendChild(c);
+  }
+  function tabLinks(root) {
+    var c = panel("الخدمات المتصلة");
+    c.appendChild(table(["الخدمة", "الحالة", "ملاحظة"], [
+      ["Google Analytics 4", badge("مثبّت", "good"), "يقيس الزيارات التفصيلية؛ الأرقام الكاملة من لوحته."],
+      ["Google AdSense", badge("الكود مثبّت", "good"), "ظهور الإعلانات مرهون بموافقة جوجل. لا نعرض أرباحاً هنا لأنها تتطلب ربطاً بحسابك."],
+      ["GitHub Actions", badge("يعمل", "good"), "المزامنة والفحص والتقارير تلقائية."]
+    ])); root.appendChild(c);
+    var c2 = panel("روابط سريعة"), g = el("div", "adm-links");
+    [["المستودع", REPO], ["المقالات", REPO + "/tree/main/posts"], ["الصفحات والأدوات", REPO + "/tree/main/pages"], ["سجل العمليات", REPO + "/actions"], ["لوحة Blogger", "https://www.blogger.com"], ["Google Analytics", "https://analytics.google.com"], ["Google AdSense", "https://adsense.google.com"], ["Search Console", "https://search.google.com/search-console"]]
+      .forEach(function (x) { g.appendChild(a(x[1], x[0], "adm-link")); });
+    c2.appendChild(g); root.appendChild(c2);
+  }
+  var TABS = [["overview", "نظرة عامة", tabOverview], ["content", "المحتوى", tabContent], ["quality", "الجودة وAdSense", tabQuality], ["tech", "الفحص الفني", tabTech], ["links", "الروابط والخدمات", tabLinks]];
+  function dashboard(root) {
+    root.textContent = ""; root.className = "adm";
+    var bar = el("div", "adm-tabs"), body = el("div", "adm-body");
+    var out = el("button", "adm-out", "خروج"); out.type = "button"; out.addEventListener("click", function () { try { sessionStorage.removeItem("sc-admin"); } catch (e) {} location.reload(); });
+    function show(id) {
+      Array.prototype.forEach.call(bar.querySelectorAll("button[data-t]"), function (b) { b.setAttribute("aria-selected", String(b.dataset.t === id)); });
+      body.textContent = ""; TABS.forEach(function (t) { if (t[0] === id) t[2](body); });
+    }
+    TABS.forEach(function (t) { var b = el("button", null, t[1]); b.type = "button"; b.dataset.t = t[0]; b.addEventListener("click", function () { show(t[0]); }); bar.appendChild(b); });
+    bar.appendChild(out); root.appendChild(bar); root.appendChild(body);
+    body.appendChild(el("p", "adm-muted", "جارٍ تحميل البيانات…"));
+    load().then(function () { show("overview"); });
   }
   function run() {
     var root = document.getElementById("sc-admin-root");
     if (!root || root.dataset.scReady) return;
     root.dataset.scReady = "1";
     var m = document.createElement("meta"); m.name = "robots"; m.content = "noindex,nofollow"; document.head.appendChild(m);
-    if (unlocked()) { panels(root); return; }
+    if (unlocked()) { dashboard(root); return; }
     root.textContent = "";
-    var c = card("دخول الإدارة"); root.appendChild(c);
-    c.appendChild(el("p", "sc-muted", "هذه الصفحة خاصة بمالك الموقع. أدخل كلمة السر للمتابعة."));
-    var inp = el("input"); inp.type = "password"; inp.autocomplete = "current-password"; inp.placeholder = "كلمة السر"; inp.setAttribute("aria-label", "كلمة السر");
-    var btn = el("button", "sc-btn", "دخول"); btn.type = "button"; var msg = el("p", "sc-bad", "");
-    function submit() {
-      check(inp.value).then(function (ok) {
-        if (ok) { try { sessionStorage.setItem("sc-admin", HASH); } catch (e) {} panels(root); }
-        else { msg.textContent = "كلمة السر غير صحيحة."; inp.value = ""; }
-      }).catch(function () { msg.textContent = "المتصفح لا يدعم التحقق."; });
-    }
+    var c = panel("دخول الإدارة"); c.appendChild(el("p", "adm-muted", "هذه الصفحة خاصة بمالك الموقع. أدخل كلمة السر للمتابعة."));
+    var inp = el("input", "adm-input"); inp.type = "password"; inp.autocomplete = "current-password"; inp.placeholder = "كلمة السر"; inp.setAttribute("aria-label", "كلمة السر");
+    var btn = el("button", "adm-btn", "دخول"); btn.type = "button"; var msg = el("p", "adm-bad", "");
+    function submit() { check(inp.value).then(function (ok) { if (ok) { try { sessionStorage.setItem("sc-admin", HASH); } catch (e) {} dashboard(root); } else { msg.textContent = "كلمة السر غير صحيحة."; inp.value = ""; } }).catch(function () { msg.textContent = "المتصفح لا يدعم التحقق."; }); }
     btn.addEventListener("click", submit); inp.addEventListener("keydown", function (e) { if (e.key === "Enter") submit(); });
-    c.appendChild(inp); c.appendChild(btn); c.appendChild(msg);
+    c.appendChild(inp); c.appendChild(btn); c.appendChild(msg); root.appendChild(c);
   }
   window.__scInitAdmin = run;
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
 })();
-
 
 /* Smart Choice — ميزات عامة: بحث، العودة للأعلى، وتحسينات صفحات المقالات (وقت القراءة، مشاركة، مقالات ذات صلة، بيانات منظمة) */
 (function () {

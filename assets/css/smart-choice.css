@@ -210,3 +210,48 @@ html body .sc-footer small{display:block;opacity:.7;margin-top:10px}
 .sc-check{display:flex!important;gap:8px;align-items:center;font-weight:500!important;margin:4px 0}
 .sc-readmore{margin-top:14px;padding-top:12px;border-top:1px dashed var(--sc-line);font-size:15px;color:var(--sc-muted)}
 .adm-bar{max-width:28px}.adm-bars{justify-content:flex-start;gap:6px}
+
+/* ===== أيقونات SVG ===== */
+.sc-i{flex:0 0 auto;vertical-align:middle}
+/* بطاقات الأدوات بدل شريط الأزرار */
+.sc-page .sc-tabs{display:grid;grid-template-columns:repeat(auto-fill,minmax(138px,1fr));gap:10px;padding:4px 0 14px;margin:0 0 8px}
+.sc-page .sc-tabs button{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:8px;text-align:center;white-space:normal;border-radius:16px;padding:14px 8px;min-height:92px;font-size:14.5px;line-height:1.45;border:1px solid var(--sc-line);background:#fff;box-shadow:0 4px 12px rgba(11,27,58,.04)}
+.sc-page .sc-tabs .sc-ti{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#e8f0ff,#e2fbf6);color:var(--sc-blue)}
+.sc-page .sc-tabs button:hover{transform:translateY(-2px);border-color:#bcd0ff}
+.sc-page .sc-tabs button[aria-selected=true]{background:linear-gradient(135deg,var(--sc-blue),var(--sc-violet));color:#fff;border-color:transparent}
+.sc-page .sc-tabs button[aria-selected=true] .sc-ti{background:rgba(255,255,255,.2);color:#fff}
+.sc-h2i{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#e8f0ff,#e2fbf6);color:var(--sc-blue);margin-inline-end:10px;vertical-align:middle}
+.sc-chips button{display:inline-flex;align-items:center;gap:6px}
+.sc-tool-tile .ico{color:var(--sc-blue)}
+.sc-trust b{display:flex;align-items:center;gap:8px;color:var(--sc-navy)}.sc-trust b .sc-i{color:var(--sc-teal)}
+@media(max-width:560px){.sc-page .sc-tabs{grid-template-columns:repeat(3,1fr);gap:8px}.sc-page .sc-tabs button{min-height:84px;padding:10px 4px;font-size:13px}.sc-page .sc-tabs .sc-ti{width:36px;height:36px}.sc-page .sc-tabs .sc-ti svg{width:20px;height:20px}.sc-h2i{width:34px;height:34px;margin-inline-end:8px}}
+/* ===== لوحة الإدارة: تخطيط تطبيق ===== */
+.adm-app{display:grid;grid-template-columns:230px 1fr;gap:18px;align-items:start;max-width:1180px}
+.adm-side{position:sticky;top:72px;background:#fff;border:1px solid var(--sc-line);border-radius:18px;padding:14px;box-shadow:0 8px 24px rgba(11,27,58,.06)}
+.adm-brand{display:flex;gap:10px;align-items:center;padding:6px 6px 14px;border-bottom:1px solid var(--sc-line);margin-bottom:10px;color:var(--sc-blue)}
+.adm-brand b{display:block;color:var(--sc-navy);font-size:17px;line-height:1.3}.adm-brand small{color:var(--sc-muted);font-size:12.5px}
+.adm-app .adm-tabs{display:flex;flex-direction:column;gap:4px;border:0;padding:0;margin:0;box-shadow:none;position:static;background:none}
+.adm-app .adm-tabs button{display:flex;align-items:center;gap:10px;text-align:right;width:100%;padding:11px 12px;border-radius:12px;font-size:15px}
+.adm-app .adm-tabs button[aria-selected=true]{box-shadow:0 8px 18px rgba(47,107,255,.28)}
+.adm-app .adm-tabs .adm-out{margin-top:10px;border-top:1px solid var(--sc-line);border-radius:0 0 12px 12px;padding-top:14px}
+.adm-main{min-width:0}
+.adm-stat{position:relative}.adm-ico{position:absolute;inset-inline-end:14px;top:14px;display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:#eef3ff;color:var(--sc-blue)}
+.adm-stat.good .adm-ico{background:#e1f6ec;color:#0e8a5f}.adm-stat.bad .adm-ico{background:#fde8e8;color:#c0392b}.adm-stat.warn .adm-ico{background:#fff3dc;color:#b8741a}
+@media(max-width:900px){.adm-app{grid-template-columns:1fr}.adm-side{position:static}.adm-app .adm-tabs{flex-direction:row;overflow-x:auto;gap:6px;padding-bottom:4px}.adm-app .adm-tabs button{width:auto;white-space:nowrap}.adm-app .adm-tabs .adm-out{margin:0;border:0;padding:11px 12px}.adm-brand{border:0;margin:0;padding-bottom:8px}}
+.adm-stats{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}.adm-stat{padding-inline-end:64px}
+
+/* ترويسة مدمجة على الهاتف */
+@media(max-width:820px){
+  html body .sc-headin{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding-top:8px;padding-bottom:8px}
+  html body .sc-brand{order:1;font-size:22px}
+  html body .sc-search{order:2;width:auto;margin:0 auto 0 0}
+  html body .sc-search input{width:130px;padding:6px 12px;font-size:14px}
+  html body .sc-search button{padding:6px 12px}
+  html body .sc-nav{order:3;width:100%;flex-wrap:nowrap;overflow-x:auto;gap:4px;padding-bottom:2px;scrollbar-width:none}
+  html body .sc-nav::-webkit-scrollbar{display:none}
+}
+@media(max-width:560px){
+  .sc-toolgrid{grid-template-columns:repeat(2,1fr)!important;gap:10px!important}
+  .sc-tool-tile{padding:14px}.sc-tool-tile b{font-size:16px}.sc-tool-tile small{font-size:13px}
+  .sc-tool-tile .ico{width:44px;height:44px}
+}

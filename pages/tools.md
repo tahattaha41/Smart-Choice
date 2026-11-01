@@ -9,34 +9,38 @@ publish: true
   <p>احسب، قارن، وخطط ببياناتك أنت. النتائج تُحسب داخل متصفحك ولا تحتاج إلى تسجيل.</p>
 </section>
 <nav class="sc-tabs" aria-label="اختيار الأداة">
-  <button type="button" data-tab="discount" aria-selected="true">🏷️ حاسبة الخصم</button>
-  <button type="button" data-tab="budget" aria-selected="false">💰 الميزانية الشهرية</button>
-  <button type="button" data-tab="unit" aria-selected="false">⚖️ مقارنة سعر الوحدة</button>
-  <button type="button" data-tab="vat" aria-selected="false">🧮 الضريبة</button>
-  <button type="button" data-tab="compare" aria-selected="false">🆚 مقارنة المنتجات</button>
-  <button type="button" data-tab="decide" aria-selected="false">🧭 مركز القرار</button>
-  <button type="button" data-tab="loan" aria-selected="false">🏦 القرض</button>
-  <button type="button" data-tab="margin" aria-selected="false">📊 هامش الربح</button>
-  <button type="button" data-tab="split" aria-selected="false">🍽️ قسمة الفاتورة</button>
-  <button type="button" data-tab="percent" aria-selected="false">📈 النسبة المئوية</button>
-  <button type="button" data-tab="saving" aria-selected="false">🎯 هدف الادخار</button>
-  <button type="button" data-tab="total" aria-selected="false">🧾 التكلفة الإجمالية</button>
-  <button type="button" data-tab="installment" aria-selected="false">💳 التقسيط</button>
-  <button type="button" data-tab="convert" aria-selected="false">🔄 تحويل الوحدات</button>
-  <button type="button" data-tab="dates" aria-selected="false">📅 فرق الأيام</button>
-  <button type="button" data-tab="assistant" aria-selected="false">🤖 المساعد الذكي</button>
-  <button type="button" data-tab="compound" aria-selected="false">🌱 نمو الادخار</button>
-  <button type="button" data-tab="breakeven" aria-selected="false">⚖️ نقطة التعادل</button>
-  <button type="button" data-tab="hourly" aria-selected="false">⏱️ قيمة ساعتك</button>
-  <button type="button" data-tab="trip" aria-selected="false">🚗 تكلفة الرحلة</button>
-  <button type="button" data-tab="fx" aria-selected="false">💱 تحويل عملة</button>
-  <button type="button" data-tab="bmi" aria-selected="false">❤️ كتلة الجسم BMI</button>
-  <button type="button" data-tab="age" aria-selected="false">🎂 حاسبة العمر</button>
-  <button type="button" data-tab="zakat" aria-selected="false">🕌 حاسبة الزكاة</button>
-  <button type="button" data-tab="grade" aria-selected="false">🎓 الدرجة المطلوبة</button>
-  <button type="button" data-tab="hijri" aria-selected="false">🌙 هجري ↔ ميلادي</button>
-  <button type="button" data-tab="wordcount" aria-selected="false">🔤 عدّاد الكلمات</button>
-  <button type="button" data-tab="password" aria-selected="false">🔐 مولّد كلمات المرور</button>
+  <button type="button" data-tab="discount" aria-selected="true">حاسبة الخصم</button>
+  <button type="button" data-tab="budget" aria-selected="false">الميزانية الشهرية</button>
+  <button type="button" data-tab="unit" aria-selected="false">مقارنة سعر الوحدة</button>
+  <button type="button" data-tab="vat" aria-selected="false">الضريبة</button>
+  <button type="button" data-tab="compare" aria-selected="false">مقارنة المنتجات</button>
+  <button type="button" data-tab="decide" aria-selected="false">مركز القرار</button>
+  <button type="button" data-tab="loan" aria-selected="false">القرض</button>
+  <button type="button" data-tab="margin" aria-selected="false">هامش الربح</button>
+  <button type="button" data-tab="split" aria-selected="false">قسمة الفاتورة</button>
+  <button type="button" data-tab="percent" aria-selected="false">النسبة المئوية</button>
+  <button type="button" data-tab="saving" aria-selected="false">هدف الادخار</button>
+  <button type="button" data-tab="total" aria-selected="false">التكلفة الإجمالية</button>
+  <button type="button" data-tab="installment" aria-selected="false">التقسيط</button>
+  <button type="button" data-tab="convert" aria-selected="false">تحويل الوحدات</button>
+  <button type="button" data-tab="dates" aria-selected="false">فرق الأيام</button>
+  <button type="button" data-tab="assistant" aria-selected="false">المساعد الذكي</button>
+  <button type="button" data-tab="compound" aria-selected="false">نمو الادخار</button>
+  <button type="button" data-tab="breakeven" aria-selected="false">نقطة التعادل</button>
+  <button type="button" data-tab="hourly" aria-selected="false">قيمة ساعتك</button>
+  <button type="button" data-tab="trip" aria-selected="false">تكلفة الرحلة</button>
+  <button type="button" data-tab="fx" aria-selected="false">تحويل عملة</button>
+  <button type="button" data-tab="bmi" aria-selected="false">كتلة الجسم BMI</button>
+  <button type="button" data-tab="age" aria-selected="false">حاسبة العمر</button>
+  <button type="button" data-tab="zakat" aria-selected="false">حاسبة الزكاة</button>
+  <button type="button" data-tab="grade" aria-selected="false">الدرجة المطلوبة</button>
+  <button type="button" data-tab="hijri" aria-selected="false">هجري ↔ ميلادي</button>
+  <button type="button" data-tab="wordcount" aria-selected="false">عدّاد الكلمات</button>
+  <button type="button" data-tab="calories" aria-selected="false">السعرات اليومية</button>
+  <button type="button" data-tab="speed" aria-selected="false">السرعة والوتيرة</button>
+  <button type="button" data-tab="loancompare" aria-selected="false">مقارنة عرضي تمويل</button>
+  <button type="button" data-tab="random" aria-selected="false">قرعة وأرقام عشوائية</button>
+  <button type="button" data-tab="password" aria-selected="false">مولّد كلمات المرور</button>
 </nav>
 <section class="sc-tool-card sc-tool" id="sc-discount">
   <h2>حاسبة الخصم والسعر النهائي</h2><p class="sc-muted">أدخل السعر والخصم لمعرفة ما ستدفعه وقيمة التوفير.</p>
@@ -214,6 +218,29 @@ publish: true
 <div class="sc-actions"><button type="button" class="sc-ghost" id="sc-pw-go">ولّد كلمة مرور</button><button type="button" class="sc-ghost" id="sc-pw-copy">نسخ</button></div>
 <div class="sc-tool-result" id="sc-password-result" aria-live="polite" data-static="1" dir="ltr" style="direction:ltr;text-align:left;font-family:monospace;word-break:break-all">اضغط «ولّد كلمة مرور».</div>
 <p class="sc-muted" id="sc-pw-strength"></p>
+</section>
+
+<section class="sc-tool-card sc-tool" id="sc-calories" hidden>
+<h2>حاسبة السعرات اليومية</h2><p class="sc-muted">تقدير احتياجك اليومي بمعادلة Mifflin-St Jeor الشائعة. تقدير عام وليس خطة غذائية؛ استشر مختصاً عند وجود حالة صحية.</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-cal-sex">الجنس</label><select id="sc-cal-sex"><option value="m">ذكر</option><option value="f">أنثى</option></select></div><div class="sc-field"><label for="sc-cal-age">العمر (سنة)</label><input id="sc-cal-age" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-cal-w">الوزن (كجم)</label><input id="sc-cal-w" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-cal-h">الطول (سم)</label><input id="sc-cal-h" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-cal-act">مستوى النشاط</label><select id="sc-cal-act"><option value="1.2">قليل الحركة</option><option value="1.375">نشاط خفيف (1-3 أيام)</option><option value="1.55" selected>نشاط متوسط (3-5 أيام)</option><option value="1.725">نشاط عالٍ (6-7 أيام)</option></select></div></div>
+<div class="sc-tool-result" id="sc-calories-result" aria-live="polite">أدخل بياناتك.</div>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-speed" hidden>
+<h2>السرعة والوتيرة</h2><p class="sc-muted">احسب متوسط سرعتك ووتيرة الجري أو المشي من المسافة والزمن.</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-sp-km">المسافة (كم)</label><input id="sc-sp-km" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-sp-h">الساعات</label><input id="sc-sp-h" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-sp-m">الدقائق</label><input id="sc-sp-m" type="number" min="0" step="any" inputmode="decimal"></div></div>
+<div class="sc-tool-result" id="sc-speed-result" aria-live="polite">أدخل المسافة والزمن.</div>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-loancompare" hidden>
+<h2>مقارنة عرضي تمويل</h2><p class="sc-muted">قارن عرضين لنفس المبلغ بفائدة ومدة مختلفتين: أيهما أقل في إجمالي الفوائد وأيهما أخف في القسط؟</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-lc-amount">مبلغ التمويل</label><input id="sc-lc-amount" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-lc-ra">فائدة العرض (أ) سنوياً %</label><input id="sc-lc-ra" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-lc-ma">مدة العرض (أ) بالأشهر</label><input id="sc-lc-ma" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-lc-rb">فائدة العرض (ب) سنوياً %</label><input id="sc-lc-rb" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-lc-mb">مدة العرض (ب) بالأشهر</label><input id="sc-lc-mb" type="number" min="0" step="any" inputmode="decimal"></div></div>
+<div class="sc-tool-result" id="sc-loancompare-result" aria-live="polite">أدخل البيانات.</div>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-random" hidden>
+<h2>قرعة وأرقام عشوائية</h2><p class="sc-muted">ولّد أرقاماً عشوائية في نطاق، أو اختر عشوائياً من قائمة أسماء (واحد في كل سطر). يعمل بمولّد عشوائي آمن داخل متصفحك.</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-rn-min">من</label><input id="sc-rn-min" type="number" step="1" inputmode="numeric"></div><div class="sc-field"><label for="sc-rn-max">إلى</label><input id="sc-rn-max" type="number" step="1" inputmode="numeric"></div><div class="sc-field"><label for="sc-rn-count">كم رقماً</label><input id="sc-rn-count" type="number" min="1" max="50" step="1" inputmode="numeric"></div></div>
+<div class="sc-field"><label for="sc-rn-list">أو قائمة للاختيار منها (اسم في كل سطر)</label><textarea id="sc-rn-list" rows="4" placeholder="أحمد&#10;سارة&#10;محمد"></textarea></div>
+<div class="sc-actions"><button type="button" class="sc-ghost" id="sc-rn-go">ولّد أرقاماً</button><button type="button" class="sc-ghost" id="sc-rn-pick">اختر من القائمة</button></div>
+<div class="sc-tool-result" id="sc-random-result" aria-live="polite" data-static="1">اضغط أحد الزرين.</div>
 </section>
 
 <p class="sc-muted">ملاحظة: النتائج حسابية بناءً على البيانات التي تدخلها، ولا تمثل أسعار سوق مباشرة أو نصيحة مالية.</p>

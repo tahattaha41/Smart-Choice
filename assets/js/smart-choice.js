@@ -1,3 +1,56 @@
+/* Smart Choice — مكتبة أيقونات SVG موحّدة (بدلاً من الإيموجي المختلف بين الأجهزة) */
+(function () {
+  "use strict";
+  var P = {
+    tag: "M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8zM7 7h.01",
+    wallet: "M20 12V8H6a2 2 0 0 1 0-4h12v4M4 6v12a2 2 0 0 0 2 2h14v-4M18 12a2 2 0 0 0 0 4h4v-4z",
+    scale: "M12 3v18M7 21h10M5 7h14M5 7l-3 7a3 3 0 0 0 6 0zM19 7l-3 7a3 3 0 0 0 6 0z",
+    calc: "M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h8",
+    compare: "M8 3L4 7l4 4M4 7h16M16 21l4-4-4-4M20 17H4",
+    compass: "M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM16.2 7.8l-2 6.3-6.4 2.1 2-6.3z",
+    bank: "M3 21h18M5 21V10M9 21V10M15 21V10M19 21V10M12 3L2 9h20z",
+    chart: "M3 3v18h18M7 16v-5M12 16V7M17 16v-3",
+    receipt: "M4 2v20l3-2 3 2 3-2 3 2 3-2V2l-3 2-3-2-3 2-3-2zM8 8h8M8 12h8",
+    trend: "M22 7l-8.5 8.5-5-5L2 17M16 7h6v6",
+    target: "M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4z",
+    card: "M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM2 10h20",
+    repeat: "M17 2l4 4-4 4M3 11v-1a4 4 0 0 1 4-4h14M7 22l-4-4 4-4M21 13v1a4 4 0 0 1-4 4H3",
+    calendar: "M8 2v4M16 2v4M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM3 10h18",
+    bot: "M6 8h12a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-6a3 3 0 0 1 3-3zM12 8V4M8 14h.01M16 14h.01M10 17.5h4",
+    sprout: "M7 20h10M12 20v-9M12 11c0-4 2.5-6 6-6 0 4-2.5 6-6 6zM12 14c0-3-2-5-5-5 0 3 2 5 5 5z",
+    timer: "M10 2h4M12 14l3-3M12 22a8 8 0 1 0 0-16 8 8 0 0 0 0 16z",
+    car: "M5 17H3v-5l2-5h12l3 5h1v5h-2M7 17h8M7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM17 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM5 12h14",
+    coin: "M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 6v12M15 9.5c0-1-1.3-1.8-3-1.8s-3 .8-3 1.8 1.3 1.8 3 1.8 3 .8 3 1.8-1.3 1.8-3 1.8-3-.8-3-1.8",
+    heart: "M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z",
+    user: "M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z",
+    banknote: "M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 12h.01M18 12h.01",
+    cap: "M22 10L12 5 2 10l10 5zM6 12v5c3 3 9 3 12 0v-5",
+    moon: "M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z",
+    type: "M4 7V4h16v3M9 20h6M12 4v16",
+    lock: "M5 11h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2zM7 11V7a5 5 0 0 1 10 0v4",
+    flame: "M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1.1-2.1-.2-4 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.2.4-2.3 1-3 0 1.4.8 2.5 1.5 2.5z",
+    gauge: "M12 14l4-4M3.3 17a10 10 0 1 1 17.4 0",
+    scales: "M16 16l3-8 3 8c-.9.7-1.9 1-3 1s-2.1-.3-3-1zM2 16l3-8 3 8c-.9.7-1.9 1-3 1s-2.1-.3-3-1zM7 21h10M12 3v18M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2",
+    dice: "M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM8 8h.01M16 8h.01M8 16h.01M16 16h.01M12 12h.01",
+    cart: "M9 22a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM20 22a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6",
+    shield: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
+    shieldok: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10zM9 12l2 2 4-4",
+    pen: "M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z",
+    grid: "M3 3h7v9H3zM14 3h7v5h-7zM14 12h7v9h-7zM3 16h7v5H3z",
+    file: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 13h8M8 17h8",
+    activity: "M22 12h-4l-3 9L9 3l-3 9H2",
+    link: "M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7",
+    eye: "M2 12s4-8 10-8 10 8 10 8-4 8-10 8-10-8-10-8zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z",
+    all: "M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"
+  };
+  var TAB = { discount: "tag", budget: "wallet", unit: "scale", vat: "calc", compare: "compare", decide: "compass", loan: "bank", margin: "chart", split: "receipt", percent: "trend", saving: "target", total: "receipt", installment: "card", convert: "repeat", dates: "calendar", assistant: "bot", compound: "sprout", breakeven: "scales", hourly: "timer", trip: "car", fx: "coin", bmi: "heart", age: "user", zakat: "banknote", grade: "cap", hijri: "moon", wordcount: "type", password: "lock", calories: "flame", speed: "gauge", loancompare: "bank", random: "dice" };
+  function svg(name, size) {
+    var d = P[name] || P.all; size = size || 22;
+    return "<svg class='sc-i' width='" + size + "' height='" + size + "' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='" + d + "'/></svg>";
+  }
+  window.SCI = { svg: svg, tab: function (t) { return TAB[t] || "all"; } };
+})();
+
 /* Smart Choice — استبعاد المالك والروبوتات من Google Analytics (علامة محلية على جهاز المالك) */
 (function () {
   try {
@@ -226,6 +279,7 @@
       } else if(has("نسبة","زيادة","ارتفع","ارتفاع","تغير")&&nums.length>=2){
         set({"sc-base":nums[0],"sc-new":nums[1]}); tab="percent"; label="النسبة المئوية والتغير"; ok=true;
       }
+      if(!ok&&!nums.length){out.textContent="أنا مساعد حسابي يعمل داخل متصفحك: أفهم أسئلة الخصم والضريبة والقرض وهامش الربح والادخار وقسمة الفاتورة والنسبة المئوية. لست محادثاً عاماً. اكتب سؤالك مع أرقامه، مثل: «خصم 20% على 2000».";if(openp)openp.textContent="";return;}
       if(!ok){out.textContent="لم أفهم السؤال بعد. اذكر نوع الحساب والأرقام، مثل: «خصم 20% على 2000»، «ضريبة 14% على 5000»، «قرض 100000 بفائدة 12% لمدة 24 شهر»، «تكلفة 80 وسعر البيع 100 كم الهامش»، «نسبة من 200 إلى 250».";if(openp)openp.textContent="";return;}
       const sec=$("sc-"+tab), res=sec&&sec.querySelector(".sc-tool-result");
       const k=res?Array.from(res.querySelectorAll(".kpi")).map(x=>{const sp=x.querySelector("span"),bb=x.querySelector("b,strong");return (sp?sp.textContent:"")+": "+(bb?bb.textContent:"");}):[];
@@ -301,6 +355,31 @@
     }
     const pwGo=$("sc-pw-go"); if(pwGo) pwGo.addEventListener("click",genPassword);
     const pwCopy=$("sc-pw-copy"); if(pwCopy) pwCopy.addEventListener("click",()=>{ const r=$("sc-password-result"); if(r&&navigator.clipboard&&r.textContent.length>=8) navigator.clipboard.writeText(r.textContent).then(()=>{pwCopy.textContent="تم النسخ ✓";setTimeout(()=>{pwCopy.textContent="نسخ";},1500);}); });
+    function calories() {
+      const sex=($("sc-cal-sex")||{}).value||"m", a=value("sc-cal-age"), w=value("sc-cal-w"), h=value("sc-cal-h"), act=Number(($("sc-cal-act")||{}).value||1.55), out=$("sc-calories-result"); if(!out)return;
+      if(![a,w,h].every(Number.isFinite)||a<15||a>90||w<30||w>300||h<120||h>230){out.textContent="أدخل عمراً (15–90) ووزناً (30–300 كجم) وطولاً (120–230 سم) صحيحة.";return;}
+      const bmr=10*w+6.25*h-5*a+(sex==="m"?5:-161), tdee=bmr*act;
+      out.textContent="معدل الحرق الأساسي: "+fmt(Math.round(bmr))+" سعرة — احتياجك اليومي: "+fmt(Math.round(tdee))+" سعرة — للتنحيف التدريجي: "+fmt(Math.round(tdee-500))+" — لزيادة الوزن: "+fmt(Math.round(tdee+500));
+    }
+    function speed() {
+      const km=value("sc-sp-km"), h=Number.isFinite(value("sc-sp-h"))?value("sc-sp-h"):0, m=Number.isFinite(value("sc-sp-m"))?value("sc-sp-m"):0, out=$("sc-speed-result"); if(!out)return;
+      const t=h+m/60; if(!Number.isFinite(km)||km<=0||t<=0||h<0||m<0){out.textContent="أدخل مسافة وزمناً أكبر من صفر.";return;}
+      const pace=t*60/km, pm=Math.floor(pace), ps=Math.round((pace-pm)*60);
+      out.textContent="السرعة المتوسطة: "+fmt(km/t)+" كم/ساعة — الوتيرة: "+pm+":"+(ps<10?"0":"")+ps+" دقيقة لكل كم — الزمن الكلي: "+fmt(Math.round(t*60))+" دقيقة";
+    }
+    function loancompare() {
+      const P=value("sc-lc-amount"), ra=value("sc-lc-ra"), ma=value("sc-lc-ma"), rb=value("sc-lc-rb"), mb=value("sc-lc-mb"), out=$("sc-loancompare-result"); if(!out)return;
+      if(![P,ra,ma,rb,mb].every(Number.isFinite)||P<=0||ra<0||rb<0||ma<1||mb<1||!Number.isInteger(ma)||!Number.isInteger(mb)){out.textContent="أدخل مبلغاً أكبر من صفر وفائدة غير سالبة ومدداً بالأشهر (أعداد صحيحة).";return;}
+      const pay=(r,n)=>{const i=r/100/12; return i===0?P/n:P*i/(1-Math.pow(1+i,-n));};
+      const pa=pay(ra,ma), pb=pay(rb,mb), ia=pa*ma-P, ib=pb*mb-P;
+      out.textContent="قسط (أ): "+fmt(pa)+" — فوائد (أ): "+fmt(ia)+" — قسط (ب): "+fmt(pb)+" — فوائد (ب): "+fmt(ib)+" — "+(Math.abs(ia-ib)<0.005?"الفوائد متساوية":(ia<ib?"الأقل فوائد: العرض (أ) بفارق ":"الأقل فوائد: العرض (ب) بفارق ")+fmt(Math.abs(ia-ib)));
+    }
+    const rndInt=(lo,hi)=>{ const span=hi-lo+1, a=new Uint32Array(1), lim=Math.floor(4294967296/span)*span; do{ crypto.getRandomValues(a); }while(a[0]>=lim); return lo+a[0]%span; };
+    const rnGo=$("sc-rn-go"); if(rnGo) rnGo.addEventListener("click",()=>{ const out=$("sc-random-result"), lo=Math.round(value("sc-rn-min")), hi=Math.round(value("sc-rn-max")); let n=Math.round(value("sc-rn-count")); if(!Number.isFinite(n)) n=1;
+      if(!Number.isFinite(lo)||!Number.isFinite(hi)||hi<lo||n<1||n>50){out.textContent="أدخل نطاقاً صحيحاً (من ≤ إلى) وعدداً بين 1 و50.";return;}
+      const r=[]; for(let i=0;i<n;i++) r.push(rndInt(lo,hi)); out.textContent=r.join("، "); });
+    const rnPick=$("sc-rn-pick"); if(rnPick) rnPick.addEventListener("click",()=>{ const out=$("sc-random-result"), items=($("sc-rn-list").value||"").split("\n").map(x=>x.trim()).filter(Boolean);
+      if(items.length<2){out.textContent="اكتب اسمين على الأقل، واحداً في كل سطر.";return;} out.textContent="الاختيار: "+items[rndInt(0,items.length-1)]; });
     function decorate(out) {
       if (out.dataset.static || out.children.length) return;
       const text = out.textContent.trim(); if (!text) return;
@@ -329,7 +408,7 @@
       "sc-compound": {"sc-cp-start":10000,"sc-cp-add":1000,"sc-cp-rate":8,"sc-cp-years":5}, "sc-breakeven": {"sc-be-fixed":6000,"sc-be-price":100,"sc-be-var":40},
       "sc-hourly": {"sc-hr-income":9000,"sc-hr-hours":8,"sc-hr-days":5,"sc-hr-price":3000}, "sc-trip": {"sc-trip-km":250,"sc-trip-cons":8,"sc-trip-price":10,"sc-trip-people":3}, "sc-fx": {"sc-fx-amount":500,"sc-fx-rate":48,"sc-fx-fee":1.5},
       "sc-bmi": {"sc-bmi-w":78,"sc-bmi-h":175}, "sc-age": {"sc-age-birth":"1995-06-15"}, "sc-zakat": {"sc-z-cash":120000,"sc-z-gold":30000,"sc-z-trade":0,"sc-z-debt":10000,"sc-z-nisab":85000},
-      "sc-grade": {"sc-g-cur":78,"sc-g-weight":40,"sc-g-target":85}, "sc-hijri": {"sc-h-greg":"2026-03-20"}, "sc-wordcount": {"sc-wc-text":"اكتب نصك هنا. هذا مثال بسيط لعدّ الكلمات والحروف والجمل في النص."}, "sc-password": {"sc-pw-len":16}
+      "sc-grade": {"sc-g-cur":78,"sc-g-weight":40,"sc-g-target":85}, "sc-hijri": {"sc-h-greg":"2026-03-20"}, "sc-wordcount": {"sc-wc-text":"اكتب نصك هنا. هذا مثال بسيط لعدّ الكلمات والحروف والجمل في النص."}, "sc-password": {"sc-pw-len":16}, "sc-calories": {"sc-cal-age":30,"sc-cal-w":75,"sc-cal-h":175}, "sc-speed": {"sc-sp-km":5,"sc-sp-h":0,"sc-sp-m":30}, "sc-loancompare": {"sc-lc-amount":100000,"sc-lc-ra":12,"sc-lc-ma":24,"sc-lc-rb":10,"sc-lc-mb":36}, "sc-random": {"sc-rn-min":1,"sc-rn-max":100,"sc-rn-count":1}
     };
     function fire(el) { el.dispatchEvent(new Event("input", { bubbles: true })); el.dispatchEvent(new Event("change", { bubbles: true })); }
     root.querySelectorAll(".sc-tool").forEach(section => {
@@ -370,6 +449,9 @@
       "sc-bmi-w": bmi, "sc-bmi-h": bmi, "sc-age-birth": age, "sc-age-to": age,
       "sc-z-cash": zakat, "sc-z-gold": zakat, "sc-z-trade": zakat, "sc-z-debt": zakat, "sc-z-nisab": zakat,
       "sc-g-cur": grade, "sc-g-weight": grade, "sc-g-target": grade,
+      "sc-cal-age": calories, "sc-cal-w": calories, "sc-cal-h": calories, "sc-cal-sex": calories, "sc-cal-act": calories,
+      "sc-sp-km": speed, "sc-sp-h": speed, "sc-sp-m": speed,
+      "sc-lc-amount": loancompare, "sc-lc-ra": loancompare, "sc-lc-ma": loancompare, "sc-lc-rb": loancompare, "sc-lc-mb": loancompare,
       "sc-h-greg": hijri, "sc-h-y": hijri, "sc-h-m": hijri, "sc-h-d": hijri, "sc-wc-text": wordcount,
       "sc-c-p1": compare, "sc-c-e1": compare, "sc-c-l1": compare, "sc-c-w1": compare, "sc-c-p2": compare, "sc-c-e2": compare, "sc-c-l2": compare, "sc-c-w2": compare
     };
@@ -389,9 +471,11 @@
     const decideBox=$("sc-decide"); if(decideBox) decideBox.addEventListener("input", decide);
     const convertType=$("sc-convert-type");
     if(convertType) convertType.addEventListener("change", () => { convert(); decorateAll(); });
+    root.querySelectorAll("[data-tab]").forEach(b => { if (b.querySelector(".sc-i")) return; const t = b.getAttribute("data-tab"), label = b.textContent.trim(); b.innerHTML = "<span class='sc-ti'>" + window.SCI.svg(window.SCI.tab(t), 24) + "</span><span class='sc-tl'>" + label + "</span>"; b.setAttribute("title", label); });
+    root.querySelectorAll(".sc-tool > h2").forEach(h => { if (h.querySelector(".sc-i")) return; const t = h.parentNode.id.replace("sc-", ""); h.innerHTML = "<span class='sc-h2i'>" + window.SCI.svg(window.SCI.tab(t), 22) + "</span>" + h.textContent; });
     /* تصنيفات وبحث الأدوات */
-    const CATS = [["all","الكل"],["shop","🛒 تسوق"],["money","💰 مال"],["biz","📊 أعمال"],["life","🧭 حياة وصحة"],["text","🔤 نصوص وأمان"]];
-    const TAB_CAT = {discount:"shop",unit:"shop",vat:"shop",compare:"shop",decide:"shop",total:"shop",installment:"shop",split:"shop",budget:"money",loan:"money",saving:"money",compound:"money",percent:"money",fx:"money",hourly:"money",margin:"biz",breakeven:"biz",bmi:"life",age:"life",zakat:"life",hijri:"life",trip:"life",dates:"life",convert:"life",grade:"life",wordcount:"text",password:"text"};
+    const CATS = [["all","الكل","all"],["shop","تسوق","cart"],["money","مال","wallet"],["biz","أعمال","chart"],["life","حياة وصحة","heart"],["text","نصوص وأمان","lock"]];
+    const TAB_CAT = {discount:"shop",unit:"shop",vat:"shop",compare:"shop",decide:"shop",total:"shop",installment:"shop",split:"shop",budget:"money",loan:"money",saving:"money",compound:"money",percent:"money",fx:"money",hourly:"money",margin:"biz",breakeven:"biz",bmi:"life",age:"life",zakat:"life",hijri:"life",trip:"life",dates:"life",convert:"life",grade:"life",wordcount:"text",password:"text",random:"text",calories:"life",speed:"life",loancompare:"money"};
     const tabNav = root.querySelector(".sc-tabs");
     if (tabNav && root.querySelectorAll("[data-tab]").length > 12 && !root.querySelector(".sc-filter")) {
       const bar = document.createElement("div"); bar.className = "sc-filter";
@@ -400,7 +484,7 @@
       let curCat = "all";
       const apply = () => { const term = q.value.trim();
         root.querySelectorAll("[data-tab]").forEach(b => { const tab = b.getAttribute("data-tab"); const okCat = curCat === "all" || tab === "assistant" || TAB_CAT[tab] === curCat; const okQ = !term || b.textContent.indexOf(term) > -1; b.style.display = okCat && okQ ? "" : "none"; }); };
-      CATS.forEach(([id, label]) => { const c = document.createElement("button"); c.type = "button"; c.textContent = label; c.setAttribute("aria-pressed", String(id === "all")); c.addEventListener("click", () => { curCat = id; chips.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x === c))); apply(); }); chips.appendChild(c); });
+      CATS.forEach(([id, label, ic]) => { const c = document.createElement("button"); c.type = "button"; c.innerHTML = window.SCI.svg(ic, 16) + "<span>" + label + "</span>"; c.setAttribute("aria-pressed", String(id === "all")); c.addEventListener("click", () => { curCat = id; chips.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x === c))); apply(); }); chips.appendChild(c); });
       q.addEventListener("input", apply); bar.appendChild(chips); bar.appendChild(q); tabNav.parentNode.insertBefore(bar, tabNav);
     }
     /* مقالات مرتبطة بكل أداة */
@@ -421,9 +505,10 @@
     }
     root.querySelectorAll("[data-tab]").forEach(btn => btn.addEventListener("click", () => {
       const tab=btn.getAttribute("data-tab"); showTab(tab);
+      const sec=root.querySelector("#sc-"+tab); if(sec&&sec.scrollIntoView) setTimeout(()=>{ const y=sec.getBoundingClientRect().top+window.pageYOffset-80; window.scrollTo({top:y,behavior:"smooth"}); },30);
       try { history.replaceState(null, "", "#" + tab); } catch (e) {}
     }));
-    discount(); budget(); unit(); percent(); saving(); total(); installment(); convert(); dates(); vat(); compare(); decide(); loan(); margin(); split(); compound(); breakeven(); hourly(); trip(); fx(); bmi(); age(); zakat(); grade(); wordcount(); genPassword(); decorateAll();
+    discount(); budget(); unit(); percent(); saving(); total(); installment(); convert(); dates(); vat(); compare(); decide(); loan(); margin(); split(); compound(); breakeven(); hourly(); trip(); fx(); bmi(); age(); zakat(); grade(); wordcount(); genPassword(); calories(); speed(); loancompare(); decorateAll();
     const fromHash=(location.hash||"").replace("#",""); if(fromHash) showTab(fromHash);
   }
   function start() {
@@ -575,14 +660,14 @@
   var isHome = location.pathname.replace(/index\.html$/, "") === "/";
   if (isHome) document.documentElement.classList.add("sc-home");
   var TOOLS = [
-    ["🏷️", "حاسبة الخصم", "السعر بعد الخصم وقيمة التوفير الحقيقية.", "discount"],
-    ["🆚", "مقارنة المنتجات", "التكلفة الشهرية الحقيقية مع الضمان وعمر الاستخدام.", "compare"],
-    ["🧭", "مركز القرار", "رتّب خياراتك بمعايير وأوزان تحددها أنت.", "decide"],
-    ["💳", "التقسيط", "كم تدفع زيادة عن السعر النقدي فعلاً؟", "installment"],
-    ["🏦", "القرض", "القسط الشهري وإجمالي الفوائد.", "loan"],
-    ["💰", "الميزانية الشهرية", "المتبقي ونسبة الإنفاق من دخلك.", "budget"],
-    ["⚖️", "سعر الوحدة", "أي عبوة أوفر لكل جرام أو لتر؟", "unit"],
-    ["🤖", "المساعد الذكي", "اكتب سؤالك بأرقامك واحصل على الحساب فوراً.", "assistant"]
+    ["tag", "حاسبة الخصم", "السعر بعد الخصم وقيمة التوفير الحقيقية.", "discount"],
+    ["compare", "مقارنة المنتجات", "التكلفة الشهرية الحقيقية مع الضمان وعمر الاستخدام.", "compare"],
+    ["compass", "مركز القرار", "رتّب خياراتك بمعايير وأوزان تحددها أنت.", "decide"],
+    ["card", "التقسيط", "كم تدفع زيادة عن السعر النقدي فعلاً؟", "installment"],
+    ["bank", "القرض", "القسط الشهري وإجمالي الفوائد.", "loan"],
+    ["wallet", "الميزانية الشهرية", "المتبقي ونسبة الإنفاق من دخلك.", "budget"],
+    ["scale", "سعر الوحدة", "أي عبوة أوفر لكل جرام أو لتر؟", "unit"],
+    ["bot", "المساعد الذكي", "اكتب سؤالك بأرقامك واحصل على الحساب فوراً.", "assistant"]
   ];
   function esc(t) { var d = document.createElement("div"); d.textContent = t; return d.innerHTML; }
   function run() {
@@ -601,14 +686,14 @@
         "<div class='sc-hero2-cta'><a class='sc-btn' href='" + tools + "'>ابدأ بالأدوات</a><a class='sc-btn alt' href='/search'>اقرأ الأدلة</a></div></div>" +
         "<div class='sc-hero2-art' aria-hidden='true'><div class='sc-demo'><small>مثال توضيحي (أرقام افتراضية)</small><div class='row'><span>السعر الأصلي</span><b>2,000</b></div><div class='row'><span>الخصم</span><b>20%</b></div><div class='bar'><i></i></div><div class='row big'><span>تدفع</span><b>1,600</b></div><div class='row save'><span>توفير</span><b>400</b></div></div><span class='orb o1'></span><span class='orb o2'></span></div></section>" +
         "<section class='sc-sec'><h2 class='sc-h2'>أدواتنا الأكثر استخداماً</h2><p class='sc-sub'>اختر الأداة، جرّب مثالاً جاهزاً أو أدخل أرقامك.</p><div class='sc-toolgrid'>" +
-        TOOLS.map(function (t) { return "<a class='sc-tool-tile' href='" + tools + "#" + t[3] + "'><span class='ico'>" + t[0] + "</span><b>" + esc(t[1]) + "</b><small>" + esc(t[2]) + "</small></a>"; }).join("") +
-        "</div><p class='sc-more'><a href='" + tools + "'>عرض كل الأدوات (28 أداة) ←</a></p></section>" +
+        TOOLS.map(function (t) { return "<a class='sc-tool-tile' href='" + tools + "#" + t[3] + "'><span class='ico'>" + window.SCI.svg(t[0], 26) + "</span><b>" + esc(t[1]) + "</b><small>" + esc(t[2]) + "</small></a>"; }).join("") +
+        "</div><p class='sc-more'><a href='" + tools + "'>عرض كل الأدوات (32 أداة) ←</a></p></section>" +
         "<section class='sc-sec sc-steps'><h2 class='sc-h2'>كيف تستفيد؟</h2><div class='sc-stepgrid'>" +
         "<div><span>1</span><b>أدخل أرقامك</b><small>السعر، الخصم، الضمان، الدخل… ما تعرفه أنت.</small></div>" +
         "<div><span>2</span><b>شاهد النتيجة فوراً</b><small>تُحسب داخل متصفحك بمعادلات معروفة.</small></div>" +
         "<div><span>3</span><b>قارن وقرر</b><small>استخدم مركز القرار لترتيب خياراتك بأوزانك.</small></div></div></section>" +
         "<section class='sc-sec'><h2 class='sc-h2'>أحدث الأدلة والمقالات</h2><p class='sc-sub'>شروحات عملية بأمثلة رقمية مبسطة.</p><div class='sc-cards sc-latest-posts'></div><p class='sc-more'><a href='/search'>كل المقالات ←</a></p></section>" +
-        "<section class='sc-sec sc-trust'><div><b>🔒 خصوصيتك أولاً</b><small>لا نطلب تسجيلاً ولا نرسل مدخلاتك إلى أي جهة.</small></div><div><b>🧾 بلا أرقام مختلقة</b><small>لا نعرض أسعاراً أو تقييمات لا نملك مصدرها.</small></div><div><b>✍️ محتوى نكتبه بأنفسنا</b><small>اطّلع على <a href='" + by("سياسة المحتوى") + "'>سياسة المحتوى والتحرير</a>.</small></div></section></div>";
+        "<section class='sc-sec sc-trust'><div><b>"+window.SCI.svg('shield',20)+" خصوصيتك أولاً</b><small>لا نطلب تسجيلاً ولا نرسل مدخلاتك إلى أي جهة.</small></div><div><b>"+window.SCI.svg('receipt',20)+" بلا أرقام مختلقة</b><small>لا نعرض أسعاراً أو تقييمات لا نملك مصدرها.</small></div><div><b>"+window.SCI.svg('pen',20)+" محتوى نكتبه بأنفسنا</b><small>اطّلع على <a href='" + by("سياسة المحتوى") + "'>سياسة المحتوى والتحرير</a>.</small></div></section></div>";
       var wrap = document.createElement("div"); wrap.innerHTML = html; host.appendChild(wrap.firstChild);
       document.documentElement.classList.add("sc-home-ready");
       if (window.__scFillLatest) window.__scFillLatest();
@@ -636,7 +721,7 @@
       .then(function (j) { return ((j.feed && j.feed.entry) || []).map(function (e) { var l = (e.link || []).filter(function (x) { return x.rel === "alternate"; })[0]; return { title: e.title.$t, url: l ? l.href : "", date: (e.published && e.published.$t || "").slice(0, 10), labels: (e.category || []).map(function (c) { return c.term; }) }; }); });
   }
   function panel(title, sub) { var c = el("section", "adm-card"); if (title) { var h = el("div", "adm-h"); h.appendChild(el("h2", null, title)); if (sub) h.appendChild(el("span", "adm-sub", sub)); c.appendChild(h); } return c; }
-  function stat(label, value, hint, tone) { var k = el("div", "adm-stat" + (tone ? " " + tone : "")); k.appendChild(el("span", "adm-lbl", label)); k.appendChild(el("b", null, value)); if (hint) k.appendChild(el("small", null, hint)); return k; }
+  function stat(label, value, hint, tone, ic) { var k = el("div", "adm-stat" + (tone ? " " + tone : "")); if (ic) { var ii = el("i", "adm-ico"); ii.innerHTML = window.SCI.svg(ic, 22); k.appendChild(ii); } k.appendChild(el("span", "adm-lbl", label)); k.appendChild(el("b", null, value)); if (hint) k.appendChild(el("small", null, hint)); return k; }
   function badge(text, tone) { return el("span", "adm-badge " + (tone || ""), text); }
   function table(head, rows) {
     var t = el("table", "adm-table"), h = el("tr"); head.forEach(function (x) { h.appendChild(el("th", null, x)); }); t.appendChild(h);
@@ -690,15 +775,15 @@
   function tabOverview(root) {
     var s = D.stats, kp = el("div", "adm-stats");
     if (s) {
-      kp.appendChild(stat("زوار 7 أيام", NF.format(Math.max(0, s.d7 - botSince(7))), "بعد استبعاد الفحص الآلي"));
-      kp.appendChild(stat("زوار 30 يوماً", NF.format(Math.max(0, s.d30 - botSince(30))), "بعد استبعاد الفحص الآلي"));
-      kp.appendChild(stat("إجمالي الزوار", NF.format(Math.max(0, s.all - botSince(null))), "منذ إنشاء المدونة"));
+      kp.appendChild(stat("زوار 7 أيام", NF.format(Math.max(0, s.d7 - botSince(7))), "بعد استبعاد الفحص الآلي", "", "eye"));
+      kp.appendChild(stat("زوار 30 يوماً", NF.format(Math.max(0, s.d30 - botSince(30))), "بعد استبعاد الفحص الآلي", "", "trend"));
+      kp.appendChild(stat("إجمالي الزوار", NF.format(Math.max(0, s.all - botSince(null))), "منذ إنشاء المدونة", "", "user"));
     } else kp.appendChild(stat("المشاهدات", "—", "تُحدَّث يومياً؛ لم يصدر أول تقرير بعد"));
-    kp.appendChild(stat("المقالات", NF.format(D.posts.length), "منشورة"));
+    kp.appendChild(stat("المقالات", NF.format(D.posts.length), "منشورة", "", "file"));
     var fails = (D.e2e || []).filter(function (x) { return x.lvl === "FAIL"; }).length, tot = (D.e2e || []).filter(function (x) { return x.lvl !== "WARN"; }).length;
-    kp.appendChild(stat("الفحص الفني", D.e2e ? (tot - fails) + "/" + tot : "—", fails ? "فحوص تحتاج مراجعة" : "كل شيء يعمل", fails ? "bad" : "good"));
+    kp.appendChild(stat("الفحص الفني", D.e2e ? (tot - fails) + "/" + tot : "—", fails ? "فحوص تحتاج مراجعة" : "كل شيء يعمل", fails ? "bad" : "good", "activity"));
     var sc = D.audit ? D.audit.score : null;
-    kp.appendChild(stat("جاهزية AdSense", sc != null ? sc + "%" : "—", "فحص آلي للمعايير", sc != null && sc >= 90 ? "good" : "warn"));
+    kp.appendChild(stat("جاهزية AdSense", sc != null ? sc + "%" : "—", "فحص آلي للمعايير", sc != null && sc >= 90 ? "good" : "warn", "shieldok"));
     root.appendChild(kp);
     var c1 = panel("الزيارات", "مصدر الأرقام: Blogger بعد استبعاد زيارات الفحص الآلي"); chart(c1);
     if (s) c1.appendChild(el("p", "adm-muted", "آخر تحديث: " + s.updated + " — الفحص الآلي المستبعد: " + NF.format(botSince(null)) + " زيارة (جزء منها تقديري للأيام الأولى)."));
@@ -774,16 +859,16 @@
       .forEach(function (x) { g.appendChild(a(x[1], x[0], "adm-link")); });
     c2.appendChild(g); root.appendChild(c2);
   }
-  var TABS = [["overview", "نظرة عامة", tabOverview], ["content", "المحتوى", tabContent], ["quality", "الجودة وAdSense", tabQuality], ["tech", "الفحص الفني", tabTech], ["links", "الروابط والخدمات", tabLinks]];
+  var TABS = [["overview", "نظرة عامة", tabOverview, "grid"], ["content", "المحتوى", tabContent, "file"], ["quality", "الجودة وAdSense", tabQuality, "shieldok"], ["tech", "الفحص الفني", tabTech, "activity"], ["links", "الروابط والخدمات", tabLinks, "link"]];
   function dashboard(root) {
-    root.textContent = ""; root.className = "adm";
+    root.textContent = ""; root.className = "adm adm-app";
     var bar = el("div", "adm-tabs"), body = el("div", "adm-body");
-    var out = el("button", "adm-out", "خروج"); out.type = "button"; out.addEventListener("click", function () { try { sessionStorage.removeItem("sc-admin"); } catch (e) {} location.reload(); });
+    var out = el("button", "adm-out"); out.innerHTML = window.SCI.svg("lock", 18) + "<span>خروج</span>"; out.type = "button"; out.addEventListener("click", function () { try { sessionStorage.removeItem("sc-admin"); } catch (e) {} location.reload(); });
     function show(id) {
       Array.prototype.forEach.call(bar.querySelectorAll("button[data-t]"), function (b) { b.setAttribute("aria-selected", String(b.dataset.t === id)); });
       body.textContent = ""; TABS.forEach(function (t) { if (t[0] === id) t[2](body); });
     }
-    TABS.forEach(function (t) { var b = el("button", null, t[1]); b.type = "button"; b.dataset.t = t[0]; b.addEventListener("click", function () { show(t[0]); }); bar.appendChild(b); });
+    TABS.forEach(function (t) { var b = el("button"); b.innerHTML = window.SCI.svg(t[3], 20) + "<span>" + t[1] + "</span>"; b.type = "button"; b.dataset.t = t[0]; b.addEventListener("click", function () { show(t[0]); }); bar.appendChild(b); });
     bar.appendChild(out); root.appendChild(bar); root.appendChild(body);
     body.appendChild(el("p", "adm-muted", "جارٍ تحميل البيانات…"));
     load().then(function () { show("overview"); });

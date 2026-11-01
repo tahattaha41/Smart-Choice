@@ -166,3 +166,7 @@ html body .sc-footer small{display:block;opacity:.7;margin-top:10px}
 .sc-share a,.sc-share button{border:1px solid #cfdcf7;background:#fff;color:var(--sc-blue);border-radius:999px;padding:5px 14px;font:inherit;font-size:14.5px;font-weight:700;cursor:pointer;text-decoration:none}
 .sc-related h2{font-size:24px;margin:10px 0 12px;color:var(--sc-navy)}
 .sc-related .sc-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.sc-page textarea{width:100%;border:1.5px solid var(--sc-line);border-radius:12px;padding:10px 14px;font:inherit;background:#fbfcff;color:var(--sc-ink);resize:vertical}
+.sc-page .sc-field select{width:100%;border:1.5px solid var(--sc-line);border-radius:12px;padding:10px 14px;font:inherit;background:#fbfcff;color:var(--sc-ink)}
+#sc-assistant-result{font-size:18px;font-weight:700}
+.sc-admin .sc-ai-text{white-space:pre-wrap;line-height:1.9;font-size:16px;background:#f7faff;border:1px solid var(--sc-line);border-radius:12px;padding:14px 16px}

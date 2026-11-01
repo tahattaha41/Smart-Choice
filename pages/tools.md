@@ -24,6 +24,12 @@ publish: true
   <button type="button" data-tab="installment" aria-selected="false">💳 التقسيط</button>
   <button type="button" data-tab="convert" aria-selected="false">🔄 تحويل الوحدات</button>
   <button type="button" data-tab="dates" aria-selected="false">📅 فرق الأيام</button>
+  <button type="button" data-tab="assistant" aria-selected="false">🤖 المساعد الذكي</button>
+  <button type="button" data-tab="compound" aria-selected="false">🌱 نمو الادخار</button>
+  <button type="button" data-tab="breakeven" aria-selected="false">⚖️ نقطة التعادل</button>
+  <button type="button" data-tab="hourly" aria-selected="false">⏱️ قيمة ساعتك</button>
+  <button type="button" data-tab="trip" aria-selected="false">🚗 تكلفة الرحلة</button>
+  <button type="button" data-tab="fx" aria-selected="false">💱 تحويل عملة</button>
 </nav>
 <section class="sc-tool-card sc-tool" id="sc-discount">
   <h2>حاسبة الخصم والسعر النهائي</h2><p class="sc-muted">أدخل السعر والخصم لمعرفة ما ستدفعه وقيمة التوفير.</p>
@@ -130,6 +136,39 @@ publish: true
 <h2>قسمة الفاتورة</h2><p class="sc-muted">قسّم إجمالي الفاتورة بين عدة أشخاص مع نسبة إكرامية اختيارية.</p>
 <div class="sc-tool-grid"><div class="sc-field"><label for="sc-split-total">إجمالي الفاتورة</label><input id="sc-split-total" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-split-tip">الإكرامية %</label><input id="sc-split-tip" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-split-people">عدد الأشخاص</label><input id="sc-split-people" type="number" min="0" step="any" inputmode="decimal" value="2"></div></div>
 <div class="sc-tool-result" id="sc-split-result" aria-live="polite">أدخل إجمالي الفاتورة.</div>
+</section>
+
+<section class="sc-tool-card sc-tool" id="sc-assistant" hidden>
+<h2>المساعد الذكي</h2><p class="sc-muted">اكتب سؤالك بالعربية بأرقامك، مثل: «خصم 25% على 1800» أو «قرض 100000 بفائدة 12% لمدة سنتين». يفهم السؤال ويشغّل الأداة المناسبة ويعرض النتيجة. يعمل داخل متصفحك ولا يرسل ما تكتبه لأي جهة.</p>
+<div class="sc-field"><label for="sc-ask">سؤالك</label><textarea id="sc-ask" rows="3" placeholder="مثال: ضريبة 14% على 5000"></textarea></div>
+<div class="sc-actions"><button type="button" class="sc-ghost" id="sc-ask-go">اسأل</button><button type="button" class="sc-ghost sc-chip" data-q="خصم 25% على 1800">خصم 25% على 1800</button><button type="button" class="sc-ghost sc-chip" data-q="قرض 100000 بفائدة 12% لمدة سنتين">قرض 100000 بفائدة 12% سنتين</button><button type="button" class="sc-ghost sc-chip" data-q="تكلفة 80 وسعر البيع 100 كم الهامش">هامش: تكلفة 80 وبيع 100</button><button type="button" class="sc-ghost sc-chip" data-q="هدف ادخار 30000 وأدخر 2000 شهرياً">هدف ادخار 30000 بـ 2000 شهرياً</button></div>
+<div class="sc-tool-result" id="sc-assistant-result" aria-live="polite" data-static="1">اكتب سؤالك أو اختر مثالاً.</div>
+<p class="sc-muted" id="sc-assistant-open"></p>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-compound" hidden>
+<h2>نمو الادخار والفائدة المركبة</h2><p class="sc-muted">كم يصبح مبلغك بعد سنوات مع إضافة شهرية؟ أدخل معدل عائد سنوي تفترضه أنت؛ لا نعرض معدلات سوق ولا نضمن عائداً.</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-cp-start">المبلغ الحالي</label><input id="sc-cp-start" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-cp-add">الإضافة الشهرية</label><input id="sc-cp-add" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-cp-rate">العائد السنوي المفترض %</label><input id="sc-cp-rate" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-cp-years">المدة بالسنوات</label><input id="sc-cp-years" type="number" min="0" step="any" inputmode="decimal"></div></div>
+<div class="sc-tool-result" id="sc-compound-result" aria-live="polite">أدخل البيانات.</div>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-breakeven" hidden>
+<h2>نقطة التعادل</h2><p class="sc-muted">كم وحدة تبيع حتى تغطي تكاليفك الثابتة؟ مفيد لأي مشروع صغير قبل تحديد السعر.</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-be-fixed">التكاليف الثابتة الشهرية (إيجار، اشتراكات…)</label><input id="sc-be-fixed" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-be-price">سعر بيع الوحدة</label><input id="sc-be-price" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-be-var">التكلفة المتغيرة للوحدة</label><input id="sc-be-var" type="number" min="0" step="any" inputmode="decimal"></div></div>
+<div class="sc-tool-result" id="sc-breakeven-result" aria-live="polite">أدخل البيانات.</div>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-hourly" hidden>
+<h2>قيمة ساعتك وسعر الشراء بساعات العمل</h2><p class="sc-muted">اعرف كم تساوي ساعة عملك، وكم ساعة تحتاج لتدفع ثمن منتج ما.</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-hr-income">دخلك الشهري الصافي</label><input id="sc-hr-income" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-hr-hours">ساعات العمل في اليوم</label><input id="sc-hr-hours" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-hr-days">أيام العمل في الأسبوع</label><input id="sc-hr-days" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-hr-price">سعر المنتج (اختياري)</label><input id="sc-hr-price" type="number" min="0" step="any" inputmode="decimal"></div></div>
+<div class="sc-tool-result" id="sc-hourly-result" aria-live="polite">أدخل البيانات.</div>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-trip" hidden>
+<h2>تكلفة الرحلة بالسيارة</h2><p class="sc-muted">احسب تكلفة الوقود للرحلة ونصيب كل راكب. استهلاك سيارتك وسعر اللتر من أرقامك أنت.</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-trip-km">المسافة (كم)</label><input id="sc-trip-km" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-trip-cons">الاستهلاك (لتر/100 كم)</label><input id="sc-trip-cons" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-trip-price">سعر لتر الوقود</label><input id="sc-trip-price" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-trip-people">عدد الركاب (بمن فيهم السائق)</label><input id="sc-trip-people" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-trip-way">نوع الرحلة</label><select id="sc-trip-way"><option value="1">ذهاب فقط</option><option value="2">ذهاب وعودة</option></select></div></div>
+<div class="sc-tool-result" id="sc-trip-result" aria-live="polite">أدخل البيانات.</div>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-fx" hidden>
+<h2>تحويل العملة بسعر تحدده أنت</h2><p class="sc-muted">لا نعرض أسعار صرف مباشرة. أدخل السعر الذي تراه في بنكك أو تطبيقك (كم وحدة من العملة الهدف تساوي وحدة واحدة من الأصلية) وأضف عمولة إن وُجدت.</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-fx-amount">المبلغ بالعملة الأصلية</label><input id="sc-fx-amount" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-fx-rate">سعر الصرف</label><input id="sc-fx-rate" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-fx-fee">عمولة التحويل %</label><input id="sc-fx-fee" type="number" min="0" step="any" inputmode="decimal"></div></div>
+<div class="sc-tool-result" id="sc-fx-result" aria-live="polite">أدخل البيانات.</div>
 </section>
 
 <p class="sc-muted">ملاحظة: النتائج حسابية بناءً على البيانات التي تدخلها، ولا تمثل أسعار سوق مباشرة أو نصيحة مالية.</p>

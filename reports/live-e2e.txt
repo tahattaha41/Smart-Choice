@@ -3,6 +3,7 @@ OK    Home shows hero
 OK    Installed theme has the GitHub loader (if FAIL: upload theme/smart-choice-blogger.xml once)
 OK    CDN serves latest front-end JS (self-heal present)
 OK    Nav has no old-brand pages: الرئيسية الأدوات الذكية مقارنة المنتجات مركز القرار من نحن سياسة المحتوى والتحرير اتصل بنا سياسة الخصوصية لوحة الإدارة ش
+OK    ads.txt يحتوي معرّف الناشر
 OK    Tools page loads
 OK    Tools: tool sections rendered
 OK    Tools: discount calculator works -> السعر بعد الخصم ١٬٦٠٠ قيمة التوفير ٤٠٠
@@ -18,13 +19,13 @@ OK    Privacy: body text length 1751
 OK    Terms loads
 OK    Terms: body text length 941
 OK    Decision page loads
-OK    Decision page: body text length 458
+OK    Decision page: body text length 579
 OK    Compare page loads
-OK    Compare page: body text length 788
+OK    Compare page: body text length 849
 OK    Editorial page loads
 OK    Editorial page: body text length 955
 OK    Admin page loads
-OK    Admin page: body text length 180
+OK    Admin page: body text length 185
 OK    Admin: password gate shown and no data exposed before login
 OK    Posts in feed: 20
 OK    Latest post body length 4367

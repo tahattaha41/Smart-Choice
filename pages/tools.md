@@ -38,6 +38,9 @@ publish: true
   <button type="button" data-tab="wordcount" aria-selected="false">عدّاد الكلمات</button>
   <button type="button" data-tab="calories" aria-selected="false">السعرات اليومية</button>
   <button type="button" data-tab="speed" aria-selected="false">السرعة والوتيرة</button>
+  <button type="button" data-tab="roi" aria-selected="false">العائد على الاستثمار</button>
+  <button type="button" data-tab="inflation" aria-selected="false">التضخم والقوة الشرائية</button>
+  <button type="button" data-tab="stack" aria-selected="false">خصومات متتالية</button>
   <button type="button" data-tab="loancompare" aria-selected="false">مقارنة عرضي تمويل</button>
   <button type="button" data-tab="random" aria-selected="false">قرعة وأرقام عشوائية</button>
   <button type="button" data-tab="password" aria-selected="false">مولّد كلمات المرور</button>
@@ -229,6 +232,21 @@ publish: true
 <h2>السرعة والوتيرة</h2><p class="sc-muted">احسب متوسط سرعتك ووتيرة الجري أو المشي من المسافة والزمن.</p>
 <div class="sc-tool-grid"><div class="sc-field"><label for="sc-sp-km">المسافة (كم)</label><input id="sc-sp-km" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-sp-h">الساعات</label><input id="sc-sp-h" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-sp-m">الدقائق</label><input id="sc-sp-m" type="number" min="0" step="any" inputmode="decimal"></div></div>
 <div class="sc-tool-result" id="sc-speed-result" aria-live="polite">أدخل المسافة والزمن.</div>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-roi" hidden>
+<h2>العائد على الاستثمار (ROI)</h2><p class="sc-muted">اعرف ربحك الفعلي ونسبة العائد الكلية والسنوية لأي استثمار أو مشروع صغير.</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-roi-cost">المبلغ المستثمر</label><input id="sc-roi-cost" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-roi-final">القيمة النهائية (شاملة الأرباح)</label><input id="sc-roi-final" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-roi-years">المدة بالسنوات</label><input id="sc-roi-years" type="number" min="0" step="any" inputmode="decimal"></div></div>
+<div class="sc-tool-result" id="sc-roi-result" aria-live="polite">أدخل المبلغ والقيمة النهائية.</div>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-inflation" hidden>
+<h2>التضخم والقوة الشرائية</h2><p class="sc-muted">كم ستكلّف سلعة بسعر اليوم بعد سنوات، وكم ستساوي مدخراتك فعلياً مع ارتفاع الأسعار.</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-inf-amount">المبلغ اليوم</label><input id="sc-inf-amount" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-inf-rate">معدل التضخم السنوي %</label><input id="sc-inf-rate" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-inf-years">عدد السنوات</label><input id="sc-inf-years" type="number" min="0" step="any" inputmode="decimal"></div></div>
+<div class="sc-tool-result" id="sc-inflation-result" aria-live="polite">أدخل المبلغ ومعدل التضخم والمدة.</div>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-stack" hidden>
+<h2>خصومات متتالية وكوبون</h2><p class="sc-muted">خصمان متتاليان (مثل 20% ثم 10%) وكوبون ثابت: ما السعر النهائي والخصم الحقيقي؟ الخصمان لا يُجمعان عادةً.</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-st-price">السعر الأصلي</label><input id="sc-st-price" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-st-d1">الخصم الأول %</label><input id="sc-st-d1" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-st-d2">الخصم الثاني %</label><input id="sc-st-d2" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-st-coupon">كوبون ثابت (اختياري)</label><input id="sc-st-coupon" type="number" min="0" step="any" inputmode="decimal"></div></div>
+<div class="sc-tool-result" id="sc-stack-result" aria-live="polite">أدخل السعر والخصومات.</div>
 </section>
 <section class="sc-tool-card sc-tool" id="sc-loancompare" hidden>
 <h2>مقارنة عرضي تمويل</h2><p class="sc-muted">قارن عرضين لنفس المبلغ بفائدة ومدة مختلفتين: أيهما أقل في إجمالي الفوائد وأيهما أخف في القسط؟</p>

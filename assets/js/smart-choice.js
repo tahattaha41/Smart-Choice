@@ -25,6 +25,7 @@
     user: "M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z",
     banknote: "M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 12h.01M18 12h.01",
     cap: "M22 10L12 5 2 10l10 5zM6 12v5c3 3 9 3 12 0v-5",
+    sun: "M12 4V2M12 22v-2M4 12H2M22 12h-2M5.6 5.6 4.2 4.2M19.8 19.8l-1.4-1.4M5.6 18.4l-1.4 1.4M19.8 4.2l-1.4 1.4M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10z",
     moon: "M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z",
     type: "M4 7V4h16v3M9 20h6M12 4v16",
     lock: "M5 11h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2zM7 11V7a5 5 0 0 1 10 0v4",
@@ -43,7 +44,7 @@
     eye: "M2 12s4-8 10-8 10 8 10 8-4 8-10 8-10-8-10-8zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z",
     all: "M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"
   };
-  var TAB = { discount: "tag", budget: "wallet", unit: "scale", vat: "calc", compare: "compare", decide: "compass", loan: "bank", margin: "chart", split: "receipt", percent: "trend", saving: "target", total: "receipt", installment: "card", convert: "repeat", dates: "calendar", assistant: "bot", compound: "sprout", breakeven: "scales", hourly: "timer", trip: "car", fx: "coin", bmi: "heart", age: "user", zakat: "banknote", grade: "cap", hijri: "moon", wordcount: "type", password: "lock", calories: "flame", speed: "gauge", loancompare: "bank", random: "dice" };
+  var TAB = { discount: "tag", budget: "wallet", unit: "scale", vat: "calc", compare: "compare", decide: "compass", loan: "bank", margin: "chart", split: "receipt", percent: "trend", saving: "target", total: "receipt", installment: "card", convert: "repeat", dates: "calendar", assistant: "bot", compound: "sprout", breakeven: "scales", hourly: "timer", trip: "car", fx: "coin", bmi: "heart", age: "user", zakat: "banknote", grade: "cap", hijri: "moon", wordcount: "type", password: "lock", calories: "flame", speed: "gauge", loancompare: "bank", random: "dice", roi: "trend", inflation: "banknote", stack: "tag" };
   function svg(name, size) {
     var d = P[name] || P.all; size = size || 22;
     return "<svg class='sc-i' width='" + size + "' height='" + size + "' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='" + d + "'/></svg>";
@@ -257,7 +258,35 @@
       const set=(map)=>{Object.keys(map).forEach(id=>{const el=$(id); if(el){el.value=map[id]; el.dispatchEvent(new Event("input",{bubbles:true})); el.dispatchEvent(new Event("change",{bubbles:true}));}});};
       let tab=null, label="", ok=false;
       const rest=(skip)=>nums.filter(n=>n!==Number(skip));
-      if(has("قرض","تمويل")&&nums.length>=2){
+      const near=(words,def)=>{ const m=txt.match(new RegExp("(?:"+words.join("|")+")[^\\d]{0,14}(\\d+(?:\\.\\d+)?)")); return m?Number(m[1]):def; };
+      const bef=(words,def)=>{ const m=txt.match(new RegExp("(\\d+(?:\\.\\d+)?)\\s*(?:"+words.join("|")+")")); return m?Number(m[1]):def; };
+      if(has("تضخم")&&nums.length>=2){
+        const rate=pct!=null?Number(pct):nums[1], amt=nums[0], yrs=nums[nums.length-1]; set({"sc-inf-amount":amt,"sc-inf-rate":rate,"sc-inf-years":yrs}); tab="inflation"; label="التضخم والقوة الشرائية"; ok=true;
+      } else if(has("خصمين","خصم متتالي","خصومات متتالية","خصم اضافي","خصم إضافي")&&nums.length>=3){
+        const p=rest(pct)[0]!=null?Math.max(...nums):nums[0], ds=nums.filter(n=>n!==p); set({"sc-st-price":p,"sc-st-d1":ds[0],"sc-st-d2":ds[1]!=null?ds[1]:0,"sc-st-coupon":""}); tab="stack"; label="خصومات متتالية"; ok=true;
+      } else if(has("roi","عائد على الاستثمار","العائد على","ربحت من","استثمرت")&&nums.length>=2){
+        set({"sc-roi-cost":nums[0],"sc-roi-final":nums[1],"sc-roi-years":nums[2]!=null?nums[2]:""}); tab="roi"; label="العائد على الاستثمار"; ok=true;
+      } else if(has("فائدة مركبة","استثمار","أستثمر","استثمر","نمو")&&nums.length>=3){
+        const yrs=nums[nums.length-1], rate=pct!=null?Number(pct):nums[1], start=nums[0], add=has("شهري","كل شهر")&&nums.length>=4?nums[1]:0;
+        set({"sc-cp-start":start,"sc-cp-add":add,"sc-cp-rate":rate,"sc-cp-years":yrs}); tab="compound"; label="الفائدة المركبة"; ok=true;
+      } else if(!has("سعرات")&&has("كتلة الجسم","bmi","وزني","وزن")&&has("طول","طولي","سم")&&nums.length>=2){
+        set({"sc-bmi-w":Math.min(nums[0],nums[1]),"sc-bmi-h":Math.max(nums[0],nums[1])}); tab="bmi"; label="مؤشر كتلة الجسم"; ok=true;
+      } else if(has("سعرات","حرق","احتياج")&&nums.length>=3){
+        set({"sc-cal-sex":has("أنثى","انثى","امرأة","بنت","سيدة")?"f":"m","sc-cal-age":nums[0],"sc-cal-w":nums[1],"sc-cal-h":nums[2]}); tab="calories"; label="السعرات اليومية"; ok=true;
+      } else if(has("زكاة","زكاه")&&nums.length>=1){
+        set({"sc-z-cash":nums[0],"sc-z-gold":near(["ذهب"],0),"sc-z-trade":near(["تجارة","بضاعة"],0),"sc-z-debt":near(["ديون","دين"],0)}); tab="zakat"; label="حاسبة الزكاة"; ok=true;
+      } else if(has("تقسيط","قسط","أقساط","اقساط")&&nums.length>=3){
+        const cash=near(["سعر","كاش","ثمن"],Math.max(...nums)), down=near(["مقدم"],0), months=near(["شهر","شهور","مدة","على"],nums[nums.length-1]), mp=near(["قسط","شهري"],nums.find(n=>n!==cash&&n!==down&&n!==months)||0);
+        set({"sc-cash":cash,"sc-down":down,"sc-months":months,"sc-monthpay":mp}); tab="installment"; label="التقسيط مقابل الكاش"; ok=true;
+      } else if(has("نقطة التعادل","تعادل")&&nums.length>=3){
+        set({"sc-be-fixed":near(["ثابت","تكاليف ثابتة"],nums[0]),"sc-be-price":near(["سعر","البيع"],nums[1]),"sc-be-var":near(["متغير","تكلفة الوحدة"],nums[2])}); tab="breakeven"; label="نقطة التعادل"; ok=true;
+      } else if(has("رحلة","بنزين","وقود","سفر")&&nums.length>=3){
+        set({"sc-trip-km":bef(["كم","كيلو"],near(["مسافة"],nums[0])),"sc-trip-cons":near(["لتر","استهلاك"],nums[1]),"sc-trip-price":near(["سعر"],nums[2]),"sc-trip-people":near(["اشخاص","أشخاص","ركاب"],1)}); tab="trip"; label="تكلفة الرحلة"; ok=true;
+      } else if(has("سرعة","وتيرة","جري","مشي")&&nums.length>=2){
+        const km=bef(["كم","كيلو"],near(["مسافة"],nums[0])); set({"sc-sp-km":km,"sc-sp-h":has("ساعة","ساعات")?near(["ساعة","ساعات","في","خلال"],0):0,"sc-sp-m":has("دقيقة","دقائق")?near(["دقيقة","دقائق","في","خلال"],0):0}); tab="speed"; label="السرعة والوتيرة"; ok=true;
+      } else if(has("أرخص","ارخص","أوفر","اوفر","سعر الوحدة")&&nums.length>=4){
+        set({"sc-p1":nums[0],"sc-q1":nums[1],"sc-p2":nums[2],"sc-q2":nums[3]}); tab="unit"; label="سعر الوحدة"; ok=true;
+      } else if(has("قرض","تمويل")&&nums.length>=2){
         const rate=pct!=null?Number(pct):nums[1]; let months=NaN;
         const others=pct!=null?rest(pct):nums.slice(2);
         if(has("سنتين")) months=24; else if(others.length>=2||(pct==null&&nums.length>=3)){ const m=nums[nums.length-1]; months=has("سنة","سنوات","عام")?m*12:m; } else if(has("سنة","عام")) months=12;
@@ -279,7 +308,7 @@
       } else if(has("نسبة","زيادة","ارتفع","ارتفاع","تغير")&&nums.length>=2){
         set({"sc-base":nums[0],"sc-new":nums[1]}); tab="percent"; label="النسبة المئوية والتغير"; ok=true;
       }
-      if(!ok&&!nums.length){out.textContent="أنا مساعد حسابي يعمل داخل متصفحك: أفهم أسئلة الخصم والضريبة والقرض وهامش الربح والادخار وقسمة الفاتورة والنسبة المئوية. لست محادثاً عاماً. اكتب سؤالك مع أرقامه، مثل: «خصم 20% على 2000».";if(openp)openp.textContent="";return;}
+      if(!ok&&!nums.length){out.textContent="أنا مساعد حسابي يعمل داخل متصفحك: أفهم أسئلة الخصم (والمتتالي) والضريبة والقرض والتقسيط والفائدة المركبة والعائد على الاستثمار والتضخم وهامش الربح ونقطة التعادل والادخار والزكاة والرحلة والسعرات ومؤشر الجسم وقسمة الفاتورة والنسبة المئوية. لست محادثاً عاماً. اكتب سؤالك مع أرقامه، مثل: «خصم 20% على 2000».";if(openp)openp.textContent="";return;}
       if(!ok){out.textContent="لم أفهم السؤال بعد. اذكر نوع الحساب والأرقام، مثل: «خصم 20% على 2000»، «ضريبة 14% على 5000»، «قرض 100000 بفائدة 12% لمدة 24 شهر»، «تكلفة 80 وسعر البيع 100 كم الهامش»، «نسبة من 200 إلى 250».";if(openp)openp.textContent="";return;}
       const sec=$("sc-"+tab), res=sec&&sec.querySelector(".sc-tool-result");
       const k=res?Array.from(res.querySelectorAll(".kpi")).map(x=>{const sp=x.querySelector("span"),bb=x.querySelector("b,strong");return (sp?sp.textContent:"")+": "+(bb?bb.textContent:"");}):[];
@@ -361,6 +390,25 @@
       const bmr=10*w+6.25*h-5*a+(sex==="m"?5:-161), tdee=bmr*act;
       out.textContent="معدل الحرق الأساسي: "+fmt(Math.round(bmr))+" سعرة — احتياجك اليومي: "+fmt(Math.round(tdee))+" سعرة — للتنحيف التدريجي: "+fmt(Math.round(tdee-500))+" — لزيادة الوزن: "+fmt(Math.round(tdee+500));
     }
+    function roi() {
+      const c=value("sc-roi-cost"), f=value("sc-roi-final"), y=value("sc-roi-years"), out=$("sc-roi-result"); if(!out)return;
+      if(!(c>0)||!Number.isFinite(f)||f<0){out.textContent="أدخل المبلغ المستثمر (أكبر من صفر) والقيمة النهائية.";return;}
+      const p=f-c, r=p/c*100; let t="صافي الربح: "+fmt(p)+" — العائد الكلي: "+fmt(r)+"%";
+      if(y>0){ const a=(Math.pow(f/c,1/y)-1)*100; t+=" — العائد السنوي المركب: "+fmt(a)+"% — متوسط الربح سنوياً: "+fmt(p/y); }
+      out.textContent=t+(p<0?" — (خسارة)":"");
+    }
+    function inflation() {
+      const a=value("sc-inf-amount"), r=value("sc-inf-rate"), y=value("sc-inf-years"), out=$("sc-inflation-result"); if(!out)return;
+      if(!(a>0)||!Number.isFinite(r)||r<0||!(y>0)){out.textContent="أدخل مبلغاً وتضخماً ومدة صحيحة.";return;}
+      const k=Math.pow(1+r/100,y), fut=a*k, now=a/k;
+      out.textContent="ما يكلّفه اليوم "+fmt(a)+" سيكلّف بعد "+fmt(y)+" سنة نحو "+fmt(fut)+" — وقوة شراء "+fmt(a)+" بعد المدة تساوي "+fmt(now)+" بأسعار اليوم (فقدت "+fmt((1-1/k)*100)+"%)";
+    }
+    function stack() {
+      const p=value("sc-st-price"), d1=Number.isFinite(value("sc-st-d1"))?value("sc-st-d1"):0, d2=Number.isFinite(value("sc-st-d2"))?value("sc-st-d2"):0, cp=Number.isFinite(value("sc-st-coupon"))?value("sc-st-coupon"):0, out=$("sc-stack-result"); if(!out)return;
+      if(!(p>0)||d1<0||d2<0||d1>100||d2>100||cp<0){out.textContent="أدخل سعراً صحيحاً وخصومات بين 0 و100%.";return;}
+      const fin=Math.max(0,p*(1-d1/100)*(1-d2/100)-cp), sav=p-fin;
+      out.textContent="السعر النهائي: "+fmt(fin)+" — إجمالي التوفير: "+fmt(sav)+" — الخصم الفعلي: "+fmt(sav/p*100)+"%"+((d1&&d2)?" (وليس "+fmt(d1+d2)+"% كما قد يبدو)":"");
+    }
     function speed() {
       const km=value("sc-sp-km"), h=Number.isFinite(value("sc-sp-h"))?value("sc-sp-h"):0, m=Number.isFinite(value("sc-sp-m"))?value("sc-sp-m"):0, out=$("sc-speed-result"); if(!out)return;
       const t=h+m/60; if(!Number.isFinite(km)||km<=0||t<=0||h<0||m<0){out.textContent="أدخل مسافة وزمناً أكبر من صفر.";return;}
@@ -408,6 +456,7 @@
       "sc-compound": {"sc-cp-start":10000,"sc-cp-add":1000,"sc-cp-rate":8,"sc-cp-years":5}, "sc-breakeven": {"sc-be-fixed":6000,"sc-be-price":100,"sc-be-var":40},
       "sc-hourly": {"sc-hr-income":9000,"sc-hr-hours":8,"sc-hr-days":5,"sc-hr-price":3000}, "sc-trip": {"sc-trip-km":250,"sc-trip-cons":8,"sc-trip-price":10,"sc-trip-people":3}, "sc-fx": {"sc-fx-amount":500,"sc-fx-rate":48,"sc-fx-fee":1.5},
       "sc-bmi": {"sc-bmi-w":78,"sc-bmi-h":175}, "sc-age": {"sc-age-birth":"1995-06-15"}, "sc-zakat": {"sc-z-cash":120000,"sc-z-gold":30000,"sc-z-trade":0,"sc-z-debt":10000,"sc-z-nisab":85000},
+      "sc-roi": {"sc-roi-cost":50000,"sc-roi-final":68000,"sc-roi-years":3}, "sc-inflation": {"sc-inf-amount":10000,"sc-inf-rate":15,"sc-inf-years":5}, "sc-stack": {"sc-st-price":2000,"sc-st-d1":20,"sc-st-d2":10,"sc-st-coupon":50},
       "sc-grade": {"sc-g-cur":78,"sc-g-weight":40,"sc-g-target":85}, "sc-hijri": {"sc-h-greg":"2026-03-20"}, "sc-wordcount": {"sc-wc-text":"اكتب نصك هنا. هذا مثال بسيط لعدّ الكلمات والحروف والجمل في النص."}, "sc-password": {"sc-pw-len":16}, "sc-calories": {"sc-cal-age":30,"sc-cal-w":75,"sc-cal-h":175}, "sc-speed": {"sc-sp-km":5,"sc-sp-h":0,"sc-sp-m":30}, "sc-loancompare": {"sc-lc-amount":100000,"sc-lc-ra":12,"sc-lc-ma":24,"sc-lc-rb":10,"sc-lc-mb":36}, "sc-random": {"sc-rn-min":1,"sc-rn-max":100,"sc-rn-count":1}
     };
     function fire(el) { el.dispatchEvent(new Event("input", { bubbles: true })); el.dispatchEvent(new Event("change", { bubbles: true })); }
@@ -451,6 +500,7 @@
       "sc-g-cur": grade, "sc-g-weight": grade, "sc-g-target": grade,
       "sc-cal-age": calories, "sc-cal-w": calories, "sc-cal-h": calories, "sc-cal-sex": calories, "sc-cal-act": calories,
       "sc-sp-km": speed, "sc-sp-h": speed, "sc-sp-m": speed,
+      "sc-roi-cost": roi, "sc-roi-final": roi, "sc-roi-years": roi, "sc-inf-amount": inflation, "sc-inf-rate": inflation, "sc-inf-years": inflation, "sc-st-price": stack, "sc-st-d1": stack, "sc-st-d2": stack, "sc-st-coupon": stack,
       "sc-lc-amount": loancompare, "sc-lc-ra": loancompare, "sc-lc-ma": loancompare, "sc-lc-rb": loancompare, "sc-lc-mb": loancompare,
       "sc-h-greg": hijri, "sc-h-y": hijri, "sc-h-m": hijri, "sc-h-d": hijri, "sc-wc-text": wordcount,
       "sc-c-p1": compare, "sc-c-e1": compare, "sc-c-l1": compare, "sc-c-w1": compare, "sc-c-p2": compare, "sc-c-e2": compare, "sc-c-l2": compare, "sc-c-w2": compare
@@ -475,7 +525,7 @@
     root.querySelectorAll(".sc-tool > h2").forEach(h => { if (h.querySelector(".sc-i")) return; const t = h.parentNode.id.replace("sc-", ""); h.innerHTML = "<span class='sc-h2i'>" + window.SCI.svg(window.SCI.tab(t), 22) + "</span>" + h.textContent; });
     /* تصنيفات وبحث الأدوات */
     const CATS = [["all","الكل","all"],["shop","تسوق","cart"],["money","مال","wallet"],["biz","أعمال","chart"],["life","حياة وصحة","heart"],["text","نصوص وأمان","lock"]];
-    const TAB_CAT = {discount:"shop",unit:"shop",vat:"shop",compare:"shop",decide:"shop",total:"shop",installment:"shop",split:"shop",budget:"money",loan:"money",saving:"money",compound:"money",percent:"money",fx:"money",hourly:"money",margin:"biz",breakeven:"biz",bmi:"life",age:"life",zakat:"life",hijri:"life",trip:"life",dates:"life",convert:"life",grade:"life",wordcount:"text",password:"text",random:"text",calories:"life",speed:"life",loancompare:"money"};
+    const TAB_CAT = {discount:"shop",unit:"shop",vat:"shop",compare:"shop",decide:"shop",total:"shop",installment:"shop",split:"shop",budget:"money",loan:"money",saving:"money",compound:"money",percent:"money",fx:"money",hourly:"money",margin:"biz",breakeven:"biz",bmi:"life",age:"life",zakat:"life",hijri:"life",trip:"life",dates:"life",convert:"life",grade:"life",wordcount:"text",password:"text",random:"text",calories:"life",speed:"life",loancompare:"money",roi:"money",inflation:"money",stack:"shop"};
     const tabNav = root.querySelector(".sc-tabs");
     if (tabNav && root.querySelectorAll("[data-tab]").length > 12 && !root.querySelector(".sc-filter")) {
       const bar = document.createElement("div"); bar.className = "sc-filter";
@@ -488,7 +538,7 @@
       q.addEventListener("input", apply); bar.appendChild(chips); bar.appendChild(q); tabNav.parentNode.insertBefore(bar, tabNav);
     }
     /* مقالات مرتبطة بكل أداة */
-    const REL = {discount:["الخصم"],vat:["ضريبة"],unit:["سعر الوحدة"],budget:["ميزانية"],saving:["ادخار","طوارئ"],loan:["القرض"],installment:["التقسيط"],margin:["هامش","تسعير"],breakeven:["تسعير","التعادل"],compare:["تقارن"],decide:["تقارن","الكلية"],total:["الكلية","مستعمل"],compound:["ادخار","طوارئ"],hourly:["اشتراكات","ميزانية"],split:["ميزانية"],trip:["الكلية"],fx:["ميزانية"]};
+    const REL = {discount:["الخصم"],vat:["ضريبة"],unit:["سعر الوحدة"],budget:["ميزانية"],saving:["ادخار","طوارئ"],loan:["القرض"],installment:["التقسيط"],margin:["هامش","تسعير"],breakeven:["تسعير","التعادل"],compare:["تقارن"],decide:["تقارن","الكلية"],total:["الكلية","مستعمل"],compound:["ادخار","طوارئ"],hourly:["اشتراكات","ميزانية"],split:["ميزانية"],trip:["الكلية"],fx:["ميزانية"],roi:["ادخار","طوارئ"],inflation:["ادخار","ميزانية"],stack:["الخصم","تفاوض"]};
     if (typeof fetch === "function" && /\/p\//.test(location.pathname)) {
       fetch("/feeds/posts/default?alt=json&max-results=60", { credentials: "omit" }).then(r => r.json()).then(d => {
         const posts = ((d.feed && d.feed.entry) || []).map(e => { const l = (e.link || []).filter(x => x.rel === "alternate")[0]; return { t: e.title.$t, u: l ? l.href : "" }; }).filter(x => x.u);
@@ -508,7 +558,7 @@
       const sec=root.querySelector("#sc-"+tab); if(sec&&sec.scrollIntoView) setTimeout(()=>{ const y=sec.getBoundingClientRect().top+window.pageYOffset-80; window.scrollTo({top:y,behavior:"smooth"}); },30);
       try { history.replaceState(null, "", "#" + tab); } catch (e) {}
     }));
-    discount(); budget(); unit(); percent(); saving(); total(); installment(); convert(); dates(); vat(); compare(); decide(); loan(); margin(); split(); compound(); breakeven(); hourly(); trip(); fx(); bmi(); age(); zakat(); grade(); wordcount(); genPassword(); calories(); speed(); loancompare(); decorateAll();
+    discount(); budget(); unit(); percent(); saving(); total(); installment(); convert(); dates(); vat(); compare(); decide(); loan(); margin(); split(); compound(); breakeven(); hourly(); trip(); fx(); bmi(); age(); zakat(); grade(); wordcount(); genPassword(); calories(); speed(); roi(); inflation(); stack(); loancompare(); decorateAll();
     const fromHash=(location.hash||"").replace("#",""); if(fromHash) showTab(fromHash);
   }
   function start() {
@@ -687,7 +737,7 @@
         "<div class='sc-hero2-art' aria-hidden='true'><div class='sc-demo'><small>مثال توضيحي (أرقام افتراضية)</small><div class='row'><span>السعر الأصلي</span><b>2,000</b></div><div class='row'><span>الخصم</span><b>20%</b></div><div class='bar'><i></i></div><div class='row big'><span>تدفع</span><b>1,600</b></div><div class='row save'><span>توفير</span><b>400</b></div></div><span class='orb o1'></span><span class='orb o2'></span></div></section>" +
         "<section class='sc-sec'><h2 class='sc-h2'>أدواتنا الأكثر استخداماً</h2><p class='sc-sub'>اختر الأداة، جرّب مثالاً جاهزاً أو أدخل أرقامك.</p><div class='sc-toolgrid'>" +
         TOOLS.map(function (t) { return "<a class='sc-tool-tile' href='" + tools + "#" + t[3] + "'><span class='ico'>" + window.SCI.svg(t[0], 26) + "</span><b>" + esc(t[1]) + "</b><small>" + esc(t[2]) + "</small></a>"; }).join("") +
-        "</div><p class='sc-more'><a href='" + tools + "'>عرض كل الأدوات (32 أداة) ←</a></p></section>" +
+        "</div><p class='sc-more'><a href='" + tools + "'>عرض كل الأدوات (35 أداة) ←</a></p></section>" +
         "<section class='sc-sec sc-steps'><h2 class='sc-h2'>كيف تستفيد؟</h2><div class='sc-stepgrid'>" +
         "<div><span>1</span><b>أدخل أرقامك</b><small>السعر، الخصم، الضمان، الدخل… ما تعرفه أنت.</small></div>" +
         "<div><span>2</span><b>شاهد النتيجة فوراً</b><small>تُحسب داخل متصفحك بمعادلات معروفة.</small></div>" +
@@ -1010,7 +1060,7 @@
         "<div class='sc-hero2-art' aria-hidden='true'><div class='sc-demo'><small>مثال توضيحي (أرقام افتراضية)</small><div class='row'><span>السعر الأصلي</span><b>2,000</b></div><div class='row'><span>الخصم</span><b>20%</b></div><div class='bar'><i></i></div><div class='row big'><span>تدفع</span><b>1,600</b></div><div class='row save'><span>توفير</span><b>400</b></div></div><span class='orb o1'></span><span class='orb o2'></span></div></section>" +
         "<section class='sc-sec'><h2 class='sc-h2'>أدواتنا الأكثر استخداماً</h2><p class='sc-sub'>اختر الأداة، جرّب مثالاً جاهزاً أو أدخل أرقامك.</p><div class='sc-toolgrid'>" +
         TOOLS.map(function (t) { return "<a class='sc-tool-tile' href='" + tools + "#" + t[3] + "'><span class='ico'>" + window.SCI.svg(t[0], 26) + "</span><b>" + esc(t[1]) + "</b><small>" + esc(t[2]) + "</small></a>"; }).join("") +
-        "</div><p class='sc-more'><a href='" + tools + "'>عرض كل الأدوات (32 أداة) ←</a></p></section>" +
+        "</div><p class='sc-more'><a href='" + tools + "'>عرض كل الأدوات (35 أداة) ←</a></p></section>" +
         "<section class='sc-sec sc-steps'><h2 class='sc-h2'>كيف تستفيد؟</h2><div class='sc-stepgrid'>" +
         "<div><span>1</span><b>أدخل أرقامك</b><small>السعر، الخصم، الضمان، الدخل… ما تعرفه أنت.</small></div>" +
         "<div><span>2</span><b>شاهد النتيجة فوراً</b><small>تُحسب داخل متصفحك بمعادلات معروفة.</small></div>" +
@@ -1350,4 +1400,21 @@
       var l = document.createElement("link"); l.rel = d[0]; if (d[1]) l.type = d[1]; if (d[3]) l.sizes = d[3]; l.href = B + d[2]; document.head.appendChild(l);
     });
   } catch (e) {}
+})();
+
+/* Smart Choice — الوضع الداكن (يُحفظ لكل جهاز، ويتبع إعداد الجهاز افتراضياً) */
+(function () {
+  var K = "sc-theme", cur = null;
+  try { cur = localStorage.getItem(K); } catch (e) {}
+  if (!cur) cur = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  function apply(t) { document.documentElement.setAttribute("data-sc-theme", t); var b = document.querySelector(".sc-theme"); if (b) { b.innerHTML = window.SCI.svg(t === "dark" ? "sun" : "moon", 20); b.setAttribute("aria-label", t === "dark" ? "التبديل إلى الوضع الفاتح" : "التبديل إلى الوضع الداكن"); b.title = b.getAttribute("aria-label"); } }
+  apply(cur);
+  function add() {
+    var inner = document.querySelector(".sc-headin"); if (!inner || inner.querySelector(".sc-theme")) return;
+    var b = document.createElement("button"); b.type = "button"; b.className = "sc-theme";
+    b.addEventListener("click", function () { cur = cur === "dark" ? "light" : "dark"; try { localStorage.setItem(K, cur); } catch (e) {} apply(cur); });
+    inner.appendChild(b); apply(cur);
+  }
+  function run() { add(); setTimeout(add, 800); setTimeout(add, 2500); }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
 })();

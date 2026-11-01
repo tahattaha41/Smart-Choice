@@ -295,3 +295,31 @@ html body .sc-btn{position:relative;overflow:hidden}
 html body .sc-btn::after{content:"";position:absolute;top:0;bottom:0;width:60%;left:-80%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);transition:left .7s ease}
 html body .sc-btn:hover::after{left:130%}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.sc-motion .sc-rv{opacity:1;transform:none}}
+
+/* ===== الوضع الداكن ===== */
+html[data-sc-theme="dark"]{color-scheme:dark;--sc-bg:#0b1220;--sc-ink:#e6ecf8;--sc-muted:#9fb0cc;--sc-line:#24324f;--sc-card:#131d33;--sc-navy:#1d3f8f;--sc-navy2:#0f1a30;--sc-shadow:0 10px 30px rgba(0,0,0,.35);--sc-shadow2:0 18px 44px rgba(0,0,0,.5)}
+html[data-sc-theme="dark"] body{background:var(--sc-bg);color:var(--sc-ink)}
+html[data-sc-theme="dark"] body .sc-head{background:rgba(11,18,32,.86)}
+html[data-sc-theme="dark"] body .sc-top{background:linear-gradient(90deg,#0f1a30,#16264a)}
+html[data-sc-theme="dark"] body .sc-btn.alt,
+html[data-sc-theme="dark"] body .post-outer,html[data-sc-theme="dark"] body .post,html[data-sc-theme="dark"] body .sc-injected,
+html[data-sc-theme="dark"] .sc-search input,html[data-sc-theme="dark"] .sc-share a,html[data-sc-theme="dark"] .sc-share button,
+html[data-sc-theme="dark"] .adm-tabs,html[data-sc-theme="dark"] .adm-stat,html[data-sc-theme="dark"] .adm-card,html[data-sc-theme="dark"] .adm-side,
+html[data-sc-theme="dark"] .sc-chips button,html[data-sc-theme="dark"] .sc-filter input,html[data-sc-theme="dark"] .sc-marquee,
+html[data-sc-theme="dark"] .sc-page .sc-tabs button,html[data-sc-theme="dark"] .sc-page .sc-tool-card,html[data-sc-theme="dark"] .sc-tool-tile,html[data-sc-theme="dark"] .sc-post-card,
+html[data-sc-theme="dark"] .sc-page .sc-field input,html[data-sc-theme="dark"] .sc-page .sc-field select,html[data-sc-theme="dark"] .sc-page textarea,html[data-sc-theme="dark"] .sc-page .sc-matrix input,
+html[data-sc-theme="dark"] .sc-page .sc-ghost,html[data-sc-theme="dark"] .adm-form input,html[data-sc-theme="dark"] .adm-form textarea,html[data-sc-theme="dark"] .adm-input,
+html[data-sc-theme="dark"] .sc-stepgrid>div,html[data-sc-theme="dark"] .sc-trust>div{background:var(--sc-card)!important;color:var(--sc-ink);border-color:var(--sc-line)}
+html[data-sc-theme="dark"] .sc-page .kpi,html[data-sc-theme="dark"] .sc-page .sc-tool-result,html[data-sc-theme="dark"] .sc-page .sc-matrix thead th,html[data-sc-theme="dark"] .adm-table th,html[data-sc-theme="dark"] .sc-page .is-note,html[data-sc-theme="dark"] .adm-badge{background:#0f1830!important;color:var(--sc-ink)}
+html[data-sc-theme="dark"] h1,html[data-sc-theme="dark"] h2,html[data-sc-theme="dark"] h3,html[data-sc-theme="dark"] .sc-brand,html[data-sc-theme="dark"] .sc-nav a,html[data-sc-theme="dark"] .sc-marquee span{color:var(--sc-ink)}
+html[data-sc-theme="dark"] .sc-hero2 h1,html[data-sc-theme="dark"] .sc-hero2 h2,html[data-sc-theme="dark"] .sc-hero2 p{color:#fff}
+html[data-sc-theme="dark"] input::placeholder,html[data-sc-theme="dark"] textarea::placeholder{color:#7d8fb0}
+html[data-sc-theme="dark"] .sc-footer{background:#070d19}
+.sc-theme{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:12px;border:1px solid var(--sc-line);background:transparent;color:var(--sc-ink);cursor:pointer;flex:none;transition:transform .25s,background .2s}
+.sc-theme:hover{transform:rotate(18deg);background:rgba(47,107,255,.1)}
+html[data-sc-theme="dark"] .sc-demo,html[data-sc-theme="dark"] .sc-demo *{color:#14213d}
+html[data-sc-theme="dark"] .sc-demo .sc-demo-bar i,html[data-sc-theme="dark"] .sc-demo b{color:inherit}
+html[data-sc-theme="dark"] body .sc-nav a[aria-current=page],html[data-sc-theme="dark"] .sc-search button{background:var(--sc-blue);color:#fff}
+html[data-sc-theme="dark"] body .sc-nav a:hover{background:#1a2a4d}
+html[data-sc-theme="dark"] .adm-stat b,html[data-sc-theme="dark"] .sc-page .kpi b,html[data-sc-theme="dark"] .sc-page .kpi strong{color:var(--sc-ink)}
+html[data-sc-theme="dark"] .adm-stat.ok b,html[data-sc-theme="dark"] .adm-stat.good b{color:#34d399}

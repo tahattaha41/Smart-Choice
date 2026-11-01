@@ -5,6 +5,34 @@ OK    CDN serves latest front-end JS (self-heal present)
 OK    Nav has no old-brand pages: الرئيسية الأدوات الذكية مقارنة المنتجات مركز القرار من نحن سياسة المحتوى والتحرير اتصل بنا سياسة الخصوصية لوحة الإدارة ش
 OK    ads.txt يحتوي معرّف الناشر
 OK    Tools page loads
-FAIL  Tools: NO tool section rendered (page is interface only)
-FAIL  Test crashed: page.fill: Timeout 30000ms exceeded.
-failed=2
+OK    Tools: tool sections rendered
+OK    Tools: discount calculator works -> السعر بعد الخصم ١٬٦٠٠ قيمة التوفير ٤٠٠
+OK    Tools: decision tab opens
+OK    Tools: compare tab opens
+OK    About loads
+OK    About: body text length 1242
+OK    Contact loads
+OK    Contact: body text length 787
+OK    Contact shows email
+OK    Privacy loads
+OK    Privacy: body text length 1751
+OK    Terms loads
+OK    Terms: body text length 941
+OK    Decision page loads
+OK    Decision page: body text length 579
+OK    Compare page loads
+OK    Compare page: body text length 849
+OK    Editorial page loads
+OK    Editorial page: body text length 955
+OK    Admin page loads
+OK    Admin page: body text length 185
+OK    Admin: password gate shown and no data exposed before login
+OK    Posts in feed: 20
+OK    Latest post body length 4367
+FAIL  No JS errors: has is not defined | has is not defined | has is not defined
+OK    Mobile: home?m=1 loads
+OK    Mobile: home content length 2808
+OK    Mobile: tools?m=1 loads
+OK    Mobile: tools rendered
+OK    Mobile: about content length 1249
+failed=1

@@ -36,12 +36,20 @@ req = urllib.request.Request("https://models.github.ai/inference/chat/completion
 now = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
 try:
     with urllib.request.urlopen(req, timeout=90) as r:
-        text = json.loads(r.read().decode())["choices"][0]["message"]["content"]
+        raw = r.read().decode("utf-8", "ignore")
+        status = r.status
+    try:
+        text = json.loads(raw)["choices"][0]["message"]["content"]
+    except Exception:
+        raise RuntimeError("HTTP %s: %s" % (status, raw[:300].replace("\n", " ")))
     OUT.write_text(f"# مراجعة الذكاء الاصطناعي ({now})\n\n> توصيات استشارية تُراجع يدوياً ولا تُطبَّق تلقائياً.\n\n{text}\n", encoding="utf-8")
     print("ok")
 except urllib.error.HTTPError as e:
-    OUT.write_text(f"# مراجعة الذكاء الاصطناعي ({now})\n\nتعذر التشغيل: HTTP {e.code}. تأكد من تفعيل GitHub Models للمستودع/الحساب.\n", encoding="utf-8")
+    detail = ""
+    try: detail = e.read().decode("utf-8", "ignore")[:300].replace("\n", " ")
+    except Exception: pass
+    OUT.write_text(f"# مراجعة الذكاء الاصطناعي ({now})\n\nتعذر التشغيل: HTTP {e.code}. {detail}\n", encoding="utf-8")
     print("http error", e.code)
 except Exception as e:
-    OUT.write_text(f"# مراجعة الذكاء الاصطناعي ({now})\n\nتعذر التشغيل: {type(e).__name__}\n", encoding="utf-8")
+    OUT.write_text(f"# مراجعة الذكاء الاصطناعي ({now})\n\nتعذر التشغيل: {type(e).__name__}: {str(e)[:300]}\n", encoding="utf-8")
     print("error", type(e).__name__)

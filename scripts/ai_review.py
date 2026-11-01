@@ -31,17 +31,31 @@ prompt = (
 body = json.dumps({"model": "openai/gpt-4.1-mini", "messages": [
     {"role": "system", "content": "مراجع محتوى دقيق وصادق؛ لا تَعِد بالقبول في AdSense."},
     {"role": "user", "content": prompt}], "temperature": 0.3, "max_tokens": 1500}).encode()
-req = urllib.request.Request("https://models.github.ai/inference/chat/completions", data=body, headers={
-    "Authorization": "Bearer " + token, "Content-Type": "application/json", "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28"})
+ENDPOINTS = [
+    ("https://models.github.ai/inference/chat/completions", "openai/gpt-4.1-mini"),
+    ("https://models.inference.ai.azure.com/chat/completions", "gpt-4o-mini"),
+]
+def make_req(url, model):
+    body = json.dumps({"model": model, "messages": [
+        {"role": "system", "content": "مراجع محتوى دقيق وصادق؛ لا تَعِد بالقبول في AdSense."},
+        {"role": "user", "content": prompt}], "temperature": 0.3, "max_tokens": 1500}).encode()
+    return urllib.request.Request(url, data=body, headers={
+        "Authorization": "Bearer " + token, "Content-Type": "application/json", "Accept": "application/json", "X-GitHub-Api-Version": "2022-11-28"})
 now = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
 try:
-    with urllib.request.urlopen(req, timeout=90) as r:
-        raw = r.read().decode("utf-8", "ignore")
-        status = r.status
-    try:
-        text = json.loads(raw)["choices"][0]["message"]["content"]
-    except Exception:
-        raise RuntimeError("HTTP %s: %s" % (status, raw[:300].replace("\n", " ")))
+    text, errs = None, []
+    for url, model in ENDPOINTS:
+        try:
+            with urllib.request.urlopen(make_req(url, model), timeout=90) as r:
+                raw = r.read().decode("utf-8", "ignore"); status = r.status
+            try:
+                text = json.loads(raw)["choices"][0]["message"]["content"]; break
+            except Exception:
+                errs.append("%s -> HTTP %s: %s" % (url.split("/")[2], status, raw[:120].replace("\n", " ")))
+        except urllib.error.HTTPError as e:
+            errs.append("%s -> HTTP %s %s" % (url.split("/")[2], e.code, e.read().decode("utf-8", "ignore")[:120].replace("\n", " ")))
+    if text is None:
+        raise RuntimeError(" | ".join(errs))
     OUT.write_text(f"# مراجعة الذكاء الاصطناعي ({now})\n\n> توصيات استشارية تُراجع يدوياً ولا تُطبَّق تلقائياً.\n\n{text}\n", encoding="utf-8")
     print("ok")
 except urllib.error.HTTPError as e:

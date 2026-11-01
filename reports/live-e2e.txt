@@ -29,10 +29,10 @@ OK    Admin page: body text length 185
 OK    Admin: password gate shown and no data exposed before login
 OK    Posts in feed: 20
 OK    Latest post body length 4367
-FAIL  No JS errors: has is not defined | has is not defined | has is not defined
+OK    No JS errors
 OK    Mobile: home?m=1 loads
 OK    Mobile: home content length 2808
 OK    Mobile: tools?m=1 loads
 OK    Mobile: tools rendered
 OK    Mobile: about content length 1249
-failed=1
+failed=0

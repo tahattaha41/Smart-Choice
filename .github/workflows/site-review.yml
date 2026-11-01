@@ -1,0 +1,44 @@
+name: Smart Choice | Review every 6 hours
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "10 */6 * * *"
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: smart-choice-review
+  cancel-in-progress: false
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Review and auto-fix
+        run: python3 scripts/site_review.py
+      - name: Commit fixes and report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/content reports/site-review.md reports/adsense-audit.json reports/adsense-audit.md
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: periodic site review [skip ci]"
+            for i in 1 2 3 4 5; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 3; done
+          fi
+      - name: Re-sync Blogger when the live check had failures
+        run: |
+          if [ "$(cat reports/.needs-resync)" = "1" ]; then
+            gh api -X POST repos/${{ github.repository }}/actions/workflows/blogger-sync.yml/dispatches -f ref=main
+            gh api -X POST repos/${{ github.repository }}/actions/workflows/blogger-pages-sync.yml/dispatches -f ref=main
+          fi
+      - name: Refresh the live browser test
+        run: gh api -X POST repos/${{ github.repository }}/actions/workflows/live-e2e.yml/dispatches -f ref=main

@@ -14,7 +14,7 @@ blog_id = os.environ["BLOGGER_BLOG_ID"]
 pv = svc.pageViews().get(blogId=blog_id, range=["7DAYS", "30DAYS", "all"]).execute()
 counts = {c["timeRange"]: int(c["count"]) for c in pv.get("counts", [])}
 blog = svc.blogs().get(blogId=blog_id).execute()
-now = datetime.datetime.utcnow()
+now = datetime.datetime.now(datetime.timezone.utc)
 stats = {"updated": now.strftime("%Y-%m-%d %H:%M UTC"), "d7": counts.get("SEVEN_DAYS", counts.get("7DAYS", 0)),
          "d30": counts.get("THIRTY_DAYS", counts.get("30DAYS", 0)), "all": counts.get("ALL_TIME", counts.get("all", 0)),
          "posts": blog.get("posts", {}).get("totalItems"), "pages": blog.get("pages", {}).get("totalItems")}

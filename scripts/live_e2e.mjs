@@ -4,10 +4,16 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 const BASE = 'https://smartchoicee1.blogspot.com';
 const out = []; let failed = 0;
 const rec = (ok, msg) => { out.push((ok ? 'OK    ' : 'FAIL  ') + msg); if (!ok) failed++; };
-let browser;
+let browser; let botLoads = 0;
+// منع إعلانات/تحليلات جوجل عن متصفح الاختبار (حتى لا تُحتسب مشاهدات أو ظهور إعلانات من الروبوت)، وعدّ تحميلات الصفحات الآلية لاستبعادها من إحصائيات الزوار
+const guard = async (c) => {
+  await c.route(/(googlesyndication|doubleclick|googletagmanager|google-analytics|googleadservices|adtrafficquality)/, (r) => r.abort());
+  c.on('response', (r) => { try { if (r.request().resourceType() === 'document' && r.url().startsWith(BASE) && r.request().frame() && !r.request().frame().parentFrame()) botLoads++; } catch {} });
+};
 try {
 browser = await chromium.launch();
 const ctx = await browser.newContext({ locale: 'ar-EG', viewport: { width: 390, height: 800 } });
+await guard(ctx);
 const page = await ctx.newPage();
 const errors = []; page.on('pageerror', (e) => { if (!/solveSimpleChallenge/.test(e.message)) errors.push(e.message); }); // خطأ تصدره صفحات Blogger نفسها لمتصفحات الاختبار
 const go = async (url) => { await page.waitForTimeout(2500); for (let i = 0; i < 6; i++) { try { const r = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 }); if (r && r.ok()) { await page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {}); return true; } } catch {} await page.waitForTimeout(15000 * (i + 1)); } return false; };
@@ -63,7 +69,8 @@ rec(errors.length === 0, 'No JS errors' + (errors.length ? ': ' + errors.slice(0
 {
   const { devices } = await import('playwright');
   const mctx = await browser.newContext({ ...devices['Pixel 7'], locale: 'ar-EG' });
-  const mp = await mctx.newPage();
+  await guard(mctx);
+const mp = await mctx.newPage();
   const mgo = async (url) => { await mp.waitForTimeout(2500); for (let i = 0; i < 5; i++) { try { const r = await mp.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 }); if (r && r.ok()) { await mp.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {}); return true; } else { console.log('mobile status', url, r && r.status()); } } catch (e) { console.log('mobile err', url, String(e).slice(0, 120)); } await mp.waitForTimeout(12000 * (i + 1)); } return false; };
   rec(await mgo(BASE + '/?m=1'), 'Mobile: home?m=1 loads');
   await mp.waitForTimeout(3000);
@@ -79,6 +86,7 @@ rec(errors.length === 0, 'No JS errors' + (errors.length ? ': ' + errors.slice(0
 } catch (e) { rec(false, 'Test crashed: ' + String(e && e.message || e).split('\n')[0].slice(0, 300)); }
 finally { if (browser) await browser.close().catch(() => {}); }
 mkdirSync('reports', { recursive: true });
+try { const { readFileSync, existsSync } = await import('node:fs'); const f = 'reports/bot-views.json'; const d = existsSync(f) ? JSON.parse(readFileSync(f, 'utf8')) : { measured: {}, estimated: {} }; const day = new Date().toISOString().slice(0, 10); d.measured[day] = (d.measured[day] || 0) + botLoads; writeFileSync(f, JSON.stringify(d)); } catch {}
 writeFileSync('reports/live-e2e.txt', out.join('\n') + `\nfailed=${failed}\n`);
 console.log(out.join('\n'));
 process.exit(0);

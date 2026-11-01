@@ -1,3 +1,11 @@
+/* Smart Choice — استبعاد المالك والروبوتات من Google Analytics (علامة محلية على جهاز المالك) */
+(function () {
+  try {
+    if (/[?&]owner=1/.test(location.search)) localStorage.setItem("sc-owner", "1");
+    if (localStorage.getItem("sc-owner") === "1" || navigator.webdriver) window["ga-disable-G-BRZP957SQ4"] = true;
+  } catch (e) { if (navigator.webdriver) window["ga-disable-G-BRZP957SQ4"] = true; }
+})();
+
 /* Smart Choice — أحدث CSS دائماً: يُحقن من GitHub مباشرة لتجاوز كاش CDN القديم */
 (function () {
   "use strict";
@@ -647,10 +655,13 @@
   function unlocked() { try { return sessionStorage.getItem("sc-admin") === HASH; } catch (e) { return false; } }
 
   /* ---------- البيانات ---------- */
-  var D = { stats: null, hist: [], audit: null, e2e: null, posts: [], pages: [] };
+  var D = { stats: null, hist: [], audit: null, e2e: null, posts: [], pages: [], bots: { measured: {}, estimated: {} } };
+  function botDay(d) { return (D.bots.measured[d] || 0) + (D.bots.estimated[d] || 0); }
+  function botSince(days) { var lim = Date.now() - days * 86400000, n = 0, all = {}; Object.keys(D.bots.measured).concat(Object.keys(D.bots.estimated)).forEach(function (k) { all[k] = 1; }); Object.keys(all).forEach(function (k) { if (days == null || new Date(k + "T23:59:59Z").getTime() >= lim) n += botDay(k); }); return n; }
   function load() {
     return Promise.all([
       get("reports/stats.json", true).then(function (x) { D.stats = x; }).catch(function () {}),
+      get("reports/bot-views.json", true).then(function (x) { D.bots = x; }).catch(function () {}),
       get("reports/stats-history.json", true).then(function (x) { D.hist = x; }).catch(function () {}),
       get("reports/adsense-audit.json", true).then(function (x) { D.audit = x; }).catch(function () {}),
       get("reports/live-e2e.txt", false).then(function (t) {
@@ -670,7 +681,7 @@
   /* ---------- التبويبات ---------- */
   function chart(host) {
     var h = D.hist || []; if (h.length < 2) { host.appendChild(el("p", "adm-muted", "يتراكم الرسم البياني يوماً بعد يوم؛ تظهر المقارنة بعد يومين من التشغيل.")); return; }
-    var days = []; for (var i = 1; i < h.length; i++) days.push({ d: h[i].date, v: Math.max(0, h[i].all - h[i - 1].all) });
+    var days = []; for (var i = 1; i < h.length; i++) days.push({ d: h[i].date, v: Math.max(0, h[i].all - h[i - 1].all - botDay(h[i].date)) });
     days = days.slice(-30); var max = Math.max.apply(null, days.map(function (x) { return x.v; }).concat([1]));
     var box = el("div", "adm-bars");
     days.forEach(function (x) { var b = el("div", "adm-bar"); var f = el("i"); f.style.height = Math.max(3, Math.round(x.v / max * 100)) + "%"; f.title = x.d + ": " + x.v; b.appendChild(f); box.appendChild(b); });
@@ -679,9 +690,9 @@
   function tabOverview(root) {
     var s = D.stats, kp = el("div", "adm-stats");
     if (s) {
-      kp.appendChild(stat("مشاهدات 7 أيام", NF.format(s.d7), "آخر أسبوع"));
-      kp.appendChild(stat("مشاهدات 30 يوماً", NF.format(s.d30), "آخر شهر"));
-      kp.appendChild(stat("إجمالي المشاهدات", NF.format(s.all), "منذ إنشاء المدونة"));
+      kp.appendChild(stat("زوار 7 أيام", NF.format(Math.max(0, s.d7 - botSince(7))), "بعد استبعاد الفحص الآلي"));
+      kp.appendChild(stat("زوار 30 يوماً", NF.format(Math.max(0, s.d30 - botSince(30))), "بعد استبعاد الفحص الآلي"));
+      kp.appendChild(stat("إجمالي الزوار", NF.format(Math.max(0, s.all - botSince(null))), "منذ إنشاء المدونة"));
     } else kp.appendChild(stat("المشاهدات", "—", "تُحدَّث يومياً؛ لم يصدر أول تقرير بعد"));
     kp.appendChild(stat("المقالات", NF.format(D.posts.length), "منشورة"));
     var fails = (D.e2e || []).filter(function (x) { return x.lvl === "FAIL"; }).length, tot = (D.e2e || []).filter(function (x) { return x.lvl !== "WARN"; }).length;
@@ -689,8 +700,12 @@
     var sc = D.audit ? D.audit.score : null;
     kp.appendChild(stat("جاهزية AdSense", sc != null ? sc + "%" : "—", "فحص آلي للمعايير", sc != null && sc >= 90 ? "good" : "warn"));
     root.appendChild(kp);
-    var c1 = panel("الزيارات", "مصدر الأرقام: Blogger (لا تشمل زياراتك أنت)"); chart(c1);
-    if (s) c1.appendChild(el("p", "adm-muted", "آخر تحديث: " + s.updated));
+    var c1 = panel("الزيارات", "مصدر الأرقام: Blogger بعد استبعاد زيارات الفحص الآلي"); chart(c1);
+    if (s) c1.appendChild(el("p", "adm-muted", "آخر تحديث: " + s.updated + " — الفحص الآلي المستبعد: " + NF.format(botSince(null)) + " زيارة (جزء منها تقديري للأيام الأولى)."));
+    var own = el("div", "adm-own"); own.appendChild(el("p", "adm-muted", "زياراتك أنت: اضغط الزر لاستبعاد هذا الجهاز من Google Analytics (علامة محلية في متصفحك). لاستبعادها من إحصائيات Blogger نفسها فعّل خيار عدم تتبع مشاهداتك الخاصة في إعدادات بلوجر؛ لا يمكن للموقع التحكم فيه."));
+    var ob = el("button", "adm-btn", (function () { try { return localStorage.getItem("sc-owner") === "1" ? "هذا الجهاز مستبعد ✓" : "استبعد هذا الجهاز من التحليلات"; } catch (e) { return "استبعد هذا الجهاز من التحليلات"; } })()); ob.type = "button";
+    ob.addEventListener("click", function () { try { localStorage.setItem("sc-owner", "1"); ob.textContent = "هذا الجهاز مستبعد ✓"; } catch (e) { ob.textContent = "المتصفح يمنع التخزين"; } });
+    own.appendChild(ob); c1.appendChild(own);
     root.appendChild(c1);
     var c2 = panel("يحتاج انتباهك"), it = attention();
     if (!it.length) c2.appendChild(el("p", "adm-ok", "لا توجد مشكلات مكتشفة. ✓"));
@@ -783,7 +798,7 @@
     var c = panel("دخول الإدارة"); c.appendChild(el("p", "adm-muted", "هذه الصفحة خاصة بمالك الموقع. أدخل كلمة السر للمتابعة."));
     var inp = el("input", "adm-input"); inp.type = "password"; inp.autocomplete = "current-password"; inp.placeholder = "كلمة السر"; inp.setAttribute("aria-label", "كلمة السر");
     var btn = el("button", "adm-btn", "دخول"); btn.type = "button"; var msg = el("p", "adm-bad", "");
-    function submit() { check(inp.value).then(function (ok) { if (ok) { try { sessionStorage.setItem("sc-admin", HASH); } catch (e) {} dashboard(root); } else { msg.textContent = "كلمة السر غير صحيحة."; inp.value = ""; } }).catch(function () { msg.textContent = "المتصفح لا يدعم التحقق."; }); }
+    function submit() { check(inp.value).then(function (ok) { if (ok) { try { sessionStorage.setItem("sc-admin", HASH); localStorage.setItem("sc-owner", "1"); } catch (e) {} dashboard(root); } else { msg.textContent = "كلمة السر غير صحيحة."; inp.value = ""; } }).catch(function () { msg.textContent = "المتصفح لا يدعم التحقق."; }); }
     btn.addEventListener("click", submit); inp.addEventListener("keydown", function (e) { if (e.key === "Enter") submit(); });
     c.appendChild(inp); c.appendChild(btn); c.appendChild(msg); root.appendChild(c);
   }

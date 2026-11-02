@@ -1265,3 +1265,27 @@
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
 })();
+
+/* Smart Choice — وصف الصفحة للزواحف: يملأ meta description عند غيابه أو فراغه (وصف بحث بلوجر قد يكون فارغاً) */
+(function () {
+  var HOME = "Smart Choice: أدوات مجانية بالعربية لحساب الخصم والتقسيط والقروض والميزانية، وأدلة عملية لاتخاذ قرارات الشراء والمال الشخصي بالأرقام.";
+  function run() {
+    try {
+      var m = document.querySelector('meta[name="description"]');
+      if (!m) { m = document.createElement("meta"); m.name = "description"; document.head.appendChild(m); }
+      var cur = (m.getAttribute("content") || "").trim();
+      var bad = !cur || cur.length < 40 || /Powered by Blogger|عرض الملف الشخصي|Edit-Me/.test(cur);
+      if (!bad) return;
+      var p = location.pathname, d = HOME;
+      if (p !== "/" && p !== "") {
+        var el = document.querySelector(".post-body p, .entry-content p, .sc-prose p, .sc-tools-hero p");
+        var t = el ? (el.textContent || "").replace(/\s+/g, " ").trim() : "";
+        if (t.length > 60) d = t.slice(0, 155).replace(/\s\S*$/, "") + "…";
+      }
+      m.setAttribute("content", d);
+      [["property", "og:description"], ["name", "twitter:description"]].forEach(function (a) { var x = document.querySelector("meta[" + a[0] + '="' + a[1] + '"]'); if (!x) { x = document.createElement("meta"); x.setAttribute(a[0], a[1]); document.head.appendChild(x); } x.setAttribute("content", d); });
+    } catch (e) {}
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
+  setTimeout(run, 2500);
+})();

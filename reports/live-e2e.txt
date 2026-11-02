@@ -3,14 +3,14 @@ OK    Home shows hero
 OK    Installed theme has the GitHub loader (if FAIL: upload theme/smart-choice-blogger.xml once)
 OK    CDN serves latest front-end JS (self-heal present)
 OK    Nav has no old-brand pages: الرئيسية الأدوات الذكية مقارنة المنتجات مركز القرار من نحن سياسة المحتوى والتحرير إعلن معنا اتصل بنا خريطة الموقع سياسة 
-OK    ads.txt يحتوي معرّف الناشر
+WARN  ads.txt غير مفعّل بعد في إعدادات بلوجر
 OK    Tools page loads
 OK    Tools: tool sections rendered
 OK    Tools: discount calculator works -> السعر بعد الخصم ١٬٦٠٠ قيمة التوفير ٤٠٠
 OK    Tools: decision tab opens
 OK    Tools: compare tab opens
-OK    About loads
-OK    About: body text length 1242
+FAIL  About loads
+FAIL  About: body text length 0
 OK    Contact loads
 OK    Contact: body text length 787
 OK    Contact shows email
@@ -18,21 +18,14 @@ OK    Privacy loads
 OK    Privacy: body text length 2032
 OK    Terms loads
 OK    Terms: body text length 1131
-OK    Decision page loads
-OK    Decision page: body text length 579
-OK    Compare page loads
-OK    Compare page: body text length 849
+FAIL  Decision page loads
+FAIL  Decision page: body text length 0
+FAIL  Compare page loads
+FAIL  Compare page: body text length 0
 OK    Editorial page loads
 OK    Editorial page: body text length 955
-OK    Admin page loads
-OK    Admin page: body text length 185
-OK    Admin: password gate shown and no data exposed before login
-OK    Posts in feed: 20
-OK    Latest post body length 5423
-OK    No JS errors
-OK    Mobile: home?m=1 loads
-OK    Mobile: home content length 3130
-OK    Mobile: tools?m=1 loads
-OK    Mobile: tools rendered
-OK    Mobile: about content length 1249
-failed=0
+FAIL  Admin page loads
+FAIL  Admin page: body text length 0
+FAIL  Admin: password gate NOT shown
+FAIL  Test crashed: page.evaluate: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+failed=10

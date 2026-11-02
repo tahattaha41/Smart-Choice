@@ -6,7 +6,7 @@ import requests
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 KEY = os.environ.get("GEMINI_API_KEY", "").strip()
-MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.0-flash")
+MODELS = [m for m in [os.environ.get("GEMINI_MODEL", "").strip(), "gemini-2.5-flash", "gemini-2.0-flash", "gemini-flash-latest"] if m]
 LOG = os.path.join(ROOT, "reports", "auto-posts.md")
 BANNED = ["utilityra", "كمذكرة", "as an ai", "كنموذج لغوي", "lorem", "ضمان الربح", "مضمون 100", "اربح مليون"]
 MIN_WORDS = 700
@@ -67,11 +67,16 @@ PROMPT = """مهم جداً: المقال يجب أن يدور حول أداة �
 HINTS = ["قرار شراء متكرر يخسر الناس فيه مالاً", "عادة مالية صغيرة بأثر كبير", "مقارنة بين خيارين شائعين في الاستهلاك", "خطأ شائع في التقسيط أو القروض", "نصيحة للتسعير أو تكاليف مشروع صغير", "تخطيط ميزانية لموسم أو مناسبة", "تقليل فواتير المنزل", "قرار بين الإيجار والشراء لسلعة"]
 
 def call(prompt):
-    r = requests.post("https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent" % MODEL,
-                      headers={"x-goog-api-key": KEY, "Content-Type": "application/json"},
-                      json={"contents": [{"parts": [{"text": prompt}]}], "generationConfig": {"temperature": 0.8, "maxOutputTokens": 6000}}, timeout=120)
-    r.raise_for_status()
-    return r.json()["candidates"][0]["content"]["parts"][0]["text"]
+    last = None
+    for model in MODELS:
+        r = requests.post("https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent" % model,
+                          headers={"x-goog-api-key": KEY, "Content-Type": "application/json"},
+                          json={"contents": [{"parts": [{"text": prompt}]}], "generationConfig": {"temperature": 0.8, "maxOutputTokens": 8000}}, timeout=180)
+        if r.status_code in (404, 400):
+            last = r; continue
+        r.raise_for_status()
+        return r.json()["candidates"][0]["content"]["parts"][0]["text"]
+    last.raise_for_status()
 
 def parse(txt):
     txt = txt.strip().strip("`")

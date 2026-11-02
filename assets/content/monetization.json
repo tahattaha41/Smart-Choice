@@ -1,28 +1,41 @@
 {
-  "_help": "ملف إعدادات الربح. عدّله من GitHub فقط: يظهر على الموقع خلال دقائق بدون إعادة رفع القالب.",
-  "adSlots": { "inArticle": "", "afterTool": "" },
+  "_help": "ملف إعدادات الربح. عدّله من GitHub فقط. كل عرض: title وurl (https) وdesc وcta. أرسل أسماء المنتجات لتحديث العناوين.",
+  "adSlots": {
+    "inArticle": "",
+    "afterTool": ""
+  },
   "donateUrl": "",
   "sponsorEmail": "skyloom32@gmail.com",
   "offers": [
     {
-      "title": "IT2160 Mobile Phone",
-      "url": "https://amzn.to/4eHUA90"
+      "title": "اقتراح من أمازون رقم 1",
+      "url": "https://amzn.to/4eHUA90",
+      "desc": "منتج نوصي بالاطلاع عليه ومقارنة تقييماته وسعره الحالي على أمازون.",
+      "cta": "شاهد على أمازون ←"
     },
     {
-      "title": "Silicone Protective Case",
-      "url": "https://amzn.to/3V1mV3x"
+      "title": "اقتراح من أمازون رقم 2",
+      "url": "https://amzn.to/3V1mV3x",
+      "desc": "منتج نوصي بالاطلاع عليه ومقارنة تقييماته وسعره الحالي على أمازون.",
+      "cta": "شاهد على أمازون ←"
     },
     {
-      "title": "Automatic Crystal Light",
-      "url": "https://amzn.to/3W8Atuq"
+      "title": "اقتراح من أمازون رقم 3",
+      "url": "https://amzn.to/3W8Atuq",
+      "desc": "منتج نوصي بالاطلاع عليه ومقارنة تقييماته وسعره الحالي على أمازون.",
+      "cta": "شاهد على أمازون ←"
     },
     {
-      "title": "Decorative LED Light Strip",
-      "url": "https://amzn.to/4zxEk2P"
+      "title": "اقتراح من أمازون رقم 4",
+      "url": "https://amzn.to/4zxEk2P",
+      "desc": "منتج نوصي بالاطلاع عليه ومقارنة تقييماته وسعره الحالي على أمازون.",
+      "cta": "شاهد على أمازون ←"
     },
     {
-      "title": "Assistant to the Villain",
-      "url": "https://amzn.to/4sBKo7C"
+      "title": "اقتراح من أمازون رقم 5",
+      "url": "https://amzn.to/4sBKo7C",
+      "desc": "منتج نوصي بالاطلاع عليه ومقارنة تقييماته وسعره الحالي على أمازون.",
+      "cta": "شاهد على أمازون ←"
     }
   ]
 }

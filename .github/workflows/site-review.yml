@@ -25,11 +25,18 @@ jobs:
           python-version: "3.12"
       - name: Review and auto-fix
         run: python3 scripts/site_review.py
+      - run: pip install requests
+      - name: AI engineer diagnosis
+        continue-on-error: true
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+        run: python3 scripts/ai_engineer.py
       - name: Commit fixes and report
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/content reports/site-review.md reports/adsense-audit.json reports/adsense-audit.md
+          git add assets/content reports/ai-engineer.md reports/site-review.md reports/adsense-audit.json reports/adsense-audit.md
           if ! git diff --cached --quiet; then
             git commit -m "chore: periodic site review [skip ci]"
             for i in 1 2 3 4 5; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 3; done
@@ -40,5 +47,16 @@ jobs:
             gh api -X POST repos/${{ github.repository }}/actions/workflows/blogger-sync.yml/dispatches -f ref=main
             gh api -X POST repos/${{ github.repository }}/actions/workflows/blogger-pages-sync.yml/dispatches -f ref=main
           fi
+      - name: Run safe actions chosen by the AI engineer
+        continue-on-error: true
+        run: |
+          [ -f reports/ai-actions.json ] || exit 0
+          for a in $(python3 -c "import json;print(' '.join(json.load(open('reports/ai-actions.json'))['actions']))"); do
+            case $a in
+              resync_blogger) gh api -X POST repos/${{ github.repository }}/actions/workflows/blogger-sync.yml/dispatches -f ref=main ;;
+              resync_pages) gh api -X POST repos/${{ github.repository }}/actions/workflows/blogger-pages-sync.yml/dispatches -f ref=main ;;
+              new_post) gh api -X POST repos/${{ github.repository }}/actions/workflows/auto-posts.yml/dispatches -f ref=main ;;
+            esac
+          done
       - name: Refresh the live browser test
         run: gh api -X POST repos/${{ github.repository }}/actions/workflows/live-e2e.yml/dispatches -f ref=main

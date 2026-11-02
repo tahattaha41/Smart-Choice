@@ -988,7 +988,18 @@
     ["زيادة الزيارات أولاً: مقالان أسبوعياً على الأقل بعناوين من أسئلة يبحث عنها الناس، وربط كل مقال بأداة مناسبة.", "Search Console: أرسل sitemap.xml وراقب الاستعلامات، وحسّن الصفحات التي تظهر ولا يُنقر عليها.", "بعد موافقة AdSense: فعّل الإعلانات التلقائية، ثم جرّب وحدة داخل المقال ووحدة بعد نتيجة الأداة.", "الشراكات: اربط كل مقال مقارنة بمنتجات حقيقية، وأضف وسم الإفصاح (يضيفه الموقع تلقائياً).", "الرعايات: عندما تتجاوز 5,000 مشاهدة شهرياً تقريباً، تواصل مع شركات ناشئة لمقالات برعاية.", "منتج رقمي: قوالب ميزانية/تتبع مصروفات PDF أو Excel تُباع عبر منصة دفع مجانية التسجيل."].forEach(function (t) { ul.appendChild(el("li", null, t)); });
     c3.appendChild(ul); root.appendChild(c3);
   }
-  var TABS = [["overview", "نظرة عامة", tabOverview, "grid"], ["content", "المحتوى", tabContent, "file"], ["quality", "الجودة وAdSense", tabQuality, "shieldok"], ["tech", "الفحص الفني", tabTech, "activity"], ["revenue", "الأرباح", tabRevenue, "banknote"], ["links", "الروابط والخدمات", tabLinks, "link"]];
+  function tabAI(root) {
+    var c = panel("المهندس التقني الذكي", "يشخّص الموقع كل 6 ساعات ويشغّل إجراءات آمنة فقط");
+    var box = el("div", "adm-ai"); box.textContent = "جارٍ التحميل…"; c.appendChild(box); root.appendChild(c);
+    get("reports/ai-engineer.md", false).then(function (t) {
+      box.textContent = ""; (t || "لا يوجد تقرير بعد.").split("\n").forEach(function (l) {
+        if (!l.trim()) return; var h = /^#+\s*/.test(l); var li = /^-\s/.test(l);
+        var n = el(h ? "h3" : "p", li ? "adm-ai-li" : null, l.replace(/^#+\s*/, "").replace(/^-\s*/, "").replace(/\*\*/g, "")); box.appendChild(n);
+      });
+    }).catch(function () { box.textContent = "لم يصدر تقرير بعد (يعمل مع أول مراجعة دورية)."; });
+    c.appendChild(el("p", "adm-sub", "حدّ الصلاحيات: يقرأ التقارير ويشخّص، وينفّذ فقط: إعادة المزامنة وإعادة الفحص وإنشاء مقال. لا يعدّل الكود أو القالب."));
+  }
+  var TABS = [["overview", "نظرة عامة", tabOverview, "grid"], ["content", "المحتوى", tabContent, "file"], ["quality", "الجودة وAdSense", tabQuality, "shieldok"], ["tech", "الفحص الفني", tabTech, "activity"], ["ai", "المهندس الذكي", tabAI, "bot"], ["revenue", "الأرباح", tabRevenue, "banknote"], ["links", "الروابط والخدمات", tabLinks, "link"]];
   function dashboard(root) {
     root.textContent = ""; root.className = "adm adm-app";
     var bar = el("div", "adm-tabs"), body = el("div", "adm-body");
@@ -1192,7 +1203,8 @@
       a.appendChild(el("b", null, o.title)); if (o.desc) a.appendChild(el("small", null, o.desc)); a.appendChild(el("span", null, o.cta || "اطّلع على العرض ←")); g.appendChild(a);
     });
     if (!g.children.length) return null;
-    b.appendChild(g); b.appendChild(el("p", "sc-disc", "إفصاح: قد نحصل على عمولة إذا اشتريت عبر هذه الروابط دون أي تكلفة إضافية عليك، ولا تؤثر على نتائج الأدوات أو تقييماتنا."));
+    b.appendChild(g); var amz = offers.some(function (o) { return /amzn\.to|amazon\./i.test((o && o.url) || ""); });
+    b.appendChild(el("p", "sc-disc", (amz ? "بصفتنا شركاء في برنامج أمازون (Amazon Associates)، نحصل على عمولة من المشتريات المؤهلة. " : "") + "إفصاح: قد نحصل على عمولة إذا اشتريت عبر هذه الروابط دون أي تكلفة إضافية عليك، ولا تؤثر على نتائج الأدوات أو تقييماتنا. الأسعار والتوفر يتغيران، فتحقق منهما على الموقع نفسه."));
     return b;
   }
   function apply(cfg) {

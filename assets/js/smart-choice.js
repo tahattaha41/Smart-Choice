@@ -72,7 +72,7 @@
         var st = document.getElementById("sc-css-live");
         if (!st) { st = document.createElement("style"); st.id = "sc-css-live"; document.head.appendChild(st); }
         st.textContent = css;
-        if (!document.getElementById("sc-font-live")) { var fl = document.createElement("link"); fl.id = "sc-font-live"; fl.rel = "stylesheet"; fl.href = "https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap"; document.head.appendChild(fl); }
+        if (!document.getElementById("sc-font-live")) { var fl = document.createElement("link"); fl.id = "sc-font-live"; fl.rel = "stylesheet"; fl.href = "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"; document.head.appendChild(fl); }
       }).catch(function () {});
   } catch (e) {}
 })();
@@ -783,7 +783,8 @@
         "<h1>اتخذ قرار الشراء <span>بالأرقام</span> لا بالانطباع</h1>" +
         "<p>أدوات حساب ومقارنة واضحة: الخصم، التقسيط، القرض، الضريبة، الميزانية، وتكلفة امتلاك المنتج على المدى الطويل.</p>" +
         "<div class='sc-hero2-cta'><a class='sc-btn' href='" + tools + "'>ابدأ بالأدوات</a><a class='sc-btn alt' href='/search'>اقرأ الأدلة</a></div></div>" +
-        "<div class='sc-hero2-art' aria-hidden='true'><div class='sc-demo'><small>مثال توضيحي (أرقام افتراضية)</small><div class='row'><span>السعر الأصلي</span><b>2,000</b></div><div class='row'><span>الخصم</span><b>20%</b></div><div class='bar'><i></i></div><div class='row big'><span>تدفع</span><b>1,600</b></div><div class='row save'><span>توفير</span><b>400</b></div></div><span class='orb o1'></span><span class='orb o2'></span></div></section>" +
+        "<div class='sc-hero2-art'><form class='sc-hq' onsubmit='return false'><h2>احسب خصمك الآن</h2><label>السعر قبل الخصم<input id='sc-hq-p' type='number' inputmode='decimal' value='2000' min='0'></label><label>نسبة الخصم %<input id='sc-hq-d' type='number' inputmode='decimal' value='20' min='0' max='100'></label><div class='sc-hq-out'><div><span>تدفع</span><b id='sc-hq-pay'>1,600</b></div><div><span>توفّر</span><b id='sc-hq-sv'>400</b></div></div><a href='" + tools + "#discount'>أدوات أكثر تفصيلاً ←</a></form></div></section>" +
+        "<section class='sc-statbar'><div><b>40+</b><span>أداة حساب ومقارنة</span></div><div><b>100%</b><span>مجانية وبدون تسجيل</span></div><div><b>0</b><span>بيانات تُرسل خارج متصفحك</span></div><div><b>عربية</b><span>بالكامل ومن اليمين لليسار</span></div></section>" +
         "<section class='sc-sec'><h2 class='sc-h2'>أدواتنا الأكثر استخداماً</h2><p class='sc-sub'>اختر الأداة، جرّب مثالاً جاهزاً أو أدخل أرقامك.</p><div class='sc-toolgrid'>" +
         TOOLS.map(function (t) { return "<a class='sc-tool-tile' href='" + tools + "#" + t[3] + "'><span class='ico'>" + window.SCI.svg(t[0], 26) + "</span><b>" + esc(t[1]) + "</b><small>" + esc(t[2]) + "</small></a>"; }).join("") +
         "</div><p class='sc-more'><a href='" + tools + "'>عرض كل الأدوات (40 أداة) ←</a></p></section>" +
@@ -799,6 +800,9 @@
         "<section class='sc-sec sc-trust'><div><b>"+window.SCI.svg('shield',20)+" خصوصيتك أولاً</b><small>لا نطلب تسجيلاً ولا نرسل مدخلاتك إلى أي جهة.</small></div><div><b>"+window.SCI.svg('receipt',20)+" بلا أرقام مختلقة</b><small>لا نعرض أسعاراً أو تقييمات لا نملك مصدرها.</small></div><div><b>"+window.SCI.svg('pen',20)+" محتوى نكتبه بأنفسنا</b><small>اطّلع على <a href='" + by("سياسة المحتوى") + "'>سياسة المحتوى والتحرير</a>.</small></div></section></div>";
       var wrap = document.createElement("div"); wrap.innerHTML = html; host.appendChild(wrap.firstChild);
       document.documentElement.classList.add("sc-home-ready");
+      (function () { var p = document.getElementById("sc-hq-p"), d = document.getElementById("sc-hq-d"); if (!p || !d) return; var f = new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 });
+        function up() { var a = parseFloat(p.value), r = parseFloat(d.value); var pay = document.getElementById("sc-hq-pay"), sv = document.getElementById("sc-hq-sv"); if (!(a >= 0) || !(r >= 0) || r > 100) { pay.textContent = "—"; sv.textContent = "—"; return; } var s = a * r / 100; pay.textContent = f.format(a - s); sv.textContent = f.format(s); }
+        p.addEventListener("input", up); d.addEventListener("input", up); })();
       if (window.__scFillLatest) window.__scFillLatest();
     }).catch(function () {});
   }

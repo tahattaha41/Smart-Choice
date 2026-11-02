@@ -108,25 +108,29 @@ def main():
     titles = " | ".join(t for t, _, _ in existing)
     ptext = " ".join(open(os.path.join(ROOT, "posts", f), encoding="utf8").read() for _, _, f in existing)
     tool = pick_tool(ptext)
+    reasons = []
     for attempt in range(4):
         hint = HINTS[(int(time.time() // 3600) + attempt) % len(HINTS)]
         try:
             res = parse(call(PROMPT.format(titles=titles, hint=hint, tool=tool[1], tdesc=tool[2])))
         except Exception as e:
-            print("API error:", e); time.sleep(10); continue
+            m = str(e)[:200]
+            try: m += " | " + e.response.text[:300]
+            except Exception: pass
+            reasons.append("خطأ API: " + m); print(m); time.sleep(10); continue
         if not res:
-            continue
+            reasons.append("تعذر تحليل الرد"); continue
         title, label, body = res
         bad = check(title, body, existing, tool)
         if bad:
-            print("رُفض:", bad); continue
+            reasons.append("رُفض: " + bad); print("رُفض:", bad); continue
         body += '\n<p><strong>جرّب الأداة الآن:</strong> <a href="/p/tools.html#%s">%s</a> — مجانية وتعمل داخل متصفحك دون تسجيل.</p>' % (tool[0], tool[1])
         slug = "auto-" + datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%d-%H%M")
         with open(os.path.join(ROOT, "posts", slug + ".md"), "w", encoding="utf8") as f:
             f.write("---\ntitle: %s\nlabels: %s\npublish: true\n---\n%s\n" % (title.replace(":", " -") if False else title, label, body))
         log("نُشر مقال جديد: %s (%d كلمة، تصنيف %s، الأداة: %s)" % (title, words(body), label, tool[1]))
         return 0
-    log("لم يجتز أي مقال فحوص الجودة هذه المرة؛ لم يُنشر شيء (هذا أفضل من نشر محتوى ضعيف).")
+    log("لم يُنشر مقال هذه المرة. الأسباب: " + " ؛ ".join(reasons))
     return 0
 
 if __name__ == "__main__":

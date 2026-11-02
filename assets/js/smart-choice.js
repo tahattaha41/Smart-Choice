@@ -816,7 +816,7 @@
   var RAW = "https://raw.githubusercontent.com/tahattaha41/Smart-Choice/main/";
   var REPO = "https://github.com/tahattaha41/Smart-Choice";
   var SALT = "smart-choice-admin-v1", HASH = "c8601e15655da80fa3388e066a0c6aa4b63d6cc287d3183b454efa82e9be1d5c", ITER = 150000;
-  var NF = new Intl.NumberFormat("ar-EG");
+  var NF = new Intl.NumberFormat("en-US");
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
   function a(href, text, cls) { var x = el("a", cls || null, text); x.href = href; x.target = "_blank"; x.rel = "noopener"; return x; }
   function get(path, json) {

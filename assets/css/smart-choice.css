@@ -494,3 +494,17 @@ html[data-sc-theme="dark"] body .sc-head{background:rgba(10,21,20,.95)!important
 html[data-sc-theme="dark"] .sc-hq{background:#112220;color:#e5f0ee}
 html[data-sc-theme="dark"] .sc-hq input,html[data-sc-theme="dark"] .sc-hq h2,html[data-sc-theme="dark"] .sc-hq-out b{background:transparent;color:#e5f0ee!important}
 html[data-sc-theme="dark"] .sc-hq-out>div{background:#183230!important}
+
+/* ===== لوحة الإدارة: سلّم أحجام واحد وخط واحد ===== */
+html body .adm,html body .adm *{font-family:inherit}
+html body .adm{font-size:.95rem;line-height:1.75}
+html body .adm .adm-h h2{font-size:clamp(1.1rem,1.02rem + .4vw,1.3rem)!important;font-weight:700!important;margin:0!important}
+html body .adm .adm-sub,html body .adm .adm-muted,html body .adm .adm-stat small,html body .adm .adm-lbl,html body .adm .adm-brand small{font-size:.82rem!important;font-weight:500}
+html body .adm .adm-stat b{font-size:clamp(1.4rem,1.2rem + .9vw,1.8rem)!important;font-weight:700!important}
+html body .adm .adm-table,html body .adm .adm-list li,html body .adm .adm-checks li,html body .adm p,html body .adm li,html body .adm td{font-size:.95rem!important}
+html body .adm .adm-table th{font-size:.85rem!important;font-weight:600}
+html body .adm .adm-badge{font-size:.78rem!important;font-weight:600;padding:2px 10px}
+html body .adm .adm-tabs button,html body .adm .adm-side button{font-size:.95rem!important;font-weight:600}
+html body .adm .adm-brand b{font-size:1.05rem!important}
+html body .adm button,html body .adm .adm-link,html body .adm .sc-btn{font-size:.9rem!important;font-weight:600}
+html body .adm input,html body .adm textarea,html body .adm select{font-size:.95rem!important}

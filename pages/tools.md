@@ -41,6 +41,11 @@ publish: true
   <button type="button" data-tab="roi" aria-selected="false">العائد على الاستثمار</button>
   <button type="button" data-tab="inflation" aria-selected="false">التضخم والقوة الشرائية</button>
   <button type="button" data-tab="stack" aria-selected="false">خصومات متتالية</button>
+  <button type="button" data-tab="effrate" aria-selected="false">الفائدة الفعلية للتقسيط</button>
+  <button type="button" data-tab="sub" aria-selected="false">اشتراك سنوي أم شهري</button>
+  <button type="button" data-tab="rule72" aria-selected="false">مضاعفة المال (قاعدة 72)</button>
+  <button type="button" data-tab="cashback" aria-selected="false">قيمة الكاش باك</button>
+  <button type="button" data-tab="payoff" aria-selected="false">سداد القرض مبكراً</button>
   <button type="button" data-tab="loancompare" aria-selected="false">مقارنة عرضي تمويل</button>
   <button type="button" data-tab="random" aria-selected="false">قرعة وأرقام عشوائية</button>
   <button type="button" data-tab="password" aria-selected="false">مولّد كلمات المرور</button>
@@ -247,6 +252,31 @@ publish: true
 <h2>خصومات متتالية وكوبون</h2><p class="sc-muted">خصمان متتاليان (مثل 20% ثم 10%) وكوبون ثابت: ما السعر النهائي والخصم الحقيقي؟ الخصمان لا يُجمعان عادةً.</p>
 <div class="sc-tool-grid"><div class="sc-field"><label for="sc-st-price">السعر الأصلي</label><input id="sc-st-price" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-st-d1">الخصم الأول %</label><input id="sc-st-d1" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-st-d2">الخصم الثاني %</label><input id="sc-st-d2" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-st-coupon">كوبون ثابت (اختياري)</label><input id="sc-st-coupon" type="number" min="0" step="any" inputmode="decimal"></div></div>
 <div class="sc-tool-result" id="sc-stack-result" aria-live="polite">أدخل السعر والخصومات.</div>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-effrate" hidden>
+<h2>الفائدة الفعلية للتقسيط</h2><p class="sc-muted">كثير من عروض التقسيط تُعلن «بدون فوائد» وسعر الكاش أقل. احسب الفائدة السنوية الحقيقية المخفية في القسط.</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-er-cash">سعر الكاش</label><input id="sc-er-cash" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-er-down">المقدم (إن وجد)</label><input id="sc-er-down" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-er-months">عدد الأشهر</label><input id="sc-er-months" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-er-pay">القسط الشهري</label><input id="sc-er-pay" type="number" min="0" step="any" inputmode="decimal"></div></div>
+<div class="sc-tool-result" id="sc-effrate-result" aria-live="polite">أدخل سعر الكاش والمقدم وعدد الأشهر والقسط.</div>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-sub" hidden>
+<h2>اشتراك سنوي أم شهري</h2><p class="sc-muted">اعرف هل الاشتراك السنوي يوفر فعلاً، وبعد كم شهر يتعادل مع الدفع الشهري.</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-sb-month">سعر الاشتراك الشهري</label><input id="sc-sb-month" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-sb-year">سعر الاشتراك السنوي</label><input id="sc-sb-year" type="number" min="0" step="any" inputmode="decimal"></div></div>
+<div class="sc-tool-result" id="sc-sub-result" aria-live="polite">أدخل سعر الباقتين.</div>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-rule72" hidden>
+<h2>مضاعفة المال وقاعدة 72</h2><p class="sc-muted">كم سنة يحتاج مبلغك ليتضاعف (أو يتضاعف أكثر) بعائد سنوي معيّن؟ تعرض النتيجة الدقيقة والتقدير بقاعدة 72.</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-r7-rate">العائد السنوي %</label><input id="sc-r7-rate" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-r7-mult">كم ضعفاً تريد (مثلاً 2)</label><input id="sc-r7-mult" type="number" min="0" step="any" inputmode="decimal"></div></div>
+<div class="sc-tool-result" id="sc-rule72-result" aria-live="polite">أدخل العائد وعدد الأضعاف.</div>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-cashback" hidden>
+<h2>قيمة الكاش باك</h2><p class="sc-muted">هل بطاقة الكاش باك تستحق رسومها؟ احسب العائد السنوي الصافي مع سقف الاسترداد الشهري.</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-cb-spend">إنفاقك الشهري بالبطاقة</label><input id="sc-cb-spend" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-cb-pct">نسبة الكاش باك %</label><input id="sc-cb-pct" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-cb-cap">سقف الكاش باك الشهري (اختياري)</label><input id="sc-cb-cap" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-cb-fee">الرسوم السنوية</label><input id="sc-cb-fee" type="number" min="0" step="any" inputmode="decimal"></div></div>
+<div class="sc-tool-result" id="sc-cashback-result" aria-live="polite">أدخل الإنفاق والنسبة.</div>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-payoff" hidden>
+<h2>سداد القرض مبكراً</h2><p class="sc-muted">كم توفّر من الفوائد وكم شهراً تختصر لو دفعت مبلغاً إضافياً كل شهر؟</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-po-bal">المتبقي من القرض</label><input id="sc-po-bal" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-po-rate">الفائدة السنوية %</label><input id="sc-po-rate" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-po-pay">القسط الشهري الحالي</label><input id="sc-po-pay" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-po-extra">مبلغ إضافي شهرياً</label><input id="sc-po-extra" type="number" min="0" step="any" inputmode="decimal"></div></div>
+<div class="sc-tool-result" id="sc-payoff-result" aria-live="polite">أدخل المتبقي والفائدة والقسط والمبلغ الإضافي.</div>
 </section>
 <section class="sc-tool-card sc-tool" id="sc-loancompare" hidden>
 <h2>مقارنة عرضي تمويل</h2><p class="sc-muted">قارن عرضين لنفس المبلغ بفائدة ومدة مختلفتين: أيهما أقل في إجمالي الفوائد وأيهما أخف في القسط؟</p>

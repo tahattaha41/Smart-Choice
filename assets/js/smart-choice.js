@@ -44,7 +44,7 @@
     eye: "M2 12s4-8 10-8 10 8 10 8-4 8-10 8-10-8-10-8zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z",
     all: "M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"
   };
-  var TAB = { discount: "tag", budget: "wallet", unit: "scale", vat: "calc", compare: "compare", decide: "compass", loan: "bank", margin: "chart", split: "receipt", percent: "trend", saving: "target", total: "receipt", installment: "card", convert: "repeat", dates: "calendar", assistant: "bot", compound: "sprout", breakeven: "scales", hourly: "timer", trip: "car", fx: "coin", bmi: "heart", age: "user", zakat: "banknote", grade: "cap", hijri: "moon", wordcount: "type", password: "lock", calories: "flame", speed: "gauge", loancompare: "bank", random: "dice", roi: "trend", inflation: "banknote", stack: "tag" };
+  var TAB = { discount: "tag", budget: "wallet", unit: "scale", vat: "calc", compare: "compare", decide: "compass", loan: "bank", margin: "chart", split: "receipt", percent: "trend", saving: "target", total: "receipt", installment: "card", convert: "repeat", dates: "calendar", assistant: "bot", compound: "sprout", breakeven: "scales", hourly: "timer", trip: "car", fx: "coin", bmi: "heart", age: "user", zakat: "banknote", grade: "cap", hijri: "moon", wordcount: "type", password: "lock", calories: "flame", speed: "gauge", loancompare: "bank", random: "dice", roi: "trend", inflation: "banknote", stack: "tag", effrate: "gauge", sub: "repeat", rule72: "trend", cashback: "coin", payoff: "bank" };
   function svg(name, size) {
     var d = P[name] || P.all; size = size || 22;
     return "<svg class='sc-i' width='" + size + "' height='" + size + "' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='" + d + "'/></svg>";
@@ -260,7 +260,17 @@
       const rest=(skip)=>nums.filter(n=>n!==Number(skip));
       const near=(words,def)=>{ const m=txt.match(new RegExp("(?:"+words.join("|")+")[^\\d]{0,14}(\\d+(?:\\.\\d+)?)")); return m?Number(m[1]):def; };
       const bef=(words,def)=>{ const m=txt.match(new RegExp("(\\d+(?:\\.\\d+)?)\\s*(?:"+words.join("|")+")")); return m?Number(m[1]):def; };
-      if(has("تضخم")&&nums.length>=2){
+      if(has("فائدة فعلية","الفائدة الفعلية","فائدة مخفية")&&nums.length>=3){
+        set({"sc-er-cash":near(["سعر","كاش"],nums[0]),"sc-er-down":near(["مقدم"],0),"sc-er-months":near(["شهر","شهور","مدة","على"],nums[nums.length-2]),"sc-er-pay":near(["قسط"],nums[nums.length-1])}); tab="effrate"; label="الفائدة الفعلية للتقسيط"; ok=true;
+      } else if(has("كاش باك","كاشباك")&&nums.length>=2){
+        set({"sc-cb-spend":nums[0],"sc-cb-pct":pct!=null?Number(pct):nums[1],"sc-cb-cap":"","sc-cb-fee":near(["رسوم"],0)}); tab="cashback"; label="قيمة الكاش باك"; ok=true;
+      } else if(has("سداد مبكر","أسدد","اسدد")&&nums.length>=3){
+        set({"sc-po-bal":nums[0],"sc-po-rate":pct!=null?Number(pct):nums[1],"sc-po-pay":near(["قسط"],nums[2]),"sc-po-extra":near(["اضافي","إضافي","زيادة"],nums[3]!=null?nums[3]:0)}); tab="payoff"; label="سداد القرض مبكراً"; ok=true;
+      } else if(has("يتضاعف","تتضاعف","مضاعفة","قاعدة 72")&&nums.length>=1){
+        set({"sc-r7-rate":pct!=null?Number(pct):nums[0],"sc-r7-mult":2}); tab="rule72"; label="مضاعفة المال"; ok=true;
+      } else if(has("اشتراك")&&has("سنوي")&&nums.length>=2){
+        set({"sc-sb-month":Math.min(nums[0],nums[1]),"sc-sb-year":Math.max(nums[0],nums[1])}); tab="sub"; label="اشتراك سنوي أم شهري"; ok=true;
+      } else if(has("تضخم")&&nums.length>=2){
         const rate=pct!=null?Number(pct):nums[1], amt=nums[0], yrs=nums[nums.length-1]; set({"sc-inf-amount":amt,"sc-inf-rate":rate,"sc-inf-years":yrs}); tab="inflation"; label="التضخم والقوة الشرائية"; ok=true;
       } else if(has("خصمين","خصم متتالي","خصومات متتالية","خصم اضافي","خصم إضافي")&&nums.length>=3){
         const p=rest(pct)[0]!=null?Math.max(...nums):nums[0], ds=nums.filter(n=>n!==p); set({"sc-st-price":p,"sc-st-d1":ds[0],"sc-st-d2":ds[1]!=null?ds[1]:0,"sc-st-coupon":""}); tab="stack"; label="خصومات متتالية"; ok=true;
@@ -409,6 +419,41 @@
       const fin=Math.max(0,p*(1-d1/100)*(1-d2/100)-cp), sav=p-fin;
       out.textContent="السعر النهائي: "+fmt(fin)+" — إجمالي التوفير: "+fmt(sav)+" — الخصم الفعلي: "+fmt(sav/p*100)+"%"+((d1&&d2)?" (وليس "+fmt(d1+d2)+"% كما قد يبدو)":"");
     }
+    function effrate() {
+      const P=value("sc-er-cash"), d=Number.isFinite(value("sc-er-down"))?value("sc-er-down"):0, n=value("sc-er-months"), m=value("sc-er-pay"), out=$("sc-effrate-result"); if(!out)return;
+      const L=P-d; if(!(P>0)||!(n>=1)||!(m>0)||d<0||L<=0){out.textContent="أدخل سعر الكاش وعدد الأشهر والقسط، والمقدم أقل من السعر.";return;}
+      const total=d+m*n; if(m*n<=L+1e-9){out.textContent="إجمالي الأقساط لا يزيد عن السعر؛ لا توجد فائدة مخفية. إجمالي ما تدفعه: "+fmt(total)+" مقابل "+fmt(P)+" كاش.";return;}
+      let lo=0,hi=1; const pv=(r)=>r===0?m*n:m*(1-Math.pow(1+r,-n))/r; for(let i=0;i<200;i++){const mid=(lo+hi)/2; if(pv(mid)>L) lo=mid; else hi=mid;}
+      const r=(lo+hi)/2, apr=(Math.pow(1+r,12)-1)*100;
+      out.textContent="الفائدة الشهرية الفعلية: "+fmt(r*100)+"% — السنوية الفعلية: "+fmt(apr)+"% — الفرق عن الكاش: "+fmt(total-P)+" ("+fmt((total-P)/P*100)+"% من السعر)";
+    }
+    function sub() {
+      const a=value("sc-sb-month"), y=value("sc-sb-year"), out=$("sc-sub-result"); if(!out)return;
+      if(!(a>0)||!(y>0)){out.textContent="أدخل سعر الباقة الشهرية والسنوية.";return;}
+      const yearM=a*12, save=yearM-y, be=y/a;
+      out.textContent=(save>0?"السنوي يوفر "+fmt(save)+" في السنة ("+fmt(save/yearM*100)+"%) — يعادل دفع "+fmt(be)+" شهراً فقط":"السنوي أغلى بـ "+fmt(-save)+" من الشهري — لا يستحق")+" — اختر السنوي فقط إن كنت متأكداً أنك ستستخدمه أكثر من "+fmt(Math.ceil(be))+" شهراً.";
+    }
+    function rule72() {
+      const r=value("sc-r7-rate"), k=Number.isFinite(value("sc-r7-mult"))?value("sc-r7-mult"):2, out=$("sc-rule72-result"); if(!out)return;
+      if(!(r>0)||!(k>1)){out.textContent="أدخل عائداً أكبر من صفر وعدد أضعاف أكبر من 1.";return;}
+      const yrs=Math.log(k)/Math.log(1+r/100); let t="يتضاعف مبلغك "+fmt(k)+" مرة خلال "+fmt(yrs)+" سنة تقريباً";
+      if(k===2) t+=" — وبقاعدة 72 التقديرية: "+fmt(72/r)+" سنة"; out.textContent=t+" (بافتراض ثبات العائد، وهو غير مضمون).";
+    }
+    function cashback() {
+      const sp=value("sc-cb-spend"), pc=value("sc-cb-pct"), cap=value("sc-cb-cap"), fee=Number.isFinite(value("sc-cb-fee"))?value("sc-cb-fee"):0, out=$("sc-cashback-result"); if(!out)return;
+      if(!(sp>0)||!(pc>=0)||fee<0){out.textContent="أدخل إنفاقاً شهرياً ونسبة صحيحة.";return;}
+      let mo=sp*pc/100; const capped=Number.isFinite(cap)&&cap>0&&mo>cap; if(capped) mo=cap;
+      const yr=mo*12, net=yr-fee;
+      out.textContent="الكاش باك شهرياً: "+fmt(mo)+(capped?" (بلغت السقف)":"")+" — سنوياً: "+fmt(yr)+" — الصافي بعد الرسوم: "+fmt(net)+(net<0?" — البطاقة تخسّرك بهذا الإنفاق":" — تستحق الرسوم")+(fee>0?" — تحتاج إنفاقاً شهرياً "+fmt(fee/12/(pc/100))+" لتعادل الرسوم":"");
+    }
+    function payoff() {
+      const B=value("sc-po-bal"), ra=value("sc-po-rate"), pay=value("sc-po-pay"), ex=Number.isFinite(value("sc-po-extra"))?value("sc-po-extra"):0, out=$("sc-payoff-result"); if(!out)return;
+      if(!(B>0)||!(ra>=0)||!(pay>0)||ex<0){out.textContent="أدخل المتبقي والفائدة والقسط الحالي.";return;}
+      const r=ra/1200; const sim=(p)=>{let b=B,i=0,n=0; while(b>0.005&&n<1200){const it=b*r; if(p<=it){return null;} b=b+it-p; i+=it; n++;} return {n,i};};
+      const a=sim(pay), b=sim(pay+ex); if(!a){out.textContent="القسط الحالي لا يغطي الفائدة الشهرية؛ لن ينتهي القرض.";return;}
+      if(!ex){out.textContent="بدون سداد إضافي: ينتهي القرض بعد "+fmt(a.n)+" شهراً وتدفع فوائد "+fmt(a.i)+". أدخل مبلغاً إضافياً لترى التوفير.";return;}
+      out.textContent="بدون إضافة: "+fmt(a.n)+" شهراً وفوائد "+fmt(a.i)+" — مع الإضافة: "+fmt(b.n)+" شهراً وفوائد "+fmt(b.i)+" — توفر "+fmt(a.i-b.i)+" من الفوائد وتختصر "+fmt(a.n-b.n)+" شهراً.";
+    }
     function speed() {
       const km=value("sc-sp-km"), h=Number.isFinite(value("sc-sp-h"))?value("sc-sp-h"):0, m=Number.isFinite(value("sc-sp-m"))?value("sc-sp-m"):0, out=$("sc-speed-result"); if(!out)return;
       const t=h+m/60; if(!Number.isFinite(km)||km<=0||t<=0||h<0||m<0){out.textContent="أدخل مسافة وزمناً أكبر من صفر.";return;}
@@ -456,6 +501,7 @@
       "sc-compound": {"sc-cp-start":10000,"sc-cp-add":1000,"sc-cp-rate":8,"sc-cp-years":5}, "sc-breakeven": {"sc-be-fixed":6000,"sc-be-price":100,"sc-be-var":40},
       "sc-hourly": {"sc-hr-income":9000,"sc-hr-hours":8,"sc-hr-days":5,"sc-hr-price":3000}, "sc-trip": {"sc-trip-km":250,"sc-trip-cons":8,"sc-trip-price":10,"sc-trip-people":3}, "sc-fx": {"sc-fx-amount":500,"sc-fx-rate":48,"sc-fx-fee":1.5},
       "sc-bmi": {"sc-bmi-w":78,"sc-bmi-h":175}, "sc-age": {"sc-age-birth":"1995-06-15"}, "sc-zakat": {"sc-z-cash":120000,"sc-z-gold":30000,"sc-z-trade":0,"sc-z-debt":10000,"sc-z-nisab":85000},
+      "sc-effrate": {"sc-er-cash":20000,"sc-er-down":2000,"sc-er-months":12,"sc-er-pay":1700}, "sc-sub": {"sc-sb-month":120,"sc-sb-year":1000}, "sc-rule72": {"sc-r7-rate":9,"sc-r7-mult":2}, "sc-cashback": {"sc-cb-spend":8000,"sc-cb-pct":2,"sc-cb-cap":100,"sc-cb-fee":300}, "sc-payoff": {"sc-po-bal":200000,"sc-po-rate":14,"sc-po-pay":6000,"sc-po-extra":1500},
       "sc-roi": {"sc-roi-cost":50000,"sc-roi-final":68000,"sc-roi-years":3}, "sc-inflation": {"sc-inf-amount":10000,"sc-inf-rate":15,"sc-inf-years":5}, "sc-stack": {"sc-st-price":2000,"sc-st-d1":20,"sc-st-d2":10,"sc-st-coupon":50},
       "sc-grade": {"sc-g-cur":78,"sc-g-weight":40,"sc-g-target":85}, "sc-hijri": {"sc-h-greg":"2026-03-20"}, "sc-wordcount": {"sc-wc-text":"اكتب نصك هنا. هذا مثال بسيط لعدّ الكلمات والحروف والجمل في النص."}, "sc-password": {"sc-pw-len":16}, "sc-calories": {"sc-cal-age":30,"sc-cal-w":75,"sc-cal-h":175}, "sc-speed": {"sc-sp-km":5,"sc-sp-h":0,"sc-sp-m":30}, "sc-loancompare": {"sc-lc-amount":100000,"sc-lc-ra":12,"sc-lc-ma":24,"sc-lc-rb":10,"sc-lc-mb":36}, "sc-random": {"sc-rn-min":1,"sc-rn-max":100,"sc-rn-count":1}
     };
@@ -500,7 +546,7 @@
       "sc-g-cur": grade, "sc-g-weight": grade, "sc-g-target": grade,
       "sc-cal-age": calories, "sc-cal-w": calories, "sc-cal-h": calories, "sc-cal-sex": calories, "sc-cal-act": calories,
       "sc-sp-km": speed, "sc-sp-h": speed, "sc-sp-m": speed,
-      "sc-roi-cost": roi, "sc-roi-final": roi, "sc-roi-years": roi, "sc-inf-amount": inflation, "sc-inf-rate": inflation, "sc-inf-years": inflation, "sc-st-price": stack, "sc-st-d1": stack, "sc-st-d2": stack, "sc-st-coupon": stack,
+      "sc-er-cash": effrate, "sc-er-down": effrate, "sc-er-months": effrate, "sc-er-pay": effrate, "sc-sb-month": sub, "sc-sb-year": sub, "sc-r7-rate": rule72, "sc-r7-mult": rule72, "sc-cb-spend": cashback, "sc-cb-pct": cashback, "sc-cb-cap": cashback, "sc-cb-fee": cashback, "sc-po-bal": payoff, "sc-po-rate": payoff, "sc-po-pay": payoff, "sc-po-extra": payoff, "sc-roi-cost": roi, "sc-roi-final": roi, "sc-roi-years": roi, "sc-inf-amount": inflation, "sc-inf-rate": inflation, "sc-inf-years": inflation, "sc-st-price": stack, "sc-st-d1": stack, "sc-st-d2": stack, "sc-st-coupon": stack,
       "sc-lc-amount": loancompare, "sc-lc-ra": loancompare, "sc-lc-ma": loancompare, "sc-lc-rb": loancompare, "sc-lc-mb": loancompare,
       "sc-h-greg": hijri, "sc-h-y": hijri, "sc-h-m": hijri, "sc-h-d": hijri, "sc-wc-text": wordcount,
       "sc-c-p1": compare, "sc-c-e1": compare, "sc-c-l1": compare, "sc-c-w1": compare, "sc-c-p2": compare, "sc-c-e2": compare, "sc-c-l2": compare, "sc-c-w2": compare
@@ -525,7 +571,7 @@
     root.querySelectorAll(".sc-tool > h2").forEach(h => { if (h.querySelector(".sc-i")) return; const t = h.parentNode.id.replace("sc-", ""); h.innerHTML = "<span class='sc-h2i'>" + window.SCI.svg(window.SCI.tab(t), 22) + "</span>" + h.textContent; });
     /* تصنيفات وبحث الأدوات */
     const CATS = [["all","الكل","all"],["shop","تسوق","cart"],["money","مال","wallet"],["biz","أعمال","chart"],["life","حياة وصحة","heart"],["text","نصوص وأمان","lock"]];
-    const TAB_CAT = {discount:"shop",unit:"shop",vat:"shop",compare:"shop",decide:"shop",total:"shop",installment:"shop",split:"shop",budget:"money",loan:"money",saving:"money",compound:"money",percent:"money",fx:"money",hourly:"money",margin:"biz",breakeven:"biz",bmi:"life",age:"life",zakat:"life",hijri:"life",trip:"life",dates:"life",convert:"life",grade:"life",wordcount:"text",password:"text",random:"text",calories:"life",speed:"life",loancompare:"money",roi:"money",inflation:"money",stack:"shop"};
+    const TAB_CAT = {discount:"shop",unit:"shop",vat:"shop",compare:"shop",decide:"shop",total:"shop",installment:"shop",split:"shop",budget:"money",loan:"money",saving:"money",compound:"money",percent:"money",fx:"money",hourly:"money",margin:"biz",breakeven:"biz",bmi:"life",age:"life",zakat:"life",hijri:"life",trip:"life",dates:"life",convert:"life",grade:"life",wordcount:"text",password:"text",random:"text",calories:"life",speed:"life",loancompare:"money",roi:"money",inflation:"money",stack:"shop",effrate:"money",sub:"shop",rule72:"money",cashback:"shop",payoff:"money"};
     const tabNav = root.querySelector(".sc-tabs");
     if (tabNav && root.querySelectorAll("[data-tab]").length > 12 && !root.querySelector(".sc-filter")) {
       const bar = document.createElement("div"); bar.className = "sc-filter";
@@ -538,7 +584,7 @@
       q.addEventListener("input", apply); bar.appendChild(chips); bar.appendChild(q); tabNav.parentNode.insertBefore(bar, tabNav);
     }
     /* مقالات مرتبطة بكل أداة */
-    const REL = {discount:["الخصم"],vat:["ضريبة"],unit:["سعر الوحدة"],budget:["ميزانية"],saving:["ادخار","طوارئ"],loan:["القرض"],installment:["التقسيط"],margin:["هامش","تسعير"],breakeven:["تسعير","التعادل"],compare:["تقارن"],decide:["تقارن","الكلية"],total:["الكلية","مستعمل"],compound:["ادخار","طوارئ"],hourly:["اشتراكات","ميزانية"],split:["ميزانية"],trip:["الكلية"],fx:["ميزانية"],roi:["ادخار","طوارئ"],inflation:["ادخار","ميزانية"],stack:["الخصم","تفاوض"]};
+    const REL = {discount:["الخصم"],vat:["ضريبة"],unit:["سعر الوحدة"],budget:["ميزانية"],saving:["ادخار","طوارئ"],loan:["القرض"],installment:["التقسيط"],margin:["هامش","تسعير"],breakeven:["تسعير","التعادل"],compare:["تقارن"],decide:["تقارن","الكلية"],total:["الكلية","مستعمل"],compound:["ادخار","طوارئ"],hourly:["اشتراكات","ميزانية"],split:["ميزانية"],trip:["الكلية"],fx:["ميزانية"],roi:["ادخار","طوارئ"],inflation:["ادخار","ميزانية"],stack:["الخصم","تفاوض"],effrate:["التقسيط","القرض"],sub:["اشتراكات","ميزانية"],rule72:["ادخار","طوارئ"],cashback:["الكلية","الخصم"],payoff:["القرض","ميزانية"]};
     if (typeof fetch === "function" && /\/p\//.test(location.pathname)) {
       fetch("/feeds/posts/default?alt=json&max-results=60", { credentials: "omit" }).then(r => r.json()).then(d => {
         const posts = ((d.feed && d.feed.entry) || []).map(e => { const l = (e.link || []).filter(x => x.rel === "alternate")[0]; return { t: e.title.$t, u: l ? l.href : "" }; }).filter(x => x.u);
@@ -558,7 +604,7 @@
       const sec=root.querySelector("#sc-"+tab); if(sec&&sec.scrollIntoView) setTimeout(()=>{ const y=sec.getBoundingClientRect().top+window.pageYOffset-80; window.scrollTo({top:y,behavior:"smooth"}); },30);
       try { history.replaceState(null, "", "#" + tab); } catch (e) {}
     }));
-    discount(); budget(); unit(); percent(); saving(); total(); installment(); convert(); dates(); vat(); compare(); decide(); loan(); margin(); split(); compound(); breakeven(); hourly(); trip(); fx(); bmi(); age(); zakat(); grade(); wordcount(); genPassword(); calories(); speed(); roi(); inflation(); stack(); loancompare(); decorateAll();
+    discount(); budget(); unit(); percent(); saving(); total(); installment(); convert(); dates(); vat(); compare(); decide(); loan(); margin(); split(); compound(); breakeven(); hourly(); trip(); fx(); bmi(); age(); zakat(); grade(); wordcount(); genPassword(); calories(); speed(); roi(); inflation(); stack(); effrate(); sub(); rule72(); cashback(); payoff(); loancompare(); decorateAll();
     const fromHash=(location.hash||"").replace("#",""); if(fromHash) showTab(fromHash);
   }
   function start() {
@@ -728,6 +774,9 @@
       if (host.querySelector(".sc-home-root")) return;
       var by = function (k) { var m = list.filter(function (p) { return p.title.indexOf(k) === 0; })[0]; return m ? m.url : "#"; };
       var tools = by("الأدوات");
+      var CATS_HOME = [["tag", "التسوق والخصومات", "خصم، سعر الوحدة، تقسيط، كاش باك، اشتراكات", "discount"], ["bank", "القروض والتمويل", "قرض، سداد مبكر، مقارنة عرضين، فائدة فعلية", "loan"], ["sprout", "الادخار والاستثمار", "ادخار، فائدة مركبة، ROI، قاعدة 72، تضخم", "saving"], ["chart", "المشاريع الصغيرة", "هامش الربح، نقطة التعادل، التسعير، الضريبة", "margin"], ["compass", "قرارات الحياة", "مركز القرار، الزكاة، الرحلة، قيمة ساعتك", "decide"]];
+      var FAQ = [["هل الأدوات مجانية وهل أحتاج إلى تسجيل؟", "نعم، كل الأدوات مجانية وتعمل مباشرة دون حساب أو بريد إلكتروني."], ["هل تُرسل أرقامي إلى أي جهة؟", "لا. تُحسب النتائج داخل متصفحك فقط، ولا نحفظ ما تدخله."], ["هل النتائج نصيحة مالية؟", "لا. هي حسابات تقريبية مبنية على أرقامك، وليست نصيحة مالية أو قانونية؛ استشر مختصاً في القرارات الكبيرة."], ["كيف أختار بين التقسيط والكاش؟", "استخدم أداتي «التقسيط مقابل الكاش» و«الفائدة الفعلية للتقسيط» لمعرفة الفرق الحقيقي بالأرقام قبل القرار."], ["ما الأداة المناسبة لمشروعي الصغير؟", "ابدأ بـ«هامش الربح» ثم «نقطة التعادل»، وراجع دليل التسعير في المقالات."]];
+      try { var fl = document.createElement("script"); fl.type = "application/ld+json"; fl.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": FAQ.map(function (q) { return { "@type": "Question", "name": q[0], "acceptedAnswer": { "@type": "Answer", "text": q[1] } }; }) }); document.head.appendChild(fl); } catch (e) {}
       var html = "<div class='sc-home-root'>" +
         "<section class='sc-hero2'><div class='sc-hero2-text'>" +
         "<span class='sc-badge'>مجاني • بدون تسجيل • بياناتك تبقى في متصفحك</span>" +
@@ -737,12 +786,16 @@
         "<div class='sc-hero2-art' aria-hidden='true'><div class='sc-demo'><small>مثال توضيحي (أرقام افتراضية)</small><div class='row'><span>السعر الأصلي</span><b>2,000</b></div><div class='row'><span>الخصم</span><b>20%</b></div><div class='bar'><i></i></div><div class='row big'><span>تدفع</span><b>1,600</b></div><div class='row save'><span>توفير</span><b>400</b></div></div><span class='orb o1'></span><span class='orb o2'></span></div></section>" +
         "<section class='sc-sec'><h2 class='sc-h2'>أدواتنا الأكثر استخداماً</h2><p class='sc-sub'>اختر الأداة، جرّب مثالاً جاهزاً أو أدخل أرقامك.</p><div class='sc-toolgrid'>" +
         TOOLS.map(function (t) { return "<a class='sc-tool-tile' href='" + tools + "#" + t[3] + "'><span class='ico'>" + window.SCI.svg(t[0], 26) + "</span><b>" + esc(t[1]) + "</b><small>" + esc(t[2]) + "</small></a>"; }).join("") +
-        "</div><p class='sc-more'><a href='" + tools + "'>عرض كل الأدوات (35 أداة) ←</a></p></section>" +
+        "</div><p class='sc-more'><a href='" + tools + "'>عرض كل الأدوات (40 أداة) ←</a></p></section>" +
         "<section class='sc-sec sc-steps'><h2 class='sc-h2'>كيف تستفيد؟</h2><div class='sc-stepgrid'>" +
         "<div><span>1</span><b>أدخل أرقامك</b><small>السعر، الخصم، الضمان، الدخل… ما تعرفه أنت.</small></div>" +
         "<div><span>2</span><b>شاهد النتيجة فوراً</b><small>تُحسب داخل متصفحك بمعادلات معروفة.</small></div>" +
         "<div><span>3</span><b>قارن وقرر</b><small>استخدم مركز القرار لترتيب خياراتك بأوزانك.</small></div></div></section>" +
         "<section class='sc-sec'><h2 class='sc-h2'>أحدث الأدلة والمقالات</h2><p class='sc-sub'>شروحات عملية بأمثلة رقمية مبسطة.</p><div class='sc-cards sc-latest-posts'></div><p class='sc-more'><a href='/search'>كل المقالات ←</a></p></section>" +
+        "<section class='sc-sec'><h2 class='sc-h2'>تصفّح حسب احتياجك</h2><p class='sc-sub'>40 أداة مجمّعة في خمس مجالات.</p><div class='sc-catgrid'>" +
+        CATS_HOME.map(function (c) { return "<a class='sc-cat' href='" + tools + "#" + c[3] + "'><span class='ico'>" + window.SCI.svg(c[0], 24) + "</span><b>" + c[1] + "</b><small>" + c[2] + "</small></a>"; }).join("") + "</div></section>" +
+        "<section class='sc-sec sc-faq'><h2 class='sc-h2'>أسئلة شائعة</h2>" +
+        FAQ.map(function (q) { return "<details><summary>" + q[0] + "</summary><p>" + q[1] + "</p></details>"; }).join("") + "</section>" +
         "<section class='sc-sec sc-trust'><div><b>"+window.SCI.svg('shield',20)+" خصوصيتك أولاً</b><small>لا نطلب تسجيلاً ولا نرسل مدخلاتك إلى أي جهة.</small></div><div><b>"+window.SCI.svg('receipt',20)+" بلا أرقام مختلقة</b><small>لا نعرض أسعاراً أو تقييمات لا نملك مصدرها.</small></div><div><b>"+window.SCI.svg('pen',20)+" محتوى نكتبه بأنفسنا</b><small>اطّلع على <a href='" + by("سياسة المحتوى") + "'>سياسة المحتوى والتحرير</a>.</small></div></section></div>";
       var wrap = document.createElement("div"); wrap.innerHTML = html; host.appendChild(wrap.firstChild);
       document.documentElement.classList.add("sc-home-ready");
@@ -1047,7 +1100,7 @@
     doc.classList.add("sc-motion");
     var NAMES = [["tag", "حاسبة الخصم"], ["wallet", "الميزانية"], ["bank", "القرض"], ["card", "التقسيط"], ["compass", "مركز القرار"], ["scale", "سعر الوحدة"], ["chart", "هامش الربح"], ["sprout", "نمو الادخار"], ["timer", "قيمة ساعتك"], ["car", "تكلفة الرحلة"], ["heart", "كتلة الجسم"], ["moon", "هجري/ميلادي"], ["lock", "كلمات المرور"], ["bot", "المساعد الذكي"]];
     var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); if (e.target.matches(".sc-demo,.adm-stat")) countAll(e.target); } }); }, { threshold: 0.08, rootMargin: "0px 0px -5% 0px" });
-    var SEL = ".sc-sec,.sc-tool-tile,.sc-post-card,.sc-stepgrid>div,.sc-trust>div,.sc-page .sc-tool-card,.sc-hero2,.post-body>h2,.sc-related,.sc-share,.adm-card,.adm-stat,.sc-prose>h2";
+    var SEL = ".sc-sec,.sc-cat,.sc-tool-tile,.sc-post-card,.sc-stepgrid>div,.sc-trust>div,.sc-page .sc-tool-card,.sc-hero2,.post-body>h2,.sc-related,.sc-share,.adm-card,.adm-stat,.sc-prose>h2";
     function toLatin(t) { return t.replace(/[٠-٩]/g, function (d) { return "٠١٢٣٤٥٦٧٨٩".indexOf(d); }).replace(/[٬،]/g, ",").replace(/٫/g, "."); }
     function countOne(el) {
       if (el.dataset.scCnt) return; var raw = el.textContent.trim(); if (!/^[\d٠-٩][\d٠-٩,٬.٫]*(%)?$/.test(raw)) return; el.dataset.scCnt = "1";

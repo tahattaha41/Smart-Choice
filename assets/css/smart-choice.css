@@ -332,3 +332,16 @@ html[data-sc-theme="dark"] .adm-stat.ok b,html[data-sc-theme="dark"] .adm-stat.g
 .sc-offer:hover{transform:translateY(-3px);box-shadow:var(--sc-shadow)}.sc-offer small{color:var(--sc-muted)}.sc-offer span{color:var(--sc-blue);font-weight:700}
 .sc-disc{margin:12px 0 0;font-size:13px;color:var(--sc-muted)}
 .sc-donate{display:inline-block;margin-top:10px;padding:8px 16px;border-radius:999px;background:linear-gradient(90deg,var(--sc-blue),var(--sc-violet));color:#fff!important;font-weight:700;text-decoration:none}
+/* ===== فئات الصفحة الرئيسية والأسئلة الشائعة ===== */
+.sc-catgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.sc-cat{display:flex;flex-direction:column;gap:8px;padding:20px;border-radius:var(--sc-radius);background:var(--sc-card);border:1px solid var(--sc-line);text-decoration:none;color:var(--sc-ink);box-shadow:var(--sc-shadow);transition:transform .25s,box-shadow .25s,border-color .25s}
+.sc-cat:hover{transform:translateY(-5px);box-shadow:var(--sc-shadow2);border-color:var(--sc-blue)}
+.sc-cat .ico{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,rgba(47,107,255,.14),rgba(18,181,165,.14));color:var(--sc-blue)}
+.sc-cat b{font-size:18px}.sc-cat small{color:var(--sc-muted);line-height:1.7}
+.sc-faq details{background:var(--sc-card);border:1px solid var(--sc-line);border-radius:14px;margin:0 0 10px;padding:0 18px;transition:box-shadow .2s}
+.sc-faq details[open]{box-shadow:var(--sc-shadow)}
+.sc-faq summary{cursor:pointer;padding:15px 0;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.sc-faq summary::after{content:"+";color:var(--sc-blue);font-size:22px;line-height:1;transition:transform .25s}
+.sc-faq details[open] summary::after{transform:rotate(45deg)}
+.sc-faq summary::-webkit-details-marker{display:none}.sc-faq p{margin:0 0 16px;color:var(--sc-muted)}
+html[data-sc-theme="dark"] .sc-cat{background:var(--sc-card)!important}

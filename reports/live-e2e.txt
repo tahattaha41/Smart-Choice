@@ -3,7 +3,7 @@ OK    Home shows hero
 OK    Installed theme has the GitHub loader (if FAIL: upload theme/smart-choice-blogger.xml once)
 OK    CDN serves latest front-end JS (self-heal present)
 OK    Nav has no old-brand pages: الرئيسية الأدوات الذكية مقارنة المنتجات مركز القرار من نحن سياسة المحتوى والتحرير إعلن معنا اتصل بنا خريطة الموقع سياسة 
-OK    ads.txt يحتوي معرّف الناشر
+WARN  ads.txt غير مفعّل بعد في إعدادات بلوجر
 OK    Tools page loads
 OK    Tools: tool sections rendered
 OK    Tools: discount calculator works -> السعر بعد الخصم ١٬٦٠٠ قيمة التوفير ٤٠٠

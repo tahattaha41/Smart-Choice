@@ -69,14 +69,26 @@ HINTS = ["قرار شراء متكرر يخسر الناس فيه مالاً", "
 def call(prompt):
     last = None
     for model in MODELS:
-        r = requests.post("https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent" % model,
-                          headers={"x-goog-api-key": KEY, "Content-Type": "application/json"},
-                          json={"contents": [{"parts": [{"text": prompt}]}], "generationConfig": {"temperature": 0.8, "maxOutputTokens": 8000}}, timeout=180)
-        if r.status_code in (404, 400):
-            last = r; continue
-        r.raise_for_status()
-        return r.json()["candidates"][0]["content"]["parts"][0]["text"]
-    last.raise_for_status()
+        for retry in range(2):
+            gen = {"temperature": 0.8, "maxOutputTokens": 8000}
+            if "2.5" in model:
+                gen["thinkingConfig"] = {"thinkingBudget": 0}
+            try:
+                r = requests.post("https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent" % model,
+                                  headers={"x-goog-api-key": KEY, "Content-Type": "application/json"},
+                                  json={"contents": [{"parts": [{"text": prompt}]}], "generationConfig": gen}, timeout=90)
+            except requests.exceptions.RequestException as e:
+                last = e; time.sleep(5); continue
+            if r.status_code in (404, 400):
+                last = RuntimeError("%s -> %s %s" % (model, r.status_code, r.text[:200])); break
+            if r.status_code in (429, 500, 502, 503, 504):
+                last = RuntimeError("%s -> %s" % (model, r.status_code)); time.sleep(8); continue
+            r.raise_for_status()
+            try:
+                return r.json()["candidates"][0]["content"]["parts"][0]["text"]
+            except Exception as e:
+                last = e; break
+    raise last or RuntimeError("no model answered")
 
 def parse(txt):
     txt = txt.strip().strip("`")
@@ -114,7 +126,7 @@ def main():
     ptext = " ".join(open(os.path.join(ROOT, "posts", f), encoding="utf8").read() for _, _, f in existing)
     tool = pick_tool(ptext)
     reasons = []
-    for attempt in range(4):
+    for attempt in range(3):
         hint = HINTS[(int(time.time() // 3600) + attempt) % len(HINTS)]
         try:
             res = parse(call(PROMPT.format(titles=titles, hint=hint, tool=tool[1], tdesc=tool[2])))

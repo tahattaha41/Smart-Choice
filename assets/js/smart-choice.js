@@ -619,7 +619,7 @@
    Static markup in the theme remains as a fallback if a request fails. */
 (function () {
   "use strict";
-  var ORDER = ["الأدوات", "مقارنة", "مركز القرار", "من نحن", "سياسة المحتوى", "إعلن معنا", "اتصل بنا", "سياسة الخصوصية", "الشروط", "لوحة الإدارة"];
+  var ORDER = ["الأدوات", "مقارنة", "مركز القرار", "من نحن", "سياسة المحتوى", "إعلن معنا", "اتصل بنا", "خريطة الموقع", "سياسة الخصوصية", "الشروط", "لوحة الإدارة"];
   function clean(title) { return String(title || "").replace(/\s*\|\s*Smart Choice\s*$/i, "").trim(); }
   function rank(title) {
     for (var i = 0; i < ORDER.length; i++) if (title.indexOf(ORDER[i]) === 0) return i;
@@ -935,7 +935,7 @@
     }
     root.appendChild(c);
     var c2 = panel("خطوات المالك قبل/بعد التقديم", "تُحفظ علاماتك في هذا المتصفح");
-    var steps = ["تفعيل ads.txt في إعدادات بلوجر (الأرباح).", "تسجيل الموقع في Search Console وإرسال sitemap.xml.", "انتظار فهرسة الصفحات في جوجل (أسبوع إلى أسبوعين).", "طلب مراجعة الموقع من حساب AdSense.", "تنظيف حسابات Utilityra القديمة في AdSense وAnalytics.", "إلغاء أي مفاتيح سرية سبق تسريبها وإنشاء بدائل."];
+    var steps = ["تفعيل ads.txt في إعدادات بلوجر (الأرباح).", "Search Console: أضف الموقع كـ «بادئة عنوان URL» وأرسل sitemap.xml وsitemap-pages.xml.", "Search Console: افحص الرابط الرئيسي وصفحة الأدوات وكل مقال جديد واضغط «طلب الفهرسة».", "AdSense ← الخصوصية والمراسلة: أنشئ رسالة الموافقة على ملفات الارتباط (EEA/UK) وفعّلها.", "بلوجر ← الإعدادات ← وصف البحث: أضف وصفاً من 150 حرفاً، وفعّل «السماح لمحركات البحث بفهرسة المدونة».", "تسجيل الموقع في Search Console وإرسال sitemap.xml.", "انتظار فهرسة الصفحات في جوجل (أسبوع إلى أسبوعين).", "طلب مراجعة الموقع من حساب AdSense.", "تنظيف حسابات Utilityra القديمة في AdSense وAnalytics.", "إلغاء أي مفاتيح سرية سبق تسريبها وإنشاء بدائل."];
     var ul3 = el("ul", "adm-checks"), store = {}; try { store = JSON.parse(localStorage.getItem("sc-adm-steps") || "{}"); } catch (e) {}
     steps.forEach(function (t, i) { var li = el("li"), lb = el("label"), cb = el("input"); cb.type = "checkbox"; cb.checked = !!store[i];
       cb.addEventListener("change", function () { store[i] = cb.checked; try { localStorage.setItem("sc-adm-steps", JSON.stringify(store)); } catch (e) {} });
@@ -1231,4 +1231,37 @@
     ld.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "WebApplication", "name": "Smart Choice — أدوات ذكية", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "inLanguage": "ar", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "url": location.origin + location.pathname });
     document.head.appendChild(ld);
   } catch (e) {}
+})();
+
+/* Smart Choice — إشارات الثقة والفهرسة: Organization وBreadcrumb وسطر التحرير وخريطة الموقع */
+(function () {
+  function ld(o) { try { var s = document.createElement("script"); s.type = "application/ld+json"; s.textContent = JSON.stringify(o); document.head.appendChild(s); } catch (e) {} }
+  function run() {
+    var origin = location.origin, path = location.pathname;
+    ld({ "@context": "https://schema.org", "@type": "Organization", "name": "Smart Choice", "url": origin + "/", "logo": "https://raw.githubusercontent.com/tahattaha41/Smart-Choice/main/assets/img/icon-512.png", "email": "skyloom32@gmail.com", "description": "أدوات حساب ومقارنة مجانية وأدلة عملية لقرارات الشراء والمال الشخصي." });
+    var isPost = /^\/\d{4}\/\d{2}\//.test(path);
+    if (isPost) {
+      var t = (document.querySelector("h1.post-title, .post-title, h1") || {}).textContent;
+      var lab = document.querySelector(".post-labels a, a[rel='tag']");
+      var items = [{ "@type": "ListItem", "position": 1, "name": "الرئيسية", "item": origin + "/" }];
+      if (lab) items.push({ "@type": "ListItem", "position": 2, "name": lab.textContent.trim(), "item": lab.href });
+      items.push({ "@type": "ListItem", "position": items.length + 1, "name": (t || document.title).trim() });
+      ld({ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": items });
+      var tries = 0, iv = setInterval(function () {
+        var body = document.querySelector(".post-body, .entry-content"); tries++;
+        if (body && (body.innerText || "").length > 300 && !document.querySelector(".sc-byline")) {
+          clearInterval(iv);
+          var b = document.createElement("div"); b.className = "sc-byline";
+          b.innerHTML = "<span>بقلم <b>فريق Smart Choice</b></span><span>محتوى تعليمي عام وليس نصيحة مالية شخصية</span><a href='/p/editorial.html'>سياسة التحرير</a>";
+          body.parentNode.insertBefore(b, body);
+        } else if (tries > 30) clearInterval(iv);
+      }, 400);
+    }
+    if (/^\/p\/sitemap/.test(path)) {
+      var pl = document.getElementById("sc-sm-pages"), po = document.getElementById("sc-sm-posts");
+      function fill(ul, feed, cap) { fetch(feed).then(function (r) { return r.json(); }).then(function (d) { ul.textContent = ""; (d.feed.entry || []).forEach(function (e) { var l = (e.link || []).filter(function (x) { return x.rel === "alternate"; })[0]; if (!l) return; var li = document.createElement("li"), a = document.createElement("a"); a.href = l.href; a.textContent = e.title.$t.replace(/\s*\|\s*Smart Choice$/, ""); li.appendChild(a); ul.appendChild(li); }); }).catch(function () {}); }
+      if (pl && po) { fill(pl, "/feeds/pages/default?alt=json&max-results=150"); fill(po, "/feeds/posts/default?alt=json&max-results=500"); }
+    }
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
 })();

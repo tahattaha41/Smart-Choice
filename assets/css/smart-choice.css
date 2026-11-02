@@ -345,3 +345,89 @@ html[data-sc-theme="dark"] .adm-stat.ok b,html[data-sc-theme="dark"] .adm-stat.g
 .sc-faq details[open] summary::after{transform:rotate(45deg)}
 .sc-faq summary::-webkit-details-marker{display:none}.sc-faq p{margin:0 0 16px;color:var(--sc-muted)}
 html[data-sc-theme="dark"] .sc-cat{background:var(--sc-card)!important}
+
+/* =====================================================================
+   طبقة التصميم المهني v3 — نظام موحّد للأحجام والمسافات والألوان
+   (تُحمَّل أخيراً لتحكم كل ما قبلها؛ تقلل الزخرفة الزائدة وتوحّد الأحجام بحسب الجهاز)
+   ===================================================================== */
+:root{
+  --fs-xs:clamp(.8rem,.78rem + .1vw,.875rem);
+  --fs-sm:clamp(.9rem,.88rem + .15vw,.975rem);
+  --fs-base:clamp(1rem,.97rem + .2vw,1.0625rem);
+  --fs-lg:clamp(1.125rem,1.05rem + .35vw,1.25rem);
+  --fs-h3:clamp(1.15rem,1.08rem + .35vw,1.3rem);
+  --fs-h2:clamp(1.4rem,1.2rem + 1vw,1.9rem);
+  --fs-h1:clamp(1.85rem,1.3rem + 2.6vw,3.1rem);
+  --sp-sec:clamp(40px,5vw,72px);
+  --sp-card:clamp(18px,2vw,28px);
+  --r:14px;
+  --sc-radius:14px;
+  --sc-shadow:0 1px 2px rgba(11,27,58,.05),0 6px 18px rgba(11,27,58,.06);
+  --sc-shadow2:0 2px 4px rgba(11,27,58,.06),0 16px 36px rgba(11,27,58,.12);
+  --sc-bg:#f6f8fb;--sc-line:#e3e8f0;--sc-ink:#101c34;--sc-muted:#566580;
+}
+html body{font-size:var(--fs-base);line-height:1.8;font-weight:400;background:var(--sc-bg)}
+html body h1,html body h2,html body h3,html body h4{font-weight:700;letter-spacing:0;line-height:1.35;color:var(--sc-ink)}
+/* العناوين: ثلاثة مستويات فقط */
+html body .sc-hero2 h1,html body .sc-tools-hero h1,html body .post-title,html body h1.post-title,html body .sc-page h1{font-size:var(--fs-h1)!important;line-height:1.25!important;font-weight:800!important}
+html body .sc-h2,html body .sc-tool-card h2,html body .sc-prose h2,html body .post-body h2,html body .adm-h h2,html body .sc-offers h2,html body .sc-related h2,html body .sc-page h2{font-size:var(--fs-h2)!important;font-weight:700!important;margin:0 0 .6em!important}
+html body .post-body h3,html body .sc-prose h3,html body .sc-page h3{font-size:var(--fs-h3)!important;font-weight:700!important}
+/* النصوص */
+html body p,html body li,html body .sc-sub,html body .sc-muted,html body .post-body{font-size:var(--fs-base)}
+html body .sc-sub,html body .sc-muted,html body .sc-hero2 p,html body .sc-tools-hero p{font-size:var(--fs-lg)!important;line-height:1.8;color:var(--sc-muted)}
+html body .sc-tools-hero p,html body .sc-hero2 p{color:rgba(255,255,255,.82)!important}
+html body small,html body .sc-tool-tile small,html body .sc-cat small,html body .adm-sub,html body .sc-disc,html body .sc-field label,html body .kpi span{font-size:var(--fs-sm)!important}
+html body input,html body select,html body textarea,html body button{font-size:var(--fs-base)}
+html body .sc-nav a{font-size:var(--fs-sm)!important;font-weight:500}
+html body .sc-brand{font-size:clamp(1.3rem,1.15rem + .7vw,1.6rem)!important;font-weight:800}
+/* المسافات والحاويات */
+html body .sc-wrap{width:min(1140px,calc(100% - clamp(28px,5vw,64px)))}
+html body .sc-main{padding-top:clamp(18px,3vw,36px)!important;padding-bottom:clamp(28px,4vw,56px)!important}
+html body .sc-sec{margin-top:var(--sp-sec)!important}
+html body .sc-home-root>.sc-sec:first-of-type{margin-top:var(--sp-sec)}
+html body .sc-page .sc-tool-card,html body .sc-prose,html body .adm-card,html body .sc-offers,html body .post-outer{padding:var(--sp-card)!important;border-radius:var(--r)!important;box-shadow:var(--sc-shadow)!important;border:1px solid var(--sc-line)!important}
+html body .sc-page .sc-tool-card{margin-bottom:clamp(14px,2vw,22px)}
+/* الهيرو: هادئ وجاد بدل الزخرفة */
+html body .sc-hero2,html body .sc-tools-hero{background:linear-gradient(135deg,#0b1b3a 0%,#12295a 100%)!important;border-radius:var(--r)!important;box-shadow:var(--sc-shadow2)!important;color:#fff;padding:clamp(26px,5vw,64px)!important}
+html body .sc-tools-hero{padding:clamp(22px,4vw,44px)!important;margin-bottom:clamp(16px,2.5vw,28px)}
+html body .sc-tools-hero h1,html body .sc-hero2 h1{color:#fff!important}
+.sc-hero2::before,.sc-hero2::after{display:none!important}
+.sc-hero2 h1 span{background:none!important;-webkit-text-fill-color:#7fd8ff!important;color:#7fd8ff!important;animation:none!important}
+.orb,.sc-chip3,.sc-marquee{display:none!important}
+html body .sc-demo{animation:none!important;border-radius:var(--r)!important;box-shadow:0 18px 40px rgba(0,0,0,.28)!important}
+html body .sc-badge{font-size:var(--fs-xs)!important;font-weight:500;border-radius:8px!important;padding:5px 12px!important}
+/* البطاقات والأزرار */
+html body .sc-tool-tile,html body .sc-cat,html body .sc-post-card,html body .sc-stepgrid>div,html body .sc-trust>div,html body .adm-stat{border-radius:var(--r)!important;box-shadow:var(--sc-shadow)!important;padding:clamp(16px,2vw,22px)!important}
+html body .sc-tool-tile,html body .sc-post-card{transform:none!important}
+html body .sc-tool-tile:hover,html body .sc-cat:hover,html body .sc-post-card:hover{transform:translateY(-3px)!important;box-shadow:var(--sc-shadow2)!important}
+html body .sc-tool-tile b,html body .sc-cat b,html body .sc-post-card h3{font-size:var(--fs-lg)!important;font-weight:700}
+html body .sc-btn,html body .sc-ghost,html body .sc-tabs button{border-radius:10px!important;font-weight:600!important;font-size:var(--fs-sm)!important;padding:.65em 1.2em!important}
+html body .sc-btn{background:#2f6bff!important;box-shadow:0 2px 8px rgba(47,107,255,.3)!important}
+html body .sc-btn.alt{background:transparent!important;border:1px solid rgba(255,255,255,.5)!important;color:#fff!important;box-shadow:none!important}
+html body .sc-btn::after{display:none}
+html body .sc-field input,html body .sc-field select,html body textarea{border-radius:10px!important;min-height:46px}
+html body .kpi{border-radius:12px!important}
+html body .kpi b,html body .kpi strong{font-size:clamp(1.25rem,1.1rem + .8vw,1.65rem)!important;font-weight:700}
+html body .sc-tool-result{font-size:var(--fs-base)!important;border-radius:12px!important}
+/* الهيدر والتذييل */
+html body .sc-head{background:rgba(255,255,255,.94)!important;box-shadow:0 1px 0 var(--sc-line)}
+html body .sc-top{font-size:var(--fs-xs)!important}
+html body .sc-footer{padding:clamp(28px,4vw,48px) 0!important}
+html body .sc-footer a,html body .sc-footer small,html body .sc-footer div{font-size:var(--fs-sm)}
+/* الحركة: هادئة */
+html body .sc-tool-tile:hover .ico{animation:none}
+.sc-motion .sc-rv{transform:translateY(14px) scale(1);transition-duration:.5s}
+/* الجوال */
+@media(max-width:640px){
+  html body .sc-hero2{text-align:right}
+  html body .sc-hero2-cta{display:flex;gap:10px;flex-wrap:wrap}
+  html body .sc-hero2-cta .sc-btn{flex:1 1 140px;text-align:center}
+  html body .sc-tabs{gap:8px!important}
+  html body .sc-tool-grid{grid-template-columns:1fr!important}
+}
+@media(min-width:1024px){html body .sc-tool-grid{gap:18px}}
+html[data-sc-theme="dark"]{--sc-bg:#0b1220;--sc-ink:#e6ecf8;--sc-muted:#9fb0cc;--sc-line:#24324f}
+html[data-sc-theme="dark"] body .sc-head{background:rgba(11,18,32,.94)!important}
+.sc-byline{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;margin:0 0 22px;padding:12px 16px;border:1px solid var(--sc-line);border-radius:10px;background:var(--sc-card);color:var(--sc-muted);font-size:var(--fs-sm)}
+.sc-byline b{color:var(--sc-ink)}
+@media(max-width:640px){html body .sc-toolgrid,html body .sc-tabs{grid-template-columns:repeat(2,minmax(0,1fr))!important}}

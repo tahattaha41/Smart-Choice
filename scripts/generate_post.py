@@ -28,13 +28,31 @@ def read_posts():
             posts.append((m.group(1).strip(), (l.group(1).strip() if l else ""), os.path.basename(p)))
     return posts
 
+def read_tools():
+    t = open(os.path.join(ROOT, "pages", "tools.md"), encoding="utf8").read()
+    out = []
+    for m in re.finditer(r'data-tab="([a-z0-9-]+)"[^>]*>([^<]+)</button>', t):
+        tab, name = m.group(1), m.group(2).strip()
+        sec = re.search(r'id="sc-%s"[^>]*>.*?<p class="sc-muted">(.*?)</p>' % re.escape(tab), t, re.S)
+        out.append((tab, name, re.sub(r"<[^>]+>", "", sec.group(1)).strip() if sec else ""))
+    return out
+
+def pick_tool(posts_text):
+    """الأداة الأقل تغطية في المقالات الحالية، لتبقى كل المقالات مرتبطة بمحتوى الموقع."""
+    tools = [x for x in read_tools() if x[0] not in ("assistant", "random", "password", "wordcount", "calories", "bmi", "hijri", "age", "grade", "speed", "dates", "convert")]
+    scored = sorted(tools, key=lambda x: (posts_text.count(x[1]) + posts_text.count("#" + x[0]), x[0]))
+    k = int(time.time() // 43200) % 3
+    return scored[min(k, len(scored) - 1)]
+
 def words(html):
     return len(re.sub(r"<[^>]+>", " ", html).split())
 
-PROMPT = """أنت كاتب محتوى عربي محترف لموقع «Smart Choice» المتخصص في: القرارات الشرائية الذكية، المال الشخصي، الميزانية، التقسيط والقروض، التسعير للمشاريع الصغيرة، والإنتاجية.
+PROMPT = """مهم جداً: المقال يجب أن يدور حول أداة محددة من أدوات موقعنا، وهي: «{tool}» — وصفها: {tdesc}
+اشرح المشكلة الحقيقية التي تحلها هذه الأداة في حياة القارئ، ثم اشرح المعادلة أو الفكرة خلف حسابها بلغة بسيطة، ثم قدّم مثالاً رقمياً افتراضياً بأرقام صحيحة قابلة للتحقق، ثم أخطاء شائعة، ثم كيف يستخدم القارئ الأداة خطوة بخطوة. اذكر اسم الأداة «{tool}» صراحةً في المقال. لا تخرج عن هذا الموضوع.
+أنت كاتب محتوى عربي محترف لموقع «Smart Choice» المتخصص في: القرارات الشرائية الذكية، المال الشخصي، الميزانية، التقسيط والقروض، التسعير للمشاريع الصغيرة، والإنتاجية.
 اكتب مقالاً أصلياً جديداً مفيداً للقارئ العربي (مصر والخليج) بين 900 و1200 كلمة.
 قواعد صارمة:
-- موضوع جديد لا يشبه هذه العناوين الموجودة: {titles}
+- زاوية جديدة لا تشبه هذه العناوين الموجودة: {titles}
 - ابدأ بفقرة مقدمة، ثم 5 إلى 7 أقسام بعناوين <h2> (وعناوين فرعية <h3> عند الحاجة)، ثم خاتمة قصيرة.
 - أمثلة بأرقام افتراضية واضحة وصريحة أنها افتراضية، وخطوات عملية قابلة للتطبيق.
 - ممنوع: إحصاءات أو أسماء دراسات أو أسعار حالية مختلقة، ووعود أرباح مضمونة، ونصائح طبية أو قانونية قطعية، وذكر أنك نموذج ذكاء اصطناعي.
@@ -44,7 +62,7 @@ PROMPT = """أنت كاتب محتوى عربي محترف لموقع «Smart Ch
 السطر 1: TITLE: عنوان جذاب بين 40 و70 حرفاً
 السطر 2: LABEL: تصنيف واحد من [التسوق الذكي، المال الشخصي، الأهداف، الأعمال الصغيرة، الإنتاجية، القروض والتمويل]
 ثم سطر فارغ ثم المقال بصيغة HTML فقط (<p> و<h2> و<h3> و<ul><li>) دون <html> أو <body> ودون علامات Markdown.
-فكرة موجّهة لهذه المرة: {hint}"""
+زاوية موجّهة لهذه المرة: {hint}"""
 
 HINTS = ["قرار شراء متكرر يخسر الناس فيه مالاً", "عادة مالية صغيرة بأثر كبير", "مقارنة بين خيارين شائعين في الاستهلاك", "خطأ شائع في التقسيط أو القروض", "نصيحة للتسعير أو تكاليف مشروع صغير", "تخطيط ميزانية لموسم أو مناسبة", "تقليل فواتير المنزل", "قرار بين الإيجار والشراء لسلعة"]
 
@@ -64,7 +82,7 @@ def parse(txt):
     body = re.sub(r"^```(?:html)?|```$", "", body.strip(), flags=re.M).strip()
     return m.group(1).strip(), (l.group(1).strip() if l else "المال الشخصي"), body
 
-def check(title, body, existing):
+def check(title, body, existing, tool=None):
     low = (title + body).lower()
     for b in BANNED:
         if b in low:
@@ -73,6 +91,8 @@ def check(title, body, existing):
         return "قصير: %d كلمة" % words(body)
     if len(re.findall(r"<h2", body)) < 4:
         return "أقسام قليلة"
+    if tool and tool[1] not in body:
+        return "لا يذكر الأداة: " + tool[1]
     if re.search(r"<script|<iframe|on\w+=|javascript:", body, re.I):
         return "وسوم غير آمنة"
     for t, _, _ in existing:
@@ -86,22 +106,25 @@ def main():
         return 0
     existing = read_posts()
     titles = " | ".join(t for t, _, _ in existing)
+    ptext = " ".join(open(os.path.join(ROOT, "posts", f), encoding="utf8").read() for _, _, f in existing)
+    tool = pick_tool(ptext)
     for attempt in range(4):
         hint = HINTS[(int(time.time() // 3600) + attempt) % len(HINTS)]
         try:
-            res = parse(call(PROMPT.format(titles=titles, hint=hint)))
+            res = parse(call(PROMPT.format(titles=titles, hint=hint, tool=tool[1], tdesc=tool[2])))
         except Exception as e:
             print("API error:", e); time.sleep(10); continue
         if not res:
             continue
         title, label, body = res
-        bad = check(title, body, existing)
+        bad = check(title, body, existing, tool)
         if bad:
             print("رُفض:", bad); continue
+        body += '\n<p><strong>جرّب الأداة الآن:</strong> <a href="/p/tools.html#%s">%s</a> — مجانية وتعمل داخل متصفحك دون تسجيل.</p>' % (tool[0], tool[1])
         slug = "auto-" + datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%d-%H%M")
         with open(os.path.join(ROOT, "posts", slug + ".md"), "w", encoding="utf8") as f:
             f.write("---\ntitle: %s\nlabels: %s\npublish: true\n---\n%s\n" % (title.replace(":", " -") if False else title, label, body))
-        log("نُشر مقال جديد: %s (%d كلمة، تصنيف %s)" % (title, words(body), label))
+        log("نُشر مقال جديد: %s (%d كلمة، تصنيف %s، الأداة: %s)" % (title, words(body), label, tool[1]))
         return 0
     log("لم يجتز أي مقال فحوص الجودة هذه المرة؛ لم يُنشر شيء (هذا أفضل من نشر محتوى ضعيف).")
     return 0

@@ -11,6 +11,18 @@ LOG = os.path.join(ROOT, "reports", "auto-posts.md")
 BANNED = ["utilityra", "كمذكرة", "as an ai", "كنموذج لغوي", "lorem", "ضمان الربح", "مضمون 100", "اربح مليون"]
 MIN_WORDS = 700
 
+def discover_models(key):
+    """يجلب نماذج flash المتاحة حالياً (الأحدث أولاً) لتفادي النماذج المتقاعدة."""
+    try:
+        r = requests.get("https://generativelanguage.googleapis.com/v1beta/models?pageSize=200", headers={"x-goog-api-key": key}, timeout=30)
+        names = [m["name"].split("/")[-1] for m in r.json().get("models", []) if "generateContent" in m.get("supportedGenerationMethods", [])]
+    except Exception:
+        return []
+    names = [n for n in names if "flash" in n and not re.search(r"lite|image|tts|live|audio|thinking|exp|preview|8b", n)]
+    def ver(n):
+        m = re.search(r"(\d+)\.?(\d*)", n); return (int(m.group(1)), int(m.group(2) or 0)) if m else (0, 0)
+    return sorted(set(names), key=ver, reverse=True)
+
 def log(msg):
     os.makedirs(os.path.dirname(LOG), exist_ok=True)
     with open(LOG, "w", encoding="utf8") as f:
@@ -68,7 +80,7 @@ HINTS = ["قرار شراء متكرر يخسر الناس فيه مالاً", "
 
 def call(prompt):
     last = None
-    for model in MODELS:
+    for model in (discover_models(KEY)[:3] + MODELS):
         for retry in range(2):
             gen = {"temperature": 0.8, "maxOutputTokens": 8000}
             if "2.5" in model:

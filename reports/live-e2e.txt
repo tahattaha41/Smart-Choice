@@ -8,7 +8,7 @@ OK    Nav has no old-brand pages: الرئيسية الأدوات الذكية �
 OK    ads.txt يحتوي معرّف الناشر
 OK    Tools page loads
 OK    Tools: tool sections rendered
-WARN  Tools: affiliate ad cards shown = 0
+INFO  Tools: affiliate ad cards shown (paused until AdSense approval) = 0
 OK    Tools: discount calculator works -> السعر بعد الخصم ١٬٦٠٠ قيمة التوفير ٤٠٠
 OK    Tools: decision tab opens
 OK    Tools: compare tab opens

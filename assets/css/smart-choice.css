@@ -508,3 +508,4 @@ html body .adm .adm-tabs button,html body .adm .adm-side button{font-size:.95rem
 html body .adm .adm-brand b{font-size:1.05rem!important}
 html body .adm button,html body .adm .adm-link,html body .adm .sc-btn{font-size:.9rem!important;font-weight:600}
 html body .adm input,html body .adm textarea,html body .adm select{font-size:.95rem!important}
+.sc-offer img{width:100%;max-height:160px;object-fit:contain;border-radius:8px;background:#fff}

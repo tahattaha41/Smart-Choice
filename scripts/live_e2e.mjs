@@ -24,6 +24,10 @@ const cdn = await page.evaluate(async () => { try { return await (await fetch('h
 // الرئيسية
 rec(await go(BASE + '/'), 'Home loads');
 rec((await page.locator('.sc-hero2, .sc-hero').count()) > 0, 'Home shows hero');
+await page.waitForTimeout(3500);
+rec((await page.locator('#sc-hq-p').count()) > 0, 'Design v4 live: hero calculator present (if FAIL: new JS not loading)');
+const dsn = await page.evaluate(() => ({ font: getComputedStyle(document.body).fontFamily.slice(0, 40), btn: (document.querySelector('.sc-btn') ? getComputedStyle(document.querySelector('.sc-btn')).backgroundColor : '') }));
+out.push('INFO  Home style probe: font=' + dsn.font + ' | button=' + dsn.btn);
 rec((await page.content()).includes('Smart Choice loader'), 'Installed theme has the GitHub loader (if FAIL: upload theme/smart-choice-blogger.xml once)');
 const cdn2 = await page.evaluate(async () => { try { return await (await fetch('https://cdn.jsdelivr.net/gh/tahattaha41/Smart-Choice@main/assets/js/smart-choice.js')).text(); } catch { return ''; } });
 rec(cdn2.includes('content bundle'), 'CDN serves latest front-end JS (self-heal present)');
@@ -40,7 +44,7 @@ const find = (s) => feed.find((p) => p.t.includes(s))?.u;
 // صفحة الأدوات: ظهور وعمل
 const tools = find('الأدوات');
 rec(!!tools && (await go(tools)), 'Tools page loads');
-try { await page.waitForSelector('.sc-tool', { timeout: 20000 }); rec(true, 'Tools: tool sections rendered'); } catch { rec(false, 'Tools: NO tool section rendered (page is interface only)'); }
+try { await page.waitForSelector('.sc-tool', { timeout: 20000 }); rec(true, 'Tools: tool sections rendered'); await page.waitForTimeout(5000); const nOff = await page.locator('.sc-offer').count(); out.push((nOff > 0 ? 'OK    ' : 'WARN  ') + 'Tools: affiliate ad cards shown = ' + nOff); } catch { rec(false, 'Tools: NO tool section rendered (page is interface only)'); }
 if ((await page.locator('#sc-price').count()) > 0) {
   await page.fill('#sc-price', '2000'); await page.fill('#sc-rate', '20');
   const txt = await page.locator('#sc-discount .sc-tool-result').innerText();

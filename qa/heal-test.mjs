@@ -1,0 +1,17 @@
+import { createRequire } from 'node:module'; import fs from 'node:fs';
+const { chromium } = createRequire(import.meta.url)('playwright');
+const root='/home/claude/smart-choice';
+const js=fs.readFileSync(root+'/assets/js/smart-choice.js','utf8');
+const tools=fs.readFileSync(root+'/pages/tools.md','utf8').split('---').slice(2).join('---');
+const css=fs.readFileSync(root+'/assets/css/smart-choice.css','utf8');
+const b=await chromium.launch(); const p=await b.newPage(); const errs=[]; p.on('pageerror',e=>errs.push(e.message));
+await p.route('https://x.test/feeds/pages/**',r=>r.fulfill({json:{feed:{entry:[{title:{$t:'الأدوات الذكية | Smart Choice'},summary:{$t:'short'},link:[{rel:'alternate',href:'https://x.test/p/tools.html'}]}]}}}));
+await p.route('https://raw.githubusercontent.com/**',r=>r.fulfill({json:{items:[{kind:'page',title:'الأدوات الذكية | Smart Choice',html:tools}]},headers:{'access-control-allow-origin':'*'}}));
+await p.route('https://x.test/feeds/posts/**',r=>r.fulfill({json:{feed:{entry:[]}}}));
+await p.route('https://x.test/p/tools.html',r=>r.fulfill({contentType:'text/html; charset=utf-8',body:`<!doctype html><html><head><meta charset="utf-8"><style>${css}</style></head><body><main id="main-content"></main></body></html>`}));
+await p.goto('https://x.test/p/tools.html#decide'); await p.addScriptTag({content:js});
+await p.waitForSelector('.sc-injected .sc-tool:not([hidden])');
+console.log('visible tool:',await p.$$eval('.sc-tool',e=>e.filter(x=>!x.hidden).map(x=>x.id)));
+await p.click('[data-tab="discount"]'); await p.fill('#sc-price','500'); await p.fill('#sc-rate','10');
+console.log('discount:',(await p.textContent('#sc-discount .sc-tool-result')).trim());
+console.log('errors',errs.length?errs:'none'); await b.close();

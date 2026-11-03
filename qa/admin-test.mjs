@@ -1,0 +1,28 @@
+import { createRequire } from 'node:module'; import fs from 'node:fs';
+const { chromium } = createRequire(import.meta.url)('playwright');
+const root='/home/claude/smart-choice';
+const js=fs.readFileSync(root+'/assets/js/smart-choice.js','utf8');
+const md=fs.readFileSync(root+'/pages/admin.md','utf8').split('---').slice(2).join('---');
+const css=fs.readFileSync(root+'/assets/css/smart-choice.css','utf8').split('\n').filter(l=>!l.startsWith('@import')).join('\n');
+const b=await chromium.launch(); const p=await b.newPage({viewport:{width:1100,height:900}}); const errs=[]; p.on('pageerror',e=>errs.push(e.message));
+const H={'access-control-allow-origin':'*'};
+await p.route('**/feeds/**',r=>r.fulfill({json:{feed:{entry:[{title:{$t:'مقال تجريبي'},published:{$t:'2026-10-30T10:00:00Z'},category:[{term:'التسوق الذكي'}],link:[{rel:'alternate',href:'https://x.test/a'}]}]}}}));
+await p.route('https://raw.githubusercontent.com/**',r=>{const u=r.request().url();
+ if(u.includes('bot-views')) return r.fulfill({json:{measured:{'2026-10-31':20},estimated:{'2026-10-30':30}},headers:H}); if(u.includes('stats-history')) return r.fulfill({json:[{date:'2026-10-28',all:100},{date:'2026-10-29',all:130},{date:'2026-10-30',all:190},{date:'2026-10-31',all:200}],headers:H});
+ if(u.includes('stats.json')) return r.fulfill({json:{updated:'2026-10-31 21:30 UTC',d7:140,d30:200,all:200},headers:H});
+ if(u.includes('live-e2e')) return r.fulfill({body:'OK    Home loads\\nFAIL  Tools: x <img src=x onerror=alert(1)>\\nWARN  ads.txt غير مفعّل\\nfailed=1\\n'.replace(/\\\\n/g,'\\n'),headers:H});
+ if(u.includes('adsense-audit')) return r.fulfill({json:{score:84,posts:20,avg_words:708,manual:[],checks:[{level:'pass',title:'صفحة من نحن',detail:'',fix:''},{level:'fail',title:'ملف ads.txt',detail:'غير متاح',fix:'فعّله'}]},headers:H});
+ return r.fulfill({status:404,body:'',headers:H});});
+await p.route('https://x.test/',r=>r.fulfill({contentType:'text/html; charset=utf-8',body:`<!doctype html><meta charset=utf-8><style>${css}</style><body><div class="sc-page">${md}</div></body>`}));
+await p.goto('https://x.test/'); await p.addScriptTag({content:js});
+await p.waitForSelector('input[type=password]');
+console.log('before login stats:',await p.$$eval('.adm-stat',e=>e.length));
+await p.fill('input[type=password]','wrong'); await p.click('#sc-admin-root .adm-btn'); await p.waitForSelector('.adm-bad:not(:empty)'); console.log('wrong pw ->',await p.textContent('#sc-admin-root .adm-bad'));
+await p.fill('input[type=password]','Taha'); await p.click('#sc-admin-root .adm-btn');
+await p.waitForSelector('.adm-stat b');
+console.log('stats:',await p.$$eval('.adm-stat',e=>e.map(x=>x.innerText.replace(/\n/g,' '))));
+console.log('attention:',await p.$$eval('.adm-list li',e=>e.map(x=>x.innerText)));
+console.log('xss img:',await p.$$eval('.adm img',e=>e.length));
+await p.screenshot({path:'/tmp/qa-adm1.png',fullPage:true});
+for (const t of ['content','quality','tech','ai','revenue','links']) { await p.click(`[data-t="${t}"]`); await p.waitForTimeout(150); await p.screenshot({path:`/tmp/qa-adm-${t}.png`,fullPage:true}); }
+console.log('errors',errs.length?errs:'none'); await b.close();

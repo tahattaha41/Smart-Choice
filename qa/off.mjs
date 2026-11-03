@@ -1,0 +1,13 @@
+import { createRequire } from 'node:module'; import fs from 'node:fs';
+const { chromium } = createRequire(import.meta.url)('playwright');
+const R='/home/claude/smart-choice';
+const css=fs.readFileSync(R+'/assets/css/smart-choice.css','utf8').split('\n').filter(l=>!l.startsWith('@import')).join('\n');
+const js=fs.readFileSync(R+'/assets/js/smart-choice.js','utf8');
+const bundle=JSON.parse(fs.readFileSync(R+'/assets/content/bundle.json','utf8'));
+const tools=bundle.items.find(i=>i.title.startsWith('الأدوات'));
+const cfg=JSON.parse(fs.readFileSync(R+'/assets/content/monetization.json','utf8'));
+const b=await chromium.launch(); const p=await (await b.newContext({viewport:{width:1280,height:900}})).newPage();
+await p.route('https://raw.githubusercontent.com/**',r=>r.fulfill({json:cfg}));
+await p.route('https://x.test/**',r=>r.fulfill({contentType:'text/html; charset=utf-8',body:`<!doctype html><html dir=rtl><head><meta charset=utf-8><style>${css}</style></head><body><main class='sc-wrap sc-main' id='main-content'><article class="sc-injected">${tools.html}</article></main></body></html>`}));
+await p.goto('https://x.test/p/tools.html'); await p.addScriptTag({content:js}); await p.waitForTimeout(4200);
+const el=await p.$('.sc-offers'); await el.scrollIntoViewIfNeeded(); await p.waitForTimeout(800); await el.screenshot({path:'/tmp/offers.png'}); await b.close();

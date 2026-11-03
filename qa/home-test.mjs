@@ -1,0 +1,12 @@
+import { createRequire } from 'node:module'; import fs from 'node:fs';
+const { chromium } = createRequire(import.meta.url)('playwright');
+const js=fs.readFileSync('/home/claude/smart-choice/assets/js/smart-choice.js','utf8');
+const b=await chromium.launch(); const p=await b.newPage(); const errs=[]; p.on('pageerror',e=>errs.push(e.message));
+await p.route('https://x.test/**',r=>{const u=r.request().url();
+ if(u.includes('/feeds/pages')) return r.fulfill({json:{feed:{entry:[['الأدوات الذكية','t'],['مقارنة المنتجات','c'],['مركز القرار','d']].map(([t,s])=>({title:{$t:t+' | Smart Choice'},link:[{rel:'alternate',href:'https://x.test/p/'+s+'.html'}]}))}}});
+ if(u.includes('/feeds/posts')) return r.fulfill({json:{feed:{entry:[{title:{$t:'مقال'},summary:{$t:'ملخص'},link:[{rel:'alternate',href:'https://x.test/a.html'}]}]}}});
+ return r.fulfill({contentType:'text/html; charset=utf-8',body:'<!doctype html><meta charset=utf-8><nav class="sc-nav"><a href="/">الرئيسية</a></nav><main id="main-content"></main>'});});
+await p.goto('https://x.test/?m=1'); await p.addScriptTag({content:js});
+await p.waitForSelector('.sc-latest-posts h3');
+console.log('hero:',await p.textContent('.sc-hero2 h1'),'| cards:',await p.$$eval('.sc-latest-posts .sc-card',e=>e.length),'| first link:',await p.getAttribute('.sc-latest-posts .sc-card a','href'),'| errors',errs.length?errs:'none');
+await b.close();

@@ -1,5 +1,5 @@
 {
-  "_help": "كل عرض: title وurl (https) وdesc وcta وimage (اختياري). عناوين العروض مأخوذة من أسماء روابط المنتجات؛ عدّلها بالاسم الدقيق من صفحة المنتج. روابط amzn.to القديمة: 4eHUA90 3V1mV3x 3W8Atuq 4zxEk2P 4sBKo7C",
+  "_help": "offersOn: أين تظهر العروض لكل الصفحات (home/tools/posts). المقالات تعرض العروض المرتبطة بها فقط عبر offer-map.json (يحدّثه الذكاء الاصطناعي). الوضع الحالي آمن لقبول AdSense؛ بعد القبول يمكن إضافة home وposts.",
   "adSlots": {
     "inArticle": "",
     "afterTool": ""
@@ -30,9 +30,7 @@
     }
   ],
   "offersOn": [
-    "home",
-    "tools",
-    "posts"
+    "tools"
   ],
   "maxOffers": 3
 }

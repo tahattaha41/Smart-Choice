@@ -509,3 +509,19 @@ html body .adm .adm-brand b{font-size:1.05rem!important}
 html body .adm button,html body .adm .adm-link,html body .adm .sc-btn{font-size:.9rem!important;font-weight:600}
 html body .adm input,html body .adm textarea,html body .adm select{font-size:.95rem!important}
 .sc-offer img{width:100%;max-height:160px;object-fit:contain;border-radius:8px;background:#fff}
+/* ===== بطاقات العروض بشكل إعلان ===== */
+.sc-offers{background:linear-gradient(180deg,#fffaf0,#fff)!important;border:1px solid #f3dfb2!important}
+.sc-offers-grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))!important;gap:16px!important}
+html body .sc-offer{padding:0!important;overflow:hidden;border:1px solid #ead9ac!important;background:#fff;border-radius:14px!important;box-shadow:0 2px 10px rgba(120,80,0,.07)!important}
+html body .sc-offer:hover{border-color:#f59e0b!important;box-shadow:0 10px 26px rgba(120,80,0,.18)!important}
+.sc-offer-media{display:grid;place-items:center;min-height:130px;background:#f7f4ec}
+.sc-offer-media.ph{color:#c78a12;background:linear-gradient(135deg,#fff4dc,#fde9b8)}
+.sc-offer-media img{width:100%;height:160px;max-height:none;object-fit:contain;background:#fff;border-radius:0}
+.sc-offer-body{display:flex;flex-direction:column;gap:8px;padding:14px 16px 16px}
+.sc-ad-tag{align-self:flex-start;font-size:.72rem!important;font-weight:700;color:#7a5200;background:#ffe9b0;border-radius:6px;padding:2px 8px}
+.sc-offer-body b{font-size:1.05rem!important;color:var(--sc-ink)}
+.sc-offer-cta{margin-top:4px;text-align:center;background:#f59e0b;color:#1d1300!important;font-weight:700;border-radius:10px;padding:10px 14px;transition:background .2s}
+.sc-offer:hover .sc-offer-cta{background:#e08a00}
+.sc-offers h2{font-size:1.15rem!important}
+html[data-sc-theme="dark"] .sc-offers{background:#1a1810!important;border-color:#4a3c14!important}
+html[data-sc-theme="dark"] .sc-offer{background:#211e12!important;border-color:#4a3c14!important}

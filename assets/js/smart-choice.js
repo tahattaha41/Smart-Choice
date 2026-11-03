@@ -1201,8 +1201,12 @@
     offers.slice(0, Math.min(6, MAXO)).forEach(function (o) {
       if (!o || !o.title || !safeUrl(o.url)) return;
       var a = el("a", "sc-offer"); a.href = o.url; a.target = "_blank"; a.rel = "sponsored nofollow noopener";
-      if (safeUrl(o.image)) { var im = document.createElement("img"); im.src = o.image; im.alt = o.title; im.loading = "lazy"; im.referrerPolicy = "no-referrer"; a.appendChild(im); }
-      a.appendChild(el("b", null, o.title)); if (o.desc) a.appendChild(el("small", null, o.desc)); a.appendChild(el("span", null, o.cta || "اطّلع على العرض ←")); g.appendChild(a);
+      var media = el("div", "sc-offer-media");
+      if (safeUrl(o.image)) { var im = document.createElement("img"); im.src = o.image; im.alt = o.title; im.loading = "lazy"; im.referrerPolicy = "no-referrer"; media.appendChild(im); }
+      else { media.innerHTML = window.SCI ? window.SCI.svg("cart", 40) : ""; media.classList.add("ph"); }
+      var body = el("div", "sc-offer-body"); body.appendChild(el("span", "sc-ad-tag", "إعلان · رابط شراكة")); body.appendChild(el("b", null, o.title)); if (o.desc) body.appendChild(el("small", null, o.desc));
+      body.appendChild(el("span", "sc-offer-cta", o.cta || "شاهد على أمازون ←"));
+      a.appendChild(media); a.appendChild(body); g.appendChild(a);
     });
     if (!g.children.length) return null;
     b.appendChild(g); var amz = offers.some(function (o) { return /amzn\.to|amazon\./i.test((o && o.url) || ""); });

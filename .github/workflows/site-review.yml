@@ -63,5 +63,8 @@ jobs:
               new_post) gh api -X POST repos/${{ github.repository }}/actions/workflows/auto-posts.yml/dispatches -f ref=main ;;
             esac
           done
+      - name: Refresh visitor stats (scheduled runs are sometimes skipped by GitHub)
+        continue-on-error: true
+        run: gh api -X POST repos/${{ github.repository }}/actions/workflows/site-stats.yml/dispatches -f ref=main
       - name: Refresh the live browser test
         run: gh api -X POST repos/${{ github.repository }}/actions/workflows/live-e2e.yml/dispatches -f ref=main

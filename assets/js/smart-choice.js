@@ -1194,10 +1194,11 @@
     var ins = document.createElement("ins"); ins.className = "adsbygoogle"; ins.style.display = "block"; ins.setAttribute("data-ad-client", "ca-pub-1235197294708204"); ins.setAttribute("data-ad-slot", id); ins.setAttribute("data-ad-format", "auto"); ins.setAttribute("data-full-width-responsive", "true");
     w.appendChild(ins); setTimeout(function () { try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {} }, 50); return w;
   }
+  var MAXO = 3;
   function offersBox(offers) {
     var b = el("section", "sc-offers"); b.appendChild(el("h2", null, "أدوات ومصادر نوصي بها"));
     var g = el("div", "sc-offers-grid");
-    offers.slice(0, 6).forEach(function (o) {
+    offers.slice(0, Math.min(6, MAXO)).forEach(function (o) {
       if (!o || !o.title || !safeUrl(o.url)) return;
       var a = el("a", "sc-offer"); a.href = o.url; a.target = "_blank"; a.rel = "sponsored nofollow noopener";
       a.appendChild(el("b", null, o.title)); if (o.desc) a.appendChild(el("small", null, o.desc)); a.appendChild(el("span", null, o.cta || "اطّلع على العرض ←")); g.appendChild(a);
@@ -1208,21 +1209,21 @@
     return b;
   }
   function apply(cfg) {
-    var slots = cfg.adSlots || {}, offers = cfg.offers || [];
+    var slots = cfg.adSlots || {}, offers = cfg.offers || [], on = cfg.offersOn || ["tools"]; MAXO = Math.max(1, Math.min(6, cfg.maxOffers || 3));
     var isPost = /^\/\d{4}\/\d{2}\//.test(location.pathname), isTools = /^\/p\/tools/.test(location.pathname);
     function tryPlace(n) {
       var body = document.querySelector(".post-body, .entry-content"), page = document.querySelector(".sc-tool-card.sc-tool:not([hidden])");
       if (isPost && body && (body.innerText || "").length > 300 && !body.dataset.scMon) {
         body.dataset.scMon = "1";
         var ps = body.querySelectorAll(":scope > p"); if (slots.inArticle && ps.length > 4) ps[2].parentNode.insertBefore(slot(slots.inArticle), ps[2].nextSibling);
-        var ob = offers.length ? offersBox(offers) : null; if (ob) body.appendChild(ob);
+        var ob = offers.length && on.indexOf("posts") > -1 ? offersBox(offers) : null; if (ob) body.appendChild(ob);
         return;
       }
       if (isTools && page && !document.querySelector(".sc-tool-ad-done")) {
         var marker = el("i", "sc-tool-ad-done"); marker.hidden = true; document.body.appendChild(marker);
         var host = page.parentNode;
         if (slots.afterTool) host.appendChild(slot(slots.afterTool));
-        var ob2 = offers.length ? offersBox(offers) : null; if (ob2) host.appendChild(ob2);
+        var ob2 = offers.length && on.indexOf("tools") > -1 ? offersBox(offers) : null; if (ob2) host.appendChild(ob2);
         return;
       }
       if (n < 20) setTimeout(function () { tryPlace(n + 1); }, 500);

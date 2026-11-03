@@ -1,7 +1,7 @@
 {
  "score": 100,
  "posts": 23,
- "avg_words": 756,
+ "avg_words": 755,
  "checks": [
   {
    "level": "pass",
@@ -17,7 +17,7 @@
   },
   {
    "level": "info",
-   "title": "متوسط طول المقال: 756 كلمة",
+   "title": "متوسط طول المقال: 755 كلمة",
    "detail": "",
    "fix": ""
   },
@@ -96,6 +96,24 @@
   {
    "level": "pass",
    "title": "Google Analytics مثبت",
+   "detail": "",
+   "fix": ""
+  },
+  {
+   "level": "pass",
+   "title": "ملف ads.txt",
+   "detail": "",
+   "fix": "Blogger › الإعدادات › الأرباح › ads.txt مخصص، والصق: google.com, pub-1235197294708204, DIRECT, f08c47fec0942fa0"
+  },
+  {
+   "level": "pass",
+   "title": "robots.txt متاح",
+   "detail": "",
+   "fix": ""
+  },
+  {
+   "level": "pass",
+   "title": "sitemap.xml متاح",
    "detail": "",
    "fix": ""
   }

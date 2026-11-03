@@ -44,7 +44,7 @@ const find = (s) => feed.find((p) => p.t.includes(s))?.u;
 // صفحة الأدوات: ظهور وعمل
 const tools = find('الأدوات');
 rec(!!tools && (await go(tools)), 'Tools page loads');
-try { await page.waitForSelector('.sc-tool', { timeout: 20000 }); rec(true, 'Tools: tool sections rendered'); await page.waitForTimeout(5000); const nOff = await page.locator('.sc-offer').count(); out.push((nOff > 0 ? 'OK    ' : 'WARN  ') + 'Tools: affiliate ad cards shown = ' + nOff); } catch { rec(false, 'Tools: NO tool section rendered (page is interface only)'); }
+try { await page.waitForSelector('.sc-tool', { timeout: 20000 }); rec(true, 'Tools: tool sections rendered'); await page.waitForTimeout(5000); const nOff = await page.locator('.sc-offer').count(); out.push((nOff > 0 ? 'OK    ' : 'INFO  ') + 'Tools: affiliate ad cards shown (paused until AdSense approval) = ' + nOff); } catch { rec(false, 'Tools: NO tool section rendered (page is interface only)'); }
 if ((await page.locator('#sc-price').count()) > 0) {
   await page.fill('#sc-price', '2000'); await page.fill('#sc-rate', '20');
   const txt = await page.locator('#sc-discount .sc-tool-result').innerText();

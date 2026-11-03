@@ -1,5 +1,5 @@
 {
-  "_help": "offersOn: أين تظهر العروض لكل الصفحات (home/tools/posts). المقالات تعرض العروض المرتبطة بها فقط عبر offer-map.json (يحدّثه الذكاء الاصطناعي). الوضع الحالي آمن لقبول AdSense؛ بعد القبول يمكن إضافة home وposts.",
+  "_help": "enabled=false يوقف ظهور كل بطاقات العروض والإعلانات اليدوية. فعّل بعد قبول AdSense بتغيير enabled إلى true وتحديد offersOn.",
   "adSlots": {
     "inArticle": "",
     "afterTool": ""
@@ -29,8 +29,7 @@
       "icon": "lamp"
     }
   ],
-  "offersOn": [
-    "tools"
-  ],
-  "maxOffers": 3
+  "offersOn": [],
+  "maxOffers": 3,
+  "enabled": false
 }

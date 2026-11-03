@@ -1219,6 +1219,7 @@
     return b;
   }
   function apply(cfg) {
+    if (cfg.enabled === false) return;
     var slots = cfg.adSlots || {}, offers = cfg.offers || [], on = cfg.offersOn || ["tools"]; MAXO = Math.max(1, Math.min(6, cfg.maxOffers || 3));
     var isPost = /^\/\d{4}\/\d{2}\//.test(location.pathname), isTools = /^\/p\/tools/.test(location.pathname);
     function tryPlace(n) {

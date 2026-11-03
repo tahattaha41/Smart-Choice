@@ -1221,7 +1221,16 @@
       if (isPost && body && (body.innerText || "").length > 300 && !body.dataset.scMon) {
         body.dataset.scMon = "1";
         var ps = body.querySelectorAll(":scope > p"); if (slots.inArticle && ps.length > 4) ps[2].parentNode.insertBefore(slot(slots.inArticle), ps[2].nextSibling);
-        var ob = offers.length && on.indexOf("posts") > -1 ? offersBox(offers) : null; if (ob) body.appendChild(ob);
+        var ob = null;
+        if (offers.length && on.indexOf("posts") > -1) ob = offersBox(offers);
+        if (ob) body.appendChild(ob);
+        else if (offers.length) {
+          fetch(CFG_URL.replace("monetization.json", "offer-map.json") + "?t=" + Math.floor(Date.now() / 300000), { credentials: "omit" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (mp) {
+            if (!mp || !mp.map) return; var h = document.querySelector("h1.post-title, .post-title, h1"); var tt = ((h && h.textContent) || document.title).replace(/\s+/g, " ").trim().replace(/\s*\|\s*Smart Choice$/, "");
+            var idx = null; Object.keys(mp.map).forEach(function (k) { if (k.replace(/\s+/g, " ").trim() === tt) idx = mp.map[k]; });
+            if (!idx) return; var sel = idx.map(function (i) { return offers[i]; }).filter(Boolean); var b2 = sel.length ? offersBox(sel) : null; if (b2) body.appendChild(b2);
+          }).catch(function () {});
+        }
         return;
       }
       if (isTools && page && !document.querySelector(".sc-tool-ad-done")) {

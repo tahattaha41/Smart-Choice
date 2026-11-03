@@ -1195,6 +1195,11 @@
     w.appendChild(ins); setTimeout(function () { try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {} }, 50); return w;
   }
   var MAXO = 3;
+  var OICON = {
+    phone: "<svg viewBox='0 0 64 64' width='72' height='72' fill='none' stroke='currentColor' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><rect x='19' y='6' width='26' height='52' rx='5'/><path d='M28 11h8M29 52h6'/><rect x='23' y='16' width='18' height='28' rx='2' fill='currentColor' opacity='.12'/></svg>",
+    band: "<svg viewBox='0 0 64 64' width='72' height='72' fill='none' stroke='currentColor' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><rect x='20' y='20' width='24' height='24' rx='6'/><path d='M25 20l2-12h10l2 12M25 44l2 12h10l2-12'/><circle cx='32' cy='32' r='5' fill='currentColor' opacity='.15'/></svg>",
+    lamp: "<svg viewBox='0 0 64 64' width='72' height='72' fill='none' stroke='currentColor' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><path d='M32 6v10M14 34c0-10 8-18 18-18s18 8 18 18z'/><path d='M32 34v18M22 56h20M24 22l-6-6M40 22l6-6'/></svg>"
+  };
   function offersBox(offers) {
     var b = el("section", "sc-offers"); b.appendChild(el("h2", null, "أدوات ومصادر نوصي بها"));
     var g = el("div", "sc-offers-grid");
@@ -1203,7 +1208,7 @@
       var a = el("a", "sc-offer"); a.href = o.url; a.target = "_blank"; a.rel = "sponsored nofollow noopener";
       var media = el("div", "sc-offer-media");
       if (safeUrl(o.image)) { var im = document.createElement("img"); im.src = o.image; im.alt = o.title; im.loading = "lazy"; im.referrerPolicy = "no-referrer"; media.appendChild(im); }
-      else { media.innerHTML = window.SCI ? window.SCI.svg("cart", 40) : ""; media.classList.add("ph"); }
+      else { media.innerHTML = OICON[o.icon] || (window.SCI ? window.SCI.svg("cart", 40) : ""); media.classList.add("ph"); }
       var body = el("div", "sc-offer-body"); body.appendChild(el("span", "sc-ad-tag", "إعلان · رابط شراكة")); body.appendChild(el("b", null, o.title)); if (o.desc) body.appendChild(el("small", null, o.desc));
       body.appendChild(el("span", "sc-offer-cta", o.cta || "شاهد على أمازون ←"));
       a.appendChild(media); a.appendChild(body); g.appendChild(a);
@@ -1238,6 +1243,12 @@
         var host = page.parentNode;
         if (slots.afterTool) host.appendChild(slot(slots.afterTool));
         var ob2 = offers.length && on.indexOf("tools") > -1 ? offersBox(offers) : null; if (ob2) host.appendChild(ob2);
+        return;
+      }
+      var isHome = location.pathname === "/" || location.pathname === "";
+      var sb = isHome && document.querySelector(".sc-home-root .sc-statbar");
+      if (sb && !document.querySelector(".sc-home-offers") && offers.length && on.indexOf("home") > -1) {
+        var hb = offersBox(offers); if (hb) { hb.classList.add("sc-home-offers"); sb.parentNode.insertBefore(hb, sb.nextSibling); }
         return;
       }
       if (n < 20) setTimeout(function () { tryPlace(n + 1); }, 500);

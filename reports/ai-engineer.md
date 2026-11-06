@@ -1,17 +1,7 @@
 # المهندس التقني الذكي
 
-- آخر تشغيل: 2026-11-06 07:18 UTC
-- الحالة: **تحذير**
-
-حالة الموقع الحي ممتازة وجاهزيتة لبرنامج AdSense بلغت 100% دون أي مشاكل في العرض أو الواجهة. تكمن المشكلة الوحيدة في وجود إخفاقات متكررة في مهام GitHub Actions الخاصة بمزامنة المقالات وإحصائيات الزوار عبر Blogger API.
-
-## المشاكل
-- [medium] **تعثر متكرر في مهام مزامنة المقالات وإحصائيات الزوار عبر API** — السبب: فشل مؤقت أو انتهاء صلاحية أذونات الاتصال (OAuth/API Tokens) أثناء تنفيذ مهام Sync posts وVisitor stats في GitHub Actions. — الحل: التحقق من صحة مفاتيح الربط ورصيد الحصص (Quota) لـ Blogger API في مستودع GitHub وإعادة تشغيل المهام. — (يحتاج المالك)
-
-## إجراءات نُفّذت تلقائياً
-- إعادة مزامنة المقالات
-
-## توصيات
-- مراجعة وتحديث أذونات Blogger API في GitHub Secrets لضمان استقرار المزامنة التلقائية.
-- إضافة الموقع إلى Google Search Console وإرسال ملف sitemap.xml لضمان تسريع الفهرسة.
-- تقديم طلب المراجعة لبرنامج Google AdSense بعد تأكيد تدفق الزوار.
+- آخر تشغيل: 2026-11-06 13:08 UTC
+- تعذّر التشخيص هذه المرة: {
+  "error": {
+    "code": 404,
+    "message": "This model models/gemini-2.0-flash is no longer available. Please update your code to use models/gemini-3.8-flash for the latest features and improvemen

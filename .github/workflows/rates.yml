@@ -25,7 +25,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/content/rates.json reports/rates-error.md 2>/dev/null || true
-          git add -u assets/content reports
+          [ -f assets/content/rates.json ] && git add assets/content/rates.json || true
+          [ -f reports/rates-error.md ] && git add reports/rates-error.md || true
+          git add -u reports assets/content
           git commit -m "chore: reference FX rates [skip ci]" || exit 0
           for i in 1 2 3 4 5; do git pull --rebase -X theirs origin main && git push origin HEAD:main && break; sleep 3; done

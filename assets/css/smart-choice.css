@@ -525,3 +525,17 @@ html body .sc-offer:hover{border-color:#f59e0b!important;box-shadow:0 10px 26px 
 .sc-offers h2{font-size:1.15rem!important}
 html[data-sc-theme="dark"] .sc-offers{background:#1a1810!important;border-color:#4a3c14!important}
 html[data-sc-theme="dark"] .sc-offer{background:#211e12!important;border-color:#4a3c14!important}
+
+/* v5: ترتيب جداول لوحة الإدارة على الموبايل */
+.sc-admin .sc-admin-table td,.sc-admin .sc-admin-table th{unicode-bidi:plaintext;overflow-wrap:anywhere;line-height:1.7}
+.sc-admin .adm-badge{white-space:nowrap;display:inline-block}
+@media (max-width:720px){
+  .sc-admin .sc-admin-table{min-width:0;display:block}
+  .sc-admin .sc-admin-table thead{display:none}
+  .sc-admin .sc-admin-table tbody,.sc-admin .sc-admin-table tr{display:block}
+  .sc-admin .sc-admin-table tr{border:1px solid var(--sc-line);border-radius:12px;padding:10px 12px;margin:0 0 10px;background:var(--sc-card,#fff)}
+  .sc-admin .sc-admin-table td{display:block;border:0;padding:3px 0;text-align:right}
+  .sc-admin .sc-admin-table td:first-child{font-weight:700;font-size:var(--fs-md,16px)}
+  .sc-admin .sc-admin-table td:nth-child(2){padding:4px 0 6px}
+  .sc-admin .sc-admin-table td:nth-child(n+3){font-size:var(--fs-sm,14px);color:var(--sc-muted,#475569)}
+}

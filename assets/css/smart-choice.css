@@ -539,3 +539,6 @@ html[data-sc-theme="dark"] .sc-offer{background:#211e12!important;border-color:#
   .sc-admin .sc-admin-table td:nth-child(2){padding:4px 0 6px}
   .sc-admin .sc-admin-table td:nth-child(n+3){font-size:var(--fs-sm,14px);color:var(--sc-muted,#475569)}
 }
+
+.sc-fx-ref{margin:10px 0;padding:10px 12px;border:1px dashed var(--sc-line,#cbd5e1);border-radius:12px;line-height:1.9}
+.sc-chipbtn{font:inherit;font-size:.9em;margin:2px;padding:4px 10px;border:1px solid var(--sc-line,#cbd5e1);border-radius:999px;background:transparent;color:inherit;cursor:pointer}

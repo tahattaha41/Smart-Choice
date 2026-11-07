@@ -248,6 +248,17 @@
       const gross=a*r, net=gross*(1-fee/100);
       out.textContent="المبلغ قبل العمولة: "+fmt(gross)+" — بعد العمولة: "+fmt(net)+" — سعر الوحدة الفعلي: "+fmt(a>0?net/a:0);
     }
+    function fxRates() {
+      const sec=$("sc-fx"); if(!sec||sec.dataset.rates)return; sec.dataset.rates="1";
+      fetch("https://raw.githubusercontent.com/tahattaha41/Smart-Choice/main/assets/content/rates.json?t="+Math.floor(Date.now()/900000),{credentials:"omit"}).then(r=>r.ok?r.json():null).then(d=>{
+        if(!d||!d.egp||!d.updated||Date.now()/1000-d.updated>172800)return;
+        const names={USD:"دولار",EUR:"يورو",SAR:"ريال سعودي",GBP:"جنيه إسترليني",AED:"درهم إماراتي"}, box=document.createElement("div"); box.className="sc-muted sc-fx-ref";
+        const when=new Date(d.updated*1000).toLocaleString("ar-EG",{dateStyle:"medium",timeStyle:"short"});
+        box.innerHTML="<b>سعر مرجعي للجنيه المصري</b> ("+d.source+"، آخر تحديث "+when+"): "+Object.keys(d.egp).map(c=>"<button type='button' class='sc-chipbtn' data-fx='"+d.egp[c]+"'>"+names[c]+" ≈ "+fmt(d.egp[c])+"</button>").join(" ")+"<br><small>سعر منتصف السوق للاسترشاد فقط، وقد يختلف عن سعر البنك أو شركة الصرف. اضغط على عملة لوضع سعرها في خانة سعر الصرف.</small>";
+        const h=sec.querySelector("p.sc-muted"); if(h)h.after(box);
+        box.addEventListener("click",e=>{const b=e.target.closest("[data-fx]"); if(!b)return; const i=$("sc-fx-rate"); i.value=b.getAttribute("data-fx"); i.dispatchEvent(new Event("input",{bubbles:true}));});
+      }).catch(()=>{});
+    }
     function assistant() {
       const box=$("sc-ask"), out=$("sc-assistant-result"), openp=$("sc-assistant-open"); if(!box||!out)return;
       const raw=box.value.trim(); if(!raw){out.textContent="اكتب سؤالك أولاً.";return;}
@@ -625,7 +636,7 @@
       const sec=root.querySelector("#sc-"+tab); if(sec&&sec.scrollIntoView) setTimeout(()=>{ const y=sec.getBoundingClientRect().top+window.pageYOffset-80; window.scrollTo({top:y,behavior:"smooth"}); },30);
       try { history.replaceState(null, "", "#" + tab); } catch (e) {}
     }));
-    discount(); budget(); unit(); percent(); saving(); total(); installment(); convert(); dates(); vat(); compare(); decide(); loan(); margin(); split(); compound(); breakeven(); hourly(); trip(); fx(); bmi(); age(); zakat(); grade(); wordcount(); genPassword(); calories(); speed(); roi(); inflation(); stack(); effrate(); sub(); rule72(); cashback(); payoff(); taxeg(); bankdep(); gold(); loancompare(); decorateAll();
+    discount(); budget(); unit(); percent(); saving(); total(); installment(); convert(); dates(); vat(); compare(); decide(); loan(); margin(); split(); compound(); breakeven(); hourly(); trip(); fx(); bmi(); age(); zakat(); grade(); wordcount(); genPassword(); calories(); speed(); roi(); inflation(); stack(); effrate(); sub(); rule72(); cashback(); payoff(); taxeg(); bankdep(); gold(); fxRates(); loancompare(); decorateAll();
     const fromHash=(location.hash||"").replace("#",""); if(fromHash) showTab(fromHash);
   }
   function start() {

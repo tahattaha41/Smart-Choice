@@ -22,7 +22,7 @@ const go = async (url) => { await page.waitForTimeout(2500); for (let i = 0; i <
 const cdn = await page.evaluate(async () => { try { return await (await fetch('https://cdn.jsdelivr.net/gh/tahattaha41/Smart-Choice@main/assets/js/smart-choice.js')).text(); } catch { return ''; } }).catch(() => '');
 // (يُقيَّم بعد فتح الصفحة الأولى)
 // الرئيسية
-rec(await go(BASE + '/'), 'Home loads');
+{ const okH = await go(BASE + '/'); rec(okH, 'Home loads'); if (!okH) { const r2 = await fetch(BASE + '/', { redirect: 'manual' }).catch((e) => ({ status: 'neterr ' + e.message })); out.push('INFO  Home fetch status=' + r2.status + ' location=' + (r2.headers ? r2.headers.get('location') : '') + ' page.url=' + page.url()); } }
 rec((await page.locator('.sc-hero2, .sc-hero').count()) > 0, 'Home shows hero');
 await page.waitForTimeout(3500);
 rec((await page.locator('#sc-hq-p').count()) > 0, 'Design v4 live: hero calculator present (if FAIL: new JS not loading)');

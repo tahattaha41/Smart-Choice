@@ -5,7 +5,7 @@ import json, os, re, subprocess, sys, time, datetime
 import requests
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 KEY = os.environ.get("GEMINI_API_KEY", "").strip()
-MODELS = [m for m in [os.environ.get("GEMINI_MODEL", "").strip(), "gemini-2.5-flash", "gemini-2.0-flash"] if m]
+MODELS = [m for m in [os.environ.get("GEMINI_MODEL", "").strip(), "gemini-2.5-flash", "gemini-flash-latest"] if m]
 ALLOWED = {"resync_blogger": "إعادة مزامنة المقالات", "resync_pages": "إعادة مزامنة الصفحات", "rerun_e2e": "إعادة الفحص الحي", "new_post": "إنشاء مقال جديد"}
 
 def discover_models(key):

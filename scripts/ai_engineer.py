@@ -35,6 +35,8 @@ PROMPT = """أنت مهندس تقني (DevOps/Frontend/SEO) مسؤول عن م�
 {e2e}
 [مراجعة المستودع]
 {review}
+[الحارس الاستباقي]
+{wd}
 [فحص AdSense]
 {audit}
 [المقالات التلقائية]
@@ -65,7 +67,7 @@ def main():
     if not KEY:
         open(out, "w", encoding="utf8").write("# المهندس التقني الذكي\n\n- آخر تشغيل: %s UTC\n- متوقف: سر GEMINI_API_KEY غير مضبوط.\n" % now); return 0
     try:
-        d = ask(PROMPT.format(e2e=rd("reports/live-e2e.txt", 3500), review=rd("reports/site-review.md"), audit=rd("reports/adsense-audit.md", 2500), auto=rd("reports/auto-posts.md", 800), fails=failed_runs()))
+        d = ask(PROMPT.format(e2e=rd("reports/live-e2e.txt", 3500), review=rd("reports/site-review.md"), wd=rd("reports/watchdog.md", 1800), audit=rd("reports/adsense-audit.md", 2500), auto=rd("reports/auto-posts.md", 800), fails=failed_runs()))
     except Exception as e:
         open(out, "w", encoding="utf8").write("# المهندس التقني الذكي\n\n- آخر تشغيل: %s UTC\n- تعذّر التشخيص هذه المرة: %s\n" % (now, str(e)[:200])); return 0
     st = {"ok": "سليم ✓", "warning": "تحذير", "critical": "حرج"}.get(d.get("status"), "غير معروف")

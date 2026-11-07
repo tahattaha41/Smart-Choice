@@ -26,6 +26,13 @@ jobs:
       - name: Review and auto-fix
         run: python3 scripts/site_review.py
       - run: pip install requests
+      - name: Proactive watchdog (code quality, data freshness, self-heal)
+        continue-on-error: true
+        env:
+          WATCHDOG_RETRY: "1"
+        run: |
+          pip install pyyaml >/dev/null
+          python3 scripts/watchdog.py
       - name: AI engineer diagnosis
         continue-on-error: true
         env:
@@ -41,6 +48,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          [ -f reports/watchdog.md ] && git add reports/watchdog.md || true
           git add assets/content reports/ai-engineer.md reports/site-review.md reports/adsense-audit.json reports/adsense-audit.md
           if ! git diff --cached --quiet; then
             git commit -m "chore: periodic site review [skip ci]"

@@ -5,7 +5,7 @@ INFO  Home style probe: font="IBM Plex Sans Arabic", Tajawal, "Segoe  | button=r
 OK    Installed theme has the GitHub loader (if FAIL: upload theme/smart-choice-blogger.xml once)
 OK    CDN serves latest front-end JS (self-heal present)
 OK    Nav has no old-brand pages: الرئيسية الأدوات الذكية مقارنة المنتجات مركز القرار من نحن سياسة المحتوى والتحرير إعلن معنا اتصل بنا خريطة الموقع سياسة 
-WARN  ads.txt غير مفعّل بعد في إعدادات بلوجر
+OK    ads.txt يحتوي معرّف الناشر
 OK    Tools page loads
 OK    Tools: tool sections rendered
 INFO  Tools: affiliate ad cards shown (paused until AdSense approval) = 0
@@ -14,9 +14,9 @@ OK    Tools: decision tab opens
 OK    Tools: compare tab opens
 OK    About loads
 OK    About: body text length 1242
-FAIL  Contact loads
-FAIL  Contact: body text length 0
-FAIL  Contact shows email
+OK    Contact loads
+OK    Contact: body text length 787
+OK    Contact shows email
 OK    Privacy loads
 OK    Privacy: body text length 2121
 OK    Terms loads
@@ -38,4 +38,4 @@ OK    Mobile: home content length 3159
 OK    Mobile: tools?m=1 loads
 OK    Mobile: tools rendered
 OK    Mobile: about content length 1249
-failed=3
+failed=0

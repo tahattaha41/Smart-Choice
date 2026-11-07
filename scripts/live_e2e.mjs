@@ -57,7 +57,7 @@ if ((await page.locator('#sc-price').count()) > 0) {
 for (const [key, label] of [['من نحن', 'About'], ['اتصل بنا', 'Contact'], ['الخصوصية', 'Privacy'], ['شروط', 'Terms'], ['مركز القرار', 'Decision page'], ['مقارنة', 'Compare page'], ['سياسة المحتوى', 'Editorial page'], ['لوحة الإدارة', 'Admin page']]) {
   const u = find(key);
   if (!u) { rec(false, label + ': not in feed'); continue; }
-  rec(await go(u), label + ' loads');
+  const okLoad = await go(u); rec(okLoad, label + ' loads'); if (!okLoad) { const r2 = await fetch(u, { redirect: 'manual' }).catch(() => null); out.push('INFO  ' + label + ' url=' + u + ' status=' + (r2 ? r2.status : 'neterr')); }
   await page.waitForTimeout(2500);
   const len = (await page.locator('.post-body, .entry-content, .sc-page').first().innerText().catch(() => '')).length;
   rec(len > (label === 'Admin page' ? 40 : 150), `${label}: body text length ${len}`);

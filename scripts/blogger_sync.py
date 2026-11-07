@@ -185,10 +185,14 @@ def main():
             except Exception as exc:
                 if attempt == 5:
                     save_state(state)
-                    raise
+                    ERRORS.append(f"{name}: {exc.__class__.__name__}: {str(exc)[:300]}")
+                    result = None
+                    break
                 wait = 30 * attempt
                 print(f"  ! خطأ مؤقت ({exc.__class__.__name__}) — إعادة المحاولة بعد {wait}ث")
                 time.sleep(wait)
+        if result is None:
+            continue
         state[name] = {"id": result["id"], "hash": h}
         print(f"  -> {result.get('url', result['id'])}")
         save_state(state)
@@ -209,7 +213,13 @@ def main():
 
     if changed:
         save_state(state)
+    if not args.dry_run:
+        Path("reports").mkdir(exist_ok=True)
+        Path("reports/sync-posts.md").write_text(
+            "# مزامنة المقالات\n\n- وقت: " + time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()) + "\n- أخطاء: " + str(len(ERRORS)) + "\n" + "".join("- " + e + "\n" for e in ERRORS), encoding="utf-8")
 
+
+ERRORS = []
 
 if __name__ == "__main__":
     main()

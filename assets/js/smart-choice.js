@@ -248,6 +248,22 @@
       const gross=a*r, net=gross*(1-fee/100);
       out.textContent="المبلغ قبل العمولة: "+fmt(gross)+" — بعد العمولة: "+fmt(net)+" — سعر الوحدة الفعلي: "+fmt(a>0?net/a:0);
     }
+    function shareBars() {
+      document.querySelectorAll(".sc-tool[id^='sc-']").forEach(function (sec) {
+        if (sec.dataset.bar) return; const res = sec.querySelector(".sc-tool-result"); if (!res || sec.id === "sc-assistant") return; sec.dataset.bar = "1";
+        const tab = sec.id.slice(3), bar = document.createElement("div"); bar.className = "sc-share-bar";
+        bar.innerHTML = "<button type='button' data-a='copy'>نسخ النتيجة</button><button type='button' data-a='link'>رابط بنفس الأرقام</button><button type='button' data-a='print'>طباعة / PDF</button><span class='sc-share-msg' aria-live='polite'></span>";
+        res.after(bar);
+        bar.addEventListener("click", function (e) {
+          const b = e.target.closest("button[data-a]"); if (!b) return; const msg = bar.querySelector(".sc-share-msg"); let txt = "";
+          if (b.dataset.a === "print") { window.print(); return; }
+          if (b.dataset.a === "copy") txt = (sec.querySelector("h2") ? sec.querySelector("h2").textContent + ": " : "") + res.innerText.replace(/\s*\n+\s*/g, " — ") + " — Smart Choice";
+          else { const q = new URLSearchParams(); sec.querySelectorAll("input[id],select[id]").forEach(function (i) { if (i.value !== "" && i.type !== "password") q.set(i.id, i.value); }); txt = location.origin + location.pathname + "#" + tab + "?" + q.toString(); }
+          const done = function () { msg.textContent = "تم النسخ ✓"; setTimeout(function () { msg.textContent = ""; }, 2200); };
+          if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, function () { msg.textContent = "تعذّر النسخ"; }); else { msg.textContent = "تعذّر النسخ"; }
+        });
+      });
+    }
     function fxRates() {
       const sec=$("sc-fx"); if(!sec||sec.dataset.rates)return; sec.dataset.rates="1";
       fetch("https://raw.githubusercontent.com/tahattaha41/Smart-Choice/main/assets/content/rates.json?t="+Math.floor(Date.now()/900000),{credentials:"omit"}).then(r=>r.ok?r.json():null).then(d=>{
@@ -643,8 +659,8 @@
       const sec=root.querySelector("#sc-"+tab); if(sec&&sec.scrollIntoView) setTimeout(()=>{ const y=sec.getBoundingClientRect().top+window.pageYOffset-80; window.scrollTo({top:y,behavior:"smooth"}); },30);
       try { history.replaceState(null, "", "#" + tab); } catch (e) {}
     }));
-    discount(); budget(); unit(); percent(); saving(); total(); installment(); convert(); dates(); vat(); compare(); decide(); loan(); margin(); split(); compound(); breakeven(); hourly(); trip(); fx(); bmi(); age(); zakat(); grade(); wordcount(); genPassword(); calories(); speed(); roi(); inflation(); stack(); effrate(); sub(); rule72(); cashback(); payoff(); taxeg(); bankdep(); gold(); rental(); appl(); fxRates(); loancompare(); decorateAll();
-    const fromHash=(location.hash||"").replace("#",""); if(fromHash) showTab(fromHash);
+    discount(); budget(); unit(); percent(); saving(); total(); installment(); convert(); dates(); vat(); compare(); decide(); loan(); margin(); split(); compound(); breakeven(); hourly(); trip(); fx(); bmi(); age(); zakat(); grade(); wordcount(); genPassword(); calories(); speed(); roi(); inflation(); stack(); effrate(); sub(); rule72(); cashback(); payoff(); taxeg(); bankdep(); gold(); rental(); appl(); fxRates(); shareBars(); loancompare(); decorateAll();
+    const fromHash=(location.hash||"").replace("#",""), hp=fromHash.split("?"); if(hp[0]) showTab(hp[0]); if(hp[1]&&hp[0]){ try { new URLSearchParams(hp[1]).forEach(function (v, k) { const el=$(k), host=$("sc-"+hp[0]); if(el&&host&&host.contains(el)&&el.tagName!=="BUTTON"&&v.length<60){ el.value=v; el.dispatchEvent(new Event("input",{bubbles:true})); el.dispatchEvent(new Event("change",{bubbles:true})); } }); } catch (e) {} }
   }
   function start() {
     document.querySelectorAll(".sc-page").forEach(init);

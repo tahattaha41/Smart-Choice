@@ -59,6 +59,7 @@ publish: true
     <div class="sc-field"><label for="sc-expenses">إجمالي المصروفات</label><input id="sc-expenses" type="number" min="0" step="0.01" inputmode="decimal"></div>
   </div>
   <div class="sc-tool-result sc-kpis" data-static="1" aria-live="polite"><div class="kpi"><span>المتبقي</span><strong id="sc-balance">أدخل البيانات</strong></div><div class="kpi"><span>نسبة الإنفاق</span><b id="sc-ratio">—</b></div></div>
+  <p class="sc-muted">تحب تتابع ميزانيتك على ملف؟ <a href="https://raw.githubusercontent.com/tahattaha41/Smart-Choice/main/assets/downloads/monthly-budget-ar.xlsx" download rel="noopener">حمّل قالب الميزانية الشهرية (Excel) مجاناً</a>: دخل ومصروفات ثابتة ومتغيرة وحساب تلقائي لنسبة الادخار.</p>
 </section>
 <section class="sc-tool-card sc-tool" id="sc-unit" hidden>
   <h2>مقارنة سعر الوحدة</h2><p class="sc-muted">قارن منتجين على أساس السعر لكل وحدة قياس. استخدم نفس نوع الوحدة للمنتجين.</p>

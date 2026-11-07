@@ -1,4 +1,5 @@
 FAIL  Home loads
+INFO  Home fetch status=302 location=https://www.google.com/sorry/index?continue=https://smartchoicee1.blogspot.com/&q=EgSGiipgGL7cvNcGIi0GEvSzHueXIL9BmhfOysMb9GvseE91FgdYxVP5snSl4Vzbmuoo3yTbsUnu1SQyAnJSWgFDYMiB9qnexpmVlAE page.url=https://www.google.com/sorry/index?continue=https://smartchoicee1.blogspot.com/&q=EgSGiipgGOTbvNcGIi1S2Vg2stj-WQKrp97Y06D0_aghDfFanFvN9E2gSlGMLLWwNwXmvTKcyu02AskyAnJSWgFDYMixq-_jga75fQ
 FAIL  Home shows hero
 FAIL  Design v4 live: hero calculator present (if FAIL: new JS not loading)
 INFO  Home style probe: font=arial, sans-serif | button=

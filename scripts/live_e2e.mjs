@@ -22,7 +22,7 @@ const go = async (url) => { await page.waitForTimeout(2500); for (let i = 0; i <
 const cdn = await page.evaluate(async () => { try { return await (await fetch('https://cdn.jsdelivr.net/gh/tahattaha41/Smart-Choice@main/assets/js/smart-choice.js')).text(); } catch { return ''; } }).catch(() => '');
 // (يُقيَّم بعد فتح الصفحة الأولى)
 // الرئيسية
-{ const okH = await go(BASE + '/'); rec(okH, 'Home loads'); if (!okH) { const r2 = await fetch(BASE + '/', { redirect: 'manual' }).catch((e) => ({ status: 'neterr ' + e.message })); out.push('INFO  Home fetch status=' + r2.status + ' location=' + (r2.headers ? r2.headers.get('location') : '') + ' page.url=' + page.url()); } }
+{ const okH = await go(BASE + '/'); rec(okH, 'Home loads'); if (!okH && /google\.com\/sorry/.test(page.url())) { mkdirSync('reports', { recursive: true }); writeFileSync('reports/live-e2e-blocked.md', '# الفحص الحي متوقف مؤقتاً\n\nجوجل حجبت عنوان سيرفر GitHub مؤقتاً (صفحة sorry) بسبب كثرة الطلبات، وهذا ليس عطلاً في الموقع. آخر نتيجة سليمة في live-e2e.txt محفوظة. ' + new Date().toISOString() + '\n'); console.log('blocked by google rate limit'); await browser.close().catch(() => {}); process.exit(0); } if (!okH) { const r2 = await fetch(BASE + '/', { redirect: 'manual' }).catch((e) => ({ status: 'neterr ' + e.message })); out.push('INFO  Home fetch status=' + r2.status + ' location=' + (r2.headers ? r2.headers.get('location') : '') + ' page.url=' + page.url()); } }
 rec((await page.locator('.sc-hero2, .sc-hero').count()) > 0, 'Home shows hero');
 await page.waitForTimeout(3500);
 rec((await page.locator('#sc-hq-p').count()) > 0, 'Design v4 live: hero calculator present (if FAIL: new JS not loading)');
@@ -91,6 +91,7 @@ const mp = await mctx.newPage();
 finally { if (browser) await browser.close().catch(() => {}); }
 mkdirSync('reports', { recursive: true });
 try { const { readFileSync, existsSync } = await import('node:fs'); const f = 'reports/bot-views.json'; const d = existsSync(f) ? JSON.parse(readFileSync(f, 'utf8')) : { measured: {}, estimated: {} }; const day = new Date().toISOString().slice(0, 10); d.measured[day] = (d.measured[day] || 0) + botLoads; writeFileSync(f, JSON.stringify(d)); } catch {}
+try { (await import('node:fs')).unlinkSync('reports/live-e2e-blocked.md'); } catch {}
 writeFileSync('reports/live-e2e.txt', out.join('\n') + `\nfailed=${failed}\n`);
 console.log(out.join('\n'));
 process.exit(0);

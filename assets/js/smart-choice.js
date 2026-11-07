@@ -372,7 +372,7 @@
     const HJ=(d)=>{ const p=new Intl.DateTimeFormat("en-u-ca-islamic-umalqura-nu-latn",{day:"numeric",month:"numeric",year:"numeric"}).formatToParts(d); const o={}; p.forEach(x=>{o[x.type]=parseInt(x.value,10);}); return o; };
     const HM=["محرم","صفر","ربيع الأول","ربيع الآخر","جمادى الأولى","جمادى الآخرة","رجب","شعبان","رمضان","شوال","ذو القعدة","ذو الحجة"];
     function hijri(ev) {
-      const out=$("sc-hijri-result"), gEl=$("sc-h-greg"), yEl=$("sc-h-y"), mEl=$("sc-h-m"), dEl=$("sc-h-d"); if(!out||!gEl)return;
+      const out=$("sc-hijri-result"), gEl=$("sc-h-greg"); if(!out||!gEl)return;
       try {
         const src=ev&&ev.target?ev.target.id:"sc-h-greg";
         if(src==="sc-h-greg"&&gEl.value){ const d=new Date(gEl.value+"T12:00:00"); const h=HJ(d); out.textContent="التاريخ الهجري: "+h.day+" "+HM[h.month-1]+" "+h.year+"هـ"; return; }
@@ -1158,7 +1158,6 @@
     window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
     if (reduce || !("IntersectionObserver" in window)) return;
     doc.classList.add("sc-motion");
-    var NAMES = [["tag", "حاسبة الخصم"], ["wallet", "الميزانية"], ["bank", "القرض"], ["card", "التقسيط"], ["compass", "مركز القرار"], ["scale", "سعر الوحدة"], ["chart", "هامش الربح"], ["sprout", "نمو الادخار"], ["timer", "قيمة ساعتك"], ["car", "تكلفة الرحلة"], ["heart", "كتلة الجسم"], ["moon", "هجري/ميلادي"], ["lock", "كلمات المرور"], ["bot", "المساعد الذكي"]];
     var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); if (e.target.matches(".sc-demo,.adm-stat")) countAll(e.target); } }); }, { threshold: 0.08, rootMargin: "0px 0px -5% 0px" });
     var SEL = ".sc-sec,.sc-cat,.sc-tool-tile,.sc-post-card,.sc-stepgrid>div,.sc-trust>div,.sc-page .sc-tool-card,.sc-hero2,.post-body>h2,.sc-related,.sc-share,.adm-card,.adm-stat,.sc-prose>h2";
     function toLatin(t) { return t.replace(/[٠-٩]/g, function (d) { return "٠١٢٣٤٥٦٧٨٩".indexOf(d); }).replace(/[٬،]/g, ",").replace(/٫/g, "."); }
@@ -1176,25 +1175,9 @@
       var i = 0;
       document.querySelectorAll(SEL).forEach(function (el) { if (el.dataset.scR) return; el.dataset.scR = "1"; el.classList.add("sc-rv"); el.style.setProperty("--d", (Math.min(i++ % 9, 8) * 55) + "ms"); io.observe(el); });
       document.querySelectorAll(".sc-demo").forEach(function (el) { if (!el.dataset.scR) { el.dataset.scR = "1"; io.observe(el); } });
-      var hero = document.querySelector(".sc-hero2");
-      if (hero && !document.querySelector(".sc-marquee")) {
-        var m = document.createElement("div"); m.className = "sc-marquee"; m.setAttribute("aria-hidden", "true");
-        var tr = document.createElement("div"); tr.className = "track";
-        var html = NAMES.map(function (n) { return "<span>" + window.SCI.svg(n[0], 18) + n[1] + "</span>"; }).join("");
-        tr.innerHTML = html + html; m.appendChild(tr); hero.parentNode.insertBefore(m, hero.nextSibling);
-        ["tag", "wallet", "bank"].forEach(function (n, k) { var c = document.createElement("span"); c.className = "sc-chip3 c" + (k + 1); c.innerHTML = window.SCI.svg(n, 22); var art = hero.querySelector(".sc-hero2-art"); if (art) art.appendChild(c); });
-      }
     }
-    scan(); new MutationObserver(function () { scan(); }).observe(document.body, { childList: true, subtree: true });
+    var scanQ = 0; scan(); new MutationObserver(function () { if (scanQ) return; scanQ = requestAnimationFrame(function () { scanQ = 0; scan(); }); }).observe(document.body, { childList: true, subtree: true });
     setTimeout(function () { document.querySelectorAll(".sc-rv:not(.in)").forEach(function (e) { e.classList.add("in"); }); }, 3500);
-    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-      document.addEventListener("pointermove", function (e) {
-        var c = e.target.closest && e.target.closest(".sc-tool-tile,.sc-post-card"); if (!c) return;
-        var r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
-        c.style.setProperty("--rx", (-y * 6).toFixed(2) + "deg"); c.style.setProperty("--ry", (x * 8).toFixed(2) + "deg");
-      }, { passive: true });
-      document.addEventListener("pointerout", function (e) { var c = e.target.closest && e.target.closest(".sc-tool-tile,.sc-post-card"); if (c) { c.style.setProperty("--rx", "0deg"); c.style.setProperty("--ry", "0deg"); } });
-    }
     new MutationObserver(function (ms) { ms.forEach(function (m) { var t = m.target.nodeType === 1 ? m.target : m.target.parentNode; var r = t && t.closest && t.closest(".sc-tool-result"); if (r && r.id !== "sc-password-result") { r.classList.remove("sc-flash"); void r.offsetWidth; r.classList.add("sc-flash"); } }); }).observe(document.body, { childList: true, subtree: true, characterData: true });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();

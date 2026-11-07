@@ -17,8 +17,9 @@ OK    About: body text length 1258
 OK    Contact loads
 OK    Contact: body text length 787
 OK    Contact shows email
-OK    Privacy loads
-OK    Privacy: body text length 2121
+FAIL  Privacy loads
+INFO  Privacy url=https://smartchoicee1.blogspot.com/p/smart-choice_01636960364.html status=200
+FAIL  Privacy: body text length 0
 OK    Terms loads
 OK    Terms: body text length 1131
 OK    Decision page loads
@@ -38,4 +39,4 @@ OK    Mobile: home content length 3136
 OK    Mobile: tools?m=1 loads
 OK    Mobile: tools rendered
 OK    Mobile: about content length 1265
-failed=0
+failed=2

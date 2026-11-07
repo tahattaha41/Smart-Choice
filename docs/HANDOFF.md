@@ -85,3 +85,8 @@
 - الأعراض: فشل `blogger-sync` و`site-stats` منذ ~5/11، المقالات التلقائية الجديدة لا تصل لبلوجر، أرقام الزيارات متوقفة.
 - السبب المؤكد (reports/sync-posts.md): `invalid_grant: Token has been expired or revoked`. غالباً تطبيق OAuth في وضع "Testing" فتنتهي صلاحية الـ refresh token بعد 7 أيام.
 - العلاج (على المالك): في Google Cloud → OAuth consent screen → Publish app (In production)، ثم تشغيل `scripts/get_refresh_token.py` على جهازه، وتحديث سر `BLOGGER_REFRESH_TOKEN` في GitHub Secrets.
+
+## 12. تحسينات الأصالة (2026-11-07)
+- قرار: إيقاف الكتابة التلقائية (`.auto-posts-paused`؛ احذف الملف لإعادتها) وتحويل 12 مقالاً `auto-*.md` إلى مسودات (publish:false) لأن جودتها عامة وفيها أخطاء لغوية، وهي خطر على قبول AdSense (محتوى مُنتَج بكثافة).
+- أداة جديدة `taxeg`: ضريبة المرتبات في مصر بالشرائح المعلنة (مصدر: مصراوي 2/8/2026). عدّل الأرقام داخل `taxeg()` في smart-choice.js عند تغيّر القانون. الأدوات الآن 41.
+- المبدأ: أدوات وبيانات خاصة بمصر بمصادر وتاريخ تحقق بدل مقالات عامة بالذكاء الاصطناعي.

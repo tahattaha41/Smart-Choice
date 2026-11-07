@@ -46,6 +46,7 @@ publish: true
   <button type="button" data-tab="rule72" aria-selected="false">مضاعفة المال (قاعدة 72)</button>
   <button type="button" data-tab="cashback" aria-selected="false">قيمة الكاش باك</button>
   <button type="button" data-tab="payoff" aria-selected="false">سداد القرض مبكراً</button>
+  <button type="button" data-tab="taxeg" aria-selected="false">ضريبة المرتبات في مصر</button>
   <button type="button" data-tab="loancompare" aria-selected="false">مقارنة عرضي تمويل</button>
   <button type="button" data-tab="random" aria-selected="false">قرعة وأرقام عشوائية</button>
   <button type="button" data-tab="password" aria-selected="false">مولّد كلمات المرور</button>
@@ -277,6 +278,12 @@ publish: true
 <h2>سداد القرض مبكراً</h2><p class="sc-muted">كم توفّر من الفوائد وكم شهراً تختصر لو دفعت مبلغاً إضافياً كل شهر؟</p>
 <div class="sc-tool-grid"><div class="sc-field"><label for="sc-po-bal">المتبقي من القرض</label><input id="sc-po-bal" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-po-rate">الفائدة السنوية %</label><input id="sc-po-rate" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-po-pay">القسط الشهري الحالي</label><input id="sc-po-pay" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-po-extra">مبلغ إضافي شهرياً</label><input id="sc-po-extra" type="number" min="0" step="any" inputmode="decimal"></div></div>
 <div class="sc-tool-result" id="sc-payoff-result" aria-live="polite">أدخل المتبقي والفائدة والقسط والمبلغ الإضافي.</div>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-taxeg" hidden>
+<h2>حاسبة ضريبة الدخل على المرتبات في مصر</h2><p class="sc-muted">قدّر الضريبة وصافي راتبك الشهري حسب الشرائح المعلنة: معفى حتى 40 ألف جنيه سنوياً، ثم 10% و15% و20% و22.5% و25% و27.5%، مع إعفاء شخصي 20 ألف جنيه سنوياً.</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-tx-gross">الراتب الشهري الإجمالي (جنيه)</label><input id="sc-tx-gross" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-tx-ins">خصم التأمينات الاجتماعية الشهري (من شيت المرتب)</label><input id="sc-tx-ins" type="number" min="0" step="any" inputmode="decimal"></div></div>
+<div class="sc-tool-result" id="sc-taxeg-result" aria-live="polite">أدخل راتبك الشهري وخصم التأمينات.</div>
+<p class="sc-muted">تقدير استرشادي بناءً على الشرائح المنشورة في أغسطس 2026 (المصدر: تقرير مصراوي بتاريخ 2/8/2026). لا يشمل أي إعفاءات أو خصومات خاصة بحالتك. المرجع النهائي هو شيت مرتبك وقسم الحسابات أو مصلحة الضرائب المصرية.</p>
 </section>
 <section class="sc-tool-card sc-tool" id="sc-loancompare" hidden>
 <h2>مقارنة عرضي تمويل</h2><p class="sc-muted">قارن عرضين لنفس المبلغ بفائدة ومدة مختلفتين: أيهما أقل في إجمالي الفوائد وأيهما أخف في القسط؟</p>

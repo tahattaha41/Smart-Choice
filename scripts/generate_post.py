@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """يولّد مقالاً عربياً جديداً بـ Gemini (طبقة مجانية) ويحفظه في posts/ بعد فحوص جودة صارمة.
 المتطلب: سر GEMINI_API_KEY في GitHub. بدونه يخرج بهدوء ويكتب السبب في reports/auto-posts.md."""
+import os
 import difflib, glob, json, os, re, sys, time, datetime
 import requests
 
@@ -133,6 +134,8 @@ def check(title, body, existing, tool=None):
     return None
 
 def main():
+    if os.path.exists('.auto-posts-paused'):
+        print('paused: .auto-posts-paused exists'); return 0
     if not KEY:
         log("لم يُنشأ مقال: سر GEMINI_API_KEY غير مضبوط في GitHub (Settings → Secrets → Actions). مفتاح مجاني من aistudio.google.com/apikey.")
         return 0

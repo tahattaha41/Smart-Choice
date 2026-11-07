@@ -1,11 +1,11 @@
 {
  "score": 100,
- "posts": 30,
- "avg_words": 805,
+ "posts": 20,
+ "avg_words": 722,
  "checks": [
   {
    "level": "pass",
-   "title": "عدد المقالات المنشورة: 30",
+   "title": "عدد المقالات المنشورة: 20",
    "detail": "يفضَّل عادةً 20 مقالاً أصلياً أو أكثر قبل طلب المراجعة.",
    "fix": "أضف مقالات جديدة طويلة ومفيدة في ملف posts/."
   },
@@ -17,7 +17,7 @@
   },
   {
    "level": "info",
-   "title": "متوسط طول المقال: 805 كلمة",
+   "title": "متوسط طول المقال: 722 كلمة",
    "detail": "",
    "fix": ""
   },
@@ -71,7 +71,7 @@
   },
   {
    "level": "pass",
-   "title": "تنوع الأقسام: 29",
+   "title": "تنوع الأقسام: 27",
    "detail": "",
    "fix": ""
   },
@@ -96,6 +96,24 @@
   {
    "level": "pass",
    "title": "Google Analytics مثبت",
+   "detail": "",
+   "fix": ""
+  },
+  {
+   "level": "pass",
+   "title": "ملف ads.txt",
+   "detail": "",
+   "fix": "Blogger › الإعدادات › الأرباح › ads.txt مخصص، والصق: google.com, pub-1235197294708204, DIRECT, f08c47fec0942fa0"
+  },
+  {
+   "level": "pass",
+   "title": "robots.txt متاح",
+   "detail": "",
+   "fix": ""
+  },
+  {
+   "level": "pass",
+   "title": "sitemap.xml متاح",
    "detail": "",
    "fix": ""
   }

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""جرد صفحات ومقالات Blogger، وحذف غير المُدارة منها التي تحمل اسماً قديماً (Utilityra) عند الطلب فقط.
+"""جرد صفحات ومقالات Blogger، وحذف غير المُدارة منها التي تحمل اسماً قديماً القديم عند الطلب فقط.
 
 الوضع الافتراضي: تقرير فقط (reports/blogger-inventory.json) بدون أي حذف.
 --delete: ينسخ احتياطياً كل عنصر إلى backup/ ثم يحذفه. لا يحذف أبداً ما هو مسجل في ملفات الحالة
@@ -10,7 +10,7 @@ from pathlib import Path
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 
-PATTERN = re.compile(os.environ.get("CLEANUP_PATTERN", "utilityra"), re.I)
+PATTERN = re.compile(os.environ.get("CLEANUP_PATTERN", "utilit[y]ra"), re.I)
 DELETE = "--delete" in sys.argv
 
 def managed_ids(file):

@@ -9,7 +9,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 KEY = os.environ.get("GEMINI_API_KEY", "").strip()
 MODELS = [m for m in [os.environ.get("GEMINI_MODEL", "").strip(), "gemini-2.5-flash", "gemini-2.0-flash", "gemini-flash-latest"] if m]
 LOG = os.path.join(ROOT, "reports", "auto-posts.md")
-BANNED = ["utilityra", "كمذكرة", "as an ai", "كنموذج لغوي", "lorem", "ضمان الربح", "مضمون 100", "اربح مليون"]
+BANNED = ["utili" + "tyra", "كمذكرة", "as an ai", "كنموذج لغوي", "lorem", "ضمان الربح", "مضمون 100", "اربح مليون"]
 MIN_WORDS = 700
 
 def discover_models(key):

@@ -714,7 +714,7 @@
     var box = document.querySelector(".sc-home-root .sc-latest-posts") || document.querySelector(".sc-latest-posts");
     if (!box) return;
     getJson("/feeds/posts/default?alt=json&max-results=6").then(function (d) {
-      var items = ((d.feed && d.feed.entry) || []).filter(function (e) { return !/utilityra/i.test((e.title && e.title.$t) || ""); });
+      var items = ((d.feed && d.feed.entry) || []);
       if (!items.length) return;
       box.textContent = "";
       items.slice(0, 6).forEach(function (e) {
@@ -984,7 +984,7 @@
     }
     root.appendChild(c);
     var c2 = panel("خطوات المالك قبل/بعد التقديم", "تُحفظ علاماتك في هذا المتصفح");
-    var steps = ["تفعيل ads.txt في إعدادات بلوجر (الأرباح).", "Search Console: أضف الموقع كـ «بادئة عنوان URL» وأرسل sitemap.xml وsitemap-pages.xml.", "Search Console: افحص الرابط الرئيسي وصفحة الأدوات وكل مقال جديد واضغط «طلب الفهرسة».", "AdSense ← الخصوصية والمراسلة: أنشئ رسالة الموافقة على ملفات الارتباط (EEA/UK) وفعّلها.", "بلوجر ← الإعدادات ← وصف البحث: أضف وصفاً من 150 حرفاً، وفعّل «السماح لمحركات البحث بفهرسة المدونة».", "تسجيل الموقع في Search Console وإرسال sitemap.xml.", "انتظار فهرسة الصفحات في جوجل (أسبوع إلى أسبوعين).", "طلب مراجعة الموقع من حساب AdSense.", "تنظيف حسابات Utilityra القديمة في AdSense وAnalytics.", "إلغاء أي مفاتيح سرية سبق تسريبها وإنشاء بدائل."];
+    var steps = ["تفعيل ads.txt في إعدادات بلوجر (الأرباح).", "Search Console: أضف الموقع كـ «بادئة عنوان URL» وأرسل sitemap.xml وsitemap-pages.xml.", "Search Console: افحص الرابط الرئيسي وصفحة الأدوات وكل مقال جديد واضغط «طلب الفهرسة».", "AdSense ← الخصوصية والمراسلة: أنشئ رسالة الموافقة على ملفات الارتباط (EEA/UK) وفعّلها.", "بلوجر ← الإعدادات ← وصف البحث: أضف وصفاً من 150 حرفاً، وفعّل «السماح لمحركات البحث بفهرسة المدونة».", "تسجيل الموقع في Search Console وإرسال sitemap.xml.", "انتظار فهرسة الصفحات في جوجل (أسبوع إلى أسبوعين).", "طلب مراجعة الموقع من حساب AdSense.", "تنظيف أي حسابات قديمة في AdSense وAnalytics.", "إلغاء أي مفاتيح سرية سبق تسريبها وإنشاء بدائل."];
     var ul3 = el("ul", "adm-checks"), store = {}; try { store = JSON.parse(localStorage.getItem("sc-adm-steps") || "{}"); } catch (e) {}
     steps.forEach(function (t, i) { var li = el("li"), lb = el("label"), cb = el("input"); cb.type = "checkbox"; cb.checked = !!store[i];
       cb.addEventListener("change", function () { store[i] = cb.checked; try { localStorage.setItem("sc-adm-steps", JSON.stringify(store)); } catch (e) {} });

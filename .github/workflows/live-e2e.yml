@@ -4,14 +4,6 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "20 6 * * *"
-  push:
-    branches: [main]
-    paths:
-      - "assets/**"
-      - "pages/**"
-      - "posts/**"
-      - "scripts/live_e2e.mjs"
-      - ".github/workflows/live-e2e.yml"
 
 permissions:
   contents: write

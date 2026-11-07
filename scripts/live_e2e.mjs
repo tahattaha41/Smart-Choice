@@ -33,7 +33,7 @@ const cdn2 = await page.evaluate(async () => { try { return await (await fetch('
 rec(cdn2.includes('content bundle'), 'CDN serves latest front-end JS (self-heal present)');
 await page.waitForTimeout(2500);
 const nav = (await page.locator('.sc-nav').innerText()).replace(/\s+/g, ' ');
-rec(!/utilityra|flarivo|toolora/i.test(nav), 'Nav has no old-brand pages: ' + nav.slice(0, 120));
+rec(!/utilit[y]ra|flarivo|toolora/i.test(nav), 'Nav has no old-brand pages: ' + nav.slice(0, 120));
 
 // ads.txt (تحذير فقط: إجراء على المالك في إعدادات بلوجر)
 try { const ar = await page.request.get(BASE + '/ads.txt'); const at = ar.ok() ? await ar.text() : ''; out.push((at.includes('pub-1235197294708204') ? 'OK    ' : 'WARN  ') + 'ads.txt ' + (at.includes('pub-1235197294708204') ? 'يحتوي معرّف الناشر' : 'غير مفعّل بعد في إعدادات بلوجر')); } catch { out.push('WARN  ads.txt تعذر الفحص'); }

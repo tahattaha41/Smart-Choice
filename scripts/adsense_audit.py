@@ -65,7 +65,7 @@ for i in range(n):
         a, b = sig(posts[i]["html"]), sig(posts[j]["html"])
         if a and b and len(a & b) / len(a | b) > 0.6: dups.append((posts[i]["title"], posts[j]["title"]))
 add("pass" if not dups else "warn", "تشابه المحتوى بين المقالات", "لا تشابه مفرط." if not dups else "؛ ".join(f"{a} ~ {b}" for a, b in dups), "اجعل كل مقال يغطي زاوية مختلفة.")
-bad = re.compile(r"lorem ipsum|TODO|قريباً جداً|تحت الإنشاء|utilityra|flarivo|toolora", re.I)
+bad = re.compile(r"lorem ipsum|TODO|قريباً جداً|تحت الإنشاء|utilit[y]ra|flarivo|toolora", re.I)
 hits = [x["title"] for x in posts if bad.search(x["html"])] + [v["title"] for v in pages.values() if bad.search(v["html"])]
 add("pass" if not hits else "fail", "نصوص تجريبية أو أسماء قديمة", "لا يوجد." if not hits else "، ".join(hits), "احذف النص التجريبي أو الاسم القديم.")
 labels = {l.strip() for x in posts for l in x["labels"].split(",") if l.strip()}

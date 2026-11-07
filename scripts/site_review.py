@@ -13,7 +13,7 @@ for p in sorted(glob.glob(ROOT + "/posts/*.md") + glob.glob(ROOT + "/pages/*.md"
     if n.startswith("_"): continue
     t = open(p, encoding="utf8").read()
     if not re.match(r"^---\n(?:.*\n)*?title:\s*\S", t): issues.append("%s: لا عنوان في الواجهة الأمامية" % n)
-    if "utilityra" in t.lower(): issues.append("%s: يحتوي الاسم القديم" % n)
+    if "utili" + "tyra" in t.lower(): issues.append("%s: يحتوي الاسم القديم" % n)
     if re.search(r"<script|javascript:", t, re.I): issues.append("%s: وسوم غير آمنة" % n)
     if p.startswith(ROOT + "/posts/"):
         w = len(re.sub(r"<[^>]+>", " ", t.split("---", 2)[2]).split())

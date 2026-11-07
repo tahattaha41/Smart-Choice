@@ -47,6 +47,8 @@ publish: true
   <button type="button" data-tab="cashback" aria-selected="false">قيمة الكاش باك</button>
   <button type="button" data-tab="payoff" aria-selected="false">سداد القرض مبكراً</button>
   <button type="button" data-tab="taxeg" aria-selected="false">ضريبة المرتبات في مصر</button>
+  <button type="button" data-tab="bankdep" aria-selected="false">عائد شهادة الادخار</button>
+  <button type="button" data-tab="gold" aria-selected="false">حاسبة الذهب والمصنعية</button>
   <button type="button" data-tab="loancompare" aria-selected="false">مقارنة عرضي تمويل</button>
   <button type="button" data-tab="random" aria-selected="false">قرعة وأرقام عشوائية</button>
   <button type="button" data-tab="password" aria-selected="false">مولّد كلمات المرور</button>
@@ -284,6 +286,18 @@ publish: true
 <div class="sc-tool-grid"><div class="sc-field"><label for="sc-tx-gross">الراتب الشهري الإجمالي (جنيه)</label><input id="sc-tx-gross" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-tx-ins">خصم التأمينات الاجتماعية الشهري (من شيت المرتب)</label><input id="sc-tx-ins" type="number" min="0" step="any" inputmode="decimal"></div></div>
 <div class="sc-tool-result" id="sc-taxeg-result" aria-live="polite">أدخل راتبك الشهري وخصم التأمينات.</div>
 <p class="sc-muted">تقدير استرشادي بناءً على الشرائح المنشورة في أغسطس 2026 (المصدر: تقرير مصراوي بتاريخ 2/8/2026). لا يشمل أي إعفاءات أو خصومات خاصة بحالتك. المرجع النهائي هو شيت مرتبك وقسم الحسابات أو مصلحة الضرائب المصرية.</p>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-bankdep" hidden>
+<h2>عائد شهادة الادخار أو الوديعة</h2><p class="sc-muted">اعرف عائدك الشهري وإجمالي ما ستحصل عليه خلال مدة الشهادة، مع خصم ضريبة إن كانت مطبقة على عائدك.</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-bd-amt">مبلغ الشهادة (جنيه)</label><input id="sc-bd-amt" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-bd-rate">العائد السنوي %</label><input id="sc-bd-rate" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-bd-months">المدة بالأشهر</label><input id="sc-bd-months" type="number" min="1" step="1" inputmode="numeric"></div><div class="sc-field"><label for="sc-bd-tax">ضريبة على العائد % (اختياري)</label><input id="sc-bd-tax" type="number" min="0" max="100" step="any" inputmode="decimal"></div></div>
+<div class="sc-tool-result" id="sc-bankdep-result" aria-live="polite">أدخل المبلغ والعائد والمدة.</div>
+<p class="sc-muted">الحساب لعائد يُصرف شهرياً دون إعادة استثمار. اسأل البنك عن نسبة العائد الحالية وأي ضريبة أو رسوم تنطبق على شهادتك.</p>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-gold" hidden>
+<h2>حاسبة الذهب والمصنعية</h2><p class="sc-muted">من سعر جرام عيار 21 احسب سعر العيارات الأخرى، وقيمة القطعة، وأثر المصنعية على الإجمالي قبل أن تدفع.</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-gd-p21">سعر جرام عيار 21 اليوم (جنيه)</label><input id="sc-gd-p21" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-gd-w">وزن القطعة (جرام)</label><input id="sc-gd-w" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-gd-mk">المصنعية للجرام (جنيه)</label><input id="sc-gd-mk" type="number" min="0" step="any" inputmode="decimal"></div></div>
+<div class="sc-tool-result" id="sc-gold-result" aria-live="polite">أدخل السعر والوزن والمصنعية.</div>
+<p class="sc-muted">اكتب سعر الجرام الحالي من مصدر تثق به؛ الأداة لا تعرض أسعاراً مباشرة. لا تشمل الحسبة الدمغة أو أي ضرائب.</p>
 </section>
 <section class="sc-tool-card sc-tool" id="sc-loancompare" hidden>
 <h2>مقارنة عرضي تمويل</h2><p class="sc-muted">قارن عرضين لنفس المبلغ بفائدة ومدة مختلفتين: أيهما أقل في إجمالي الفوائد وأيهما أخف في القسط؟</p>

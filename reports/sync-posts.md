@@ -1,7 +1,8 @@
 # مزامنة المقالات
 
-- وقت: 2026-11-07 01:54 UTC
-- أخطاء: 3
-- auto-20261105-1359.md: RefreshError: ('invalid_client: The provided client secret is invalid.', {'error': 'invalid_client', 'error_description': 'The provided client secret is invalid.'})
-- auto-20261106-0150.md: RefreshError: ('invalid_client: The provided client secret is invalid.', {'error': 'invalid_client', 'error_description': 'The provided client secret is invalid.'})
-- auto-20261106-1350.md: RefreshError: ('invalid_client: The provided client secret is invalid.', {'error': 'invalid_client', 'error_description': 'The provided client secret is invalid.'})
+- وقت: 2026-11-07 02:19 UTC
+- أخطاء: 4
+- auto-20261105-1359.md: RefreshError: ('invalid_grant: Bad Request', {'error': 'invalid_grant', 'error_description': 'Bad Request'})
+- auto-20261106-0150.md: RefreshError: ('invalid_grant: Bad Request', {'error': 'invalid_grant', 'error_description': 'Bad Request'})
+- auto-20261106-1350.md: RefreshError: ('invalid_grant: Bad Request', {'error': 'invalid_grant', 'error_description': 'Bad Request'})
+- auto-20261107-0158.md: RefreshError: ('invalid_grant: Bad Request', {'error': 'invalid_grant', 'error_description': 'Bad Request'})

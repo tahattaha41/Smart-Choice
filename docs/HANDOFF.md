@@ -28,7 +28,7 @@
 | quality-audit | فحص AdSense الثابت ← `reports/adsense-audit.*` |
 | **site-review** | **كل 6 ساعات:** `site_review.py` (فحص المستودع وإصلاح الحزمة) + `ai_engineer.py` (تشخيص Gemini ← `reports/ai-engineer.md`، وإجراءات آمنة بقائمة بيضاء) + `link_offers.py` (ربط عروض الشراكة بالمقالات ← `assets/content/offer-map.json`) ثم إعادة المزامنة/الفحص عند الحاجة |
 | **auto-posts** | **كل 12 ساعة:** `generate_post.py` يكتب مقالاً (900–1200 كلمة) عن أداة محددة من الموقع بـ Gemini مع بوابات جودة (≥700 كلمة، عنوان غير مكرر، يذكر الأداة، بلا عبارات محظورة) ← `posts/auto-*.md` ← مزامنة |
-| frontend-assets / theme-validation / site-health / blogger-cleanup / delete-branch / update-project-review | مساعدة/يدوية |
+| frontend-assets / theme-validation / blogger-cleanup | مساعدة/يدوية |
 
 ### الأسرار (GitHub Secrets؛ أسماء فقط)
 `BLOGGER_CLIENT_ID`, `BLOGGER_CLIENT_SECRET`, `BLOGGER_REFRESH_TOKEN`, `BLOGGER_BLOG_ID`, `GEMINI_API_KEY` (مفتاح مجاني من aistudio.google.com/apikey؛ السكربتات تكتشف نموذج flash المتاح تلقائياً عبر ListModels لأن النماذج القديمة تُسحب).
@@ -105,3 +105,8 @@
 - auto-posts صار يدوياً فقط (الكتابة التلقائية موقوفة).
 - أُزيل الاسم القديم الصريح من كل الملفات؛ الفحوص تستخدم النمط utilit[y]ra.
 - سياسة الخصوصية: عبارة أمازون صارت مشروطة (لا نُعلن شراكة غير مفعّلة).
+
+## 16. إعادة التهيئة وحذف غير الضروري (2026-11-07)
+- حُذفت 11 أداة خارج تخصص الموقع (BMI، السعرات، السرعة، عدّاد الكلمات، قرعة، كلمات المرور، الدرجة المطلوبة، العمر، هجري/ميلادي، فرق الأيام، تحويل الوحدات) مع فروع المساعد الخاصة بها. بقيت 34 أداة مركّزة على المال والشراء والقرارات. دوال JS الخاصة بها ما زالت في الملف بلا تأثير ويمكن حذفها لاحقاً.
+- حُذفت المقالات التلقائية (11 ملف) من المستودع، وmaster plan المكرر، وseo-diagnose، وworkflows اليدوية غير اللازمة، واختبارات qa المؤقتة، وخطوة ربط العروض (الإعلانات متوقفة).
+- اختبارات qa المتبقية: devices, dark, admin-test, heal-test, home-test, new-tools, post-feat, sweep, tools-test.

@@ -290,10 +290,6 @@
       } else if(has("فائدة مركبة","استثمار","أستثمر","استثمر","نمو")&&nums.length>=3){
         const yrs=nums[nums.length-1], rate=pct!=null?Number(pct):nums[1], start=nums[0], add=has("شهري","كل شهر")&&nums.length>=4?nums[1]:0;
         set({"sc-cp-start":start,"sc-cp-add":add,"sc-cp-rate":rate,"sc-cp-years":yrs}); tab="compound"; label="الفائدة المركبة"; ok=true;
-      } else if(!has("سعرات")&&has("كتلة الجسم","bmi","وزني","وزن")&&has("طول","طولي","سم")&&nums.length>=2){
-        set({"sc-bmi-w":Math.min(nums[0],nums[1]),"sc-bmi-h":Math.max(nums[0],nums[1])}); tab="bmi"; label="مؤشر كتلة الجسم"; ok=true;
-      } else if(has("سعرات","حرق","احتياج")&&nums.length>=3){
-        set({"sc-cal-sex":has("أنثى","انثى","امرأة","بنت","سيدة")?"f":"m","sc-cal-age":nums[0],"sc-cal-w":nums[1],"sc-cal-h":nums[2]}); tab="calories"; label="السعرات اليومية"; ok=true;
       } else if(has("زكاة","زكاه")&&nums.length>=1){
         set({"sc-z-cash":nums[0],"sc-z-gold":near(["ذهب"],0),"sc-z-trade":near(["تجارة","بضاعة"],0),"sc-z-debt":near(["ديون","دين"],0)}); tab="zakat"; label="حاسبة الزكاة"; ok=true;
       } else if(has("تقسيط","قسط","أقساط","اقساط")&&nums.length>=3){
@@ -303,8 +299,6 @@
         set({"sc-be-fixed":near(["ثابت","تكاليف ثابتة"],nums[0]),"sc-be-price":near(["سعر","البيع"],nums[1]),"sc-be-var":near(["متغير","تكلفة الوحدة"],nums[2])}); tab="breakeven"; label="نقطة التعادل"; ok=true;
       } else if(has("رحلة","بنزين","وقود","سفر")&&nums.length>=3){
         set({"sc-trip-km":bef(["كم","كيلو"],near(["مسافة"],nums[0])),"sc-trip-cons":near(["لتر","استهلاك"],nums[1]),"sc-trip-price":near(["سعر"],nums[2]),"sc-trip-people":near(["اشخاص","أشخاص","ركاب"],1)}); tab="trip"; label="تكلفة الرحلة"; ok=true;
-      } else if(has("سرعة","وتيرة","جري","مشي")&&nums.length>=2){
-        const km=bef(["كم","كيلو"],near(["مسافة"],nums[0])); set({"sc-sp-km":km,"sc-sp-h":has("ساعة","ساعات")?near(["ساعة","ساعات","في","خلال"],0):0,"sc-sp-m":has("دقيقة","دقائق")?near(["دقيقة","دقائق","في","خلال"],0):0}); tab="speed"; label="السرعة والوتيرة"; ok=true;
       } else if(has("أرخص","ارخص","أوفر","اوفر","سعر الوحدة")&&nums.length>=4){
         set({"sc-p1":nums[0],"sc-q1":nums[1],"sc-p2":nums[2],"sc-q2":nums[3]}); tab="unit"; label="سعر الوحدة"; ok=true;
       } else if(has("قرض","تمويل")&&nums.length>=2){
@@ -832,13 +826,13 @@
         "<section class='sc-statbar'><div><b>40+</b><span>أداة حساب ومقارنة</span></div><div><b>100%</b><span>مجانية وبدون تسجيل</span></div><div><b>0</b><span>بيانات تُرسل خارج متصفحك</span></div><div><b>عربية</b><span>بالكامل ومن اليمين لليسار</span></div></section>" +
         "<section class='sc-sec'><h2 class='sc-h2'>أدواتنا الأكثر استخداماً</h2><p class='sc-sub'>اختر الأداة، جرّب مثالاً جاهزاً أو أدخل أرقامك.</p><div class='sc-toolgrid'>" +
         TOOLS.map(function (t) { return "<a class='sc-tool-tile' href='" + tools + "#" + t[3] + "'><span class='ico'>" + window.SCI.svg(t[0], 26) + "</span><b>" + esc(t[1]) + "</b><small>" + esc(t[2]) + "</small></a>"; }).join("") +
-        "</div><p class='sc-more'><a href='" + tools + "'>عرض كل الأدوات (45 أداة) ←</a></p></section>" +
+        "</div><p class='sc-more'><a href='" + tools + "'>عرض كل الأدوات (34 أداة) ←</a></p></section>" +
         "<section class='sc-sec sc-steps'><h2 class='sc-h2'>كيف تستفيد؟</h2><div class='sc-stepgrid'>" +
         "<div><span>1</span><b>أدخل أرقامك</b><small>السعر، الخصم، الضمان، الدخل… ما تعرفه أنت.</small></div>" +
         "<div><span>2</span><b>شاهد النتيجة فوراً</b><small>تُحسب داخل متصفحك بمعادلات معروفة.</small></div>" +
         "<div><span>3</span><b>قارن وقرر</b><small>استخدم مركز القرار لترتيب خياراتك بأوزانك.</small></div></div></section>" +
         "<section class='sc-sec'><h2 class='sc-h2'>أحدث الأدلة والمقالات</h2><p class='sc-sub'>شروحات عملية بأمثلة رقمية مبسطة.</p><div class='sc-cards sc-latest-posts'></div><p class='sc-more'><a href='/search'>كل المقالات ←</a></p></section>" +
-        "<section class='sc-sec'><h2 class='sc-h2'>تصفّح حسب احتياجك</h2><p class='sc-sub'>45 أداة مجمّعة في خمس مجالات.</p><div class='sc-catgrid'>" +
+        "<section class='sc-sec'><h2 class='sc-h2'>تصفّح حسب احتياجك</h2><p class='sc-sub'>34 أداة مجمّعة في خمس مجالات.</p><div class='sc-catgrid'>" +
         CATS_HOME.map(function (c) { return "<a class='sc-cat' href='" + tools + "#" + c[3] + "'><span class='ico'>" + window.SCI.svg(c[0], 24) + "</span><b>" + c[1] + "</b><small>" + c[2] + "</small></a>"; }).join("") + "</div></section>" +
         "<section class='sc-sec sc-faq'><h2 class='sc-h2'>أسئلة شائعة</h2>" +
         FAQ.map(function (q) { return "<details><summary>" + q[0] + "</summary><p>" + q[1] + "</p></details>"; }).join("") + "</section>" +

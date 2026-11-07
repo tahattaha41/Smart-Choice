@@ -39,11 +39,6 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
         run: python3 scripts/ai_engineer.py
-      - name: AI links affiliate offers to relevant articles
-        continue-on-error: true
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python3 scripts/link_offers.py
       - name: Commit fixes and report
         run: |
           git config user.name "github-actions[bot]"

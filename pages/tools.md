@@ -22,22 +22,13 @@ publish: true
   <button type="button" data-tab="saving" aria-selected="false">هدف الادخار</button>
   <button type="button" data-tab="total" aria-selected="false">التكلفة الإجمالية</button>
   <button type="button" data-tab="installment" aria-selected="false">التقسيط</button>
-  <button type="button" data-tab="convert" aria-selected="false">تحويل الوحدات</button>
-  <button type="button" data-tab="dates" aria-selected="false">فرق الأيام</button>
   <button type="button" data-tab="assistant" aria-selected="false">المساعد الذكي</button>
   <button type="button" data-tab="compound" aria-selected="false">نمو الادخار</button>
   <button type="button" data-tab="breakeven" aria-selected="false">نقطة التعادل</button>
   <button type="button" data-tab="hourly" aria-selected="false">قيمة ساعتك</button>
   <button type="button" data-tab="trip" aria-selected="false">تكلفة الرحلة</button>
   <button type="button" data-tab="fx" aria-selected="false">تحويل عملة</button>
-  <button type="button" data-tab="bmi" aria-selected="false">كتلة الجسم BMI</button>
-  <button type="button" data-tab="age" aria-selected="false">حاسبة العمر</button>
   <button type="button" data-tab="zakat" aria-selected="false">حاسبة الزكاة</button>
-  <button type="button" data-tab="grade" aria-selected="false">الدرجة المطلوبة</button>
-  <button type="button" data-tab="hijri" aria-selected="false">هجري ↔ ميلادي</button>
-  <button type="button" data-tab="wordcount" aria-selected="false">عدّاد الكلمات</button>
-  <button type="button" data-tab="calories" aria-selected="false">السعرات اليومية</button>
-  <button type="button" data-tab="speed" aria-selected="false">السرعة والوتيرة</button>
   <button type="button" data-tab="roi" aria-selected="false">العائد على الاستثمار</button>
   <button type="button" data-tab="inflation" aria-selected="false">التضخم والقوة الشرائية</button>
   <button type="button" data-tab="stack" aria-selected="false">خصومات متتالية</button>
@@ -52,8 +43,6 @@ publish: true
   <button type="button" data-tab="rental" aria-selected="false">العائد الإيجاري للعقار</button>
   <button type="button" data-tab="appl" aria-selected="false">تكلفة تشغيل جهاز كهربائي</button>
   <button type="button" data-tab="loancompare" aria-selected="false">مقارنة عرضي تمويل</button>
-  <button type="button" data-tab="random" aria-selected="false">قرعة وأرقام عشوائية</button>
-  <button type="button" data-tab="password" aria-selected="false">مولّد كلمات المرور</button>
 </nav>
 <section class="sc-tool-card sc-tool" id="sc-discount">
   <h2>حاسبة الخصم والسعر النهائي</h2><p class="sc-muted">أدخل السعر والخصم لمعرفة ما ستدفعه وقيمة التوفير.</p>
@@ -111,20 +100,6 @@ publish: true
 <div class="sc-field"><label for="sc-months">عدد الشهور</label><input id="sc-months" type="number" min="1" step="1"></div>
 <div class="sc-field"><label for="sc-monthpay">قيمة القسط الشهري</label><input id="sc-monthpay" type="number" min="0" step="any"></div>
 </div><div class="sc-tool-result" id="sc-installment-result" aria-live="polite">أدخل بيانات العرض.</div>
-</section>
-<section class="sc-tool-card sc-tool" id="sc-convert" hidden>
-<h2>محول الوحدات</h2>
-<div class="sc-tool-grid">
-<div class="sc-field"><label for="sc-convert-value">القيمة</label><input id="sc-convert-value" type="number" step="any"></div>
-<div class="sc-field"><label for="sc-convert-type">نوع التحويل</label><select id="sc-convert-type"><option value="kg-g">كيلوجرام إلى جرام</option><option value="g-kg">جرام إلى كيلوجرام</option><option value="l-ml">لتر إلى ملليلتر</option><option value="ml-l">ملليلتر إلى لتر</option><option value="m-cm">متر إلى سنتيمتر</option><option value="cm-m">سنتيمتر إلى متر</option><option value="km-m">كيلومتر إلى متر</option><option value="m-km">متر إلى كيلومتر</option></select></div>
-</div><div class="sc-tool-result" id="sc-convert-result" aria-live="polite">أدخل القيمة واختر التحويل.</div>
-</section>
-<section class="sc-tool-card sc-tool" id="sc-dates" hidden>
-<h2>حاسبة فرق الأيام</h2>
-<div class="sc-tool-grid">
-<div class="sc-field"><label for="sc-date1">التاريخ الأول</label><input id="sc-date1" type="date"></div>
-<div class="sc-field"><label for="sc-date2">التاريخ الثاني</label><input id="sc-date2" type="date"></div>
-</div><div class="sc-tool-result" id="sc-dates-result" aria-live="polite">اختر تاريخين.</div>
 </section>
 <section class="sc-tool-card sc-tool" id="sc-vat" hidden>
 <h2>حاسبة ضريبة القيمة المضافة</h2><p class="sc-muted">أضف الضريبة إلى سعر، أو استخرجها من سعر نهائي. النسبة تختلف حسب السلعة والبلد، فتأكد منها من مصدر رسمي.</p>
@@ -195,54 +170,12 @@ publish: true
 <div class="sc-tool-result" id="sc-fx-result" aria-live="polite">أدخل البيانات.</div>
 </section>
 
-<section class="sc-tool-card sc-tool" id="sc-bmi" hidden>
-<h2>حاسبة كتلة الجسم (BMI)</h2><p class="sc-muted">مؤشر عام للبالغين يقارن الوزن بالطول. ليس تشخيصاً طبياً، ولا يناسب الرياضيين والحوامل والأطفال.</p>
-<div class="sc-tool-grid"><div class="sc-field"><label for="sc-bmi-w">الوزن (كجم)</label><input id="sc-bmi-w" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-bmi-h">الطول (سم)</label><input id="sc-bmi-h" type="number" min="0" step="any" inputmode="decimal"></div></div>
-<div class="sc-tool-result" id="sc-bmi-result" aria-live="polite">أدخل الوزن والطول.</div>
-</section>
-<section class="sc-tool-card sc-tool" id="sc-age" hidden>
-<h2>حاسبة العمر</h2><p class="sc-muted">عمرك بالسنوات والشهور والأيام، وكم يوماً بقي على عيد ميلادك القادم.</p>
-<div class="sc-tool-grid"><div class="sc-field"><label for="sc-age-birth">تاريخ الميلاد</label><input id="sc-age-birth" type="date"></div><div class="sc-field"><label for="sc-age-to">حتى تاريخ (اتركه فارغاً لليوم)</label><input id="sc-age-to" type="date"></div></div>
-<div class="sc-tool-result" id="sc-age-result" aria-live="polite">أدخل تاريخ الميلاد.</div>
-</section>
 <section class="sc-tool-card sc-tool" id="sc-zakat" hidden>
 <h2>حاسبة الزكاة على المال</h2><p class="sc-muted">تقدير مبسّط لزكاة المال بنسبة 2.5% إذا بلغ صافي مالك النصاب وحال عليه الحول. أدخل قيمة النصاب الحالية من مصدر موثوق؛ لا نعرض أسعار ذهب. للفتوى في حالتك راجع جهة شرعية.</p>
 <div class="sc-tool-grid"><div class="sc-field"><label for="sc-z-cash">النقد والمدخرات</label><input id="sc-z-cash" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-z-gold">قيمة الذهب والفضة المدّخرة</label><input id="sc-z-gold" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-z-trade">عروض التجارة (بضاعة للبيع)</label><input id="sc-z-trade" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-z-debt">ديون حالّة عليك</label><input id="sc-z-debt" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-z-nisab">قيمة النصاب الحالية</label><input id="sc-z-nisab" type="number" min="0" step="any" inputmode="decimal"></div></div>
 <div class="sc-tool-result" id="sc-zakat-result" aria-live="polite">أدخل بياناتك.</div>
 </section>
-<section class="sc-tool-card sc-tool" id="sc-grade" hidden>
-<h2>الدرجة المطلوبة في الاختبار النهائي</h2><p class="sc-muted">كم تحتاج في الاختبار النهائي لتحقق الدرجة التي تريدها في المادة؟</p>
-<div class="sc-tool-grid"><div class="sc-field"><label for="sc-g-cur">درجتك الحالية %</label><input id="sc-g-cur" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-g-weight">وزن الاختبار النهائي %</label><input id="sc-g-weight" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-g-target">الدرجة المستهدفة %</label><input id="sc-g-target" type="number" min="0" step="any" inputmode="decimal"></div></div>
-<div class="sc-tool-result" id="sc-grade-result" aria-live="polite">أدخل البيانات.</div>
-</section>
-<section class="sc-tool-card sc-tool" id="sc-hijri" hidden>
-<h2>تحويل التاريخ الهجري والميلادي</h2><p class="sc-muted">تحويل بتقويم أم القرى المدمج في متصفحك. قد يختلف يوماً عن الرؤية الشرعية أو التقويم الرسمي في بلدك.</p>
-<div class="sc-tool-grid"><div class="sc-field"><label for="sc-h-greg">تاريخ ميلادي</label><input id="sc-h-greg" type="date"></div><div class="sc-field"><label for="sc-h-y">سنة هجرية</label><input id="sc-h-y" type="number" min="1300" max="1600" step="1" inputmode="numeric"></div><div class="sc-field"><label for="sc-h-m">شهر هجري (1–12)</label><input id="sc-h-m" type="number" min="1" max="12" step="1" inputmode="numeric"></div><div class="sc-field"><label for="sc-h-d">يوم هجري (1–30)</label><input id="sc-h-d" type="number" min="1" max="30" step="1" inputmode="numeric"></div></div>
-<div class="sc-tool-result" id="sc-hijri-result" aria-live="polite">اختر تاريخاً ميلادياً أو أدخل تاريخاً هجرياً.</div>
-</section>
-<section class="sc-tool-card sc-tool" id="sc-wordcount" hidden>
-<h2>عدّاد الكلمات والحروف</h2><p class="sc-muted">الصق نصاً لتعرف عدد الكلمات والحروف والجمل ووقت القراءة. النص لا يغادر متصفحك.</p>
-<div class="sc-field"><label for="sc-wc-text">النص</label><textarea id="sc-wc-text" rows="7" placeholder="اكتب أو الصق النص هنا"></textarea></div>
-<div class="sc-tool-result" id="sc-wordcount-result" aria-live="polite">ابدأ بالكتابة.</div>
-</section>
-<section class="sc-tool-card sc-tool" id="sc-password" hidden>
-<h2>مولّد كلمات مرور قوية</h2><p class="sc-muted">كلمات عشوائية تُولَّد داخل متصفحك بمولّد أرقام عشوائي آمن (crypto) ولا تُرسل ولا تُحفظ في أي مكان.</p>
-<div class="sc-tool-grid"><div class="sc-field"><label for="sc-pw-len">الطول (8–64)</label><input id="sc-pw-len" type="number" min="8" max="64" step="1" inputmode="numeric"></div><div class="sc-field"><label>المحارف</label><label class="sc-check"><input type="checkbox" id="sc-pw-up" checked> أحرف كبيرة</label><label class="sc-check"><input type="checkbox" id="sc-pw-lo" checked> أحرف صغيرة</label><label class="sc-check"><input type="checkbox" id="sc-pw-di" checked> أرقام</label><label class="sc-check"><input type="checkbox" id="sc-pw-sy" checked> رموز</label></div></div>
-<div class="sc-actions"><button type="button" class="sc-ghost" id="sc-pw-go">ولّد كلمة مرور</button><button type="button" class="sc-ghost" id="sc-pw-copy">نسخ</button></div>
-<div class="sc-tool-result" id="sc-password-result" aria-live="polite" data-static="1" dir="ltr" style="direction:ltr;text-align:left;font-family:monospace;word-break:break-all">اضغط «ولّد كلمة مرور».</div>
-<p class="sc-muted" id="sc-pw-strength"></p>
-</section>
 
-<section class="sc-tool-card sc-tool" id="sc-calories" hidden>
-<h2>حاسبة السعرات اليومية</h2><p class="sc-muted">تقدير احتياجك اليومي بمعادلة Mifflin-St Jeor الشائعة. تقدير عام وليس خطة غذائية؛ استشر مختصاً عند وجود حالة صحية.</p>
-<div class="sc-tool-grid"><div class="sc-field"><label for="sc-cal-sex">الجنس</label><select id="sc-cal-sex"><option value="m">ذكر</option><option value="f">أنثى</option></select></div><div class="sc-field"><label for="sc-cal-age">العمر (سنة)</label><input id="sc-cal-age" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-cal-w">الوزن (كجم)</label><input id="sc-cal-w" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-cal-h">الطول (سم)</label><input id="sc-cal-h" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-cal-act">مستوى النشاط</label><select id="sc-cal-act"><option value="1.2">قليل الحركة</option><option value="1.375">نشاط خفيف (1-3 أيام)</option><option value="1.55" selected>نشاط متوسط (3-5 أيام)</option><option value="1.725">نشاط عالٍ (6-7 أيام)</option></select></div></div>
-<div class="sc-tool-result" id="sc-calories-result" aria-live="polite">أدخل بياناتك.</div>
-</section>
-<section class="sc-tool-card sc-tool" id="sc-speed" hidden>
-<h2>السرعة والوتيرة</h2><p class="sc-muted">احسب متوسط سرعتك ووتيرة الجري أو المشي من المسافة والزمن.</p>
-<div class="sc-tool-grid"><div class="sc-field"><label for="sc-sp-km">المسافة (كم)</label><input id="sc-sp-km" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-sp-h">الساعات</label><input id="sc-sp-h" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-sp-m">الدقائق</label><input id="sc-sp-m" type="number" min="0" step="any" inputmode="decimal"></div></div>
-<div class="sc-tool-result" id="sc-speed-result" aria-live="polite">أدخل المسافة والزمن.</div>
-</section>
 <section class="sc-tool-card sc-tool" id="sc-roi" hidden>
 <h2>العائد على الاستثمار (ROI)</h2><p class="sc-muted">اعرف ربحك الفعلي ونسبة العائد الكلية والسنوية لأي استثمار أو مشروع صغير.</p>
 <div class="sc-tool-grid"><div class="sc-field"><label for="sc-roi-cost">المبلغ المستثمر</label><input id="sc-roi-cost" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-roi-final">القيمة النهائية (شاملة الأرباح)</label><input id="sc-roi-final" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-roi-years">المدة بالسنوات</label><input id="sc-roi-years" type="number" min="0" step="any" inputmode="decimal"></div></div>
@@ -317,13 +250,6 @@ publish: true
 <h2>مقارنة عرضي تمويل</h2><p class="sc-muted">قارن عرضين لنفس المبلغ بفائدة ومدة مختلفتين: أيهما أقل في إجمالي الفوائد وأيهما أخف في القسط؟</p>
 <div class="sc-tool-grid"><div class="sc-field"><label for="sc-lc-amount">مبلغ التمويل</label><input id="sc-lc-amount" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-lc-ra">فائدة العرض (أ) سنوياً %</label><input id="sc-lc-ra" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-lc-ma">مدة العرض (أ) بالأشهر</label><input id="sc-lc-ma" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-lc-rb">فائدة العرض (ب) سنوياً %</label><input id="sc-lc-rb" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-lc-mb">مدة العرض (ب) بالأشهر</label><input id="sc-lc-mb" type="number" min="0" step="any" inputmode="decimal"></div></div>
 <div class="sc-tool-result" id="sc-loancompare-result" aria-live="polite">أدخل البيانات.</div>
-</section>
-<section class="sc-tool-card sc-tool" id="sc-random" hidden>
-<h2>قرعة وأرقام عشوائية</h2><p class="sc-muted">ولّد أرقاماً عشوائية في نطاق، أو اختر عشوائياً من قائمة أسماء (واحد في كل سطر). يعمل بمولّد عشوائي آمن داخل متصفحك.</p>
-<div class="sc-tool-grid"><div class="sc-field"><label for="sc-rn-min">من</label><input id="sc-rn-min" type="number" step="1" inputmode="numeric"></div><div class="sc-field"><label for="sc-rn-max">إلى</label><input id="sc-rn-max" type="number" step="1" inputmode="numeric"></div><div class="sc-field"><label for="sc-rn-count">كم رقماً</label><input id="sc-rn-count" type="number" min="1" max="50" step="1" inputmode="numeric"></div></div>
-<div class="sc-field"><label for="sc-rn-list">أو قائمة للاختيار منها (اسم في كل سطر)</label><textarea id="sc-rn-list" rows="4" placeholder="أحمد&#10;سارة&#10;محمد"></textarea></div>
-<div class="sc-actions"><button type="button" class="sc-ghost" id="sc-rn-go">ولّد أرقاماً</button><button type="button" class="sc-ghost" id="sc-rn-pick">اختر من القائمة</button></div>
-<div class="sc-tool-result" id="sc-random-result" aria-live="polite" data-static="1">اضغط أحد الزرين.</div>
 </section>
 
 <p class="sc-muted">ملاحظة: النتائج حسابية بناءً على البيانات التي تدخلها، ولا تمثل أسعار سوق مباشرة أو نصيحة مالية.</p>

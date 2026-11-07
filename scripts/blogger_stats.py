@@ -29,11 +29,22 @@ def main():
     print(stats)
 
 
+def diag():
+    import os
+    out = ["تشخيص (بدون كشف القيم):"]
+    for k in ("BLOGGER_CLIENT_ID", "BLOGGER_CLIENT_SECRET", "BLOGGER_REFRESH_TOKEN", "BLOGGER_BLOG_ID"):
+        v = os.environ.get(k, "")
+        out.append("- %s: طول=%d، مسافات/أسطر في الأطراف=%s، يبدأ بـ %s" % (k, len(v), v != v.strip(), v[:4] if k != "BLOGGER_CLIENT_SECRET" else v[:6]))
+    cid = os.environ.get("BLOGGER_CLIENT_ID", "")
+    out.append("- client_id يبدأ بـ 306962213730-s37ce: %s" % cid.startswith("306962213730-s37ce"))
+    return "\n".join(out)
+
+
 try:
     main()
     (Path(__file__).resolve().parent.parent / "reports" / "stats-error.md").unlink(missing_ok=True)
 except Exception as exc:
     r = Path(__file__).resolve().parent.parent / "reports"
     r.mkdir(exist_ok=True)
-    (r / "stats-error.md").write_text("# خطأ الإحصائيات\n\n" + exc.__class__.__name__ + ": " + str(exc)[:500] + "\n", encoding="utf-8")
+    (r / "stats-error.md").write_text("# خطأ الإحصائيات\n\n" + exc.__class__.__name__ + ": " + str(exc)[:500] + "\n\n" + diag() + "\n", encoding="utf-8")
     print("ERR", exc)

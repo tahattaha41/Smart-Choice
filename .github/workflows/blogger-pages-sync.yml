@@ -48,7 +48,7 @@ jobs:
             git add .blogger-pages-state.json
             git commit -m "chore(smart-choice): update Blogger pages sync state [skip ci]"
             for attempt in 1 2 3 4 5; do
-              git pull --rebase origin main
+              git pull --rebase -X theirs origin main
               if git push origin HEAD:main; then exit 0; fi
               echo "Push conflict on attempt $attempt; retrying..."
               sleep 2

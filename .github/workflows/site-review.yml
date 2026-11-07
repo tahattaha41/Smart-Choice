@@ -44,7 +44,7 @@ jobs:
           git add assets/content reports/ai-engineer.md reports/site-review.md reports/adsense-audit.json reports/adsense-audit.md
           if ! git diff --cached --quiet; then
             git commit -m "chore: periodic site review [skip ci]"
-            for i in 1 2 3 4 5; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 3; done
+            for i in 1 2 3 4 5; do git pull --rebase -X theirs origin main && git push origin HEAD:main && break; sleep 3; done
           fi
       - name: Re-sync Blogger when the live check had failures
         run: |

@@ -63,5 +63,5 @@ jobs:
           git add reports/site-health.txt reports/live-*.txt || true
           if ! git diff --cached --quiet; then
             git commit -m "chore: live site health report [skip ci]"
-            for i in 1 2 3 4 5; do git pull --rebase origin main && git push origin HEAD:main && exit 0; sleep 2; done
+            for i in 1 2 3 4 5; do git pull --rebase -X theirs origin main && git push origin HEAD:main && exit 0; sleep 2; done
           fi

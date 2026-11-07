@@ -32,6 +32,6 @@ jobs:
           git add reports/adsense-audit.json reports/adsense-audit.md
           if ! git diff --cached --quiet; then
             git commit -m "chore: quality audit reports [skip ci]"
-            for i in 1 2 3 4 5; do git pull --rebase origin main && git push origin HEAD:main && exit 0; sleep 3; done
+            for i in 1 2 3 4 5; do git pull --rebase -X theirs origin main && git push origin HEAD:main && exit 0; sleep 3; done
             exit 1
           fi

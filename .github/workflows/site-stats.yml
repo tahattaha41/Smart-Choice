@@ -37,6 +37,6 @@ jobs:
           git add reports/stats.json reports/stats-history.json reports/stats-error.md 2>/dev/null || true; git add -u reports
           if ! git diff --cached --quiet; then
             git commit -m "chore: visitor stats [skip ci]"
-            for i in 1 2 3 4 5; do git pull --rebase origin main && git push origin HEAD:main && exit 0; sleep 3; done
+            for i in 1 2 3 4 5; do git pull --rebase -X theirs origin main && git push origin HEAD:main && exit 0; sleep 3; done
             exit 1
           fi

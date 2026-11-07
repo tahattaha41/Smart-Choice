@@ -18,7 +18,7 @@ OK    Contact loads
 OK    Contact: body text length 787
 OK    Contact shows email
 OK    Privacy loads
-OK    Privacy: body text length 2121
+OK    Privacy: body text length 2162
 OK    Terms loads
 OK    Terms: body text length 1131
 OK    Decision page loads

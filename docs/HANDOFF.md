@@ -80,3 +80,8 @@
 
 ## 10) سجل المراجعات
 - 2026-11-03 (مساءً): مراجعة شاملة: e2e failed=0 (38 OK)، site-review 0 مشاكل، المهندس الذكي «سليم»، 25/25 مقالاً متزامن مع Blogger، الاختبارات المحلية سليمة. وُجد فقط أن cron الإحصاءات يوم 11-03 لم يعمل (GitHub يتخطى أحياناً) ← أضيف تشغيله من site-review كل 6 ساعات.
+
+## 11. عطل مفتاح Blogger (2026-11-07)
+- الأعراض: فشل `blogger-sync` و`site-stats` منذ ~5/11، المقالات التلقائية الجديدة لا تصل لبلوجر، أرقام الزيارات متوقفة.
+- السبب المؤكد (reports/sync-posts.md): `invalid_grant: Token has been expired or revoked`. غالباً تطبيق OAuth في وضع "Testing" فتنتهي صلاحية الـ refresh token بعد 7 أيام.
+- العلاج (على المالك): في Google Cloud → OAuth consent screen → Publish app (In production)، ثم تشغيل `scripts/get_refresh_token.py` على جهازه، وتحديث سر `BLOGGER_REFRESH_TOKEN` في GitHub Secrets.

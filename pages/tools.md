@@ -49,6 +49,8 @@ publish: true
   <button type="button" data-tab="taxeg" aria-selected="false">ضريبة المرتبات في مصر</button>
   <button type="button" data-tab="bankdep" aria-selected="false">عائد شهادة الادخار</button>
   <button type="button" data-tab="gold" aria-selected="false">حاسبة الذهب والمصنعية</button>
+  <button type="button" data-tab="rental" aria-selected="false">العائد الإيجاري للعقار</button>
+  <button type="button" data-tab="appl" aria-selected="false">تكلفة تشغيل جهاز كهربائي</button>
   <button type="button" data-tab="loancompare" aria-selected="false">مقارنة عرضي تمويل</button>
   <button type="button" data-tab="random" aria-selected="false">قرعة وأرقام عشوائية</button>
   <button type="button" data-tab="password" aria-selected="false">مولّد كلمات المرور</button>
@@ -298,6 +300,18 @@ publish: true
 <div class="sc-tool-grid"><div class="sc-field"><label for="sc-gd-p21">سعر جرام عيار 21 اليوم (جنيه)</label><input id="sc-gd-p21" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-gd-w">وزن القطعة (جرام)</label><input id="sc-gd-w" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-gd-mk">المصنعية للجرام (جنيه)</label><input id="sc-gd-mk" type="number" min="0" step="any" inputmode="decimal"></div></div>
 <div class="sc-tool-result" id="sc-gold-result" aria-live="polite">أدخل السعر والوزن والمصنعية.</div>
 <p class="sc-muted">اكتب سعر الجرام الحالي من مصدر تثق به؛ الأداة لا تعرض أسعاراً مباشرة. لا تشمل الحسبة الدمغة أو أي ضرائب.</p>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-rental" hidden>
+<h2>العائد الإيجاري للعقار</h2><p class="sc-muted">قبل شراء شقة أو محل للتأجير: كم نسبة العائد السنوي، وفي كم سنة يسترد العقار ثمنه من الإيجار؟</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-rt-price">سعر العقار (جنيه)</label><input id="sc-rt-price" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-rt-rent">الإيجار الشهري المتوقع</label><input id="sc-rt-rent" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-rt-cost">مصاريف سنوية (صيانة، ضرائب، فترات خلو)</label><input id="sc-rt-cost" type="number" min="0" step="any" inputmode="decimal"></div></div>
+<div class="sc-tool-result" id="sc-rental-result" aria-live="polite">أدخل السعر والإيجار والمصاريف.</div>
+<p class="sc-muted">الحسبة لا تشمل تغيّر سعر العقار ولا الاقتراض. قارن العائد بعائد شهادات الادخار قبل أن تقرر.</p>
+</section>
+<section class="sc-tool-card sc-tool" id="sc-appl" hidden>
+<h2>تكلفة تشغيل جهاز كهربائي</h2><p class="sc-muted">كم يكلّفك التكييف أو السخان أو الثلاجة شهرياً؟ احسبها من قدرة الجهاز وساعات تشغيله.</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-ap-w">قدرة الجهاز (وات)</label><input id="sc-ap-w" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-ap-h">ساعات التشغيل يومياً</label><input id="sc-ap-h" type="number" min="0" max="24" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-ap-k">سعر الكيلووات ساعة (جنيه)</label><input id="sc-ap-k" type="number" min="0" step="any" inputmode="decimal"></div></div>
+<div class="sc-tool-result" id="sc-appl-result" aria-live="polite">أدخل القدرة وساعات التشغيل والسعر.</div>
+<p class="sc-muted">تقدير بافتراض تشغيل ثابت 30 يوماً؛ بعض الأجهزة (التكييف والثلاجة) تعمل بقدرة أقل من المكتوبة فترات طويلة. سعر الكيلووات ساعة تأخذه من فاتورتك حسب شريحتك.</p>
 </section>
 <section class="sc-tool-card sc-tool" id="sc-loancompare" hidden>
 <h2>مقارنة عرضي تمويل</h2><p class="sc-muted">قارن عرضين لنفس المبلغ بفائدة ومدة مختلفتين: أيهما أقل في إجمالي الفوائد وأيهما أخف في القسط؟</p>

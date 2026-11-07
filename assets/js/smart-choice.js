@@ -44,7 +44,7 @@
     eye: "M2 12s4-8 10-8 10 8 10 8-4 8-10 8-10-8-10-8zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z",
     all: "M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"
   };
-  var TAB = { discount: "tag", budget: "wallet", unit: "scale", vat: "calc", compare: "compare", decide: "compass", loan: "bank", margin: "chart", split: "receipt", percent: "trend", saving: "target", total: "receipt", installment: "card", convert: "repeat", dates: "calendar", assistant: "bot", compound: "sprout", breakeven: "scales", hourly: "timer", trip: "car", fx: "coin", bmi: "heart", age: "user", zakat: "banknote", grade: "cap", hijri: "moon", wordcount: "type", password: "lock", calories: "flame", speed: "gauge", loancompare: "bank", random: "dice", roi: "trend", inflation: "banknote", stack: "tag", effrate: "gauge", sub: "repeat", rule72: "trend", cashback: "coin", payoff: "bank", taxeg: "banknote", bankdep: "bank", gold: "coin" };
+  var TAB = { discount: "tag", budget: "wallet", unit: "scale", vat: "calc", compare: "compare", decide: "compass", loan: "bank", margin: "chart", split: "receipt", percent: "trend", saving: "target", total: "receipt", installment: "card", convert: "repeat", dates: "calendar", assistant: "bot", compound: "sprout", breakeven: "scales", hourly: "timer", trip: "car", fx: "coin", bmi: "heart", age: "user", zakat: "banknote", grade: "cap", hijri: "moon", wordcount: "type", password: "lock", calories: "flame", speed: "gauge", loancompare: "bank", random: "dice", roi: "trend", inflation: "banknote", stack: "tag", effrate: "gauge", sub: "repeat", rule72: "trend", cashback: "coin", payoff: "bank", taxeg: "banknote", bankdep: "bank", gold: "coin", rental: "bank", appl: "gauge" };
   function svg(name, size) {
     var d = P[name] || P.all; size = size || 22;
     return "<svg class='sc-i' width='" + size + "' height='" + size + "' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='" + d + "'/></svg>";
@@ -486,6 +486,19 @@
       const g24=p*24/21, g18=p*18/21, val=p*w, make=mk*w;
       out.textContent="جرام عيار 24 ≈ "+fmt(g24)+" — جرام عيار 18 ≈ "+fmt(g18)+" — قيمة الذهب في القطعة: "+fmt(val)+" — المصنعية: "+fmt(make)+" — الإجمالي: "+fmt(val+make)+" جنيه ("+fmt(make/val*100)+"% مصنعية فوق سعر الذهب). لا يشمل الدمغة أو أي ضرائب.";
     }
+    function rental() {
+      const P=value("sc-rt-price"), rent=value("sc-rt-rent"), cost=Number.isFinite(value("sc-rt-cost"))?value("sc-rt-cost"):0, out=$("sc-rental-result"); if(!out)return;
+      if(!(P>0)||!(rent>0)||cost<0){out.textContent="أدخل سعر العقار والإيجار الشهري المتوقع.";return;}
+      const yr=(rent*12-cost), g=rent*12/P*100, n=yr/P*100;
+      if(!(yr>0)){out.textContent="مصاريف السنة تتجاوز الإيجار؛ لا يوجد عائد صافٍ بهذه الأرقام.";return;}
+      out.textContent="العائد الإجمالي: "+fmt(g)+"% سنوياً — العائد الصافي بعد المصاريف: "+fmt(n)+"% (صافي "+fmt(yr)+" جنيه في السنة) — يسترد العقار ثمنه من الإيجار خلال ≈ "+fmt(P/yr)+" سنة، دون حساب تغيّر سعر العقار.";
+    }
+    function appl() {
+      const w=value("sc-ap-w"), h=value("sc-ap-h"), k=value("sc-ap-k"), out=$("sc-appl-result"); if(!out)return;
+      if(!(w>0)||!(h>0)||h>24||!(k>=0)){out.textContent="أدخل القدرة بالوات وساعات التشغيل يومياً (حتى 24) وسعر الكيلووات ساعة.";return;}
+      const kwh=w*h*30/1000;
+      out.textContent="الاستهلاك ≈ "+fmt(kwh)+" كيلووات ساعة شهرياً — التكلفة ≈ "+fmt(kwh*k)+" جنيه شهرياً و"+fmt(kwh*k*12)+" سنوياً. اقرأ القدرة من ملصق الجهاز، واستخدم سعر الشريحة المكتوب في فاتورتك.";
+    }
     function speed() {
       const km=value("sc-sp-km"), h=Number.isFinite(value("sc-sp-h"))?value("sc-sp-h"):0, m=Number.isFinite(value("sc-sp-m"))?value("sc-sp-m"):0, out=$("sc-speed-result"); if(!out)return;
       const t=h+m/60; if(!Number.isFinite(km)||km<=0||t<=0||h<0||m<0){out.textContent="أدخل مسافة وزمناً أكبر من صفر.";return;}
@@ -533,7 +546,7 @@
       "sc-compound": {"sc-cp-start":10000,"sc-cp-add":1000,"sc-cp-rate":8,"sc-cp-years":5}, "sc-breakeven": {"sc-be-fixed":6000,"sc-be-price":100,"sc-be-var":40},
       "sc-hourly": {"sc-hr-income":9000,"sc-hr-hours":8,"sc-hr-days":5,"sc-hr-price":3000}, "sc-trip": {"sc-trip-km":250,"sc-trip-cons":8,"sc-trip-price":10,"sc-trip-people":3}, "sc-fx": {"sc-fx-amount":500,"sc-fx-rate":48,"sc-fx-fee":1.5},
       "sc-bmi": {"sc-bmi-w":78,"sc-bmi-h":175}, "sc-age": {"sc-age-birth":"1995-06-15"}, "sc-zakat": {"sc-z-cash":120000,"sc-z-gold":30000,"sc-z-trade":0,"sc-z-debt":10000,"sc-z-nisab":85000},
-      "sc-effrate": {"sc-er-cash":20000,"sc-er-down":2000,"sc-er-months":12,"sc-er-pay":1700}, "sc-sub": {"sc-sb-month":120,"sc-sb-year":1000}, "sc-rule72": {"sc-r7-rate":9,"sc-r7-mult":2}, "sc-cashback": {"sc-cb-spend":8000,"sc-cb-pct":2,"sc-cb-cap":100,"sc-cb-fee":300}, "sc-payoff": {"sc-po-bal":200000,"sc-po-rate":14,"sc-po-pay":6000,"sc-po-extra":1500}, "sc-taxeg": {"sc-tx-gross":20000,"sc-tx-ins":1100}, "sc-bankdep": {"sc-bd-amt":100000,"sc-bd-rate":20,"sc-bd-months":12,"sc-bd-tax":0}, "sc-gold": {"sc-gd-p21":4000,"sc-gd-w":10,"sc-gd-mk":150},
+      "sc-effrate": {"sc-er-cash":20000,"sc-er-down":2000,"sc-er-months":12,"sc-er-pay":1700}, "sc-sub": {"sc-sb-month":120,"sc-sb-year":1000}, "sc-rule72": {"sc-r7-rate":9,"sc-r7-mult":2}, "sc-cashback": {"sc-cb-spend":8000,"sc-cb-pct":2,"sc-cb-cap":100,"sc-cb-fee":300}, "sc-payoff": {"sc-po-bal":200000,"sc-po-rate":14,"sc-po-pay":6000,"sc-po-extra":1500}, "sc-taxeg": {"sc-tx-gross":20000,"sc-tx-ins":1100}, "sc-bankdep": {"sc-bd-amt":100000,"sc-bd-rate":20,"sc-bd-months":12,"sc-bd-tax":0}, "sc-gold": {"sc-gd-p21":4000,"sc-gd-w":10,"sc-gd-mk":150}, "sc-rental": {"sc-rt-price":2000000,"sc-rt-rent":12000,"sc-rt-cost":10000}, "sc-appl": {"sc-ap-w":1500,"sc-ap-h":8,"sc-ap-k":2},
       "sc-roi": {"sc-roi-cost":50000,"sc-roi-final":68000,"sc-roi-years":3}, "sc-inflation": {"sc-inf-amount":10000,"sc-inf-rate":15,"sc-inf-years":5}, "sc-stack": {"sc-st-price":2000,"sc-st-d1":20,"sc-st-d2":10,"sc-st-coupon":50},
       "sc-grade": {"sc-g-cur":78,"sc-g-weight":40,"sc-g-target":85}, "sc-hijri": {"sc-h-greg":"2026-03-20"}, "sc-wordcount": {"sc-wc-text":"اكتب نصك هنا. هذا مثال بسيط لعدّ الكلمات والحروف والجمل في النص."}, "sc-password": {"sc-pw-len":16}, "sc-calories": {"sc-cal-age":30,"sc-cal-w":75,"sc-cal-h":175}, "sc-speed": {"sc-sp-km":5,"sc-sp-h":0,"sc-sp-m":30}, "sc-loancompare": {"sc-lc-amount":100000,"sc-lc-ra":12,"sc-lc-ma":24,"sc-lc-rb":10,"sc-lc-mb":36}, "sc-random": {"sc-rn-min":1,"sc-rn-max":100,"sc-rn-count":1}
     };
@@ -578,7 +591,7 @@
       "sc-g-cur": grade, "sc-g-weight": grade, "sc-g-target": grade,
       "sc-cal-age": calories, "sc-cal-w": calories, "sc-cal-h": calories, "sc-cal-sex": calories, "sc-cal-act": calories,
       "sc-sp-km": speed, "sc-sp-h": speed, "sc-sp-m": speed,
-      "sc-er-cash": effrate, "sc-er-down": effrate, "sc-er-months": effrate, "sc-er-pay": effrate, "sc-sb-month": sub, "sc-sb-year": sub, "sc-r7-rate": rule72, "sc-r7-mult": rule72, "sc-cb-spend": cashback, "sc-cb-pct": cashback, "sc-cb-cap": cashback, "sc-cb-fee": cashback, "sc-po-bal": payoff, "sc-po-rate": payoff, "sc-po-pay": payoff, "sc-po-extra": payoff, "sc-tx-gross": taxeg, "sc-tx-ins": taxeg, "sc-bd-amt": bankdep, "sc-bd-rate": bankdep, "sc-bd-months": bankdep, "sc-bd-tax": bankdep, "sc-gd-p21": gold, "sc-gd-w": gold, "sc-gd-mk": gold, "sc-roi-cost": roi, "sc-roi-final": roi, "sc-roi-years": roi, "sc-inf-amount": inflation, "sc-inf-rate": inflation, "sc-inf-years": inflation, "sc-st-price": stack, "sc-st-d1": stack, "sc-st-d2": stack, "sc-st-coupon": stack,
+      "sc-er-cash": effrate, "sc-er-down": effrate, "sc-er-months": effrate, "sc-er-pay": effrate, "sc-sb-month": sub, "sc-sb-year": sub, "sc-r7-rate": rule72, "sc-r7-mult": rule72, "sc-cb-spend": cashback, "sc-cb-pct": cashback, "sc-cb-cap": cashback, "sc-cb-fee": cashback, "sc-po-bal": payoff, "sc-po-rate": payoff, "sc-po-pay": payoff, "sc-po-extra": payoff, "sc-tx-gross": taxeg, "sc-tx-ins": taxeg, "sc-bd-amt": bankdep, "sc-bd-rate": bankdep, "sc-bd-months": bankdep, "sc-bd-tax": bankdep, "sc-gd-p21": gold, "sc-gd-w": gold, "sc-gd-mk": gold, "sc-rt-price": rental, "sc-rt-rent": rental, "sc-rt-cost": rental, "sc-ap-w": appl, "sc-ap-h": appl, "sc-ap-k": appl, "sc-roi-cost": roi, "sc-roi-final": roi, "sc-roi-years": roi, "sc-inf-amount": inflation, "sc-inf-rate": inflation, "sc-inf-years": inflation, "sc-st-price": stack, "sc-st-d1": stack, "sc-st-d2": stack, "sc-st-coupon": stack,
       "sc-lc-amount": loancompare, "sc-lc-ra": loancompare, "sc-lc-ma": loancompare, "sc-lc-rb": loancompare, "sc-lc-mb": loancompare,
       "sc-h-greg": hijri, "sc-h-y": hijri, "sc-h-m": hijri, "sc-h-d": hijri, "sc-wc-text": wordcount,
       "sc-c-p1": compare, "sc-c-e1": compare, "sc-c-l1": compare, "sc-c-w1": compare, "sc-c-p2": compare, "sc-c-e2": compare, "sc-c-l2": compare, "sc-c-w2": compare
@@ -603,7 +616,7 @@
     root.querySelectorAll(".sc-tool > h2").forEach(h => { if (h.querySelector(".sc-i")) return; const t = h.parentNode.id.replace("sc-", ""); h.innerHTML = "<span class='sc-h2i'>" + window.SCI.svg(window.SCI.tab(t), 22) + "</span>" + h.textContent; });
     /* تصنيفات وبحث الأدوات */
     const CATS = [["all","الكل","all"],["shop","تسوق","cart"],["money","مال","wallet"],["biz","أعمال","chart"],["life","حياة وصحة","heart"],["text","نصوص وأمان","lock"]];
-    const TAB_CAT = {discount:"shop",unit:"shop",vat:"shop",compare:"shop",decide:"shop",total:"shop",installment:"shop",split:"shop",budget:"money",loan:"money",saving:"money",compound:"money",percent:"money",fx:"money",hourly:"money",margin:"biz",breakeven:"biz",bmi:"life",age:"life",zakat:"life",hijri:"life",trip:"life",dates:"life",convert:"life",grade:"life",wordcount:"text",password:"text",random:"text",calories:"life",speed:"life",loancompare:"money",roi:"money",inflation:"money",stack:"shop",effrate:"money",sub:"shop",rule72:"money",cashback:"shop",payoff:"money",taxeg:"money",bankdep:"money",gold:"money"};
+    const TAB_CAT = {discount:"shop",unit:"shop",vat:"shop",compare:"shop",decide:"shop",total:"shop",installment:"shop",split:"shop",budget:"money",loan:"money",saving:"money",compound:"money",percent:"money",fx:"money",hourly:"money",margin:"biz",breakeven:"biz",bmi:"life",age:"life",zakat:"life",hijri:"life",trip:"life",dates:"life",convert:"life",grade:"life",wordcount:"text",password:"text",random:"text",calories:"life",speed:"life",loancompare:"money",roi:"money",inflation:"money",stack:"shop",effrate:"money",sub:"shop",rule72:"money",cashback:"shop",payoff:"money",taxeg:"money",bankdep:"money",gold:"money",rental:"money",appl:"life"};
     const tabNav = root.querySelector(".sc-tabs");
     if (tabNav && root.querySelectorAll("[data-tab]").length > 12 && !root.querySelector(".sc-filter")) {
       const bar = document.createElement("div"); bar.className = "sc-filter";
@@ -616,7 +629,7 @@
       q.addEventListener("input", apply); bar.appendChild(chips); bar.appendChild(q); tabNav.parentNode.insertBefore(bar, tabNav);
     }
     /* مقالات مرتبطة بكل أداة */
-    const REL = {discount:["الخصم"],vat:["ضريبة"],unit:["سعر الوحدة"],budget:["ميزانية"],saving:["ادخار","طوارئ"],loan:["القرض"],installment:["التقسيط"],margin:["هامش","تسعير"],breakeven:["تسعير","التعادل"],compare:["تقارن"],decide:["تقارن","الكلية"],total:["الكلية","مستعمل"],compound:["ادخار","طوارئ"],hourly:["اشتراكات","ميزانية"],split:["ميزانية"],trip:["الكلية"],fx:["ميزانية"],roi:["ادخار","طوارئ"],inflation:["ادخار","ميزانية"],stack:["الخصم","تفاوض"],effrate:["التقسيط","القرض"],sub:["اشتراكات","ميزانية"],rule72:["ادخار","طوارئ"],cashback:["الكلية","الخصم"],payoff:["القرض","ميزانية"],taxeg:["ميزانية","ادخار"],bankdep:["ادخار","طوارئ"],gold:["ادخار","الكلية"]};
+    const REL = {discount:["الخصم"],vat:["ضريبة"],unit:["سعر الوحدة"],budget:["ميزانية"],saving:["ادخار","طوارئ"],loan:["القرض"],installment:["التقسيط"],margin:["هامش","تسعير"],breakeven:["تسعير","التعادل"],compare:["تقارن"],decide:["تقارن","الكلية"],total:["الكلية","مستعمل"],compound:["ادخار","طوارئ"],hourly:["اشتراكات","ميزانية"],split:["ميزانية"],trip:["الكلية"],fx:["ميزانية"],roi:["ادخار","طوارئ"],inflation:["ادخار","ميزانية"],stack:["الخصم","تفاوض"],effrate:["التقسيط","القرض"],sub:["اشتراكات","ميزانية"],rule72:["ادخار","طوارئ"],cashback:["الكلية","الخصم"],payoff:["القرض","ميزانية"],taxeg:["ميزانية","ادخار"],bankdep:["ادخار","طوارئ"],gold:["ادخار","الكلية"],rental:["ادخار","القرض"],appl:["ميزانية","اشتراكات"]};
     if (typeof fetch === "function" && /\/p\//.test(location.pathname)) {
       fetch("/feeds/posts/default?alt=json&max-results=60", { credentials: "omit" }).then(r => r.json()).then(d => {
         const posts = ((d.feed && d.feed.entry) || []).map(e => { const l = (e.link || []).filter(x => x.rel === "alternate")[0]; return { t: e.title.$t, u: l ? l.href : "" }; }).filter(x => x.u);
@@ -636,7 +649,7 @@
       const sec=root.querySelector("#sc-"+tab); if(sec&&sec.scrollIntoView) setTimeout(()=>{ const y=sec.getBoundingClientRect().top+window.pageYOffset-80; window.scrollTo({top:y,behavior:"smooth"}); },30);
       try { history.replaceState(null, "", "#" + tab); } catch (e) {}
     }));
-    discount(); budget(); unit(); percent(); saving(); total(); installment(); convert(); dates(); vat(); compare(); decide(); loan(); margin(); split(); compound(); breakeven(); hourly(); trip(); fx(); bmi(); age(); zakat(); grade(); wordcount(); genPassword(); calories(); speed(); roi(); inflation(); stack(); effrate(); sub(); rule72(); cashback(); payoff(); taxeg(); bankdep(); gold(); fxRates(); loancompare(); decorateAll();
+    discount(); budget(); unit(); percent(); saving(); total(); installment(); convert(); dates(); vat(); compare(); decide(); loan(); margin(); split(); compound(); breakeven(); hourly(); trip(); fx(); bmi(); age(); zakat(); grade(); wordcount(); genPassword(); calories(); speed(); roi(); inflation(); stack(); effrate(); sub(); rule72(); cashback(); payoff(); taxeg(); bankdep(); gold(); rental(); appl(); fxRates(); loancompare(); decorateAll();
     const fromHash=(location.hash||"").replace("#",""); if(fromHash) showTab(fromHash);
   }
   function start() {
@@ -819,13 +832,13 @@
         "<section class='sc-statbar'><div><b>40+</b><span>أداة حساب ومقارنة</span></div><div><b>100%</b><span>مجانية وبدون تسجيل</span></div><div><b>0</b><span>بيانات تُرسل خارج متصفحك</span></div><div><b>عربية</b><span>بالكامل ومن اليمين لليسار</span></div></section>" +
         "<section class='sc-sec'><h2 class='sc-h2'>أدواتنا الأكثر استخداماً</h2><p class='sc-sub'>اختر الأداة، جرّب مثالاً جاهزاً أو أدخل أرقامك.</p><div class='sc-toolgrid'>" +
         TOOLS.map(function (t) { return "<a class='sc-tool-tile' href='" + tools + "#" + t[3] + "'><span class='ico'>" + window.SCI.svg(t[0], 26) + "</span><b>" + esc(t[1]) + "</b><small>" + esc(t[2]) + "</small></a>"; }).join("") +
-        "</div><p class='sc-more'><a href='" + tools + "'>عرض كل الأدوات (43 أداة) ←</a></p></section>" +
+        "</div><p class='sc-more'><a href='" + tools + "'>عرض كل الأدوات (45 أداة) ←</a></p></section>" +
         "<section class='sc-sec sc-steps'><h2 class='sc-h2'>كيف تستفيد؟</h2><div class='sc-stepgrid'>" +
         "<div><span>1</span><b>أدخل أرقامك</b><small>السعر، الخصم، الضمان، الدخل… ما تعرفه أنت.</small></div>" +
         "<div><span>2</span><b>شاهد النتيجة فوراً</b><small>تُحسب داخل متصفحك بمعادلات معروفة.</small></div>" +
         "<div><span>3</span><b>قارن وقرر</b><small>استخدم مركز القرار لترتيب خياراتك بأوزانك.</small></div></div></section>" +
         "<section class='sc-sec'><h2 class='sc-h2'>أحدث الأدلة والمقالات</h2><p class='sc-sub'>شروحات عملية بأمثلة رقمية مبسطة.</p><div class='sc-cards sc-latest-posts'></div><p class='sc-more'><a href='/search'>كل المقالات ←</a></p></section>" +
-        "<section class='sc-sec'><h2 class='sc-h2'>تصفّح حسب احتياجك</h2><p class='sc-sub'>43 أداة مجمّعة في خمس مجالات.</p><div class='sc-catgrid'>" +
+        "<section class='sc-sec'><h2 class='sc-h2'>تصفّح حسب احتياجك</h2><p class='sc-sub'>45 أداة مجمّعة في خمس مجالات.</p><div class='sc-catgrid'>" +
         CATS_HOME.map(function (c) { return "<a class='sc-cat' href='" + tools + "#" + c[3] + "'><span class='ico'>" + window.SCI.svg(c[0], 24) + "</span><b>" + c[1] + "</b><small>" + c[2] + "</small></a>"; }).join("") + "</div></section>" +
         "<section class='sc-sec sc-faq'><h2 class='sc-h2'>أسئلة شائعة</h2>" +
         FAQ.map(function (q) { return "<details><summary>" + q[0] + "</summary><p>" + q[1] + "</p></details>"; }).join("") + "</section>" +

@@ -53,6 +53,18 @@ if ((await page.locator('#sc-price').count()) > 0) {
   await page.click('[data-tab="compare"]'); rec(await page.locator('#sc-compare').isVisible(), 'Tools: compare tab opens');
 } else rec(false, 'Tools: discount input missing');
 
+// صفحات الأدوات المستقلة: الأيقونة تفتح صفحتها وفيها الأداة ظاهرة
+try {
+  const hrefs = await page.evaluate(() => [...document.querySelectorAll('[data-href]')].map((b) => b.getAttribute('data-href')));
+  rec(hrefs.length >= 30, 'Hub: icons carry page links (' + hrefs.length + ')');
+  for (const h of [hrefs[0], hrefs[Math.floor(hrefs.length / 2)], hrefs[hrefs.length - 1]].filter(Boolean)) {
+    const ok = await go(h.startsWith('http') ? h : BASE + h);
+    const vis = ok && (await page.waitForSelector('.sc-tool', { timeout: 20000 }).then(() => true).catch(() => false));
+    const shown = vis && (await page.locator('.sc-tool:visible').count()) > 0;
+    rec(!!shown, 'Tool page opens with its tool visible: ' + h);
+  }
+} catch (e) { rec(false, 'Tool pages check error: ' + e.message); }
+
 // صفحات أخرى ومقال
 for (const [key, label] of [['من نحن', 'About'], ['اتصل بنا', 'Contact'], ['الخصوصية', 'Privacy'], ['شروط', 'Terms'], ['مركز القرار', 'Decision page'], ['مقارنة', 'Compare page'], ['سياسة المحتوى', 'Editorial page'], ['لوحة الإدارة', 'Admin page']]) {
   const u = find(key);

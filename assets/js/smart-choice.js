@@ -629,6 +629,7 @@
     /* تصنيفات وبحث الأدوات */
     const CATS = [["all","الكل","all"],["shop","تسوق","cart"],["money","مال","wallet"],["biz","أعمال","chart"]];
     const TAB_CAT = {discount:"shop",unit:"shop",vat:"shop",compare:"shop",decide:"shop",total:"shop",installment:"shop",split:"shop",budget:"money",loan:"money",saving:"money",compound:"money",percent:"money",fx:"money",hourly:"money",margin:"biz",breakeven:"biz",bmi:"life",age:"life",zakat:"life",hijri:"life",trip:"life",dates:"life",convert:"life",grade:"life",wordcount:"text",password:"text",random:"text",calories:"life",speed:"life",loancompare:"money",roi:"money",inflation:"money",stack:"shop",effrate:"money",sub:"shop",rule72:"money",cashback:"shop",payoff:"money",taxeg:"money",bankdep:"money",gold:"money",rental:"money",appl:"life"};
+    root.querySelectorAll(".sc-tabs [data-tab]").forEach(b => { const c = TAB_CAT[b.getAttribute("data-tab")]; if (c) b.setAttribute("data-cat", c); });
     const tabNav = root.querySelector(".sc-tabs");
     if (tabNav && root.querySelectorAll("[data-tab]").length > 12 && !root.querySelector(".sc-filter")) {
       const bar = document.createElement("div"); bar.className = "sc-filter";
@@ -871,6 +872,34 @@
         p.addEventListener("input", up); d.addEventListener("input", up); })();
       if (window.__scFillLatest) window.__scFillLatest();
     }).catch(function () {});
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
+})();
+
+/* Smart Choice — شريط التنقل السفلي للموبايل (يشبه التطبيقات) */
+(function () {
+  "use strict";
+  function build(tools) {
+    if (document.querySelector(".sc-bottombar")) return;
+    var I = function (d) { return "<svg viewBox='0 0 24 24' width='22' height='22' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'>" + d + "</svg>"; };
+    var items = [
+      ["الرئيسية", "/", I("<path d='M3 11l9-8 9 8M5 10v10h14V10'/>")],
+      ["الحاسبات", tools || "/", I("<rect x='5' y='3' width='14' height='18' rx='2'/><path d='M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01'/>")],
+      ["المقالات", "/search", I("<path d='M5 3h10l4 4v14H5zM9 11h6M9 15h6'/>")],
+      ["بحث", "/search?q=", I("<circle cx='11' cy='11' r='7'/><path d='M20 20l-4-4'/>")]
+    ];
+    var nav = document.createElement("nav"); nav.className = "sc-bottombar"; nav.setAttribute("aria-label", "التنقل السريع");
+    items.forEach(function (it) {
+      var a = document.createElement("a"); a.href = it[1]; a.innerHTML = it[2] + "<span>" + it[0] + "</span>";
+      try { var u = new URL(a.href, location.href); if (u.pathname === location.pathname && (it[1] !== "/search?q=")) a.setAttribute("aria-current", "page"); } catch (e) {}
+      if (it[1] === "/search?q=") { a.href = "#"; a.addEventListener("click", function (e) { e.preventDefault(); document.documentElement.classList.toggle("sc-search-open"); var q = document.querySelector(".sc-search input"); if (q && document.documentElement.classList.contains("sc-search-open")) { window.scrollTo(0, 0); q.focus(); } }); }
+      nav.appendChild(a);
+    });
+    document.body.appendChild(nav);
+  }
+  function run() {
+    if (window.__scPages) window.__scPages().then(function (l) { var t = l.filter(function (p) { return p.title.indexOf("الأدوات") === 0; })[0]; build(t && t.url); }).catch(function () { build(); });
+    else build();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
 })();

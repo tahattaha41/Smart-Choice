@@ -4,38 +4,26 @@ OK    Design v4 live: hero calculator present (if FAIL: new JS not loading)
 INFO  Home style probe: font="IBM Plex Sans Arabic", Tajawal, "Segoe  | button=rgb(15, 118, 110)
 OK    Installed theme has the GitHub loader (if FAIL: upload theme/smart-choice-blogger.xml once)
 OK    CDN serves latest front-end JS (self-heal present)
-OK    Nav has no old-brand pages: الرئيسية الأدوات الذكية مقارنة المنتجات مركز القرار من نحن سياسة المحتوى والتحرير إعلن معنا اتصل بنا خريطة الموقع سياسة 
+OK    Nav has no old-brand pages: الرئيسية مقارنة سعر الوحدة مقارنة عرضي تمويل مقارنة سعر الوحدة مقارنة عرضي تمويل تكلفة تشغيل جهاز كهربائي تكلفة الرحلة ق
 OK    ads.txt يحتوي معرّف الناشر
-OK    Tools page loads
-OK    Tools: tool sections rendered
-INFO  Tools: affiliate ad cards shown (paused until AdSense approval) = 0
-OK    Tools: discount calculator works -> السعر بعد الخصم ١٬٦٠٠ قيمة التوفير ٤٠٠
-OK    Tools: decision tab opens
-OK    Tools: compare tab opens
-OK    About loads
-OK    About: body text length 1258
-OK    Contact loads
-OK    Contact: body text length 787
-OK    Contact shows email
-OK    Privacy loads
-OK    Privacy: body text length 2162
-OK    Terms loads
-OK    Terms: body text length 1131
-OK    Decision page loads
-OK    Decision page: body text length 621
+FAIL  Tools page loads
+FAIL  Tools: NO tool section rendered (page is interface only)
+FAIL  Tools: discount input missing
+FAIL  Hub: icons carry page links (0)
+FAIL  About: not in feed
+FAIL  Contact: not in feed
+FAIL  Privacy: not in feed
+FAIL  Terms: not in feed
+FAIL  Decision page: not in feed
 OK    Compare page loads
-OK    Compare page: body text length 891
-OK    Editorial page loads
-OK    Editorial page: body text length 978
-OK    Admin page loads
-OK    Admin page: body text length 185
-OK    Admin: password gate shown and no data exposed before login
+OK    Compare page: body text length 589
+FAIL  Editorial page: not in feed
+FAIL  Admin page: not in feed
 OK    Posts in feed: 20
 OK    Latest post body length 4367
 OK    No JS errors
-OK    Mobile: home?m=1 loads
-OK    Mobile: home content length 3136
-OK    Mobile: tools?m=1 loads
-OK    Mobile: tools rendered
-OK    Mobile: about content length 1265
-failed=0
+FAIL  Mobile: home?m=1 loads
+FAIL  Mobile: home content length 0
+FAIL  Mobile: tools?m=1 loads
+FAIL  Mobile: tools NOT rendered
+failed=15

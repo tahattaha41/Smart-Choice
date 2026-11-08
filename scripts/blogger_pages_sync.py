@@ -61,13 +61,21 @@ def main():
                 print(" ! page was deleted on Blogger; recreating:",name)
                 result=None
         if result is None:
+            import time
             try:
-                result=service.pages().insert(blogId=blog,body=body,isDraft=not page["publish"]).execute()
+                for attempt in range(5):
+                    try:
+                        result=service.pages().insert(blogId=blog,body=body,isDraft=not page["publish"]).execute(); break
+                    except HttpError as e:
+                        if getattr(e.resp,"status",None)==429 and attempt<4:
+                            print(" ! rate limited; waiting 70s (attempt %d)"%(attempt+1)); time.sleep(70); continue
+                        raise
+                time.sleep(6)
             except HttpError as e:
                 msg="%s: HTTP %s %s"%(name,getattr(e.resp,"status","?"),str(e)[:300])
                 print(" ! create failed:",msg)
                 Path("reports").mkdir(exist_ok=True)
-                Path("reports/pages-sync-error.md").write_text("# فشل إنشاء صفحة\n\n"+msg+"\n\nغالباً حدّ عدد الصفحات في Blogger. باقي الأدوات تعمل من صفحة الأدوات.\n",encoding="utf-8")
+                Path("reports/pages-sync-error.md").write_text("# فشل إنشاء صفحة\n\n"+msg+"\n\nقد يكون حد معدل الطلبات (429) أو حد عدد الصفحات. الأدوات بلا صفحة تعمل من صفحة الأدوات، وتُعاد المحاولة في المزامنة التالية.\n",encoding="utf-8")
                 if name.startswith("tool-"): break
                 raise
         state[name]={"id":result["id"],"hash":digest,"url":result.get("url","")}

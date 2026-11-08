@@ -14,5 +14,5 @@ publish: true
 <div class="sc-field"><label for="sc-monthpay">قيمة القسط الشهري</label><input id="sc-monthpay" type="number" min="0" step="any"></div>
 </div><div class="sc-tool-result" id="sc-installment-result" aria-live="polite">أدخل بيانات العرض.</div>
 </section>
-<section class="sc-tool-card sc-prose"><h2>أدوات ذات صلة</h2><p class="sc-relrow"><a class="sc-rel" href="/p/smart-choice_01764616798.html">حاسبة الخصم</a> <a class="sc-rel" href="/p/smart-choice_01428013757.html">مقارنة سعر الوحدة</a> <a class="sc-rel" href="/p/smart-choice_0444906336.html">الضريبة</a> <a class="sc-rel" href="/p/smart-choice_01034158753.html">مقارنة المنتجات</a> <a class="sc-rel" href="/p/smart-choice_01190848683.html">مركز القرار</a></p><p><a href="/p/smart-choice_02145436434.html">عرض كل الأدوات ←</a></p></section>
+<section class="sc-tool-card sc-prose"><h2>أدوات ذات صلة</h2><p class="sc-relrow"><a class="sc-rel" href="/p/smart-choice_02019563632.html">حاسبة الخصم</a> <a class="sc-rel" href="/p/smart-choice_01559774815.html">مقارنة سعر الوحدة</a> <a class="sc-rel" href="/p/smart-choice_01226618737.html">الضريبة</a> <a class="sc-rel" href="/p/smart-choice_01034158753.html">مقارنة المنتجات</a> <a class="sc-rel" href="/p/smart-choice_01190848683.html">مركز القرار</a></p><p><a href="/p/smart-choice_02145436434.html">عرض كل الأدوات ←</a></p></section>
 </div>

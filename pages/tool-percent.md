@@ -12,5 +12,5 @@ publish: true
 <div class="sc-field"><label for="sc-new">القيمة الجديدة</label><input id="sc-new" type="number" step="any" inputmode="decimal"></div>
 </div><div class="sc-tool-result" id="sc-percent-result" aria-live="polite">أدخل القيمتين.</div>
 </section>
-<section class="sc-tool-card sc-prose"><h2>أدوات ذات صلة</h2><p class="sc-relrow"><a class="sc-rel" href="/p/smart-choice_02071192904.html">الميزانية الشهرية</a> <a class="sc-rel" href="/p/smart-choice_0233426229.html">القرض</a> <a class="sc-rel" href="/p/smart-choice_01138239092.html">هدف الادخار</a> <a class="sc-rel" href="/p/smart-choice_0861219334.html">نمو الادخار</a> <a class="sc-rel" href="/p/smart-choice_01865888670.html">قيمة ساعتك</a></p><p><a href="/p/smart-choice_02145436434.html">عرض كل الأدوات ←</a></p></section>
+<section class="sc-tool-card sc-prose"><h2>أدوات ذات صلة</h2><p class="sc-relrow"><a class="sc-rel" href="/p/smart-choice_0935764383.html">الميزانية الشهرية</a> <a class="sc-rel" href="/p/smart-choice_0233426229.html">القرض</a> <a class="sc-rel" href="/p/smart-choice_0791198856.html">هدف الادخار</a> <a class="sc-rel" href="/p/smart-choice_01860613994.html">نمو الادخار</a> <a class="sc-rel" href="/p/smart-choice_0890721008.html">قيمة ساعتك</a></p><p><a href="/p/smart-choice_02145436434.html">عرض كل الأدوات ←</a></p></section>
 </div>

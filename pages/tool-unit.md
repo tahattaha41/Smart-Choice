@@ -13,5 +13,5 @@ publish: true
   </div>
   <div class="sc-tool-result" aria-live="polite" id="sc-unit-result">أدخل الأسعار والكميات للمقارنة.</div>
 </section>
-<section class="sc-tool-card sc-prose"><h2>أدوات ذات صلة</h2><p class="sc-relrow"><a class="sc-rel" href="/p/smart-choice_01764616798.html">حاسبة الخصم</a> <a class="sc-rel" href="/p/smart-choice_0444906336.html">الضريبة</a> <a class="sc-rel" href="/p/smart-choice_01034158753.html">مقارنة المنتجات</a> <a class="sc-rel" href="/p/smart-choice_01190848683.html">مركز القرار</a> <a class="sc-rel" href="/p/smart-choice_01267237524.html">قسمة الفاتورة</a></p><p><a href="/p/smart-choice_02145436434.html">عرض كل الأدوات ←</a></p></section>
+<section class="sc-tool-card sc-prose"><h2>أدوات ذات صلة</h2><p class="sc-relrow"><a class="sc-rel" href="/p/smart-choice_02019563632.html">حاسبة الخصم</a> <a class="sc-rel" href="/p/smart-choice_01226618737.html">الضريبة</a> <a class="sc-rel" href="/p/smart-choice_01034158753.html">مقارنة المنتجات</a> <a class="sc-rel" href="/p/smart-choice_01190848683.html">مركز القرار</a> <a class="sc-rel" href="/p/smart-choice_0101771211.html">قسمة الفاتورة</a></p><p><a href="/p/smart-choice_02145436434.html">عرض كل الأدوات ←</a></p></section>
 </div>

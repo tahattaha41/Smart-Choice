@@ -9,40 +9,40 @@ publish: true
   <p>اختر أداة من الأيقونات لتفتح في صفحتها الخاصة، أو اسأل المساعد أدناه بأرقامك. النتائج تُحسب داخل متصفحك ولا تحتاج إلى تسجيل.</p>
 </section>
 <nav class="sc-tabs" aria-label="اختيار الأداة">
-  <button type="button" data-tab="discount" data-href="/p/smart-choice_01764616798.html" aria-selected="false">حاسبة الخصم</button>
-  <button type="button" data-tab="budget" data-href="/p/smart-choice_02071192904.html" aria-selected="false">الميزانية الشهرية</button>
-  <button type="button" data-tab="unit" data-href="/p/smart-choice_01428013757.html" aria-selected="false">مقارنة سعر الوحدة</button>
-  <button type="button" data-tab="vat" data-href="/p/smart-choice_0444906336.html" aria-selected="false">الضريبة</button>
+  <button type="button" data-tab="discount" data-href="/p/smart-choice_02019563632.html" aria-selected="false">حاسبة الخصم</button>
+  <button type="button" data-tab="budget" data-href="/p/smart-choice_0935764383.html" aria-selected="false">الميزانية الشهرية</button>
+  <button type="button" data-tab="unit" data-href="/p/smart-choice_01559774815.html" aria-selected="false">مقارنة سعر الوحدة</button>
+  <button type="button" data-tab="vat" data-href="/p/smart-choice_01226618737.html" aria-selected="false">الضريبة</button>
   <button type="button" data-tab="compare" data-href="/p/smart-choice_01034158753.html" aria-selected="false">مقارنة المنتجات</button>
   <button type="button" data-tab="decide" data-href="/p/smart-choice_01190848683.html" aria-selected="false">مركز القرار</button>
   <button type="button" data-tab="loan" data-href="/p/smart-choice_0233426229.html" aria-selected="false">القرض</button>
-  <button type="button" data-tab="margin" data-href="/p/smart-choice_01449217589.html" aria-selected="false">هامش الربح</button>
-  <button type="button" data-tab="split" data-href="/p/smart-choice_01267237524.html" aria-selected="false">قسمة الفاتورة</button>
-  <button type="button" data-tab="percent" data-href="/p/smart-choice_0436573556.html" aria-selected="false">النسبة المئوية</button>
-  <button type="button" data-tab="saving" data-href="/p/smart-choice_01138239092.html" aria-selected="false">هدف الادخار</button>
-  <button type="button" data-tab="total" data-href="/p/smart-choice_01224101055.html" aria-selected="false">التكلفة الإجمالية</button>
-  <button type="button" data-tab="installment" data-href="/p/smart-choice_02030036034.html" aria-selected="false">التقسيط</button>
+  <button type="button" data-tab="margin" data-href="/p/smart-choice_01704183381.html" aria-selected="false">هامش الربح</button>
+  <button type="button" data-tab="split" data-href="/p/smart-choice_0101771211.html" aria-selected="false">قسمة الفاتورة</button>
+  <button type="button" data-tab="percent" data-href="/p/smart-choice_0166917587.html" aria-selected="false">النسبة المئوية</button>
+  <button type="button" data-tab="saving" data-href="/p/smart-choice_0791198856.html" aria-selected="false">هدف الادخار</button>
+  <button type="button" data-tab="total" data-href="/p/smart-choice_01872826488.html" aria-selected="false">التكلفة الإجمالية</button>
+  <button type="button" data-tab="installment" data-href="/p/smart-choice_0141847646.html" aria-selected="false">التقسيط</button>
   <button type="button" data-tab="assistant" aria-selected="true">المساعد الذكي</button>
-  <button type="button" data-tab="compound" data-href="/p/smart-choice_0861219334.html" aria-selected="false">نمو الادخار</button>
-  <button type="button" data-tab="breakeven" data-href="/p/smart-choice_01927696332.html" aria-selected="false">نقطة التعادل</button>
-  <button type="button" data-tab="hourly" data-href="/p/smart-choice_01865888670.html" aria-selected="false">قيمة ساعتك</button>
-  <button type="button" data-tab="trip" data-href="/p/smart-choice_02012375883.html" aria-selected="false">تكلفة الرحلة</button>
-  <button type="button" data-tab="fx" data-href="/p/smart-choice_0821432554.html" aria-selected="false">تحويل عملة</button>
-  <button type="button" data-tab="zakat" data-href="/p/smart-choice_01022897461.html" aria-selected="false">حاسبة الزكاة</button>
-  <button type="button" data-tab="roi" data-href="/p/smart-choice_01284747857.html" aria-selected="false">العائد على الاستثمار</button>
-  <button type="button" data-tab="inflation" data-href="/p/smart-choice_02007406655.html" aria-selected="false">التضخم والقوة الشرائية</button>
-  <button type="button" data-tab="stack" data-href="/p/smart-choice_01172815406.html" aria-selected="false">خصومات متتالية</button>
-  <button type="button" data-tab="effrate" data-href="/p/smart-choice_01632111211.html" aria-selected="false">الفائدة الفعلية للتقسيط</button>
-  <button type="button" data-tab="sub" data-href="/p/smart-choice_0981235953.html" aria-selected="false">اشتراك سنوي أم شهري</button>
-  <button type="button" data-tab="rule72" data-href="/p/72-smart-choice.html" aria-selected="false">مضاعفة المال (قاعدة 72)</button>
-  <button type="button" data-tab="cashback" data-href="/p/smart-choice_0991661734.html" aria-selected="false">قيمة الكاش باك</button>
-  <button type="button" data-tab="payoff" data-href="/p/smart-choice_01197928951.html" aria-selected="false">سداد القرض مبكراً</button>
+  <button type="button" data-tab="compound" data-href="/p/smart-choice_01860613994.html" aria-selected="false">نمو الادخار</button>
+  <button type="button" data-tab="breakeven" data-href="/p/smart-choice_0814919520.html" aria-selected="false">نقطة التعادل</button>
+  <button type="button" data-tab="hourly" data-href="/p/smart-choice_0890721008.html" aria-selected="false">قيمة ساعتك</button>
+  <button type="button" data-tab="trip" data-href="/p/smart-choice_01324700279.html" aria-selected="false">تكلفة الرحلة</button>
+  <button type="button" data-tab="fx" data-href="/p/smart-choice_0223493282.html" aria-selected="false">تحويل عملة</button>
+  <button type="button" data-tab="zakat" data-href="/p/smart-choice_0478057747.html" aria-selected="false">حاسبة الزكاة</button>
+  <button type="button" data-tab="roi" data-href="/p/smart-choice_01610293671.html" aria-selected="false">العائد على الاستثمار</button>
+  <button type="button" data-tab="inflation" data-href="/p/smart-choice_0421431942.html" aria-selected="false">التضخم والقوة الشرائية</button>
+  <button type="button" data-tab="stack" data-href="/p/smart-choice_01508774695.html" aria-selected="false">خصومات متتالية</button>
+  <button type="button" data-tab="effrate" data-href="/p/smart-choice_0180729854.html" aria-selected="false">الفائدة الفعلية للتقسيط</button>
+  <button type="button" data-tab="sub" data-href="/p/smart-choice_01971300183.html" aria-selected="false">اشتراك سنوي أم شهري</button>
+  <button type="button" data-tab="rule72" data-href="/p/72-smart-choice_0875490625.html" aria-selected="false">مضاعفة المال (قاعدة 72)</button>
+  <button type="button" data-tab="cashback" data-href="/p/smart-choice_01555764264.html" aria-selected="false">قيمة الكاش باك</button>
+  <button type="button" data-tab="payoff" data-href="/p/smart-choice_0159770150.html" aria-selected="false">سداد القرض مبكراً</button>
   <button type="button" data-tab="taxeg" data-href="/p/smart-choice_01448156426.html" aria-selected="false">ضريبة المرتبات في مصر</button>
   <button type="button" data-tab="bankdep" data-href="/p/smart-choice_091578269.html" aria-selected="false">عائد شهادة الادخار</button>
   <button type="button" data-tab="gold" data-href="/p/smart-choice_0607977130.html" aria-selected="false">حاسبة الذهب والمصنعية</button>
   <button type="button" data-tab="rental" data-href="/p/smart-choice_01653965676.html" aria-selected="false">العائد الإيجاري للعقار</button>
-  <button type="button" data-tab="appl" data-href="/p/smart-choice_0379114834.html" aria-selected="false">تكلفة تشغيل جهاز كهربائي</button>
-  <button type="button" data-tab="loancompare" data-href="/p/smart-choice_0929469799.html" aria-selected="false">مقارنة عرضي تمويل</button>
+  <button type="button" data-tab="appl" data-href="/p/smart-choice_01112539700.html" aria-selected="false">تكلفة تشغيل جهاز كهربائي</button>
+  <button type="button" data-tab="loancompare" data-href="/p/smart-choice_01911370151.html" aria-selected="false">مقارنة عرضي تمويل</button>
 </nav>
 <section class="sc-tool-card sc-tool" id="sc-discount" hidden>
   <h2>حاسبة الخصم والسعر النهائي</h2><p class="sc-muted">أدخل السعر والخصم لمعرفة ما ستدفعه وقيمة التوفير.</p>

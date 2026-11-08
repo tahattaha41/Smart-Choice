@@ -11,5 +11,5 @@ publish: true
 <div class="sc-tool-result" id="sc-appl-result" aria-live="polite">أدخل القدرة وساعات التشغيل والسعر.</div>
 <p class="sc-muted">تقدير بافتراض تشغيل ثابت 30 يوماً؛ بعض الأجهزة (التكييف والثلاجة) تعمل بقدرة أقل من المكتوبة فترات طويلة. سعر الكيلووات ساعة تأخذه من فاتورتك حسب شريحتك.</p>
 </section>
-<section class="sc-tool-card sc-prose"><h2>أدوات ذات صلة</h2><p class="sc-relrow"><a class="sc-rel" href="/p/smart-choice_02012375883.html">تكلفة الرحلة</a> <a class="sc-rel" href="/p/smart-choice_01022897461.html">حاسبة الزكاة</a></p><p><a href="/p/smart-choice_02145436434.html">عرض كل الأدوات ←</a></p></section>
+<section class="sc-tool-card sc-prose"><h2>أدوات ذات صلة</h2><p class="sc-relrow"><a class="sc-rel" href="/p/smart-choice_01324700279.html">تكلفة الرحلة</a> <a class="sc-rel" href="/p/smart-choice_0478057747.html">حاسبة الزكاة</a></p><p><a href="/p/smart-choice_02145436434.html">عرض كل الأدوات ←</a></p></section>
 </div>

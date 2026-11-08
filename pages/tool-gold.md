@@ -11,5 +11,5 @@ publish: true
 <div class="sc-tool-result" id="sc-gold-result" aria-live="polite">أدخل السعر والوزن والمصنعية.</div>
 <p class="sc-muted">اكتب سعر الجرام الحالي من مصدر تثق به؛ الأداة لا تعرض أسعاراً مباشرة. لا تشمل الحسبة الدمغة أو أي ضرائب.</p>
 </section>
-<section class="sc-tool-card sc-prose"><h2>أدوات ذات صلة</h2><p class="sc-relrow"><a class="sc-rel" href="/p/smart-choice_02071192904.html">الميزانية الشهرية</a> <a class="sc-rel" href="/p/smart-choice_0233426229.html">القرض</a> <a class="sc-rel" href="/p/smart-choice_0436573556.html">النسبة المئوية</a> <a class="sc-rel" href="/p/smart-choice_01138239092.html">هدف الادخار</a> <a class="sc-rel" href="/p/smart-choice_0861219334.html">نمو الادخار</a></p><p><a href="/p/smart-choice_02145436434.html">عرض كل الأدوات ←</a></p></section>
+<section class="sc-tool-card sc-prose"><h2>أدوات ذات صلة</h2><p class="sc-relrow"><a class="sc-rel" href="/p/smart-choice_0935764383.html">الميزانية الشهرية</a> <a class="sc-rel" href="/p/smart-choice_0233426229.html">القرض</a> <a class="sc-rel" href="/p/smart-choice_0166917587.html">النسبة المئوية</a> <a class="sc-rel" href="/p/smart-choice_0791198856.html">هدف الادخار</a> <a class="sc-rel" href="/p/smart-choice_01860613994.html">نمو الادخار</a></p><p><a href="/p/smart-choice_02145436434.html">عرض كل الأدوات ←</a></p></section>
 </div>

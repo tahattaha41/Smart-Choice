@@ -814,48 +814,46 @@
   var isHome = location.pathname.replace(/index\.html$/, "") === "/";
   if (isHome) document.documentElement.classList.add("sc-home");
   var TOOLS = [
-    ["tag", "حاسبة الخصم", "السعر بعد الخصم وقيمة التوفير الحقيقية.", "discount"],
-    ["compare", "مقارنة المنتجات", "التكلفة الشهرية الحقيقية مع الضمان وعمر الاستخدام.", "compare"],
-    ["compass", "مركز القرار", "رتّب خياراتك بمعايير وأوزان تحددها أنت.", "decide"],
-    ["card", "التقسيط", "كم تدفع زيادة عن السعر النقدي فعلاً؟", "installment"],
-    ["bank", "القرض", "القسط الشهري وإجمالي الفوائد.", "loan"],
-    ["wallet", "الميزانية الشهرية", "المتبقي ونسبة الإنفاق من دخلك.", "budget"],
-    ["scale", "سعر الوحدة", "أي عبوة أوفر لكل جرام أو لتر؟", "unit"],
-    ["bot", "المساعد الذكي", "اكتب سؤالك بأرقامك واحصل على الحساب فوراً.", "assistant"]
+    ["receipt", "ضريبة المرتبات", "صافي الراتب بعد التأمينات وضريبة الدخل حسب الشرائح.", "taxeg"],
+    ["bank", "عائد شهادات الادخار", "العائد الشهري والسنوي على مبلغك ومدة الشهادة.", "bankdep"],
+    ["scale", "الذهب والمصنعية", "قيمة القطعة بالجرام والعيار مع المصنعية.", "gold"],
+    ["card", "تكلفة التقسيط", "الفرق الفعلي بين سعر التقسيط والسعر النقدي.", "installment"],
+    ["bank", "القرض", "القسط الشهري وإجمالي الفوائد على مدة السداد.", "loan"],
+    ["tag", "الخصم", "السعر بعد الخصم وقيمة التوفير.", "discount"],
+    ["wallet", "الميزانية الشهرية", "المتبقي من دخلك ونسبة كل بند من الإنفاق.", "budget"],
+    ["compass", "مركز القرار", "ترتيب الخيارات بمعايير وأوزان تحددها أنت.", "decide"]
   ];
   function esc(t) { var d = document.createElement("div"); d.textContent = t; return d.innerHTML; }
   function run() {
     if (!isHome) return;
     var host = document.getElementById("main-content") || document.querySelector("main");
     if (!host || host.querySelector(".sc-home-root") || !window.__scPages) return;
-    window.__scPages().then(function (list) {
+    Promise.all([window.__scPages(), fetch("https://raw.githubusercontent.com/tahattaha41/Smart-Choice/main/assets/content/tool-urls.json?t=" + Math.floor(Date.now() / 300000)).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; })]).then(function (res) {
+      var list = res[0]; window.__scToolUrls = res[1] || {};
       if (host.querySelector(".sc-home-root")) return;
       var by = function (k) { var m = list.filter(function (p) { return p.title.indexOf(k) === 0; })[0]; return m ? m.url : "#"; };
       var tools = by("الأدوات");
       var CATS_HOME = [["tag", "التسوق والخصومات", "خصم، سعر الوحدة، تقسيط، كاش باك، اشتراكات", "discount"], ["bank", "القروض والتمويل", "قرض، سداد مبكر، مقارنة عرضين، فائدة فعلية", "loan"], ["sprout", "الادخار والاستثمار", "ادخار، فائدة مركبة، ROI، قاعدة 72، تضخم", "saving"], ["chart", "المشاريع الصغيرة", "هامش الربح، نقطة التعادل، التسعير، الضريبة", "margin"], ["compass", "قرارات الحياة", "مركز القرار، الزكاة، الرحلة، قيمة ساعتك", "decide"]];
       var FAQ = [["هل الأدوات مجانية وهل أحتاج إلى تسجيل؟", "نعم، كل الأدوات مجانية وتعمل مباشرة دون حساب أو بريد إلكتروني."], ["هل تُرسل أرقامي إلى أي جهة؟", "لا. تُحسب النتائج داخل متصفحك فقط، ولا نحفظ ما تدخله."], ["هل النتائج نصيحة مالية؟", "لا. هي حسابات تقريبية مبنية على أرقامك، وليست نصيحة مالية أو قانونية؛ استشر مختصاً في القرارات الكبيرة."], ["كيف أختار بين التقسيط والكاش؟", "استخدم أداتي «التقسيط مقابل الكاش» و«الفائدة الفعلية للتقسيط» لمعرفة الفرق الحقيقي بالأرقام قبل القرار."], ["ما الأداة المناسبة لمشروعي الصغير؟", "ابدأ بـ«هامش الربح» ثم «نقطة التعادل»، وراجع دليل التسعير في المقالات."]];
       try { var fl = document.createElement("script"); fl.type = "application/ld+json"; fl.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": FAQ.map(function (q) { return { "@type": "Question", "name": q[0], "acceptedAnswer": { "@type": "Answer", "text": q[1] } }; }) }); document.head.appendChild(fl); } catch (e) {}
+      var U = window.__scToolUrls || {};
+      var tl = function (id) { return U[id] || (tools + "#" + id); };
       var html = "<div class='sc-home-root'>" +
-        "<section class='sc-hero2'><div class='sc-hero2-text'>" +
-        "<span class='sc-badge'>مجاني • بدون تسجيل • بياناتك تبقى في متصفحك</span>" +
-        "<h1>احسب قرارك المالي <span>بأرقامك أنت</span></h1>" +
-        "<p>حاسبات عملية للمصريين: ضريبة المرتب، شهادات الادخار، الذهب، القروض والتقسيط، والخصومات. كل أداة تشرح معادلتها وتعمل في متصفحك دون تسجيل.</p>" +
-        "<div class='sc-hero2-cta'><a class='sc-btn' href='" + tools + "'>ابدأ بالأدوات</a><a class='sc-btn alt' href='/search'>اقرأ الأدلة</a></div></div>" +
-        "<div class='sc-hero2-art'><form class='sc-hq' onsubmit='return false'><h2>احسب خصمك الآن</h2><label>السعر قبل الخصم<input id='sc-hq-p' type='number' inputmode='decimal' value='2000' min='0'></label><label>نسبة الخصم %<input id='sc-hq-d' type='number' inputmode='decimal' value='20' min='0' max='100'></label><div class='sc-hq-out'><div><span>تدفع</span><b id='sc-hq-pay'>1,600</b></div><div><span>توفّر</span><b id='sc-hq-sv'>400</b></div></div><a href='" + tools + "#discount'>أدوات أكثر تفصيلاً ←</a></form></div></section>" +
-        "<section class='sc-statbar'><div><b>34</b><span>أداة حساب ومقارنة</span></div><div><b>100%</b><span>مجانية وبدون تسجيل</span></div><div><b>0</b><span>بيانات تُرسل خارج متصفحك</span></div><div><b>عربية</b><span>بالكامل ومن اليمين لليسار</span></div></section>" +
-        "<section class='sc-sec'><h2 class='sc-h2'>أدواتنا الأكثر استخداماً</h2><p class='sc-sub'>اختر الأداة، جرّب مثالاً جاهزاً أو أدخل أرقامك.</p><div class='sc-toolgrid'>" +
-        TOOLS.map(function (t) { return "<a class='sc-tool-tile' href='" + tools + "#" + t[3] + "'><span class='ico'>" + window.SCI.svg(t[0], 26) + "</span><b>" + esc(t[1]) + "</b><small>" + esc(t[2]) + "</small></a>"; }).join("") +
-        "</div><p class='sc-more'><a href='" + tools + "'>عرض كل الأدوات (34 أداة) ←</a></p></section>" +
-        "<section class='sc-sec sc-steps'><h2 class='sc-h2'>كيف تستفيد؟</h2><div class='sc-stepgrid'>" +
-        "<div><span>1</span><b>أدخل أرقامك</b><small>السعر، الخصم، الضمان، الدخل… ما تعرفه أنت.</small></div>" +
-        "<div><span>2</span><b>شاهد النتيجة فوراً</b><small>تُحسب داخل متصفحك بمعادلات معروفة.</small></div>" +
-        "<div><span>3</span><b>قارن وقرر</b><small>استخدم مركز القرار لترتيب خياراتك بأوزانك.</small></div></div></section>" +
-        "<section class='sc-sec'><h2 class='sc-h2'>أحدث الأدلة والمقالات</h2><p class='sc-sub'>شروحات عملية بأمثلة رقمية مبسطة.</p><div class='sc-cards sc-latest-posts'></div><p class='sc-more'><a href='/search'>كل المقالات ←</a></p></section>" +
-        "<section class='sc-sec'><h2 class='sc-h2'>تصفّح حسب احتياجك</h2><p class='sc-sub'>34 أداة مجمّعة في خمس مجالات.</p><div class='sc-catgrid'>" +
-        CATS_HOME.map(function (c) { return "<a class='sc-cat' href='" + tools + "#" + c[3] + "'><span class='ico'>" + window.SCI.svg(c[0], 24) + "</span><b>" + c[1] + "</b><small>" + c[2] + "</small></a>"; }).join("") + "</div></section>" +
-        "<section class='sc-sec sc-faq'><h2 class='sc-h2'>أسئلة شائعة</h2>" +
+        "<section class='sc-h-hero'><div class='sc-h-hero-text'>" +
+        "<p class='sc-h-eyebrow'>حاسبات مالية بالجنيه المصري</p>" +
+        "<h1>احسب قبل أن تقرر</h1>" +
+        "<p class='sc-h-lead'>أدوات لحساب ضريبة المرتب وعائد الشهادات وتكلفة التقسيط والقروض وقيمة الذهب. كل أداة تعرض المعادلة المستخدمة وتعمل في متصفحك دون تسجيل.</p>" +
+        "<div class='sc-h-cta'><a class='sc-btn' href='" + tools + "'>تصفّح كل الأدوات</a><a class='sc-btn alt' href='/search'>الأدلة والمقالات</a></div></div>" +
+        "<form class='sc-hq sc-h-quick' onsubmit='return false'><h2>حساب سريع: الخصم</h2><label>السعر قبل الخصم<input id='sc-hq-p' type='number' inputmode='decimal' value='2000' min='0'></label><label>نسبة الخصم %<input id='sc-hq-d' type='number' inputmode='decimal' value='20' min='0' max='100'></label><div class='sc-hq-out'><div><span>تدفع</span><b id='sc-hq-pay'>1,600</b></div><div><span>توفّر</span><b id='sc-hq-sv'>400</b></div></div></form></section>" +
+        "<section class='sc-h-sec'><div class='sc-h-head'><h2>الحاسبات الأكثر استخداماً</h2><a href='" + tools + "'>كل الأدوات (34)</a></div><ul class='sc-h-list'>" +
+        TOOLS.map(function (t) { return "<li><a href='" + tl(t[3]) + "'><span class='ico'>" + window.SCI.svg(t[0], 22) + "</span><span class='tx'><b>" + esc(t[1]) + "</b><small>" + esc(t[2]) + "</small></span></a></li>"; }).join("") +
+        "</ul></section>" +
+        "<section class='sc-h-sec'><div class='sc-h-head'><h2>أحدث الأدلة</h2><a href='/search'>كل المقالات</a></div><div class='sc-cards sc-latest-posts sc-h-posts'></div></section>" +
+        "<section class='sc-h-sec'><div class='sc-h-head'><h2>الأدوات حسب المجال</h2></div><div class='sc-h-cats'>" +
+        CATS_HOME.map(function (c) { return "<a href='" + tl(c[3]) + "'><b>" + c[1] + "</b><small>" + c[2] + "</small></a>"; }).join("") + "</div></section>" +
+        "<section class='sc-h-sec sc-faq'><div class='sc-h-head'><h2>أسئلة شائعة</h2></div>" +
         FAQ.map(function (q) { return "<details><summary>" + q[0] + "</summary><p>" + q[1] + "</p></details>"; }).join("") + "</section>" +
-        "<section class='sc-sec sc-trust'><div><b>"+window.SCI.svg('shield',20)+" خصوصيتك أولاً</b><small>لا نطلب تسجيلاً ولا نرسل مدخلاتك إلى أي جهة.</small></div><div><b>"+window.SCI.svg('receipt',20)+" بلا أرقام مختلقة</b><small>لا نعرض أسعاراً أو تقييمات لا نملك مصدرها.</small></div><div><b>"+window.SCI.svg('pen',20)+" محتوى نكتبه بأنفسنا</b><small>اطّلع على <a href='" + by("سياسة المحتوى") + "'>سياسة المحتوى والتحرير</a>.</small></div></section></div>";
+        "<section class='sc-h-note'><p>تُحسب النتائج داخل متصفحك ولا تُرسل إلى أي جهة. الأسعار المرجعية تُعرض مع مصدرها وتوقيتها، وما لا نملك له مصدراً موثوقاً تُدخله أنت. <a href='" + by("سياسة المحتوى") + "'>سياسة المحتوى والتحرير</a></p></section></div>";
       var wrap = document.createElement("div"); wrap.innerHTML = html; host.appendChild(wrap.firstChild);
       document.documentElement.classList.add("sc-home-ready");
       (function () { var p = document.getElementById("sc-hq-p"), d = document.getElementById("sc-hq-d"); if (!p || !d) return; var f = new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 });

@@ -5,8 +5,8 @@ publish: true
 ---
 <div class="sc-page" dir="rtl" lang="ar">
 <section class="sc-tools-hero">
-  <h1>أدوات Smart Choice الذكية</h1>
-  <p>اختر أداة من الأيقونات لتفتح في صفحتها الخاصة، أو اسأل المساعد أدناه بأرقامك. النتائج تُحسب داخل متصفحك ولا تحتاج إلى تسجيل.</p>
+  <h1>الحاسبات</h1>
+  <p>اختر الحاسبة المناسبة لتفتح في صفحتها، أو اكتب سؤالك للمساعد بالأرقام. تُحسب النتائج في متصفحك دون تسجيل.</p>
 </section>
 <nav class="sc-tabs" aria-label="اختيار الأداة">
   <button type="button" data-tab="discount" data-href="/p/smart-choice_02019563632.html" aria-selected="false">حاسبة الخصم</button>

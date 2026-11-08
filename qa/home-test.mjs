@@ -8,5 +8,5 @@ await p.route('https://x.test/**',r=>{const u=r.request().url();
  return r.fulfill({contentType:'text/html; charset=utf-8',body:'<!doctype html><meta charset=utf-8><nav class="sc-nav"><a href="/">الرئيسية</a></nav><main id="main-content"></main>'});});
 await p.goto('https://x.test/?m=1'); await p.addScriptTag({content:js});
 await p.waitForSelector('.sc-latest-posts h3');
-console.log('hero:',await p.textContent('.sc-hero2 h1'),'| cards:',await p.$$eval('.sc-latest-posts .sc-card',e=>e.length),'| first link:',await p.getAttribute('.sc-latest-posts .sc-card a','href'),'| errors',errs.length?errs:'none');
+console.log('hero:',await p.textContent('.sc-h-hero h1'),'| cards:',await p.$$eval('.sc-latest-posts .sc-card',e=>e.length),'| first link:',await p.getAttribute('.sc-latest-posts .sc-card a','href'),'| errors',errs.length?errs:'none');
 await b.close();

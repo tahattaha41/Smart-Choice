@@ -9,6 +9,7 @@ on:
     branches: [main]
     paths:
       - "pages/**"
+      - "scripts/build_tool_pages.py"
       - "scripts/blogger_pages_sync.py"
       - ".github/workflows/blogger-pages-sync.yml"
 
@@ -31,6 +32,8 @@ jobs:
           python-version: "3.12"
       - name: Install dependencies
         run: pip install -r requirements.txt
+      - name: Build per-tool pages
+        run: python scripts/build_tool_pages.py
       - name: Validate page sources
         run: python scripts/blogger_pages_sync.py --dry-run
       - name: Sync static Blogger pages
@@ -40,12 +43,23 @@ jobs:
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
         run: python scripts/blogger_pages_sync.py
+      - name: Rebuild tool pages with real URLs, then sync again
+        env:
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+        run: |
+          python scripts/build_tool_pages.py
+          python scripts/blogger_pages_sync.py
       - name: Commit page sync state safely
         run: |
-          if [ -n "$(git status --porcelain .blogger-pages-state.json)" ]; then
+          if [ -n "$(git status --porcelain .blogger-pages-state.json pages assets/content/tool-urls.json reports/pages-sync-error.md)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add .blogger-pages-state.json
+            git add .blogger-pages-state.json pages
+            [ -f assets/content/tool-urls.json ] && git add assets/content/tool-urls.json || true
+            [ -f reports/pages-sync-error.md ] && git add reports/pages-sync-error.md || true
             git commit -m "chore(smart-choice): update Blogger pages sync state [skip ci]"
             for attempt in 1 2 3 4 5; do
               git pull --rebase -X theirs origin main

@@ -1,0 +1,14 @@
+---
+title: مقارنة عرضي تمويل | Smart Choice
+labels: أدوات, Smart Choice
+publish: true
+---
+<div class="sc-page sc-toolpage" dir="rtl" lang="ar">
+<nav class="sc-crumbs" aria-label="مسار التصفح"><a href="/">الرئيسية</a> › <a href="/p/tools.html">الأدوات</a> › <span>مقارنة عرضي تمويل</span></nav>
+<section class="sc-tool-card sc-tool" id="sc-loancompare">
+<h2>مقارنة عرضي تمويل</h2><p class="sc-muted">قارن عرضين لنفس المبلغ بفائدة ومدة مختلفتين: أيهما أقل في إجمالي الفوائد وأيهما أخف في القسط؟</p>
+<div class="sc-tool-grid"><div class="sc-field"><label for="sc-lc-amount">مبلغ التمويل</label><input id="sc-lc-amount" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-lc-ra">فائدة العرض (أ) سنوياً %</label><input id="sc-lc-ra" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-lc-ma">مدة العرض (أ) بالأشهر</label><input id="sc-lc-ma" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-lc-rb">فائدة العرض (ب) سنوياً %</label><input id="sc-lc-rb" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-lc-mb">مدة العرض (ب) بالأشهر</label><input id="sc-lc-mb" type="number" min="0" step="any" inputmode="decimal"></div></div>
+<div class="sc-tool-result" id="sc-loancompare-result" aria-live="polite">أدخل البيانات.</div>
+</section>
+<section class="sc-tool-card sc-prose"><h2>أدوات ذات صلة</h2><p class="sc-relrow"><a class="sc-rel" href="/p/tools.html">الميزانية الشهرية</a> <a class="sc-rel" href="/p/tools.html">القرض</a> <a class="sc-rel" href="/p/tools.html">النسبة المئوية</a> <a class="sc-rel" href="/p/tools.html">هدف الادخار</a> <a class="sc-rel" href="/p/tools.html">نمو الادخار</a></p><p><a href="/p/tools.html">عرض كل الأدوات ←</a></p></section>
+</div>

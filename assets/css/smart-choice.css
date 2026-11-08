@@ -548,3 +548,10 @@ html[data-sc-theme="dark"] .sc-offer{background:#211e12!important;border-color:#
 .sc-share-bar button:hover{border-color:#0f766e;color:#0f766e}
 .sc-share-msg{font-size:.86em;color:#0f766e}
 @media print{.sc-share-bar,.sc-nav,.sc-footer,header,nav{display:none!important}}
+
+.sc-crumbs{font-size:.9em;margin:0 0 12px;color:#475569}
+.sc-crumbs a{color:#0f766e;text-decoration:none}
+.sc-relrow{display:flex;flex-wrap:wrap;gap:8px}
+.sc-rel{display:inline-block;padding:6px 12px;border:1px solid var(--sc-line,#cbd5e1);border-radius:999px;color:inherit;text-decoration:none;font-size:.92em}
+.sc-rel:hover{border-color:#0f766e;color:#0f766e}
+.sc-toolpage .sc-tool{display:block}

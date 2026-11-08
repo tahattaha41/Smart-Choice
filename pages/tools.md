@@ -6,10 +6,10 @@ publish: true
 <div class="sc-page" dir="rtl" lang="ar">
 <section class="sc-tools-hero">
   <h1>أدوات Smart Choice الذكية</h1>
-  <p>احسب، قارن، وخطط ببياناتك أنت. النتائج تُحسب داخل متصفحك ولا تحتاج إلى تسجيل.</p>
+  <p>اختر أداة من الأيقونات لتفتح في صفحتها الخاصة، أو اسأل المساعد أدناه بأرقامك. النتائج تُحسب داخل متصفحك ولا تحتاج إلى تسجيل.</p>
 </section>
 <nav class="sc-tabs" aria-label="اختيار الأداة">
-  <button type="button" data-tab="discount" aria-selected="true">حاسبة الخصم</button>
+  <button type="button" data-tab="discount" aria-selected="false">حاسبة الخصم</button>
   <button type="button" data-tab="budget" aria-selected="false">الميزانية الشهرية</button>
   <button type="button" data-tab="unit" aria-selected="false">مقارنة سعر الوحدة</button>
   <button type="button" data-tab="vat" aria-selected="false">الضريبة</button>
@@ -22,7 +22,7 @@ publish: true
   <button type="button" data-tab="saving" aria-selected="false">هدف الادخار</button>
   <button type="button" data-tab="total" aria-selected="false">التكلفة الإجمالية</button>
   <button type="button" data-tab="installment" aria-selected="false">التقسيط</button>
-  <button type="button" data-tab="assistant" aria-selected="false">المساعد الذكي</button>
+  <button type="button" data-tab="assistant" aria-selected="true">المساعد الذكي</button>
   <button type="button" data-tab="compound" aria-selected="false">نمو الادخار</button>
   <button type="button" data-tab="breakeven" aria-selected="false">نقطة التعادل</button>
   <button type="button" data-tab="hourly" aria-selected="false">قيمة ساعتك</button>
@@ -44,7 +44,7 @@ publish: true
   <button type="button" data-tab="appl" aria-selected="false">تكلفة تشغيل جهاز كهربائي</button>
   <button type="button" data-tab="loancompare" aria-selected="false">مقارنة عرضي تمويل</button>
 </nav>
-<section class="sc-tool-card sc-tool" id="sc-discount">
+<section class="sc-tool-card sc-tool" id="sc-discount" hidden>
   <h2>حاسبة الخصم والسعر النهائي</h2><p class="sc-muted">أدخل السعر والخصم لمعرفة ما ستدفعه وقيمة التوفير.</p>
   <div class="sc-tool-grid">
     <div class="sc-field"><label for="sc-price">السعر الأصلي</label><input id="sc-price" type="number" min="0" step="0.01" inputmode="decimal"></div>
@@ -138,7 +138,7 @@ publish: true
 <div class="sc-tool-result" id="sc-split-result" aria-live="polite">أدخل إجمالي الفاتورة.</div>
 </section>
 
-<section class="sc-tool-card sc-tool" id="sc-assistant" hidden>
+<section class="sc-tool-card sc-tool" id="sc-assistant">
 <h2>المساعد الذكي</h2><p class="sc-muted">اكتب سؤالك بالعربية بأرقامك، مثل: «خصم 25% على 1800» أو «قرض 100000 بفائدة 12% لمدة سنتين». يفهم السؤال ويشغّل الأداة المناسبة ويعرض النتيجة. يعمل داخل متصفحك ولا يرسل ما تكتبه لأي جهة.</p>
 <div class="sc-field"><label for="sc-ask">سؤالك</label><textarea id="sc-ask" rows="3" placeholder="مثال: ضريبة 14% على 5000"></textarea></div>
 <div class="sc-actions"><button type="button" class="sc-ghost" id="sc-ask-go">اسأل</button><button type="button" class="sc-ghost sc-chip" data-q="خصم 25% على 1800">خصم 25% على 1800</button><button type="button" class="sc-ghost sc-chip" data-q="قرض 100000 بفائدة 12% لمدة سنتين">قرض 100000 بفائدة 12% سنتين</button><button type="button" class="sc-ghost sc-chip" data-q="تكلفة 80 وسعر البيع 100 كم الهامش">هامش: تكلفة 80 وبيع 100</button><button type="button" class="sc-ghost sc-chip" data-q="هدف ادخار 30000 وأدخر 2000 شهرياً">هدف ادخار 30000 بـ 2000 شهرياً</button></div>

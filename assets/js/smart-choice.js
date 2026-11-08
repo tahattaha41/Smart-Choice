@@ -339,12 +339,12 @@
       } else if(has("نسبة","زيادة","ارتفع","ارتفاع","تغير")&&nums.length>=2){
         set({"sc-base":nums[0],"sc-new":nums[1]}); tab="percent"; label="النسبة المئوية والتغير"; ok=true;
       }
-      if(!ok&&!nums.length){out.textContent="أنا مساعد حسابي يعمل داخل متصفحك: أفهم أسئلة الخصم (والمتتالي) والضريبة والقرض والتقسيط والفائدة المركبة والعائد على الاستثمار والتضخم وهامش الربح ونقطة التعادل والادخار والزكاة والرحلة والسعرات ومؤشر الجسم وقسمة الفاتورة والنسبة المئوية. لست محادثاً عاماً. اكتب سؤالك مع أرقامه، مثل: «خصم 20% على 2000».";if(openp)openp.textContent="";return;}
+      if(!ok&&!nums.length){out.textContent="أنا مساعد حسابي يعمل داخل متصفحك: أفهم أسئلة الخصم (والمتتالي) والضريبة والقرض والتقسيط والفائدة المركبة والعائد على الاستثمار والتضخم وهامش الربح ونقطة التعادل والادخار والزكاة والرحلة وقسمة الفاتورة والنسبة المئوية. لست محادثاً عاماً. اكتب سؤالك مع أرقامه، مثل: «خصم 20% على 2000».";if(openp)openp.textContent="";return;}
       if(!ok){out.textContent="لم أفهم السؤال بعد. اذكر نوع الحساب والأرقام، مثل: «خصم 20% على 2000»، «ضريبة 14% على 5000»، «قرض 100000 بفائدة 12% لمدة 24 شهر»، «تكلفة 80 وسعر البيع 100 كم الهامش»، «نسبة من 200 إلى 250».";if(openp)openp.textContent="";return;}
       const sec=$("sc-"+tab), res=sec&&sec.querySelector(".sc-tool-result");
       const k=res?Array.from(res.querySelectorAll(".kpi")).map(x=>{const sp=x.querySelector("span"),bb=x.querySelector("b,strong");return (sp?sp.textContent:"")+": "+(bb?bb.textContent:"");}):[];
       out.textContent=(k.length?k.join(" — "):(res?res.innerText.replace(/\n+/g," — "):""))+"  (الأداة: "+label+")";
-      if(openp){openp.textContent="";const b=document.createElement("button");b.type="button";b.className="sc-ghost";b.textContent="افتح "+label+" لتعديل الأرقام";b.addEventListener("click",()=>showTab(tab));openp.appendChild(b);}
+      if(openp){openp.textContent="";const b=document.createElement("button");b.type="button";b.className="sc-ghost";b.textContent="افتح "+label+" لتعديل الأرقام";b.addEventListener("click",()=>{ const tb=root.querySelector('[data-tab="'+tab+'"]'), href=tb&&tb.getAttribute("data-href"); if(href){ const sec=$("sc-"+tab), q=new URLSearchParams(); if(sec) sec.querySelectorAll("input[id],select[id]").forEach(i=>{ if(i.value!==""&&i.type!=="password") q.set(i.id,i.value); }); location.href=href+"#"+tab+"?"+q.toString(); } else showTab(tab); });openp.appendChild(b);}
     }
     root.querySelectorAll("[data-q]").forEach(b=>b.addEventListener("click",()=>{const a=$("sc-ask"); if(a){a.value=b.getAttribute("data-q"); assistant();}}));
     const askGo=$("sc-ask-go"); if(askGo) askGo.addEventListener("click",assistant);
@@ -625,7 +625,7 @@
     root.querySelectorAll("[data-tab]").forEach(b => { if (b.querySelector(".sc-i")) return; const t = b.getAttribute("data-tab"), label = b.textContent.trim(); b.innerHTML = "<span class='sc-ti'>" + window.SCI.svg(window.SCI.tab(t), 24) + "</span><span class='sc-tl'>" + label + "</span>"; b.setAttribute("title", label); });
     root.querySelectorAll(".sc-tool > h2").forEach(h => { if (h.querySelector(".sc-i")) return; const t = h.parentNode.id.replace("sc-", ""); h.innerHTML = "<span class='sc-h2i'>" + window.SCI.svg(window.SCI.tab(t), 22) + "</span>" + h.textContent; });
     /* تصنيفات وبحث الأدوات */
-    const CATS = [["all","الكل","all"],["shop","تسوق","cart"],["money","مال","wallet"],["biz","أعمال","chart"],["life","حياة وصحة","heart"],["text","نصوص وأمان","lock"]];
+    const CATS = [["all","الكل","all"],["shop","تسوق","cart"],["money","مال","wallet"],["biz","أعمال","chart"]];
     const TAB_CAT = {discount:"shop",unit:"shop",vat:"shop",compare:"shop",decide:"shop",total:"shop",installment:"shop",split:"shop",budget:"money",loan:"money",saving:"money",compound:"money",percent:"money",fx:"money",hourly:"money",margin:"biz",breakeven:"biz",bmi:"life",age:"life",zakat:"life",hijri:"life",trip:"life",dates:"life",convert:"life",grade:"life",wordcount:"text",password:"text",random:"text",calories:"life",speed:"life",loancompare:"money",roi:"money",inflation:"money",stack:"shop",effrate:"money",sub:"shop",rule72:"money",cashback:"shop",payoff:"money",taxeg:"money",bankdep:"money",gold:"money",rental:"money",appl:"life"};
     const tabNav = root.querySelector(".sc-tabs");
     if (tabNav && root.querySelectorAll("[data-tab]").length > 12 && !root.querySelector(".sc-filter")) {
@@ -655,7 +655,7 @@
       root.querySelectorAll(".sc-tool").forEach(section => { const show = section.id === "sc-" + tab; if (show && section.hidden) { section.classList.remove("sc-swap"); void section.offsetWidth; section.classList.add("sc-swap"); } section.hidden = !show; });
     }
     root.querySelectorAll("[data-tab]").forEach(btn => btn.addEventListener("click", () => {
-      const tab=btn.getAttribute("data-tab"); showTab(tab);
+      const tab=btn.getAttribute("data-tab"); const href=btn.getAttribute("data-href"); if(href){ location.href=href; return; } showTab(tab);
       const sec=root.querySelector("#sc-"+tab); if(sec&&sec.scrollIntoView) setTimeout(()=>{ const y=sec.getBoundingClientRect().top+window.pageYOffset-80; window.scrollTo({top:y,behavior:"smooth"}); },30);
       try { history.replaceState(null, "", "#" + tab); } catch (e) {}
     }));

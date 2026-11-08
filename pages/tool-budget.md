@@ -4,7 +4,7 @@ labels: أدوات, Smart Choice
 publish: true
 ---
 <div class="sc-page sc-toolpage" dir="rtl" lang="ar">
-<nav class="sc-crumbs" aria-label="مسار التصفح"><a href="/">الرئيسية</a> › <a href="/p/tools.html">الأدوات</a> › <span>الميزانية الشهرية</span></nav>
+<nav class="sc-crumbs" aria-label="مسار التصفح"><a href="/">الرئيسية</a> › <a href="/p/smart-choice_02145436434.html">الأدوات</a> › <span>الميزانية الشهرية</span></nav>
 <section class="sc-tool-card sc-tool" id="sc-budget">
   <h2>حاسبة الميزانية الشهرية</h2><p class="sc-muted">اكتب دخلك ومصروفاتك لتعرف المتبقي ونسبة ما تنفقه.</p>
   <div class="sc-tool-grid">
@@ -14,5 +14,5 @@ publish: true
   <div class="sc-tool-result sc-kpis" data-static="1" aria-live="polite"><div class="kpi"><span>المتبقي</span><strong id="sc-balance">أدخل البيانات</strong></div><div class="kpi"><span>نسبة الإنفاق</span><b id="sc-ratio">—</b></div></div>
   <p class="sc-muted">تحب تتابع ميزانيتك على ملف؟ <a href="https://raw.githubusercontent.com/tahattaha41/Smart-Choice/main/assets/downloads/monthly-budget-ar.xlsx" download rel="noopener">حمّل قالب الميزانية الشهرية (Excel) مجاناً</a>: دخل ومصروفات ثابتة ومتغيرة وحساب تلقائي لنسبة الادخار.</p>
 </section>
-<section class="sc-tool-card sc-prose"><h2>أدوات ذات صلة</h2><p class="sc-relrow"><a class="sc-rel" href="/p/tools.html">القرض</a> <a class="sc-rel" href="/p/tools.html">النسبة المئوية</a> <a class="sc-rel" href="/p/tools.html">هدف الادخار</a> <a class="sc-rel" href="/p/tools.html">نمو الادخار</a> <a class="sc-rel" href="/p/tools.html">قيمة ساعتك</a></p><p><a href="/p/tools.html">عرض كل الأدوات ←</a></p></section>
+<section class="sc-tool-card sc-prose"><h2>أدوات ذات صلة</h2><p class="sc-relrow"><a class="sc-rel" href="/p/smart-choice_0233426229.html">القرض</a> <a class="sc-rel" href="/p/smart-choice_02145436434.html">النسبة المئوية</a> <a class="sc-rel" href="/p/smart-choice_02145436434.html">هدف الادخار</a> <a class="sc-rel" href="/p/smart-choice_02145436434.html">نمو الادخار</a> <a class="sc-rel" href="/p/smart-choice_02145436434.html">قيمة ساعتك</a></p><p><a href="/p/smart-choice_02145436434.html">عرض كل الأدوات ←</a></p></section>
 </div>

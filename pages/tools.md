@@ -13,9 +13,9 @@ publish: true
   <button type="button" data-tab="budget" aria-selected="false">الميزانية الشهرية</button>
   <button type="button" data-tab="unit" aria-selected="false">مقارنة سعر الوحدة</button>
   <button type="button" data-tab="vat" aria-selected="false">الضريبة</button>
-  <button type="button" data-tab="compare" aria-selected="false">مقارنة المنتجات</button>
-  <button type="button" data-tab="decide" aria-selected="false">مركز القرار</button>
-  <button type="button" data-tab="loan" aria-selected="false">القرض</button>
+  <button type="button" data-tab="compare" data-href="/p/smart-choice_01034158753.html" aria-selected="false">مقارنة المنتجات</button>
+  <button type="button" data-tab="decide" data-href="/p/smart-choice_01190848683.html" aria-selected="false">مركز القرار</button>
+  <button type="button" data-tab="loan" data-href="/p/smart-choice_0233426229.html" aria-selected="false">القرض</button>
   <button type="button" data-tab="margin" aria-selected="false">هامش الربح</button>
   <button type="button" data-tab="split" aria-selected="false">قسمة الفاتورة</button>
   <button type="button" data-tab="percent" aria-selected="false">النسبة المئوية</button>
@@ -37,10 +37,10 @@ publish: true
   <button type="button" data-tab="rule72" aria-selected="false">مضاعفة المال (قاعدة 72)</button>
   <button type="button" data-tab="cashback" aria-selected="false">قيمة الكاش باك</button>
   <button type="button" data-tab="payoff" aria-selected="false">سداد القرض مبكراً</button>
-  <button type="button" data-tab="taxeg" aria-selected="false">ضريبة المرتبات في مصر</button>
-  <button type="button" data-tab="bankdep" aria-selected="false">عائد شهادة الادخار</button>
-  <button type="button" data-tab="gold" aria-selected="false">حاسبة الذهب والمصنعية</button>
-  <button type="button" data-tab="rental" aria-selected="false">العائد الإيجاري للعقار</button>
+  <button type="button" data-tab="taxeg" data-href="/p/smart-choice_01448156426.html" aria-selected="false">ضريبة المرتبات في مصر</button>
+  <button type="button" data-tab="bankdep" data-href="/p/smart-choice_091578269.html" aria-selected="false">عائد شهادة الادخار</button>
+  <button type="button" data-tab="gold" data-href="/p/smart-choice_0607977130.html" aria-selected="false">حاسبة الذهب والمصنعية</button>
+  <button type="button" data-tab="rental" data-href="/p/smart-choice_01653965676.html" aria-selected="false">العائد الإيجاري للعقار</button>
   <button type="button" data-tab="appl" aria-selected="false">تكلفة تشغيل جهاز كهربائي</button>
   <button type="button" data-tab="loancompare" aria-selected="false">مقارنة عرضي تمويل</button>
 </nav>

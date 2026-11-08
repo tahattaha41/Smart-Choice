@@ -4,7 +4,7 @@ labels: أدوات, Smart Choice
 publish: true
 ---
 <div class="sc-page sc-toolpage" dir="rtl" lang="ar">
-<nav class="sc-crumbs" aria-label="مسار التصفح"><a href="/">الرئيسية</a> › <a href="/p/tools.html">الأدوات</a> › <span>حاسبة الخصم</span></nav>
+<nav class="sc-crumbs" aria-label="مسار التصفح"><a href="/">الرئيسية</a> › <a href="/p/smart-choice_02145436434.html">الأدوات</a> › <span>حاسبة الخصم</span></nav>
 <section class="sc-tool-card sc-tool" id="sc-discount">
   <h2>حاسبة الخصم والسعر النهائي</h2><p class="sc-muted">أدخل السعر والخصم لمعرفة ما ستدفعه وقيمة التوفير.</p>
   <div class="sc-tool-grid">
@@ -13,5 +13,5 @@ publish: true
   </div>
   <div class="sc-tool-result sc-kpis" data-static="1" aria-live="polite"><div class="kpi"><span>السعر بعد الخصم</span><strong id="sc-final">أدخل البيانات</strong></div><div class="kpi"><span>قيمة التوفير</span><b id="sc-discount-saved">—</b></div></div>
 </section>
-<section class="sc-tool-card sc-prose"><h2>أدوات ذات صلة</h2><p class="sc-relrow"><a class="sc-rel" href="/p/tools.html">مقارنة سعر الوحدة</a> <a class="sc-rel" href="/p/tools.html">الضريبة</a> <a class="sc-rel" href="/p/tools.html">مقارنة المنتجات</a> <a class="sc-rel" href="/p/tools.html">مركز القرار</a> <a class="sc-rel" href="/p/tools.html">قسمة الفاتورة</a></p><p><a href="/p/tools.html">عرض كل الأدوات ←</a></p></section>
+<section class="sc-tool-card sc-prose"><h2>أدوات ذات صلة</h2><p class="sc-relrow"><a class="sc-rel" href="/p/smart-choice_02145436434.html">مقارنة سعر الوحدة</a> <a class="sc-rel" href="/p/smart-choice_02145436434.html">الضريبة</a> <a class="sc-rel" href="/p/smart-choice_01034158753.html">مقارنة المنتجات</a> <a class="sc-rel" href="/p/smart-choice_01190848683.html">مركز القرار</a> <a class="sc-rel" href="/p/smart-choice_02145436434.html">قسمة الفاتورة</a></p><p><a href="/p/smart-choice_02145436434.html">عرض كل الأدوات ←</a></p></section>
 </div>

@@ -555,3 +555,67 @@ html[data-sc-theme="dark"] .sc-offer{background:#211e12!important;border-color:#
 .sc-rel{display:inline-block;padding:6px 12px;border:1px solid var(--sc-line,#cbd5e1);border-radius:999px;color:inherit;text-decoration:none;font-size:.92em}
 .sc-rel:hover{border-color:#0f766e;color:#0f766e}
 .sc-toolpage .sc-tool{display:block}
+
+/* ============ v6 — هوية بصرية هادئة (ورق دافئ + أخضر مزرق)، بلا تدرجات ولا حركة زائدة ============ */
+:root{--sc-bg:#f7f5f0;--sc-ink:#1c2b2d;--sc-muted:#5f6b6d;--sc-line:#e3ded3;--sc-card:#fff;--sc-navy:#12332f;--sc-navy2:#12332f;--sc-blue:#0f766e;--sc-teal:#0f766e;--sc-violet:#0f766e;--sc-amber:#b7791f;--sc-radius:12px;--sc-shadow:none;--sc-shadow2:0 6px 18px rgba(28,43,45,.08)}
+html body{background:var(--sc-bg);color:var(--sc-ink);line-height:1.9}
+html body a{color:#0b5a54}
+html body .sc-top{background:#12332f;color:#d8ebe7;font-size:13px;padding:6px 0}
+html body .sc-head{background:#fff;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom:1px solid var(--sc-line)}
+html body .sc-brand{color:var(--sc-ink);font-size:24px}
+html body .sc-brand span{background:none;-webkit-background-clip:initial;background-clip:initial;color:#0f766e}
+html body .sc-nav a{border-radius:8px;font-weight:600;font-size:15px;color:var(--sc-ink)}
+html body .sc-nav a:hover{background:#eef4f2;color:#0b5a54}
+html body .sc-nav a[aria-current=page]{background:#0f766e;color:#fff}
+html body .sc-btn,html body .sc-btn:hover{background:#0f766e;color:#fff;border-radius:10px;box-shadow:none;transform:none;font-weight:700}
+html body .sc-btn:hover{background:#0b5a54}
+html body .sc-btn::after{display:none}
+html body .sc-btn.alt{background:#fff;color:var(--sc-ink);box-shadow:inset 0 0 0 1.5px var(--sc-line)}
+html body .sc-btn.alt:hover{background:#f1efe8;color:var(--sc-ink)}
+/* الغلاف */
+.sc-hero2{background:#fff;color:var(--sc-ink);border:1px solid var(--sc-line);border-radius:16px;box-shadow:none;padding:36px 32px}
+.sc-hero2::before,.sc-hero2::after,.sc-hero2 .orb,.sc-marquee,.sc-chip3{display:none!important}
+.sc-hero2 h1{color:var(--sc-ink);font-size:clamp(28px,4.6vw,44px);line-height:1.35}
+.sc-hero2 h1 span{background:none;-webkit-background-clip:initial;background-clip:initial;color:#0f766e;animation:none}
+.sc-hero2 p{color:var(--sc-muted)}
+.sc-badge{background:#eef4f2;border:1px solid #d3e3df;color:#0b5a54}
+.sc-demo{background:#faf8f3;border:1px solid var(--sc-line);box-shadow:none;animation:none;border-radius:14px}
+.sc-demo *{color:var(--sc-ink)}
+/* البطاقات والأيقونات */
+html body .sc-card,.sc-tool-tile,.sc-stepgrid>div,.sc-trust>div,.sc-page .sc-tool-card,.sc-page .kpi,.adm-card,.adm-stat{background:#fff;border:1px solid var(--sc-line);border-radius:12px;box-shadow:none}
+html body .sc-card:before{display:none}
+html body .sc-card:hover,.sc-tool-tile:hover{transform:none;box-shadow:var(--sc-shadow2);border-color:#b9d3ce}
+.sc-tool-tile .ico,.sc-stepgrid span{background:#e6f1ee;color:#0f766e;border-radius:10px;animation:none}
+.chip{background:#eef4f2;color:#0b5a54;border-radius:6px}
+.sc-page .sc-tools-hero{background:#fff;color:var(--sc-ink);border:1px solid var(--sc-line);border-radius:14px;box-shadow:none}
+.sc-page .sc-tools-hero h1{color:var(--sc-ink)}.sc-page .sc-tools-hero p{color:var(--sc-muted)}
+.sc-page .sc-tabs button{border-radius:8px;background:#fff;border:1px solid var(--sc-line);color:var(--sc-ink);box-shadow:none}
+.sc-page .sc-tabs button[aria-selected=true],.sc-chips button[aria-pressed=true]{background:#0f766e;border-color:#0f766e;color:#fff}
+.sc-page .sc-tool-result{background:#f1f7f5;border:1px solid #cfe3de}
+.sc-page .sc-field input,.sc-page .sc-field select{border-radius:8px;border:1px solid #cfc9bb;background:#fff}
+.sc-page .sc-field input:focus,.sc-page .sc-field select:focus{border-color:#0f766e;box-shadow:0 0 0 3px rgba(15,118,110,.18)}
+/* التذييل */
+html body .sc-footer{background:#12332f;color:#d8ebe7}
+/* لوحة الإدارة */
+.adm-app{background:#fff;border:1px solid var(--sc-line);border-radius:14px}
+.adm-side{background:#12332f}.adm-app .adm-tabs button[aria-selected=true]{background:#0f766e;color:#fff}
+/* بلا حركة */
+.sc-motion .sc-rv{opacity:1!important;transform:none!important}
+@keyframes scFloat{to{}}
+/* الوضع الداكن */
+html[data-sc-theme="dark"]{--sc-bg:#101a1a;--sc-ink:#e8efee;--sc-muted:#9fb0ae;--sc-line:#263636;--sc-card:#162424}
+html[data-sc-theme="dark"] body .sc-head,html[data-sc-theme="dark"] .sc-hero2,html[data-sc-theme="dark"] .sc-page .sc-tools-hero,html[data-sc-theme="dark"] .sc-card,html[data-sc-theme="dark"] .sc-tool-tile,html[data-sc-theme="dark"] .sc-page .sc-tool-card,html[data-sc-theme="dark"] .adm-card,html[data-sc-theme="dark"] .adm-app{background:#162424;border-color:#263636}
+html[data-sc-theme="dark"] .sc-demo{background:#1b2d2d;border-color:#263636}
+html[data-sc-theme="dark"] .sc-page .sc-tabs button{background:#162424;border-color:#263636;color:#e8efee}
+html body .sc-hero2,html body .sc-tools-hero{background:#fff!important;color:var(--sc-ink)!important;border:1px solid var(--sc-line);border-radius:16px!important;box-shadow:none!important;padding:clamp(22px,4vw,40px)!important}
+html body .sc-hero2 h1,html body .sc-tools-hero h1{color:var(--sc-ink)!important}
+html body .sc-hero2 h1 span{color:#0f766e!important;-webkit-text-fill-color:#0f766e!important;background:none!important}
+html body .sc-hero2 p,html body .sc-tools-hero p{color:var(--sc-muted)!important}
+html body .sc-hero2 .sc-btn.alt{background:#fff;color:var(--sc-ink)!important}
+html body .sc-nav a{text-decoration:none}
+html[data-sc-theme="dark"] body .sc-hero2,html[data-sc-theme="dark"] body .sc-tools-hero{background:#162424!important;border-color:#263636}
+html[data-sc-theme="dark"] body .sc-hero2 h1,html[data-sc-theme="dark"] body .sc-tools-hero h1{color:#e8efee!important}
+html[data-sc-theme="dark"] body .sc-hero2 p,html[data-sc-theme="dark"] body .sc-tools-hero p{color:#9fb0ae!important}
+html body .sc-badge{background:#eef4f2!important;border:1px solid #d3e3df!important;color:#0b5a54!important}
+html body .sc-demo{box-shadow:0 2px 10px rgba(28,43,45,.08)!important;background:#faf8f3!important;border:1px solid var(--sc-line)}
+html body .sc-hero2 .sc-btn.alt{box-shadow:inset 0 0 0 1.5px var(--sc-line)!important}

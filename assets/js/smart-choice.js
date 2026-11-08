@@ -676,6 +676,7 @@
   "use strict";
   var ORDER = ["الأدوات", "مقارنة", "مركز القرار", "من نحن", "سياسة المحتوى", "إعلن معنا", "اتصل بنا", "خريطة الموقع", "سياسة الخصوصية", "الشروط", "لوحة الإدارة"];
   function clean(title) { return String(title || "").replace(/\s*\|\s*Smart Choice\s*$/i, "").trim(); }
+  var CORE = ["الأدوات الذكية", "مقارنة المنتجات", "مركز القرار", "من نحن", "سياسة المحتوى والتحرير", "إعلن معنا", "اتصل بنا", "خريطة الموقع", "سياسة الخصوصية", "شروط الاستخدام وإخلاء المسؤولية", "لوحة الإدارة"];
   function rank(title) {
     for (var i = 0; i < ORDER.length; i++) if (title.indexOf(ORDER[i]) === 0) return i;
     return ORDER.length;
@@ -696,6 +697,8 @@
       }).map(function (e) {
         return { title: clean(e.title && e.title.$t), url: entryUrl(e) };
       }).filter(function (p) { return p.title && p.url; });
+      // القائمة والتذييل للصفحات الأساسية فقط (صفحات الأدوات الفردية تُفتح من أيقونات صفحة الأدوات)
+      list = list.filter(function (p) { return CORE.indexOf(p.title) !== -1; });
       list.sort(function (a, b) { return rank(a.title) - rank(b.title); });
       return list;
     });
@@ -839,7 +842,7 @@
         "<p>حاسبات عملية للمصريين: ضريبة المرتب، شهادات الادخار، الذهب، القروض والتقسيط، والخصومات. كل أداة تشرح معادلتها وتعمل في متصفحك دون تسجيل.</p>" +
         "<div class='sc-hero2-cta'><a class='sc-btn' href='" + tools + "'>ابدأ بالأدوات</a><a class='sc-btn alt' href='/search'>اقرأ الأدلة</a></div></div>" +
         "<div class='sc-hero2-art'><form class='sc-hq' onsubmit='return false'><h2>احسب خصمك الآن</h2><label>السعر قبل الخصم<input id='sc-hq-p' type='number' inputmode='decimal' value='2000' min='0'></label><label>نسبة الخصم %<input id='sc-hq-d' type='number' inputmode='decimal' value='20' min='0' max='100'></label><div class='sc-hq-out'><div><span>تدفع</span><b id='sc-hq-pay'>1,600</b></div><div><span>توفّر</span><b id='sc-hq-sv'>400</b></div></div><a href='" + tools + "#discount'>أدوات أكثر تفصيلاً ←</a></form></div></section>" +
-        "<section class='sc-statbar'><div><b>40+</b><span>أداة حساب ومقارنة</span></div><div><b>100%</b><span>مجانية وبدون تسجيل</span></div><div><b>0</b><span>بيانات تُرسل خارج متصفحك</span></div><div><b>عربية</b><span>بالكامل ومن اليمين لليسار</span></div></section>" +
+        "<section class='sc-statbar'><div><b>34</b><span>أداة حساب ومقارنة</span></div><div><b>100%</b><span>مجانية وبدون تسجيل</span></div><div><b>0</b><span>بيانات تُرسل خارج متصفحك</span></div><div><b>عربية</b><span>بالكامل ومن اليمين لليسار</span></div></section>" +
         "<section class='sc-sec'><h2 class='sc-h2'>أدواتنا الأكثر استخداماً</h2><p class='sc-sub'>اختر الأداة، جرّب مثالاً جاهزاً أو أدخل أرقامك.</p><div class='sc-toolgrid'>" +
         TOOLS.map(function (t) { return "<a class='sc-tool-tile' href='" + tools + "#" + t[3] + "'><span class='ico'>" + window.SCI.svg(t[0], 26) + "</span><b>" + esc(t[1]) + "</b><small>" + esc(t[2]) + "</small></a>"; }).join("") +
         "</div><p class='sc-more'><a href='" + tools + "'>عرض كل الأدوات (34 أداة) ←</a></p></section>" +

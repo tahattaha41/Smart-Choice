@@ -72,6 +72,8 @@
         var st = document.getElementById("sc-css-live");
         if (!st) { st = document.createElement("style"); st.id = "sc-css-live"; document.head.appendChild(st); }
         st.textContent = css;
+        // أزل ورقة CSS القديمة المخزّنة على CDN حتى لا تتعارض قواعدها مع التصميم الحالي
+        try { document.querySelectorAll('link[rel="stylesheet"][href*="assets/css/smart-choice.css"]').forEach(function (l) { l.parentNode.removeChild(l); }); } catch (e) {}
         if (!document.getElementById("sc-font-live")) { var fl = document.createElement("link"); fl.id = "sc-font-live"; fl.rel = "stylesheet"; fl.href = "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"; document.head.appendChild(fl); }
       }).catch(function () {});
   } catch (e) {}

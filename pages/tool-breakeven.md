@@ -10,5 +10,5 @@ publish: true
 <div class="sc-tool-grid"><div class="sc-field"><label for="sc-be-fixed">التكاليف الثابتة الشهرية (إيجار، اشتراكات…)</label><input id="sc-be-fixed" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-be-price">سعر بيع الوحدة</label><input id="sc-be-price" type="number" min="0" step="any" inputmode="decimal"></div><div class="sc-field"><label for="sc-be-var">التكلفة المتغيرة للوحدة</label><input id="sc-be-var" type="number" min="0" step="any" inputmode="decimal"></div></div>
 <div class="sc-tool-result" id="sc-breakeven-result" aria-live="polite">أدخل البيانات.</div>
 </section>
-<section class="sc-tool-card sc-prose"><h2>أدوات ذات صلة</h2><p class="sc-relrow"><a class="sc-rel" href="/p/smart-choice_02145436434.html">هامش الربح</a></p><p><a href="/p/smart-choice_02145436434.html">عرض كل الأدوات ←</a></p></section>
+<section class="sc-tool-card sc-prose"><h2>أدوات ذات صلة</h2><p class="sc-relrow"><a class="sc-rel" href="/p/smart-choice_01449217589.html">هامش الربح</a></p><p><a href="/p/smart-choice_02145436434.html">عرض كل الأدوات ←</a></p></section>
 </div>

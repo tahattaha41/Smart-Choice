@@ -38,8 +38,9 @@ rec(!/utilit[y]ra|flarivo|toolora/i.test(nav), 'Nav has no old-brand pages: ' + 
 // ads.txt (تحذير فقط: إجراء على المالك في إعدادات بلوجر)
 try { const ar = await page.request.get(BASE + '/ads.txt'); const at = ar.ok() ? await ar.text() : ''; out.push((at.includes('pub-1235197294708204') ? 'OK    ' : 'WARN  ') + 'ads.txt ' + (at.includes('pub-1235197294708204') ? 'يحتوي معرّف الناشر' : 'غير مفعّل بعد في إعدادات بلوجر')); } catch { out.push('WARN  ads.txt تعذر الفحص'); }
 // الصفحات من الخلاصة
-const feed = await page.evaluate(async () => (await (await fetch('/feeds/pages/default?alt=json&max-results=50')).json()).feed.entry.map((e) => ({ t: e.title.$t, u: e.link.find((l) => l.rel === 'alternate').href })));
-const find = (s) => feed.find((p) => p.t.includes(s))?.u;
+const feed = await page.evaluate(async () => { const all = []; for (let st = 1; st <= 201; st += 25) { try { const r = await fetch('/feeds/pages/default?alt=json&max-results=25&start-index=' + st); if (!r.ok) break; const en = (await r.json()).feed.entry || []; for (const e of en) all.push({ t: e.title.$t, u: e.link.find((l) => l.rel === 'alternate').href }); if (en.length < 25) break; } catch { break; } } return all; });
+out.push('INFO  Pages feed entries: ' + feed.length);
+const find = (s) => (feed.find((p) => p.t.startsWith(s)) || feed.find((p) => p.t.includes(s)))?.u;
 
 // صفحة الأدوات: ظهور وعمل
 const tools = find('الأدوات');

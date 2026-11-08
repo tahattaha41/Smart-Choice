@@ -655,7 +655,7 @@
       root.querySelectorAll(".sc-tool").forEach(section => { const show = section.id === "sc-" + tab; if (show && section.hidden) { section.classList.remove("sc-swap"); void section.offsetWidth; section.classList.add("sc-swap"); } section.hidden = !show; });
     }
     root.querySelectorAll("[data-tab]").forEach(btn => btn.addEventListener("click", () => {
-      const tab=btn.getAttribute("data-tab"); const href=btn.getAttribute("data-href"); if(href){ location.href=href; return; } showTab(tab);
+      const tab=btn.getAttribute("data-tab"); const U=window.__scToolUrls||{}; const href=btn.getAttribute("data-href")||U[tab]; if(href&&tab!=="assistant"){ location.href=href; return; } showTab(tab);
       const sec=root.querySelector("#sc-"+tab); if(sec&&sec.scrollIntoView) setTimeout(()=>{ const y=sec.getBoundingClientRect().top+window.pageYOffset-80; window.scrollTo({top:y,behavior:"smooth"}); },30);
       try { history.replaceState(null, "", "#" + tab); } catch (e) {}
     }));
@@ -669,6 +669,14 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
   else start();
 })();
+/* Smart Choice — روابط صفحات الأدوات (تُحمَّل مرة واحدة لتعمل الأيقونات حتى لو لم يحمل محتوى الصفحة روابطها) */
+(function () {
+  "use strict";
+  if (window.__scToolUrls) return;
+  window.__scToolUrls = {};
+  try { fetch("https://raw.githubusercontent.com/tahattaha41/Smart-Choice/main/assets/content/tool-urls.json?t=" + Math.floor(Date.now() / 300000), { credentials: "omit" }).then(function (r) { return r.ok ? r.json() : {}; }).then(function (j) { window.__scToolUrls = j || {}; }).catch(function () {}); } catch (e) {}
+})();
+
 /* Smart Choice — dynamic navigation, footer links and latest posts.
    Read from the blog's public feeds so new pages/posts appear without re-uploading the Blogger theme.
    Static markup in the theme remains as a fallback if a request fails. */
@@ -714,7 +722,7 @@
       var home = nav.querySelector("a");
       nav.textContent = "";
       if (home) nav.appendChild(home);
-      list.forEach(function (p) { nav.appendChild(link(p.url, p.title)); });
+      list.forEach(function (p, i) { nav.appendChild(link(p.url, p.title)); if (i === 0) nav.appendChild(link("/search", "المقالات")); });
       markCurrent();
     }
     var foot = document.querySelector(".sc-footlinks");
@@ -829,7 +837,7 @@
     var host = document.getElementById("main-content") || document.querySelector("main");
     if (!host || host.querySelector(".sc-home-root") || !window.__scPages) return;
     Promise.all([window.__scPages(), fetch("https://raw.githubusercontent.com/tahattaha41/Smart-Choice/main/assets/content/tool-urls.json?t=" + Math.floor(Date.now() / 300000)).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; })]).then(function (res) {
-      var list = res[0]; window.__scToolUrls = res[1] || {};
+      var list = res[0]; if (res[1] && Object.keys(res[1]).length) window.__scToolUrls = res[1];
       if (host.querySelector(".sc-home-root")) return;
       var by = function (k) { var m = list.filter(function (p) { return p.title.indexOf(k) === 0; })[0]; return m ? m.url : "#"; };
       var tools = by("الأدوات");

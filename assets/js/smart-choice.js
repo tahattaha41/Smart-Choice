@@ -844,7 +844,7 @@
       if (host.querySelector(".sc-home-root")) return;
       var by = function (k) { var m = list.filter(function (p) { return p.title.indexOf(k) === 0; })[0]; return m ? m.url : "#"; };
       var tools = by("الأدوات");
-      var CATS_HOME = [["tag", "التسوق والخصومات", "خصم، سعر الوحدة، تقسيط، كاش باك، اشتراكات", "discount"], ["bank", "القروض والتمويل", "قرض، سداد مبكر، مقارنة عرضين، فائدة فعلية", "loan"], ["sprout", "الادخار والاستثمار", "ادخار، فائدة مركبة، ROI، قاعدة 72، تضخم", "saving"], ["chart", "المشاريع الصغيرة", "هامش الربح، نقطة التعادل، التسعير، الضريبة", "margin"], ["compass", "قرارات الحياة", "مركز القرار، الزكاة، الرحلة، قيمة ساعتك", "decide"]];
+      var CATS_HOME = [["tag", "التسوق والخصومات", "خصم، سعر الوحدة، تقسيط، كاش باك", "discount", "shop"], ["bank", "القروض والتمويل", "قرض، سداد مبكر، فائدة فعلية", "loan", "loan"], ["sprout", "الادخار والاستثمار", "شهادات، فائدة مركبة، تضخم", "saving", "save"], ["chart", "المشاريع الصغيرة", "هامش الربح، نقطة التعادل", "margin", "biz"], ["compass", "قرارات الحياة", "الزكاة، الرحلة، مركز القرار", "decide", "life"]];
       var FAQ = [["هل الأدوات مجانية وهل أحتاج إلى تسجيل؟", "نعم، كل الأدوات مجانية وتعمل مباشرة دون حساب أو بريد إلكتروني."], ["هل تُرسل أرقامي إلى أي جهة؟", "لا. تُحسب النتائج داخل متصفحك فقط، ولا نحفظ ما تدخله."], ["هل النتائج نصيحة مالية؟", "لا. هي حسابات تقريبية مبنية على أرقامك، وليست نصيحة مالية أو قانونية؛ استشر مختصاً في القرارات الكبيرة."], ["كيف أختار بين التقسيط والكاش؟", "استخدم أداتي «التقسيط مقابل الكاش» و«الفائدة الفعلية للتقسيط» لمعرفة الفرق الحقيقي بالأرقام قبل القرار."], ["ما الأداة المناسبة لمشروعي الصغير؟", "ابدأ بـ«هامش الربح» ثم «نقطة التعادل»، وراجع دليل التسعير في المقالات."]];
       try { var fl = document.createElement("script"); fl.type = "application/ld+json"; fl.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": FAQ.map(function (q) { return { "@type": "Question", "name": q[0], "acceptedAnswer": { "@type": "Answer", "text": q[1] } }; }) }); document.head.appendChild(fl); } catch (e) {}
       var U = window.__scToolUrls || {};
@@ -856,12 +856,12 @@
         "<p class='sc-h-lead'>أدوات لحساب ضريبة المرتب وعائد الشهادات وتكلفة التقسيط والقروض وقيمة الذهب. كل أداة تعرض المعادلة المستخدمة وتعمل في متصفحك دون تسجيل.</p>" +
         "<div class='sc-h-cta'><a class='sc-btn' href='" + tools + "'>تصفّح كل الأدوات</a><a class='sc-btn alt' href='/search'>الأدلة والمقالات</a></div></div>" +
         "<form class='sc-hq sc-h-quick' onsubmit='return false'><h2>حساب سريع: الخصم</h2><label>السعر قبل الخصم<input id='sc-hq-p' type='number' inputmode='decimal' value='2000' min='0'></label><label>نسبة الخصم %<input id='sc-hq-d' type='number' inputmode='decimal' value='20' min='0' max='100'></label><div class='sc-hq-out'><div><span>تدفع</span><b id='sc-hq-pay'>1,600</b></div><div><span>توفّر</span><b id='sc-hq-sv'>400</b></div></div></form></section>" +
+        "<section class='sc-h-sec'><div class='sc-h-head'><h2>ابدأ من مجالك</h2></div><div class='sc-h-cats'>" +
+        CATS_HOME.map(function (c) { return "<a data-cat='" + c[4] + "' href='" + tl(c[3]) + "'><span class='ico'>" + window.SCI.svg(c[0], 26) + "</span><b>" + c[1] + "</b><small>" + c[2] + "</small></a>"; }).join("") + "</div></section>" +
         "<section class='sc-h-sec'><div class='sc-h-head'><h2>الحاسبات الأكثر استخداماً</h2><a href='" + tools + "'>كل الأدوات (34)</a></div><ul class='sc-h-list'>" +
         TOOLS.map(function (t) { return "<li><a href='" + tl(t[3]) + "'><span class='ico'>" + window.SCI.svg(t[0], 22) + "</span><span class='tx'><b>" + esc(t[1]) + "</b><small>" + esc(t[2]) + "</small></span></a></li>"; }).join("") +
         "</ul></section>" +
         "<section class='sc-h-sec'><div class='sc-h-head'><h2>أحدث الأدلة</h2><a href='/search'>كل المقالات</a></div><div class='sc-cards sc-latest-posts sc-h-posts'></div></section>" +
-        "<section class='sc-h-sec'><div class='sc-h-head'><h2>الأدوات حسب المجال</h2></div><div class='sc-h-cats'>" +
-        CATS_HOME.map(function (c) { return "<a href='" + tl(c[3]) + "'><b>" + c[1] + "</b><small>" + c[2] + "</small></a>"; }).join("") + "</div></section>" +
         "<section class='sc-h-sec sc-faq'><div class='sc-h-head'><h2>أسئلة شائعة</h2></div>" +
         FAQ.map(function (q) { return "<details><summary>" + q[0] + "</summary><p>" + q[1] + "</p></details>"; }).join("") + "</section>" +
         "<section class='sc-h-note'><p>تُحسب النتائج داخل متصفحك ولا تُرسل إلى أي جهة. الأسعار المرجعية تُعرض مع مصدرها وتوقيتها، وما لا نملك له مصدراً موثوقاً تُدخله أنت. <a href='" + by("سياسة المحتوى") + "'>سياسة المحتوى والتحرير</a></p></section></div>";
@@ -1246,9 +1246,9 @@
 
 /* Smart Choice — الوضع الداكن (يُحفظ لكل جهاز، ويتبع إعداد الجهاز افتراضياً) */
 (function () {
-  var K = "sc-theme", cur = null;
+  var K = "sc-theme-v2", cur = null;
   try { cur = localStorage.getItem(K); } catch (e) {}
-  if (!cur) cur = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  if (!cur) cur = "dark";
   function apply(t) { document.documentElement.setAttribute("data-sc-theme", t); var b = document.querySelector(".sc-theme"); if (b) { b.innerHTML = window.SCI.svg(t === "dark" ? "sun" : "moon", 20); b.setAttribute("aria-label", t === "dark" ? "التبديل إلى الوضع الفاتح" : "التبديل إلى الوضع الداكن"); b.title = b.getAttribute("aria-label"); } }
   apply(cur);
   function add() {

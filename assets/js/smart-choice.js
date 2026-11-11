@@ -849,10 +849,6 @@
       try { var fl = document.createElement("script"); fl.type = "application/ld+json"; fl.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": FAQ.map(function (q) { return { "@type": "Question", "name": q[0], "acceptedAnswer": { "@type": "Answer", "text": q[1] } }; }) }); document.head.appendChild(fl); } catch (e) {}
       var U = window.__scToolUrls || {};
       var tl = function (id) { return U[id] || (tools + "#" + id); };
-      var recent = []; try { recent = JSON.parse(localStorage.getItem("sc-recent") || "[]"); } catch (e) {}
-      var resume = recent.length
-        ? "<ul class='sc-h-rows'>" + recent.slice(0, 4).map(function (r) { return "<li><a href='" + esc(r.u) + "'><b>" + esc(r.t) + "</b><span>افتح من جديد ←</span></a></li>"; }).join("") + "</ul>"
-        : "<p class='sc-h-empty'>لم تستخدم أي حاسبة بعد. ستظهر هنا آخر الحاسبات التي فتحتها لتكمل منها.</p>";
       var html = "<div class='sc-home-root'>" +
         "<section class='sc-h-hero'><div class='sc-h-hero-text'>" +
         "<p class='sc-h-eyebrow'>حاسبات مالية بالجنيه المصري</p>" +
@@ -864,8 +860,7 @@
         "<label>التأمينات الاجتماعية الشهرية<input id='sc-hq-i' type='number' inputmode='decimal' value='1100' min='0'></label>" +
         "<dl class='sc-hq-out'><div><dt>صافي الراتب شهرياً</dt><dd id='sc-hq-net'>—</dd></div><div><dt>الضريبة شهرياً</dt><dd id='sc-hq-tax'>—</dd></div></dl>" +
         "<p class='sc-h-qnote'>شرائح مصراوي المنشورة بتاريخ 2/8/2026 مع إعفاء شخصي 20 ألف جنيه سنوياً. <a href='" + tl("taxeg") + "'>افتح الحاسبة كاملة ←</a></p></form></section>" +
-        "<section class='sc-h-sec sc-h-split'><div><div class='sc-h-head'><h2>أكمل من حيث توقفت</h2></div>" + resume + "</div>" +
-        "<div><div class='sc-h-head'><h2>كيف تعمل الحاسبات</h2></div><ol class='sc-h-steps'><li><b>أدخل أرقامك</b><span>الراتب أو السعر أو القسط، بما تعرفه أنت.</span></li><li><b>اقرأ المعادلة</b><span>كل حاسبة تشرح كيف وصلت إلى الرقم.</span></li><li><b>قارن وقرر</b><span>استخدم مركز القرار لترتيب خياراتك بأوزانك.</span></li></ol></div></section>" +
+        "<section class='sc-h-sec'><div class='sc-h-head'><h2>كيف تعمل الحاسبات</h2></div><ol class='sc-h-steps sc-h-steps3'><li><b>أدخل أرقامك</b><span>الراتب أو السعر أو القسط، بما تعرفه أنت.</span></li><li><b>اقرأ المعادلة</b><span>كل حاسبة تشرح كيف وصلت إلى الرقم.</span></li><li><b>قارن وقرر</b><span>استخدم مركز القرار لترتيب خياراتك بأوزانك.</span></li></ol></section>" +
         "<section class='sc-h-sec'><div class='sc-h-head'><h2>الحاسبات حسب المجال</h2><a href='" + tools + "'>كل الأدوات (34)</a></div><div class='sc-h-cats'>" +
         CATS_HOME.map(function (c) { return "<a data-cat='" + c[4] + "' href='" + tl(c[3]) + "'><span class='ico'>" + window.SCI.svg(c[0], 22) + "</span><b>" + c[1] + "</b><small>" + c[2] + "</small></a>"; }).join("") + "</div></section>" +
         "<section class='sc-h-sec'><div class='sc-h-head'><h2>الأكثر استخداماً</h2></div><ul class='sc-h-list'>" +
@@ -923,18 +918,6 @@
     else build();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
-})();
-
-/* Smart Choice — تذكّر آخر الحاسبات المفتوحة (محلياً في المتصفح فقط) */
-(function () {
-  "use strict";
-  try {
-    if (!document.querySelector(".sc-toolpage")) return;
-    var h1 = document.querySelector(".sc-toolpage .sc-tool-card h2, .sc-toolpage h1"); if (!h1) return;
-    var t = h1.textContent.trim(), u = location.pathname, list = JSON.parse(localStorage.getItem("sc-recent") || "[]");
-    list = list.filter(function (x) { return x.u !== u; }); list.unshift({ t: t, u: u });
-    localStorage.setItem("sc-recent", JSON.stringify(list.slice(0, 6)));
-  } catch (e) {}
 })();
 
 /* Smart Choice — لوحة الإدارة (للمالك). تعرض بيانات عامة غير سرية فقط: زيارات Blogger الحقيقية، الفحص الفني، جاهزية AdSense،

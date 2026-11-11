@@ -25,7 +25,7 @@ const cdn = await page.evaluate(async () => { try { return await (await fetch('h
 { const okH = await go(BASE + '/'); rec(okH, 'Home loads'); if (!okH && /google\.com\/sorry/.test(page.url())) { mkdirSync('reports', { recursive: true }); writeFileSync('reports/live-e2e-blocked.md', '# الفحص الحي متوقف مؤقتاً\n\nجوجل حجبت عنوان سيرفر GitHub مؤقتاً (صفحة sorry) بسبب كثرة الطلبات، وهذا ليس عطلاً في الموقع. آخر نتيجة سليمة في live-e2e.txt محفوظة. ' + new Date().toISOString() + '\n'); console.log('blocked by google rate limit'); await browser.close().catch(() => {}); process.exit(0); } if (!okH) { const r2 = await fetch(BASE + '/', { redirect: 'manual' }).catch((e) => ({ status: 'neterr ' + e.message })); out.push('INFO  Home fetch status=' + r2.status + ' location=' + (r2.headers ? r2.headers.get('location') : '') + ' page.url=' + page.url()); } }
 rec((await page.locator('.sc-h-hero, .sc-hero2, .sc-hero').count()) > 0, 'Home shows hero');
 await page.waitForTimeout(3500);
-rec((await page.locator('#sc-hq-p').count()) > 0, 'Design v4 live: hero calculator present (if FAIL: new JS not loading)');
+rec((await page.locator('#sc-hq-g').count()) > 0, 'Design v4 live: hero calculator present (if FAIL: new JS not loading)');
 const dsn = await page.evaluate(() => ({ font: getComputedStyle(document.body).fontFamily.slice(0, 40), btn: (document.querySelector('.sc-btn') ? getComputedStyle(document.querySelector('.sc-btn')).backgroundColor : '') }));
 out.push('INFO  Home style probe: font=' + dsn.font + ' | button=' + dsn.btn);
 rec((await page.content()).includes('Smart Choice loader'), 'Installed theme has the GitHub loader (if FAIL: upload theme/smart-choice-blogger.xml once)');

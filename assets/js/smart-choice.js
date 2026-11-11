@@ -849,27 +849,48 @@
       try { var fl = document.createElement("script"); fl.type = "application/ld+json"; fl.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": FAQ.map(function (q) { return { "@type": "Question", "name": q[0], "acceptedAnswer": { "@type": "Answer", "text": q[1] } }; }) }); document.head.appendChild(fl); } catch (e) {}
       var U = window.__scToolUrls || {};
       var tl = function (id) { return U[id] || (tools + "#" + id); };
+      var recent = []; try { recent = JSON.parse(localStorage.getItem("sc-recent") || "[]"); } catch (e) {}
+      var resume = recent.length
+        ? "<ul class='sc-h-rows'>" + recent.slice(0, 4).map(function (r) { return "<li><a href='" + esc(r.u) + "'><b>" + esc(r.t) + "</b><span>افتح من جديد ←</span></a></li>"; }).join("") + "</ul>"
+        : "<p class='sc-h-empty'>لم تستخدم أي حاسبة بعد. ستظهر هنا آخر الحاسبات التي فتحتها لتكمل منها.</p>";
       var html = "<div class='sc-home-root'>" +
         "<section class='sc-h-hero'><div class='sc-h-hero-text'>" +
         "<p class='sc-h-eyebrow'>حاسبات مالية بالجنيه المصري</p>" +
-        "<h1>احسب قبل أن تقرر</h1>" +
-        "<p class='sc-h-lead'>أدوات لحساب ضريبة المرتب وعائد الشهادات وتكلفة التقسيط والقروض وقيمة الذهب. كل أداة تعرض المعادلة المستخدمة وتعمل في متصفحك دون تسجيل.</p>" +
-        "<div class='sc-h-cta'><a class='sc-btn' href='" + tools + "'>تصفّح كل الأدوات</a><a class='sc-btn alt' href='/search'>الأدلة والمقالات</a></div></div>" +
-        "<form class='sc-hq sc-h-quick' onsubmit='return false'><h2>حساب سريع: الخصم</h2><label>السعر قبل الخصم<input id='sc-hq-p' type='number' inputmode='decimal' value='2000' min='0'></label><label>نسبة الخصم %<input id='sc-hq-d' type='number' inputmode='decimal' value='20' min='0' max='100'></label><div class='sc-hq-out'><div><span>تدفع</span><b id='sc-hq-pay'>1,600</b></div><div><span>توفّر</span><b id='sc-hq-sv'>400</b></div></div></form></section>" +
-        "<section class='sc-h-sec'><div class='sc-h-head'><h2>ابدأ من مجالك</h2></div><div class='sc-h-cats'>" +
-        CATS_HOME.map(function (c) { return "<a data-cat='" + c[4] + "' href='" + tl(c[3]) + "'><span class='ico'>" + window.SCI.svg(c[0], 26) + "</span><b>" + c[1] + "</b><small>" + c[2] + "</small></a>"; }).join("") + "</div></section>" +
-        "<section class='sc-h-sec'><div class='sc-h-head'><h2>الحاسبات الأكثر استخداماً</h2><a href='" + tools + "'>كل الأدوات (34)</a></div><ul class='sc-h-list'>" +
-        TOOLS.map(function (t) { return "<li><a href='" + tl(t[3]) + "'><span class='ico'>" + window.SCI.svg(t[0], 22) + "</span><span class='tx'><b>" + esc(t[1]) + "</b><small>" + esc(t[2]) + "</small></span></a></li>"; }).join("") +
+        "<h1>اعرف صافي راتبك وتكلفة قرارك قبل أن توقّع</h1>" +
+        "<p class='sc-h-lead'>أدخل أرقامك فتظهر النتيجة والمعادلة المستخدمة. كل الحسابات تتم داخل متصفحك، دون تسجيل ودون إرسال بياناتك لأحد.</p>" +
+        "<div class='sc-h-cta'><a class='sc-btn' href='" + tools + "'>افتح كل الحاسبات</a><a class='sc-h-link' href='/search'>أو اقرأ الأدلة ←</a></div></div>" +
+        "<form class='sc-h-quick' onsubmit='return false' aria-label='مثال حي: صافي الراتب'><p class='sc-h-qtag'>مثال حي · ضريبة المرتبات</p>" +
+        "<label>الراتب الشهري الإجمالي (جنيه)<input id='sc-hq-g' type='number' inputmode='decimal' value='20000' min='0'></label>" +
+        "<label>التأمينات الاجتماعية الشهرية<input id='sc-hq-i' type='number' inputmode='decimal' value='1100' min='0'></label>" +
+        "<dl class='sc-hq-out'><div><dt>صافي الراتب شهرياً</dt><dd id='sc-hq-net'>—</dd></div><div><dt>الضريبة شهرياً</dt><dd id='sc-hq-tax'>—</dd></div></dl>" +
+        "<p class='sc-h-qnote'>شرائح مصراوي المنشورة بتاريخ 2/8/2026 مع إعفاء شخصي 20 ألف جنيه سنوياً. <a href='" + tl("taxeg") + "'>افتح الحاسبة كاملة ←</a></p></form></section>" +
+        "<section class='sc-h-sec sc-h-split'><div><div class='sc-h-head'><h2>أكمل من حيث توقفت</h2></div>" + resume + "</div>" +
+        "<div><div class='sc-h-head'><h2>كيف تعمل الحاسبات</h2></div><ol class='sc-h-steps'><li><b>أدخل أرقامك</b><span>الراتب أو السعر أو القسط، بما تعرفه أنت.</span></li><li><b>اقرأ المعادلة</b><span>كل حاسبة تشرح كيف وصلت إلى الرقم.</span></li><li><b>قارن وقرر</b><span>استخدم مركز القرار لترتيب خياراتك بأوزانك.</span></li></ol></div></section>" +
+        "<section class='sc-h-sec'><div class='sc-h-head'><h2>الحاسبات حسب المجال</h2><a href='" + tools + "'>كل الأدوات (34)</a></div><div class='sc-h-cats'>" +
+        CATS_HOME.map(function (c) { return "<a data-cat='" + c[4] + "' href='" + tl(c[3]) + "'><span class='ico'>" + window.SCI.svg(c[0], 22) + "</span><b>" + c[1] + "</b><small>" + c[2] + "</small></a>"; }).join("") + "</div></section>" +
+        "<section class='sc-h-sec'><div class='sc-h-head'><h2>الأكثر استخداماً</h2></div><ul class='sc-h-list'>" +
+        TOOLS.map(function (t) { return "<li><a href='" + tl(t[3]) + "'><span class='ico'>" + window.SCI.svg(t[0], 20) + "</span><span class='tx'><b>" + esc(t[1]) + "</b><small>" + esc(t[2]) + "</small></span></a></li>"; }).join("") +
         "</ul></section>" +
+        "<section class='sc-h-sec sc-h-caps'><div class='sc-h-head'><h2>ما نلتزم به</h2></div><div class='sc-h-capgrid'><div><b>المعادلة ظاهرة</b><p>لا أرقام مخفية: ترى كيف حُسبت كل نتيجة.</p></div><div><b>أرقامك تبقى عندك</b><p>تُحسب في متصفحك ولا تُرسل إلى أي جهة.</p></div><div><b>مصدر وتاريخ لكل رقم مرجعي</b><p>وما لا نملك له مصدراً موثوقاً تُدخله أنت بدل أن نخمّنه.</p></div></div></section>" +
         "<section class='sc-h-sec'><div class='sc-h-head'><h2>أحدث الأدلة</h2><a href='/search'>كل المقالات</a></div><div class='sc-cards sc-latest-posts sc-h-posts'></div></section>" +
         "<section class='sc-h-sec sc-faq'><div class='sc-h-head'><h2>أسئلة شائعة</h2></div>" +
         FAQ.map(function (q) { return "<details><summary>" + q[0] + "</summary><p>" + q[1] + "</p></details>"; }).join("") + "</section>" +
-        "<section class='sc-h-note'><p>تُحسب النتائج داخل متصفحك ولا تُرسل إلى أي جهة. الأسعار المرجعية تُعرض مع مصدرها وتوقيتها، وما لا نملك له مصدراً موثوقاً تُدخله أنت. <a href='" + by("سياسة المحتوى") + "'>سياسة المحتوى والتحرير</a></p></section></div>";
+        "<section class='sc-h-note'><p>النتائج تقديرية بناءً على ما تدخله، وليست نصيحة مالية. <a href='" + by("سياسة المحتوى") + "'>سياسة المحتوى والتحرير</a></p></section></div>";
       var wrap = document.createElement("div"); wrap.innerHTML = html; host.appendChild(wrap.firstChild);
       document.documentElement.classList.add("sc-home-ready");
-      (function () { var p = document.getElementById("sc-hq-p"), d = document.getElementById("sc-hq-d"); if (!p || !d) return; var f = new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 });
-        function up() { var a = parseFloat(p.value), r = parseFloat(d.value); var pay = document.getElementById("sc-hq-pay"), sv = document.getElementById("sc-hq-sv"); if (!(a >= 0) || !(r >= 0) || r > 100) { pay.textContent = "—"; sv.textContent = "—"; return; } var s = a * r / 100; pay.textContent = f.format(a - s); sv.textContent = f.format(s); }
-        p.addEventListener("input", up); d.addEventListener("input", up); })();
+      (function () {
+        var g = document.getElementById("sc-hq-g"), n = document.getElementById("sc-hq-i"); if (!g || !n) return;
+        var f = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+        var B = [[40000, 0], [55000, 0.10], [70000, 0.15], [200000, 0.20], [400000, 0.225], [1200000, 0.25], [Infinity, 0.275]];
+        function up() {
+          var gv = parseFloat(g.value), iv = parseFloat(n.value) || 0, net = document.getElementById("sc-hq-net"), tx = document.getElementById("sc-hq-tax");
+          if (!(gv > 0) || iv < 0 || iv > gv) { net.textContent = "—"; tx.textContent = "—"; return; }
+          var taxable = Math.max(0, (gv - iv) * 12 - 20000), tax = 0, prev = 0;
+          B.forEach(function (x) { if (taxable > prev) tax += (Math.min(taxable, x[0]) - prev) * x[1]; prev = x[0]; });
+          net.textContent = f.format(gv - iv - tax / 12); tx.textContent = f.format(tax / 12);
+        }
+        g.addEventListener("input", up); n.addEventListener("input", up); up();
+      })();
       if (window.__scFillLatest) window.__scFillLatest();
     }).catch(function () {});
   }
@@ -902,6 +923,18 @@
     else build();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
+})();
+
+/* Smart Choice — تذكّر آخر الحاسبات المفتوحة (محلياً في المتصفح فقط) */
+(function () {
+  "use strict";
+  try {
+    if (!document.querySelector(".sc-toolpage")) return;
+    var h1 = document.querySelector(".sc-toolpage .sc-tool-card h2, .sc-toolpage h1"); if (!h1) return;
+    var t = h1.textContent.trim(), u = location.pathname, list = JSON.parse(localStorage.getItem("sc-recent") || "[]");
+    list = list.filter(function (x) { return x.u !== u; }); list.unshift({ t: t, u: u });
+    localStorage.setItem("sc-recent", JSON.stringify(list.slice(0, 6)));
+  } catch (e) {}
 })();
 
 /* Smart Choice — لوحة الإدارة (للمالك). تعرض بيانات عامة غير سرية فقط: زيارات Blogger الحقيقية، الفحص الفني، جاهزية AdSense،
@@ -1246,9 +1279,9 @@
 
 /* Smart Choice — الوضع الداكن (يُحفظ لكل جهاز، ويتبع إعداد الجهاز افتراضياً) */
 (function () {
-  var K = "sc-theme-v2", cur = null;
+  var K = "sc-theme-v3", cur = null;
   try { cur = localStorage.getItem(K); } catch (e) {}
-  if (!cur) cur = "dark";
+  if (!cur) cur = "light";
   function apply(t) { document.documentElement.setAttribute("data-sc-theme", t); var b = document.querySelector(".sc-theme"); if (b) { b.innerHTML = window.SCI.svg(t === "dark" ? "sun" : "moon", 20); b.setAttribute("aria-label", t === "dark" ? "التبديل إلى الوضع الفاتح" : "التبديل إلى الوضع الداكن"); b.title = b.getAttribute("aria-label"); } }
   apply(cur);
   function add() {

@@ -1,6 +1,6 @@
 # حالة المشروع (تُولَّد تلقائياً — لا تعدّل يدوياً)
 
-> آخر توليد: 2026-11-12 22:32 UTC بواسطة scripts/update_status.py. للتفاصيل الثابتة والقرارات: docs/HANDOFF.md.
+> آخر توليد: 2026-11-12 22:42 UTC بواسطة scripts/update_status.py. للتفاصيل الثابتة والقرارات: docs/HANDOFF.md.
 
 ## الأرقام
 - مقالات: 21 (متوسط الكلمات 688)
@@ -29,6 +29,10 @@
 auto-posts.yml، blogger-cleanup.yml، blogger-pages-sync.yml، blogger-sync.yml، content-bundle.yml، frontend-assets.yml، live-e2e.yml، quality-audit.yml، rates.yml، site-review.yml، site-stats.yml، status-doc.yml، theme-validation.yml
 
 ## آخر الكوميتات
+- 3633a71 2026-11-13 tools hub visible guide text; admin checklist alignment
+- 581360a 2026-11-12 chore(smart-choice): update Blogger pages sync state [skip ci]
+- b1c6777 2026-11-12 chore: quality audit reports [skip ci]
+- 6163107 2026-11-12 docs: auto-update STATUS.md [skip ci]
 - 2d61655 2026-11-13 content: original guides for all 31 tool pages + compare/decide/sitemap text (AdSense thin-content fix)
 - f3a6679 2026-11-12 chore: visitor stats [skip ci]
 - 8a0d944 2026-11-12 chore: visitor stats [skip ci]
@@ -37,7 +41,3 @@ auto-posts.yml، blogger-cleanup.yml، blogger-pages-sync.yml، blogger-sync.yml
 - 13b5684 2026-11-12 docs: auto-update STATUS.md [skip ci]
 - 048b371 2026-11-12 chore: visitor stats [skip ci]
 - 17b7027 2026-11-12 chore(smart-choice): update Blogger sync state [skip ci]
-- d37e40b 2026-11-12 chore: reference FX rates [skip ci]
-- ad5ce83 2026-11-12 docs: auto-update STATUS.md [skip ci]
-- 6e4eafc 2026-11-12 docs: refresh HANDOFF, add auto-updating STATUS.md + workflow
-- ebbb40c 2026-11-12 chore: visitor stats [skip ci]

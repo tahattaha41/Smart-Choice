@@ -1,6 +1,6 @@
 # حالة المشروع (تُولَّد تلقائياً — لا تعدّل يدوياً)
 
-> آخر توليد: 2026-11-12 09:40 UTC بواسطة scripts/update_status.py. للتفاصيل الثابتة والقرارات: docs/HANDOFF.md.
+> آخر توليد: 2026-11-12 13:44 UTC بواسطة scripts/update_status.py. للتفاصيل الثابتة والقرارات: docs/HANDOFF.md.
 
 ## الأرقام
 - مقالات: 21 (متوسط الكلمات 688)
@@ -29,6 +29,10 @@
 auto-posts.yml، blogger-cleanup.yml، blogger-pages-sync.yml، blogger-sync.yml، content-bundle.yml، frontend-assets.yml، live-e2e.yml، quality-audit.yml، rates.yml، site-review.yml، site-stats.yml، status-doc.yml، theme-validation.yml
 
 ## آخر الكوميتات
+- 048b371 2026-11-12 chore: visitor stats [skip ci]
+- 17b7027 2026-11-12 chore(smart-choice): update Blogger sync state [skip ci]
+- d37e40b 2026-11-12 chore: reference FX rates [skip ci]
+- ad5ce83 2026-11-12 docs: auto-update STATUS.md [skip ci]
 - 6e4eafc 2026-11-12 docs: refresh HANDOFF, add auto-updating STATUS.md + workflow
 - ebbb40c 2026-11-12 chore: visitor stats [skip ci]
 - 986ccd9 2026-11-12 chore(smart-choice): update Blogger sync state [skip ci]
@@ -37,7 +41,3 @@ auto-posts.yml، blogger-cleanup.yml، blogger-pages-sync.yml، blogger-sync.yml
 - 507e1e0 2026-11-12 chore(smart-choice): update Blogger sync state [skip ci]
 - 5bbb706 2026-11-12 chore: reference FX rates [skip ci]
 - a0f2de0 2026-11-11 chore: visitor stats [skip ci]
-- ed3c9fe 2026-11-11 chore: visitor stats [skip ci]
-- 8a1e60a 2026-11-11 chore(smart-choice): update Blogger sync state [skip ci]
-- 347c008 2026-11-11 chore: reference FX rates [skip ci]
-- 09606d3 2026-11-11 remove 'resume' section from home (misread of user instruction)

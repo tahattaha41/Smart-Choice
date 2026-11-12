@@ -1,6 +1,6 @@
 # حالة المشروع (تُولَّد تلقائياً — لا تعدّل يدوياً)
 
-> آخر توليد: 2026-11-12 22:45 UTC بواسطة scripts/update_status.py. للتفاصيل الثابتة والقرارات: docs/HANDOFF.md.
+> آخر توليد: 2026-11-12 22:48 UTC بواسطة scripts/update_status.py. للتفاصيل الثابتة والقرارات: docs/HANDOFF.md.
 
 ## الأرقام
 - مقالات: 21 (متوسط الكلمات 688)
@@ -29,6 +29,9 @@
 auto-posts.yml، blogger-cleanup.yml، blogger-pages-sync.yml، blogger-sync.yml، content-bundle.yml، frontend-assets.yml، live-e2e.yml، quality-audit.yml، rates.yml، site-review.yml، site-stats.yml، status-doc.yml، theme-validation.yml
 
 ## آخر الكوميتات
+- 5efd4f5 2026-11-13 feat: fetch silver too, once per ~20h to protect GoldAPI quota
+- dd77727 2026-11-12 chore: reference FX rates [skip ci]
+- 61dcbe9 2026-11-12 docs: auto-update STATUS.md [skip ci]
 - 8d15e82 2026-11-13 feat: reference gold price via GoldAPI.io (GOLD_API_KEY secret), shown on gold tool when fresh
 - 38e3343 2026-11-12 chore: quality audit reports [skip ci]
 - e7f9dbf 2026-11-12 chore: update content bundle [skip ci]
@@ -38,6 +41,3 @@ auto-posts.yml، blogger-cleanup.yml، blogger-pages-sync.yml، blogger-sync.yml
 - 581360a 2026-11-12 chore(smart-choice): update Blogger pages sync state [skip ci]
 - b1c6777 2026-11-12 chore: quality audit reports [skip ci]
 - 6163107 2026-11-12 docs: auto-update STATUS.md [skip ci]
-- 2d61655 2026-11-13 content: original guides for all 31 tool pages + compare/decide/sitemap text (AdSense thin-content fix)
-- f3a6679 2026-11-12 chore: visitor stats [skip ci]
-- 8a0d944 2026-11-12 chore: visitor stats [skip ci]

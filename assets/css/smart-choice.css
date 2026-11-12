@@ -183,6 +183,8 @@ html body .sc-share-bar button,html body .sc-share-bar a,html body .sc-tool-resu
 html body .sc-share-bar button:hover{border-color:var(--brand)}
 html body .sc-relrow a{display:inline-block;margin:2px 4px 2px 0;padding:3px 12px;border:1px solid var(--line);border-radius:999px;font-size:14px}
 html body .sc-prose p,html body .sc-prose li{font-size:16.5px}
+html body .sc-guide h2{font-size:21px;margin:26px 0 8px;padding-top:14px;border-top:1px solid var(--line)}html body .sc-guide h2:first-child{margin-top:0;border-top:0;padding-top:0}
+html body .sc-guide h3{font-size:17px;margin:16px 0 4px}html body .sc-guide table{width:100%;border-collapse:collapse;font-size:15px;display:block;overflow-x:auto}html body .sc-guide th,html body .sc-guide td{border:1px solid var(--line);padding:7px 10px;text-align:start}html body .sc-guide th{background:var(--soft)}
 html body .sc-offers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
 html body .sc-offer{display:flex;gap:10px;padding:10px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);color:var(--ink)}
 html body .sc-ad-tag{font-size:12px;color:var(--muted)}

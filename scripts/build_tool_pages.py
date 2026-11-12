@@ -30,6 +30,10 @@ for k in names:
     p = path_of(SPECIAL.get(k) or ("tool-%s.md" % k))
     if p: urls[k] = p
 (ROOT / "assets/content/tool-urls.json").write_text(json.dumps(urls, ensure_ascii=False, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+def guide_html(k):
+    g = ROOT / ("content/tool-guides/%s.html" % k)
+    if not g.exists(): return ""
+    return '<article class="sc-tool-card sc-prose sc-guide">\n' + g.read_text(encoding="utf-8").strip() + "\n</article>\n"
 hub = path_of("tools.md") or "/p/tools.html"
 n = 0
 for k, sec in secs.items():
@@ -42,8 +46,9 @@ for k, sec in secs.items():
             '<div class="sc-page sc-toolpage" dir="rtl" lang="ar">\n'
             '<nav class="sc-crumbs" aria-label="مسار التصفح"><a href="/">الرئيسية</a> › <a href="%s">الأدوات</a> › <span>%s</span></nav>\n'
             "%s\n"
+            "%s"
             '<section class="sc-tool-card sc-prose"><h2>أدوات ذات صلة</h2><p class="sc-relrow">%s</p><p><a href="%s">عرض كل الأدوات ←</a></p></section>\n'
-            "</div>\n") % (name, hub, name, s, links, hub)
+            "</div>\n") % (name, hub, name, s, guide_html(k), links, hub)
     out = ROOT / ("pages/tool-%s.md" % k)
     if not out.exists() or out.read_text(encoding="utf-8") != page:
         out.write_text(page, encoding="utf-8"); n += 1

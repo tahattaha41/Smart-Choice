@@ -29,6 +29,7 @@
 auto-posts.yml، blogger-cleanup.yml، blogger-pages-sync.yml، blogger-sync.yml، content-bundle.yml، frontend-assets.yml، live-e2e.yml، quality-audit.yml، rates.yml، site-review.yml، site-stats.yml، status-doc.yml، theme-validation.yml
 
 ## آخر الكوميتات
+- 6e4eafc 2026-11-12 docs: refresh HANDOFF, add auto-updating STATUS.md + workflow
 - ebbb40c 2026-11-12 chore: visitor stats [skip ci]
 - 986ccd9 2026-11-12 chore(smart-choice): update Blogger sync state [skip ci]
 - d66cbeb 2026-11-12 chore: reference FX rates [skip ci]
@@ -40,4 +41,3 @@ auto-posts.yml، blogger-cleanup.yml، blogger-pages-sync.yml، blogger-sync.yml
 - 8a1e60a 2026-11-11 chore(smart-choice): update Blogger sync state [skip ci]
 - 347c008 2026-11-11 chore: reference FX rates [skip ci]
 - 09606d3 2026-11-11 remove 'resume' section from home (misread of user instruction)
-- 2fe07a4 2026-11-11 home redesign inspired by workspace-dashboard/launch-page briefs: paper/navy/cobalt, live salary example, resume section

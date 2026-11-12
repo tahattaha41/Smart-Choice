@@ -1059,7 +1059,7 @@
   }
   function tabTech(root) {
     var e = D.e2e || [], fails = e.filter(function (x) { return x.lvl === "FAIL"; });
-    var c = panel("الفحص الفني للموقع الحي", "يعمل تلقائياً يومياً وعند كل تعديل");
+    var c = panel("الفحص الفني للموقع الحي", "يعمل تلقائياً يومياً وبالطلب");
     c.appendChild(el("p", fails.length ? "adm-bad" : "adm-ok", e.length ? (fails.length ? fails.length + " فحص فاشل" : "كل الفحوصات ناجحة ✓") : "لا يوجد تقرير بعد"));
     if (fails.length) { var ul = el("ul", "adm-list"); fails.forEach(function (x) { ul.appendChild(el("li", null, "✗ " + x.msg)); }); c.appendChild(ul); }
     var det = el("details"); det.appendChild(el("summary", null, "عرض كل الفحوصات (" + e.length + ")")); det.appendChild(table(["الحالة", "الفحص"], e.map(function (x) { return [badge(x.lvl === "OK" ? "ناجح" : (x.lvl === "WARN" ? "تنبيه" : "فاشل"), x.lvl === "OK" ? "good" : (x.lvl === "WARN" ? "warn" : "bad")), x.msg.length > 140 ? x.msg.slice(0, 140) + "…" : x.msg]; }))); c.appendChild(det);

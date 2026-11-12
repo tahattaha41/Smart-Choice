@@ -277,6 +277,17 @@
         box.addEventListener("click",e=>{const b=e.target.closest("[data-fx]"); if(!b)return; const i=$("sc-fx-rate"); i.value=b.getAttribute("data-fx"); i.dispatchEvent(new Event("input",{bubbles:true}));});
       }).catch(()=>{});
     }
+    function goldRef() {
+      const sec=$("sc-gold"); if(!sec||sec.dataset.ref)return; sec.dataset.ref="1";
+      fetch("https://raw.githubusercontent.com/tahattaha41/Smart-Choice/main/assets/content/rates.json?t="+Math.floor(Date.now()/900000),{credentials:"omit"}).then(r=>r.ok?r.json():null).then(d=>{
+        const g=d&&d.gold; if(!g||!g.egp_gram||!g.updated||Date.now()/1000-g.updated>86400)return;
+        const box=document.createElement("div"); box.className="sc-muted sc-fx-ref";
+        const when=new Date(g.updated*1000).toLocaleString("ar-EG",{dateStyle:"medium",timeStyle:"short"});
+        box.innerHTML="<b>سعر مرجعي للجرام</b> ("+g.source+"، آخر تحديث "+when+"): <button type='button' class='sc-chipbtn' data-g='"+g.egp_gram["21"]+"'>عيار 21 ≈ "+fmt(g.egp_gram["21"])+"</button> عيار 24 ≈ "+fmt(g.egp_gram["24"])+" — عيار 18 ≈ "+fmt(g.egp_gram["18"])+". سعر عالمي محوّل للجنيه؛ سعر محلات الصاغة قد يختلف ويشمل المصنعية.";
+        const h=sec.querySelector("p.sc-muted")||sec.querySelector("h2,h3"); if(h)h.after(box); else sec.prepend(box);
+        box.addEventListener("click",e=>{const b=e.target.closest("[data-g]"); if(!b)return; const i=$("sc-gd-p21"); i.value=b.getAttribute("data-g"); i.dispatchEvent(new Event("input",{bubbles:true}));});
+      }).catch(()=>{});
+    }
     function assistant() {
       const box=$("sc-ask"), out=$("sc-assistant-result"), openp=$("sc-assistant-open"); if(!box||!out)return;
       const raw=box.value.trim(); if(!raw){out.textContent="اكتب سؤالك أولاً.";return;}
@@ -662,7 +673,7 @@
       const sec=root.querySelector("#sc-"+tab); if(sec&&sec.scrollIntoView) setTimeout(()=>{ const y=sec.getBoundingClientRect().top+window.pageYOffset-80; window.scrollTo({top:y,behavior:"smooth"}); },30);
       try { history.replaceState(null, "", "#" + tab); } catch (e) {}
     }));
-    discount(); budget(); unit(); percent(); saving(); total(); installment(); convert(); dates(); vat(); compare(); decide(); loan(); margin(); split(); compound(); breakeven(); hourly(); trip(); fx(); bmi(); age(); zakat(); grade(); wordcount(); genPassword(); calories(); speed(); roi(); inflation(); stack(); effrate(); sub(); rule72(); cashback(); payoff(); taxeg(); bankdep(); gold(); rental(); appl(); fxRates(); shareBars(); loancompare(); decorateAll();
+    discount(); budget(); unit(); percent(); saving(); total(); installment(); convert(); dates(); vat(); compare(); decide(); loan(); margin(); split(); compound(); breakeven(); hourly(); trip(); fx(); bmi(); age(); zakat(); grade(); wordcount(); genPassword(); calories(); speed(); roi(); inflation(); stack(); effrate(); sub(); rule72(); cashback(); payoff(); taxeg(); bankdep(); gold(); rental(); appl(); fxRates(); goldRef(); shareBars(); loancompare(); decorateAll();
     const fromHash=(location.hash||"").replace("#",""), hp=fromHash.split("?"); if(hp[0]) showTab(hp[0]); if(hp[1]&&hp[0]){ try { new URLSearchParams(hp[1]).forEach(function (v, k) { const el=$(k), host=$("sc-"+hp[0]); if(el&&host&&host.contains(el)&&el.tagName!=="BUTTON"&&v.length<60){ el.value=v; el.dispatchEvent(new Event("input",{bubbles:true})); el.dispatchEvent(new Event("change",{bubbles:true})); } }); } catch (e) {} }
   }
   function start() {

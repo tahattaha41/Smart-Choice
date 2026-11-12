@@ -21,6 +21,8 @@ jobs:
         with:
           python-version: "3.12"
       - run: python scripts/update_rates.py
+        env:
+          GOLD_API_KEY: ${{ secrets.GOLD_API_KEY }}
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"

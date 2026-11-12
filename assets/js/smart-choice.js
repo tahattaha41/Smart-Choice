@@ -280,7 +280,7 @@
     function goldRef() {
       const sec=$("sc-gold"); if(!sec||sec.dataset.ref)return; sec.dataset.ref="1";
       fetch("https://raw.githubusercontent.com/tahattaha41/Smart-Choice/main/assets/content/rates.json?t="+Math.floor(Date.now()/900000),{credentials:"omit"}).then(r=>r.ok?r.json():null).then(d=>{
-        const g=d&&d.gold; if(!g||!g.egp_gram||!g.updated||Date.now()/1000-g.updated>86400)return;
+        const g=d&&d.gold; if(!g||!g.egp_gram||!g.updated||Date.now()/1000-g.updated>129600)return;
         const box=document.createElement("div"); box.className="sc-muted sc-fx-ref";
         const when=new Date(g.updated*1000).toLocaleString("ar-EG",{dateStyle:"medium",timeStyle:"short"});
         box.innerHTML="<b>سعر مرجعي للجرام</b> ("+g.source+"، آخر تحديث "+when+"): <button type='button' class='sc-chipbtn' data-g='"+g.egp_gram["21"]+"'>عيار 21 ≈ "+fmt(g.egp_gram["21"])+"</button> عيار 24 ≈ "+fmt(g.egp_gram["24"])+" — عيار 18 ≈ "+fmt(g.egp_gram["18"])+". سعر عالمي محوّل للجنيه؛ سعر محلات الصاغة قد يختلف ويشمل المصنعية.";

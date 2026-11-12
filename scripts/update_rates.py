@@ -31,14 +31,20 @@ try:
 except Exception as e:
     errors.append("FX %s: %s" % (e.__class__.__name__, str(e)[:200]))
 
-# --- الذهب ---
+# --- المعادن (GoldAPI.io): مرة كل ~20 ساعة لتوفير حصة الخطة المجانية (~100 طلب/شهر) ---
 key = os.environ.get("GOLD_API_KEY", "").strip()
+def gapi(sym):
+    req = urllib.request.Request("https://www.goldapi.io/api/%s/EGP" % sym, headers={"x-access-token": key, "Content-Type": "application/json", "User-Agent": "smart-choice-rates"})
+    return json.load(urllib.request.urlopen(req, timeout=30))
+def fresh(blk):
+    return blk and time.time() - blk.get("fetched", 0) < 20 * 3600
 if not key:
     errors.append("GOLD: السر GOLD_API_KEY غير متاح")
+elif fresh(data.get("gold")) and fresh(data.get("silver")):
+    print("metals fresh, skip")
 else:
     try:
-        req = urllib.request.Request("https://www.goldapi.io/api/XAU/EGP", headers={"x-access-token": key, "Content-Type": "application/json", "User-Agent": "smart-choice-rates"})
-        g = json.load(urllib.request.urlopen(req, timeout=30))
+        g = gapi("XAU")
         p24 = g.get("price_gram_24k"); p21 = g.get("price_gram_21k"); p18 = g.get("price_gram_18k")
         if not p21 and p24: p21 = p24 * 21 / 24
         if not p18 and p24: p18 = p24 * 18 / 24
@@ -53,8 +59,18 @@ else:
                         "egp_gram": {"24": round(p24, 2), "21": round(p21, 2), "18": round(p18, 2)}}
         print("gold ok", data["gold"]["egp_gram"])
     except Exception as e:
-        code = getattr(e, "code", "")
-        errors.append("GOLD %s %s: %s" % (e.__class__.__name__, code, str(e)[:200]))
+        errors.append("GOLD %s %s: %s" % (e.__class__.__name__, getattr(e, "code", ""), str(e)[:200]))
+    try:
+        s_ = gapi("XAG")
+        pg = s_.get("price_gram_24k") or (s_.get("price") or 0) / 31.1035
+        ts = int(s_.get("timestamp") or 0)
+        if not (5 < pg < 10000) or not ts or abs(time.time() - ts) > 86400:
+            raise RuntimeError("implausible silver %s ts=%s" % (pg, ts))
+        data["silver"] = {"source": "GoldAPI.io", "note": "سعر مرجعي عالمي للفضة الخالصة محوّل للجنيه", "updated": ts, "fetched": int(time.time()),
+                          "egp_gram": {"999": round(pg, 2), "925": round(pg * 0.925, 2)}}
+        print("silver ok", data["silver"]["egp_gram"])
+    except Exception as e:
+        errors.append("SILVER %s %s: %s" % (e.__class__.__name__, getattr(e, "code", ""), str(e)[:200]))
 
 OUT.parent.mkdir(parents=True, exist_ok=True)
 OUT.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")

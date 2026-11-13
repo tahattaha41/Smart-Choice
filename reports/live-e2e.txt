@@ -1,29 +1,51 @@
 OK    Home loads
 OK    Home shows hero
 OK    Design v4 live: hero calculator present (if FAIL: new JS not loading)
-INFO  Home style probe: font="IBM Plex Sans Arabic", Tajawal, "Segoe  | button=rgb(15, 118, 110)
+INFO  Home style probe: font=Tajawal, "Segoe UI", Tahoma, Arial, sans | button=rgb(36, 87, 245)
 OK    Installed theme has the GitHub loader (if FAIL: upload theme/smart-choice-blogger.xml once)
 OK    CDN serves latest front-end JS (self-heal present)
-OK    Nav has no old-brand pages: الرئيسية مقارنة سعر الوحدة مقارنة عرضي تمويل مقارنة سعر الوحدة مقارنة عرضي تمويل تكلفة تشغيل جهاز كهربائي تكلفة الرحلة ق
+OK    Nav has no old-brand pages:  الرئيسيةالأدواتمن نحناتصل بناشروط الاستخدام 
 OK    ads.txt يحتوي معرّف الناشر
-FAIL  Tools page loads
-FAIL  Tools: NO tool section rendered (page is interface only)
-FAIL  Tools: discount input missing
-FAIL  Hub: icons carry page links (0)
-FAIL  About: not in feed
-FAIL  Contact: not in feed
-FAIL  Privacy: not in feed
-FAIL  Terms: not in feed
-FAIL  Decision page: not in feed
+INFO  Pages feed entries: 68
+OK    Tools page loads
+OK    Hub: assistant visible
+OK    Hub: icon buttons (34)
+OK    Hub: icons carry page links (33)
+OK    Design font Tajawal loaded
+FAIL  Hub: assistant answers -> السعر بعد الخصم: ١٬٣٥٠ — قيمة التوفير: ٤٥٠ (الأداة: حاسبة ال
+OK    Discount tool page loads
+OK    Discount tool visible on its own page
+OK    Discount calculator works -> السعر بعد الخصم ١٬٦٠٠ قيمة التوفير ٤٠٠
+OK    Gold tool page loads
+OK    Gold reference line shown: سعر مرجعي للجرام (GoldAPI.io، آخر تحديث ١٢‏/١١‏/٢٠٢٦، ١٠:٤٨ م): عيار 21 ≈ ٥٬٨٢٣٫٦٤ عيار 24
+OK    Tool page opens with its tool visible: taxeg
+OK    Tool page guide text words (taxeg): 664
+OK    Tool page opens with its tool visible: percent
+OK    Tool page guide text words (percent): 480
+OK    About loads
+OK    About: body text length 1258
+OK    Contact loads
+OK    Contact: body text length 787
+OK    Contact shows email
+OK    Privacy loads
+OK    Privacy: body text length 2162
+OK    Terms loads
+OK    Terms: body text length 1131
+OK    Decision page loads
+OK    Decision page: body text length 2360
 OK    Compare page loads
-OK    Compare page: body text length 589
-FAIL  Editorial page: not in feed
-FAIL  Admin page: not in feed
+OK    Compare page: body text length 3095
+OK    Editorial page loads
+OK    Editorial page: body text length 978
+OK    Admin page loads
+OK    Admin page: body text length 185
+OK    Admin: password gate shown and no data exposed before login
 OK    Posts in feed: 20
 OK    Latest post body length 4367
 OK    No JS errors
-FAIL  Mobile: home?m=1 loads
-FAIL  Mobile: home content length 0
-FAIL  Mobile: tools?m=1 loads
-FAIL  Mobile: tools NOT rendered
-failed=15
+OK    Mobile: home?m=1 loads
+OK    Mobile: home content length 3008
+OK    Mobile: tools?m=1 loads
+OK    Mobile: tools hub rendered
+OK    Mobile: about content length 1265
+failed=1

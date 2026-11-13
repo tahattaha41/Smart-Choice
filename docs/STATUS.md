@@ -1,6 +1,6 @@
 # حالة المشروع (تُولَّد تلقائياً — لا تعدّل يدوياً)
 
-> آخر توليد: 2026-11-13 06:13 UTC بواسطة scripts/update_status.py. للتفاصيل الثابتة والقرارات: docs/HANDOFF.md.
+> آخر توليد: 2026-11-13 06:35 UTC بواسطة scripts/update_status.py. للتفاصيل الثابتة والقرارات: docs/HANDOFF.md.
 
 ## الأرقام
 - مقالات: 21 (متوسط الكلمات 688)
@@ -19,6 +19,7 @@
 auto-posts.yml، blogger-cleanup.yml، blogger-pages-sync.yml، blogger-sync.yml، content-bundle.yml، frontend-assets.yml، live-e2e.yml، quality-audit.yml، rates.yml، site-review.yml، site-stats.yml، status-doc.yml، theme-validation.yml
 
 ## آخر الكوميتات
+- 5bd0d1c 2026-11-13 docs: auto-update STATUS.md [skip ci]
 - a44c9fb 2026-11-13 docs: handoff - live e2e failed=0, duplicate pages removed
 - b47d126 2026-11-13 chore: live browser test report [skip ci]
 - d2e7fea 2026-11-13 chore: Blogger inventory report [skip ci]
@@ -30,4 +31,3 @@ auto-posts.yml، blogger-cleanup.yml، blogger-pages-sync.yml، blogger-sync.yml
 - 92957f8 2026-11-13 fix: live e2e report commit + hub-aware checks; load Tajawal font matching CSS
 - 92f618e 2026-11-13 docs: auto-update STATUS.md [skip ci]
 - cb8a17f 2026-11-13 chore(smart-choice): update Blogger sync state [skip ci]
-- a664db8 2026-11-13 chore: visitor stats [skip ci]

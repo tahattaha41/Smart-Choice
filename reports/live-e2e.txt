@@ -5,7 +5,7 @@ INFO  Home style probe: font=Tajawal, "Segoe UI", Tahoma, Arial, sans | button=r
 OK    Installed theme has the GitHub loader (if FAIL: upload theme/smart-choice-blogger.xml once)
 OK    CDN serves latest front-end JS (self-heal present)
 OK    Nav has no old-brand pages: الرئيسيةالأدوات الذكيةالمقالاتأسعار اليوممقارنة المنتجاتمركز القرار
-WARN  ads.txt غير مفعّل بعد في إعدادات بلوجر
+OK    ads.txt يحتوي معرّف الناشر
 INFO  Pages feed entries: 43
 OK    Tools page loads
 OK    Hub: assistant visible
@@ -17,11 +17,11 @@ OK    Discount tool page loads
 OK    Discount tool visible on its own page
 OK    Discount calculator works -> السعر بعد الخصم ١٬٦٠٠ قيمة التوفير ٤٠٠
 OK    Gold tool page loads
-OK    Gold reference line shown: سعر مرجعي للجرام (xaus.com، آخر تحديث ١٣‏/١١‏/٢٠٢٦، ١٢:٠٥ م): عيار 21 ≈ ٥٬٨٦٠٫٦ عيار 24 ≈ 
+OK    Gold reference line shown: سعر مرجعي للجرام (xaus.com، آخر تحديث ١٣‏/١١‏/٢٠٢٦، ١:٠٩ م): عيار 21 ≈ ٥٬٨٥٦٫٠٦ عيار 24 ≈ 
 OK    Rates page loads
 OK    Rates board cards: 15 (عملات + ذهب + فضة؛ أقل من 8 = بيانات قديمة أو مصدر متوقف)
 OK    Rates board has no NaN/undefined
-INFO  Rates board meta: تتجدد تلقائياً | آخر فحص للمصادر: ١٣‏/١١‏/٢٠٢٦، ١٢:٠٦ م
+INFO  Rates board meta: تتجدد تلقائياً | آخر فحص للمصادر: ١٣‏/١١‏/٢٠٢٦، ١:١٠ م
 OK    Tool page opens with its tool visible: taxeg
 OK    Tool page guide text words (taxeg): 660
 OK    Tool page opens with its tool visible: percent

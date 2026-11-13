@@ -4,15 +4,15 @@ OK    Design v4 live: hero calculator present (if FAIL: new JS not loading)
 INFO  Home style probe: font=Tajawal, "Segoe UI", Tahoma, Arial, sans | button=rgb(36, 87, 245)
 OK    Installed theme has the GitHub loader (if FAIL: upload theme/smart-choice-blogger.xml once)
 OK    CDN serves latest front-end JS (self-heal present)
-OK    Nav has no old-brand pages:  الرئيسيةالأدواتمن نحناتصل بناشروط الاستخدام 
+OK    Nav has no old-brand pages: الرئيسيةالأدوات الذكيةالمقالاتمقارنة المنتجاتمركز القرارمن نحنسياسة المحتوى والتحريرإعلن معنااتصل بناخريطة الموقعسياسة ا
 OK    ads.txt يحتوي معرّف الناشر
-INFO  Pages feed entries: 68
+INFO  Pages feed entries: 42
 OK    Tools page loads
 OK    Hub: assistant visible
 OK    Hub: icon buttons (34)
 OK    Hub: icons carry page links (33)
 OK    Design font Tajawal loaded
-FAIL  Hub: assistant answers -> السعر بعد الخصم: ١٬٣٥٠ — قيمة التوفير: ٤٥٠ (الأداة: حاسبة ال
+OK    Hub: assistant answers -> السعر بعد الخصم: ١٬٣٥٠ — قيمة التوفير: ٤٥٠ (الأداة: حاسبة ال
 OK    Discount tool page loads
 OK    Discount tool visible on its own page
 OK    Discount calculator works -> السعر بعد الخصم ١٬٦٠٠ قيمة التوفير ٤٠٠
@@ -48,4 +48,4 @@ OK    Mobile: home content length 3008
 OK    Mobile: tools?m=1 loads
 OK    Mobile: tools hub rendered
 OK    Mobile: about content length 1265
-failed=1
+failed=0

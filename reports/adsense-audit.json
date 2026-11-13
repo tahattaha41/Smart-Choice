@@ -1,5 +1,5 @@
 {
- "score": 100,
+ "score": 94,
  "posts": 20,
  "avg_words": 722,
  "checks": [
@@ -96,6 +96,24 @@
   {
    "level": "pass",
    "title": "Google Analytics مثبت",
+   "detail": "",
+   "fix": ""
+  },
+  {
+   "level": "fail",
+   "title": "ملف ads.txt",
+   "detail": "غير متاح/خاطئ (حالة 429).",
+   "fix": "Blogger › الإعدادات › الأرباح › ads.txt مخصص، والصق: google.com, pub-1235197294708204, DIRECT, f08c47fec0942fa0"
+  },
+  {
+   "level": "pass",
+   "title": "robots.txt متاح",
+   "detail": "",
+   "fix": ""
+  },
+  {
+   "level": "pass",
+   "title": "sitemap.xml متاح",
    "detail": "",
    "fix": ""
   }

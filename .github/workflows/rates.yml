@@ -1,8 +1,8 @@
-name: Smart Choice | Reference FX rates
+name: Smart Choice | Live reference rates (FX, gold, silver)
 
 on:
   schedule:
-    - cron: "15 */6 * * *"
+    - cron: "7 * * * *"
   workflow_dispatch:
 
 permissions:

@@ -58,6 +58,10 @@ try:
     h = (time.time() - r["updated"]) / 3600
     if h > 36: problems.append("أسعار العملات قديمة (%.0f ساعة) وتختفي من الموقع بعد 48" % h); dispatch("rates.yml", "الأسعار قديمة")
     else: ok.append("أسعار العملات محدّثة")
+    for k, label in (("gold", "الذهب"), ("silver", "الفضة")):
+        fh = (time.time() - (r.get(k) or {}).get("fetched", 0)) / 3600
+        if fh > 12: problems.append("أسعار %s لم تتجدد منذ %.0f ساعة (تُخفى من الموقع بعد 36)" % (label, fh)); dispatch("rates.yml", "أسعار المعادن قديمة")
+        else: ok.append("أسعار %s محدّثة" % label)
 except Exception: dispatch("rates.yml", "لا يوجد ملف أسعار")
 if age_h("reports/live-e2e.txt") > 30 and not os.path.exists(ROOT + "/reports/live-e2e-blocked.md"): dispatch("live-e2e.yml", "الفحص الحي قديم")
 if os.path.exists(ROOT + "/reports/live-e2e-blocked.md"): ok.append("الفحص الحي محجوب مؤقتاً من جوجل (ليس عطلاً)")

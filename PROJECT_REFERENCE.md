@@ -727,3 +727,7 @@
 - live-e2e: إصلاح حفظ التقرير (`git add -A reports/`)، تحديث فحوص الهب وصفحات الأدوات وسطر الذهب والموبايل، وكتابة `reports/live-pages-feed.txt`.
 - smart-choice.js: تحميل خط Tajawal (مطابقاً للـ CSS) بدل IBM Plex.
 - qa: تحديث heal-test وnew-tools لسلوك الأيقونات (data-href).
+
+## 2026-11-13 — لوحة الأسعار الحية
+- صفحة «أسعار اليوم» وشريط الرئيسية؛ XAUS للذهب والفضة كل ساعة؛ rates.yml كل ساعة؛ تتبّع التغيّر (prev)؛ مراقبة المعادن في watchdog؛ qa/rates.mjs.
+

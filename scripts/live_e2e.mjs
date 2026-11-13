@@ -87,6 +87,21 @@ try {
   }
 } catch (e) { out.push('WARN  Gold check error: ' + String(e.message).split('\n')[0]); }
 
+// صفحة أسعار اليوم: اللوحة الحية تُرسم ببيانات حديثة
+try {
+  const ru = find('أسعار اليوم');
+  if (!ru) rec(false, 'Rates page: not in feed (يُنشأ بعد مزامنة الصفحات)');
+  else {
+    rec(await go(ru), 'Rates page loads');
+    const shown = await page.waitForSelector('#sc-rates-board .sc-rcard', { state: 'visible', timeout: 25000 }).then(() => true).catch(() => false);
+    const nCards = shown ? await page.locator('#sc-rates-board .sc-rcard').count() : 0;
+    rec(nCards >= 8, 'Rates board cards: ' + nCards + ' (عملات + ذهب + فضة؛ أقل من 8 = بيانات قديمة أو مصدر متوقف)');
+    const bt = await page.locator('#sc-rates-board').innerText().catch(() => '');
+    rec(shown && !/NaN|undefined|Infinity/.test(bt), 'Rates board has no NaN/undefined');
+    out.push('INFO  Rates board meta: ' + (bt.split('\n').slice(0, 2).join(' | ')).slice(0, 140));
+  }
+} catch (e) { rec(false, 'Rates page check error: ' + String(e.message).split('\n')[0]); }
+
 // صفحات الأدوات المستقلة: عينة (الأولى/الوسطى/الأخيرة) فيها الأداة ظاهرة ودليل ≥ 350 كلمة
 try {
   const sample = [hrefs[0], hrefs[Math.floor(hrefs.length / 2)], hrefs[hrefs.length - 1]].filter((x) => x && x.h);

@@ -254,3 +254,26 @@ html body .adm-checks li{margin:6px 0}html body .adm-checks label{display:flex;g
   .sc-h-head h2{font-size:19px}
   html body .sc-tools-hero h1{font-size:26px}
 }
+
+/* لوحة الأسعار الحية */
+html body .sc-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+html body .sc-rates h3{margin:24px 0 4px;font-size:19px}
+html body .sc-rates>.sc-muted,html body #sc-rates-board>.sc-muted{margin:0 0 10px}
+html body .sc-rates-meta{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;margin:0 0 6px;color:var(--muted);font-size:14px}
+html body .sc-live{display:inline-flex;align-items:center;gap:7px;font-weight:700;color:var(--good)}
+html body .sc-live::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--good);animation:sc-pulse 2s ease-out infinite}
+@keyframes sc-pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--good) 55%,transparent)}100%{box-shadow:0 0 0 9px transparent}}
+@media(prefers-reduced-motion:reduce){html body .sc-live::before{animation:none}}
+html body .sc-rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:10px}
+html body .sc-rcard{display:flex;flex-direction:column;gap:2px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+html body .sc-rcard b{font-size:14px;font-weight:600;color:var(--muted)}
+html body .sc-rcard strong{font-size:21px;line-height:1.35;font-variant-numeric:tabular-nums;color:var(--ink)}
+html body .sc-rcard strong small{font-size:13px;font-weight:500;color:var(--muted)}
+html body .sc-rcard>small{color:var(--muted);font-size:13px}
+html body .sc-delta{margin-top:4px;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--brand-d)}
+html body .sc-rates-src{margin-top:16px;font-size:13.5px}
+html body .sc-rs{grid-template-columns:repeat(4,1fr)}
+@media(max-width:820px){html body .sc-rs{grid-template-columns:1fr 1fr}html body .sc-rgrid{grid-template-columns:1fr 1fr}}
+
+/* إخفاء شريط الأسعار الرئيسي عند غياب بيانات حديثة */
+html body .sc-rates-wrap[hidden]{display:none}

@@ -270,9 +270,9 @@
       const sec=$("sc-fx"); if(!sec||sec.dataset.rates)return; sec.dataset.rates="1";
       fetch("https://raw.githubusercontent.com/tahattaha41/Smart-Choice/main/assets/content/rates.json?t="+Math.floor(Date.now()/900000),{credentials:"omit"}).then(r=>r.ok?r.json():null).then(d=>{
         if(!d||!d.egp||!d.updated||Date.now()/1000-d.updated>172800)return;
-        const names={USD:"دولار",EUR:"يورو",SAR:"ريال سعودي",GBP:"جنيه إسترليني",AED:"درهم إماراتي"}, box=document.createElement("div"); box.className="sc-muted sc-fx-ref";
+        const names={USD:"دولار",EUR:"يورو",SAR:"ريال سعودي",GBP:"جنيه إسترليني",AED:"درهم إماراتي",KWD:"دينار كويتي",QAR:"ريال قطري"}, box=document.createElement("div"); box.className="sc-muted sc-fx-ref";
         const when=new Date(d.updated*1000).toLocaleString("ar-EG",{dateStyle:"medium",timeStyle:"short"});
-        box.innerHTML="<b>سعر مرجعي للجنيه المصري</b> ("+d.source+"، آخر تحديث "+when+"): "+Object.keys(d.egp).map(c=>"<button type='button' class='sc-chipbtn' data-fx='"+d.egp[c]+"'>"+names[c]+" ≈ "+fmt(d.egp[c])+"</button>").join(" ")+"<br><small>سعر منتصف السوق للاسترشاد فقط، وقد يختلف عن سعر البنك أو شركة الصرف. اضغط على عملة لوضع سعرها في خانة سعر الصرف.</small>";
+        box.innerHTML="<b>سعر مرجعي للجنيه المصري</b> ("+d.source+"، آخر تحديث "+when+"): "+Object.keys(d.egp).filter(c=>names[c]).map(c=>"<button type='button' class='sc-chipbtn' data-fx='"+d.egp[c]+"'>"+names[c]+" ≈ "+fmt(d.egp[c])+"</button>").join(" ")+"<br><small>سعر منتصف السوق للاسترشاد فقط، وقد يختلف عن سعر البنك أو شركة الصرف. اضغط على عملة لوضع سعرها في خانة سعر الصرف.</small>";
         const h=sec.querySelector("p.sc-muted"); if(h)h.after(box);
         box.addEventListener("click",e=>{const b=e.target.closest("[data-fx]"); if(!b)return; const i=$("sc-fx-rate"); i.value=b.getAttribute("data-fx"); i.dispatchEvent(new Event("input",{bubbles:true}));});
       }).catch(()=>{});
@@ -280,7 +280,7 @@
     function goldRef() {
       const sec=$("sc-gold"); if(!sec||sec.dataset.ref)return; sec.dataset.ref="1";
       fetch("https://raw.githubusercontent.com/tahattaha41/Smart-Choice/main/assets/content/rates.json?t="+Math.floor(Date.now()/900000),{credentials:"omit"}).then(r=>r.ok?r.json():null).then(d=>{
-        const g=d&&d.gold; if(!g||!g.egp_gram||!g.updated||Date.now()/1000-g.updated>129600)return;
+        const g=d&&d.gold; if(!g||!g.egp_gram||!g.updated||Date.now()/1000-(g.fetched||g.updated)>129600)return;
         const box=document.createElement("div"); box.className="sc-muted sc-fx-ref";
         const when=new Date(g.updated*1000).toLocaleString("ar-EG",{dateStyle:"medium",timeStyle:"short"});
         box.innerHTML="<b>سعر مرجعي للجرام</b> ("+g.source+"، آخر تحديث "+when+"): <button type='button' class='sc-chipbtn' data-g='"+g.egp_gram["21"]+"'>عيار 21 ≈ "+fmt(g.egp_gram["21"])+"</button> عيار 24 ≈ "+fmt(g.egp_gram["24"])+" — عيار 18 ≈ "+fmt(g.egp_gram["18"])+". سعر عالمي محوّل للجنيه؛ سعر محلات الصاغة قد يختلف ويشمل المصنعية.";
@@ -696,9 +696,9 @@
    Static markup in the theme remains as a fallback if a request fails. */
 (function () {
   "use strict";
-  var ORDER = ["الأدوات", "مقارنة", "مركز القرار", "من نحن", "سياسة المحتوى", "إعلن معنا", "اتصل بنا", "خريطة الموقع", "سياسة الخصوصية", "الشروط", "لوحة الإدارة"];
+  var ORDER = ["الأدوات", "أسعار اليوم", "مقارنة", "مركز القرار", "من نحن", "سياسة المحتوى", "إعلن معنا", "اتصل بنا", "خريطة الموقع", "سياسة الخصوصية", "الشروط", "لوحة الإدارة"];
   function clean(title) { return String(title || "").replace(/\s*\|\s*Smart Choice\s*$/i, "").trim(); }
-  var CORE = ["الأدوات الذكية", "مقارنة المنتجات", "مركز القرار", "من نحن", "سياسة المحتوى والتحرير", "إعلن معنا", "اتصل بنا", "خريطة الموقع", "سياسة الخصوصية", "شروط الاستخدام وإخلاء المسؤولية", "لوحة الإدارة"];
+  var CORE = ["الأدوات الذكية", "أسعار اليوم", "مقارنة المنتجات", "مركز القرار", "من نحن", "سياسة المحتوى والتحرير", "إعلن معنا", "اتصل بنا", "خريطة الموقع", "سياسة الخصوصية", "شروط الاستخدام وإخلاء المسؤولية", "لوحة الإدارة"];
   function rank(title) {
     for (var i = 0; i < ORDER.length; i++) if (title.indexOf(ORDER[i]) === 0) return i;
     return ORDER.length;
@@ -712,7 +712,7 @@
     return fetch(path, { credentials: "omit" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
   }
   function pages() {
-    return getJson("/feeds/pages/default?alt=json&max-results=50").then(function (d) {
+    return getJson("/feeds/pages/default?alt=json&max-results=100").then(function (d) {
       var list = ((d.feed && d.feed.entry) || []).filter(function (e) {
         // فقط صفحات Smart Choice: عنوانها ينتهي بـ "| Smart Choice"
         return /\|\s*Smart Choice\s*$/i.test((e.title && e.title.$t) || "");
@@ -871,6 +871,7 @@
         "<label>التأمينات الاجتماعية الشهرية<input id='sc-hq-i' type='number' inputmode='decimal' value='1100' min='0'></label>" +
         "<dl class='sc-hq-out'><div><dt>صافي الراتب شهرياً</dt><dd id='sc-hq-net'>—</dd></div><div><dt>الضريبة شهرياً</dt><dd id='sc-hq-tax'>—</dd></div></dl>" +
         "<p class='sc-h-qnote'>شرائح مصراوي المنشورة بتاريخ 2/8/2026 مع إعفاء شخصي 20 ألف جنيه سنوياً. <a href='" + tl("taxeg") + "'>افتح الحاسبة كاملة ←</a></p></form></section>" +
+        "<section class='sc-h-sec sc-rates-wrap' hidden><div class='sc-h-head'><h2>أسعار اليوم</h2><a href='" + by("أسعار اليوم") + "'>كل الأسعار</a></div><div id='sc-rates-strip' class='sc-rgrid sc-rs'></div></section>" +
         "<section class='sc-h-sec'><div class='sc-h-head'><h2>كيف تعمل الحاسبات</h2></div><ol class='sc-h-steps sc-h-steps3'><li><b>أدخل أرقامك</b><span>الراتب أو السعر أو القسط، بما تعرفه أنت.</span></li><li><b>اقرأ المعادلة</b><span>كل حاسبة تشرح كيف وصلت إلى الرقم.</span></li><li><b>قارن وقرر</b><span>استخدم مركز القرار لترتيب خياراتك بأوزانك.</span></li></ol></section>" +
         "<section class='sc-h-sec'><div class='sc-h-head'><h2>الحاسبات حسب المجال</h2><a href='" + tools + "'>كل الأدوات (34)</a></div><div class='sc-h-cats'>" +
         CATS_HOME.map(function (c) { return "<a data-cat='" + c[4] + "' href='" + tl(c[3]) + "'><span class='ico'>" + window.SCI.svg(c[0], 22) + "</span><b>" + c[1] + "</b><small>" + c[2] + "</small></a>"; }).join("") + "</div></section>" +
@@ -898,6 +899,7 @@
         g.addEventListener("input", up); n.addEventListener("input", up); up();
       })();
       if (window.__scFillLatest) window.__scFillLatest();
+      if (window.__scRatesMount) window.__scRatesMount();
     }).catch(function () {});
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
@@ -1436,4 +1438,78 @@
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
   setTimeout(run, 2500);
+})();
+
+/* Smart Choice — لوحة الأسعار الحية (عملات وذهب وفضة) من assets/content/rates.json.
+   يحدّث الملف workflow كل ساعة؛ الصفحة تعيد قراءته كل 5 دقائق وهي مفتوحة، فلا حاجة لإعادة نشر القالب. */
+(function () {
+  var URL = "https://raw.githubusercontent.com/tahattaha41/Smart-Choice/main/assets/content/rates.json";
+  var NAMES = { USD: "دولار أمريكي", EUR: "يورو", GBP: "جنيه إسترليني", SAR: "ريال سعودي", AED: "درهم إماراتي", KWD: "دينار كويتي", QAR: "ريال قطري" };
+  var STALE = 36 * 3600, EVERY = 5 * 60 * 1000;
+  var nf = new Intl.NumberFormat("ar-EG", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  function esc(x) { return String(x == null ? "" : x).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function ok(v) { return typeof v === "number" && isFinite(v) && v > 0; }
+  function live(b) { return !!b && (Date.now() / 1000 - (b.fetched || b.updated || 0)) < STALE; }
+  function when(ts) { try { return ts ? new Date(ts * 1000).toLocaleString("ar-EG", { dateStyle: "medium", timeStyle: "short" }) : ""; } catch (e) { return ""; } }
+  function delta(cur, prev) {
+    if (!ok(cur) || !ok(prev) || Math.abs(cur / prev - 1) < 0.00005) return "";
+    var p = (cur / prev - 1) * 100, up = p > 0;
+    return "<span class='sc-delta " + (up ? "up" : "down") + "'><span aria-hidden='true'>" + (up ? "▲" : "▼") + "</span> " + nf.format(Math.abs(p)) + "٪<span class='sc-sr'> " + (up ? "ارتفاع" : "انخفاض") + " عن التحديث السابق</span></span>";
+  }
+  function card(label, sub, val, prev, unit) {
+    if (!ok(val)) return "";
+    return "<div class='sc-rcard'><b>" + esc(label) + "</b><strong>" + nf.format(val) + " <small>" + (unit || "جنيه") + "</small></strong>" + (sub ? "<small>" + esc(sub) + "</small>" : "") + delta(val, prev) + "</div>";
+  }
+  function srcLink(name, url) { return url ? "<a href='" + url + "' target='_blank' rel='nofollow noopener'>" + esc(name) + "</a>" : esc(name); }
+  function board(d) {
+    var P = d.prev || {}, g = d.gold, sv = d.silver, html = "", any = false;
+    var fxOn = d.egp && live(d), gOn = g && g.egp_gram && live(g), sOn = sv && sv.egp_gram && live(sv);
+    if (fxOn) {
+      any = true;
+      html += "<h3>العملات مقابل الجنيه المصري</h3><p class='sc-muted'>سعر الوحدة الواحدة · آخر سعر مرجعي: " + esc(when(d.updated)) + "</p><div class='sc-rgrid'>" +
+        Object.keys(NAMES).map(function (c) { return card(NAMES[c], c, d.egp[c], P.egp && P.egp[c]); }).join("") + "</div>";
+    }
+    if (gOn) {
+      any = true; var G = g.egp_gram, PG = P.gold || {};
+      html += "<h3>الذهب (سعر الجرام)</h3><p class='sc-muted'>سعر عالمي محوّل للجنيه دون مصنعية · آخر سعر عالمي: " + esc(when(g.updated)) + "</p><div class='sc-rgrid'>" +
+        card("عيار 24", "للجرام", G["24"], PG["24"]) + card("عيار 21", "للجرام", G["21"], PG["21"]) + card("عيار 18", "للجرام", G["18"], PG["18"]) +
+        card("جنيه الذهب", "8 جرامات عيار 21 تقريباً", ok(G["21"]) ? G["21"] * 8 : 0, ok(PG["21"]) ? PG["21"] * 8 : 0) +
+        card("أوقية الذهب عالمياً", "بالدولار", g.usd_oz, 0, "دولار") + "</div>";
+    }
+    if (sOn) {
+      any = true; var S = sv.egp_gram, PS = P.silver || {};
+      html += "<h3>الفضة (سعر الجرام)</h3><p class='sc-muted'>سعر عالمي محوّل للجنيه دون مصنعية · آخر سعر عالمي: " + esc(when(sv.updated)) + "</p><div class='sc-rgrid'>" +
+        card("فضة عيار 999", "للجرام", S["999"], PS["999"]) + card("فضة عيار 925", "للجرام", S["925"], PS["925"]) +
+        card("أوقية الفضة عالمياً", "بالدولار", sv.usd_oz, 0, "دولار") + "</div>";
+    }
+    if (!any) return "<p class='sc-muted'>الأسعار غير محدّثة حالياً، وأخفيناها حتى لا نعرض رقماً قديماً. جرّب بعد قليل.</p>";
+    var chk = Math.max(d.fetched || 0, g && g.fetched || 0, sv && sv.fetched || 0);
+    return "<div class='sc-rates-meta'><span class='sc-live'>تتجدد تلقائياً</span><span>آخر فحص للمصادر: " + esc(when(chk)) + "</span></div>" + html +
+      "<p class='sc-muted sc-rates-src'>المصادر: العملات من " + srcLink("Rates By Exchange Rate API", "https://www.exchangerate-api.com") +
+      " · المعادن من " + (g ? srcLink(g.source, g.source === "xaus.com" ? "https://xaus.com" : "") : "") +
+      ". النسبة الظاهرة هي التغير عن التحديث السابق. أسعار مرجعية للاسترشاد وليست عروض بيع أو شراء.</p>";
+  }
+  function strip(d) {
+    var P = d.prev || {}, g = d.gold, sv = d.silver, out = [];
+    if (d.egp && live(d)) { out.push(card("دولار أمريكي", "USD", d.egp.USD, P.egp && P.egp.USD)); out.push(card("يورو", "EUR", d.egp.EUR, P.egp && P.egp.EUR)); }
+    if (g && g.egp_gram && live(g)) out.push(card("ذهب عيار 21", "للجرام", g.egp_gram["21"], P.gold && P.gold["21"]));
+    if (sv && sv.egp_gram && live(sv)) out.push(card("فضة عيار 999", "للجرام", sv.egp_gram["999"], P.silver && P.silver["999"]));
+    return out.join("");
+  }
+  function mount() {
+    var b = document.getElementById("sc-rates-board"), s = document.getElementById("sc-rates-strip");
+    if (!b && !s) return;
+    fetch(URL + "?t=" + Math.floor(Date.now() / 300000), { credentials: "omit" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+      if (!d) throw new Error("no data");
+      if (b) { var hb = board(d); if (b.__h !== hb) { b.innerHTML = hb; b.__h = hb; } }
+      if (s) { var hs = strip(d), w = s.closest ? s.closest(".sc-rates-wrap") : null; if (s.__h !== hs) { s.innerHTML = hs; s.__h = hs; } if (w) w.hidden = !hs; }
+    }).catch(function () {
+      if (b && b.__h === undefined) { b.innerHTML = "<p class='sc-muted'>تعذّر تحميل الأسعار الآن. أعد تحميل الصفحة بعد قليل.</p>"; }
+    });
+  }
+  window.__scRatesMount = mount;
+  setInterval(function () { if (!document.hidden) mount(); }, EVERY);
+  document.addEventListener("visibilitychange", function () { if (!document.hidden) mount(); });
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount); else mount();
+  setTimeout(mount, 2500);
 })();

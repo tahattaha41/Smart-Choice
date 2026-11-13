@@ -1,6 +1,6 @@
 # حالة المشروع (تُولَّد تلقائياً — لا تعدّل يدوياً)
 
-> آخر توليد: 2026-11-13 11:55 UTC بواسطة scripts/update_status.py. للتفاصيل الثابتة والقرارات: docs/HANDOFF.md.
+> آخر توليد: 2026-11-13 13:40 UTC بواسطة scripts/update_status.py. للتفاصيل الثابتة والقرارات: docs/HANDOFF.md.
 
 ## الأرقام
 - مقالات: 21 (متوسط الكلمات 688)
@@ -19,15 +19,15 @@
 auto-posts.yml، blogger-cleanup.yml، blogger-pages-sync.yml، blogger-sync.yml، content-bundle.yml، frontend-assets.yml، live-e2e.yml، quality-audit.yml، rates.yml، site-review.yml، site-stats.yml، status-doc.yml، theme-validation.yml
 
 ## آخر الكوميتات
+- 29b2f36 2026-11-13 chore: live browser test report [skip ci]
+- f62e1cd 2026-11-13 chore: visitor stats [skip ci]
+- 0ccf5ab 2026-11-13 chore: periodic site review [skip ci]
+- 9004459 2026-11-13 chore: reference FX rates [skip ci]
+- 992f5c2 2026-11-13 chore: live browser test report [skip ci]
+- 995d630 2026-11-13 chore: reference FX rates [skip ci]
+- 2debfee 2026-11-13 feat(design): v6 clearer UI - decision-led home, assistant-first hub, prominent results
+- 05d891f 2026-11-13 chore(smart-choice): update Blogger pages sync state [skip ci]
+- 054625e 2026-11-13 chore: quality audit reports [skip ci]
+- c14fb65 2026-11-13 docs: auto-update STATUS.md [skip ci]
 - 3ea1942 2026-11-13 feat: live rates board (currencies, gold, silver) updating hourly
 - 34cf475 2026-11-13 chore: live browser test report [skip ci]
-- a1db853 2026-11-13 chore: live browser test report [skip ci]
-- 564df09 2026-11-13 chore: visitor stats [skip ci]
-- eab1fe0 2026-11-13 chore: periodic site review [skip ci]
-- ad4befe 2026-11-13 chore: reference FX rates [skip ci]
-- a3a101f 2026-11-13 docs: auto-update STATUS.md [skip ci]
-- 5bd0d1c 2026-11-13 docs: auto-update STATUS.md [skip ci]
-- a44c9fb 2026-11-13 docs: handoff - live e2e failed=0, duplicate pages removed
-- b47d126 2026-11-13 chore: live browser test report [skip ci]
-- d2e7fea 2026-11-13 chore: Blogger inventory report [skip ci]
-- db27be2 2026-11-13 chore: Blogger inventory report [skip ci]

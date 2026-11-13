@@ -6,7 +6,7 @@ const css=fs.readFileSync(R+'/assets/css/smart-choice.css','utf8').split('\n').f
 const md=fs.readFileSync(R+'/pages/tools.md','utf8').split('---').slice(2).join('---');
 const b=await chromium.launch(); const p=await b.newPage(); const errs=[]; p.on('pageerror',e=>errs.push(e.message));
 await p.route('https://x.test/',r=>r.fulfill({contentType:'text/html; charset=utf-8',body:`<!doctype html><meta charset=utf-8><style>${css}</style><body>${md}</body>`}));
-await p.goto('https://x.test/'); await p.addScriptTag({content:js}); await p.waitForTimeout(600);
+await p.goto('https://x.test/'); await p.addScriptTag({content:js}); await p.waitForTimeout(600); await p.evaluate(()=>document.querySelectorAll('[data-href]').forEach(x=>x.removeAttribute('data-href')));
 for (const t of ['compound','breakeven','hourly','trip','fx']) { await p.click(`[data-tab="${t}"]`); console.log(t,'->',(await p.innerText(`#sc-${t} .sc-tool-result`)).replace(/\n+/g,' | ')); }
 const qs=['خصم 25% على 1800','ضريبة 14% على ٥٠٠٠','قرض 100000 بفائدة 12% لمدة سنتين','قرض 100,000 بفائدة 10% لمدة 3 سنوات','تكلفة 80 وسعر البيع 100 كم الهامش','هدف ادخار 30000 وأدخر 2000 شهرياً','فاتورة 900 نقسمها على 3 أشخاص مع إكرامية 10%','نسبة من 200 إلى 250','ما عاصمة فرنسا'];
 await p.click('[data-tab="assistant"]');

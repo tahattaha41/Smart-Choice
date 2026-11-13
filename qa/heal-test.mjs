@@ -12,6 +12,6 @@ await p.route('https://x.test/p/tools.html',r=>r.fulfill({contentType:'text/html
 await p.goto('https://x.test/p/tools.html#decide'); await p.addScriptTag({content:js});
 await p.waitForSelector('.sc-injected .sc-tool:not([hidden])');
 console.log('visible tool:',await p.$$eval('.sc-tool',e=>e.filter(x=>!x.hidden).map(x=>x.id)));
-await p.click('[data-tab="discount"]'); await p.fill('#sc-price','500'); await p.fill('#sc-rate','10');
+await p.evaluate(()=>document.querySelectorAll('[data-href]').forEach(x=>x.removeAttribute('data-href'))); /* الأيقونات تفتح صفحات مستقلة؛ نختبر هنا العرض داخل الصفحة بعد الإصلاح الذاتي */ await p.click('[data-tab="discount"]'); await p.fill('#sc-price','500'); await p.fill('#sc-rate','10');
 console.log('discount:',(await p.textContent('#sc-discount .sc-tool-result')).trim());
 console.log('errors',errs.length?errs:'none'); await b.close();

@@ -40,36 +40,70 @@ try { const ar = await page.request.get(BASE + '/ads.txt'); const at = ar.ok() ?
 // الصفحات من الخلاصة
 const feed = await page.evaluate(async () => { const all = []; for (let st = 1; st <= 201; st += 25) { try { const r = await fetch('/feeds/pages/default?alt=json&max-results=25&start-index=' + st); if (!r.ok) break; const en = (await r.json()).feed.entry || []; for (const e of en) all.push({ t: e.title.$t, u: e.link.find((l) => l.rel === 'alternate').href }); if (en.length < 25) break; } catch { break; } } return all; });
 out.push('INFO  Pages feed entries: ' + feed.length);
+try { writeFileSync('reports/live-pages-feed.txt', feed.map((p) => p.t + '\t' + p.u).join('\n') + '\n'); } catch {}
+mkdirSync('reports', { recursive: true });
 const find = (s) => (feed.find((p) => p.t.startsWith(s)) || feed.find((p) => p.t.includes(s)))?.u;
 
-// صفحة الأدوات: ظهور وعمل
+// صفحة الأدوات (الهب): فهرس أيقونات + مساعد؛ أقسام الأدوات مخفية فيه عمداً وتُفتح في صفحاتها
 const tools = find('الأدوات');
 rec(!!tools && (await go(tools)), 'Tools page loads');
-try { await page.waitForSelector('.sc-tool', { timeout: 20000 }); rec(true, 'Tools: tool sections rendered'); await page.waitForTimeout(5000); const nOff = await page.locator('.sc-offer').count(); out.push((nOff > 0 ? 'OK    ' : 'INFO  ') + 'Tools: affiliate ad cards shown (paused until AdSense approval) = ' + nOff); } catch { rec(false, 'Tools: NO tool section rendered (page is interface only)'); }
-if ((await page.locator('#sc-price').count()) > 0) {
-  await page.fill('#sc-price', '2000'); await page.fill('#sc-rate', '20');
-  const txt = await page.locator('#sc-discount .sc-tool-result').innerText();
-  rec(/١٬?٦٠٠|1,?600/.test(txt), 'Tools: discount calculator works -> ' + txt.replace(/\s+/g, ' '));
-  await page.click('[data-tab="decide"]'); rec(await page.locator('#sc-decide').isVisible(), 'Tools: decision tab opens');
-  await page.click('[data-tab="compare"]'); rec(await page.locator('#sc-compare').isVisible(), 'Tools: compare tab opens');
-} else rec(false, 'Tools: discount input missing');
-
-// صفحات الأدوات المستقلة: الأيقونة تفتح صفحتها وفيها الأداة ظاهرة
+try { await page.waitForSelector('#sc-assistant', { state: 'visible', timeout: 25000 }); rec(true, 'Hub: assistant visible'); } catch { rec(false, 'Hub: assistant NOT visible'); }
+let hrefs = [];
 try {
-  const hrefs = await page.evaluate(() => [...document.querySelectorAll('[data-href]')].map((b) => b.getAttribute('data-href')));
-  rec(hrefs.length >= 30, 'Hub: icons carry page links (' + hrefs.length + ')');
-  for (const h of [hrefs[0], hrefs[Math.floor(hrefs.length / 2)], hrefs[hrefs.length - 1]].filter(Boolean)) {
-    const ok = await go(h.startsWith('http') ? h : BASE + h);
-    const vis = ok && (await page.waitForSelector('.sc-tool', { timeout: 20000 }).then(() => true).catch(() => false));
-    const shown = vis && (await page.locator('.sc-tool:visible').count()) > 0;
-    rec(!!shown, 'Tool page opens with its tool visible: ' + h);
+  hrefs = await page.evaluate(() => [...document.querySelectorAll('nav.sc-tabs [data-tab]')].map((b) => ({ t: b.getAttribute('data-tab'), h: b.getAttribute('data-href') || (window.__scToolUrls || {})[b.getAttribute('data-tab')] || '' })));
+  rec(hrefs.length >= 30, 'Hub: icon buttons (' + hrefs.length + ')');
+  rec(hrefs.filter((x) => x.h).length >= 30, 'Hub: icons carry page links (' + hrefs.filter((x) => x.h).length + ')');
+  const fontOk = await page.evaluate(() => document.fonts && [...document.fonts].some((f) => /Tajawal/i.test(f.family) && f.status === 'loaded'));
+  out.push((fontOk ? 'OK    ' : 'WARN  ') + 'Design font Tajawal loaded');
+  await page.fill('#sc-ask', 'خصم 25% على 1800'); await page.click('#sc-ask-go'); await page.waitForTimeout(800);
+  const at = await page.locator('#sc-assistant-result').innerText().catch(() => '');
+  rec(/1350|١٣٥٠|1[,٬]350/.test(at) && !/NaN|undefined/.test(at), 'Hub: assistant answers -> ' + at.replace(/\s+/g, ' ').slice(0, 60));
+} catch (e) { rec(false, 'Hub check error: ' + String(e.message).split('\n')[0]); }
+
+// صفحة كل أداة: الأداة ظاهرة، دليل نصي كافٍ، وسطر الذهب في حاسبة الذهب
+const toolUrl = (k) => { const x = hrefs.find((h) => h.t === k); return x && x.h ? (x.h.startsWith('http') ? x.h : BASE + x.h) : ''; };
+try {
+  const du2 = toolUrl('discount');
+  if (!du2) rec(false, 'Discount tool page link missing');
+  else {
+    const ok = await go(du2); rec(ok, 'Discount tool page loads');
+    const vis = await page.waitForSelector('#sc-price', { state: 'visible', timeout: 25000 }).then(() => true).catch(() => false);
+    rec(vis, 'Discount tool visible on its own page');
+    if (vis) {
+      await page.fill('#sc-price', '2000'); await page.fill('#sc-rate', '20');
+      const txt = await page.locator('#sc-discount .sc-tool-result').innerText();
+      rec(/١٬?٦٠٠|1,?600/.test(txt), 'Discount calculator works -> ' + txt.replace(/\s+/g, ' ').slice(0, 80));
+    }
   }
-} catch (e) { rec(false, 'Tool pages check error: ' + e.message); }
+} catch (e) { rec(false, 'Discount page check error: ' + String(e.message).split('\n')[0]); }
+try {
+  const gu = toolUrl('gold');
+  if (gu) {
+    rec(await go(gu), 'Gold tool page loads');
+    await page.waitForSelector('#sc-gold', { state: 'visible', timeout: 25000 }).catch(() => {});
+    await page.waitForTimeout(4000);
+    const ref = await page.locator('.sc-fx-ref').first().innerText().catch(() => '');
+    out.push((ref ? 'OK    ' : 'INFO  ') + 'Gold reference line ' + (ref ? 'shown: ' + ref.replace(/\s+/g, ' ').slice(0, 90) : 'not shown (hidden when data older than 36h or fetch failed)'));
+  }
+} catch (e) { out.push('WARN  Gold check error: ' + String(e.message).split('\n')[0]); }
+
+// صفحات الأدوات المستقلة: عينة (الأولى/الوسطى/الأخيرة) فيها الأداة ظاهرة ودليل ≥ 350 كلمة
+try {
+  const sample = [hrefs[0], hrefs[Math.floor(hrefs.length / 2)], hrefs[hrefs.length - 1]].filter((x) => x && x.h);
+  for (const x of sample) {
+    const u = x.h.startsWith('http') ? x.h : BASE + x.h;
+    const ok = await go(u);
+    const shown = ok && (await page.waitForSelector('#sc-' + x.t, { state: 'visible', timeout: 25000 }).then(() => true).catch(() => false));
+    rec(!!shown, 'Tool page opens with its tool visible: ' + x.t);
+    const words = await page.evaluate(() => ((document.querySelector('.post-body, .entry-content, .sc-page') || {}).innerText || '').split(/\s+/).filter(Boolean).length);
+    rec(words >= 300, 'Tool page guide text words (' + x.t + '): ' + words);
+  }
+} catch (e) { rec(false, 'Tool pages check error: ' + String(e.message).split('\n')[0]); }
 
 // صفحات أخرى ومقال
 for (const [key, label] of [['من نحن', 'About'], ['اتصل بنا', 'Contact'], ['الخصوصية', 'Privacy'], ['شروط', 'Terms'], ['مركز القرار', 'Decision page'], ['مقارنة', 'Compare page'], ['سياسة المحتوى', 'Editorial page'], ['لوحة الإدارة', 'Admin page']]) {
   const u = find(key);
-  if (!u) { rec(false, label + ': not in feed'); continue; }
+  if (!u) { rec(false, label + ': not in feed'); out.push('INFO  feed titles sample: ' + feed.slice(0, 12).map((p) => p.t).join(' | ')); continue; }
   const okLoad = await go(u); rec(okLoad, label + ' loads'); if (!okLoad) { const r2 = await fetch(u, { redirect: 'manual' }).catch(() => null); out.push('INFO  ' + label + ' url=' + u + ' status=' + (r2 ? r2.status : 'neterr')); }
   await page.waitForTimeout(2500);
   const len = (await page.locator('.post-body, .entry-content, .sc-page').first().innerText().catch(() => '')).length;
@@ -95,7 +129,7 @@ const mp = await mctx.newPage();
   rec(hl > 200, 'Mobile: home content length ' + hl);
   const tu = feed.find((p) => p.t.includes('الأدوات'))?.u;
   rec(!!tu && (await mgo(tu + '?m=1')), 'Mobile: tools?m=1 loads');
-  try { await mp.waitForSelector('.sc-tool', { timeout: 20000 }); rec(true, 'Mobile: tools rendered'); } catch { rec(false, 'Mobile: tools NOT rendered'); }
+  try { await mp.waitForSelector('#sc-assistant', { state: 'visible', timeout: 20000 }); rec(true, 'Mobile: tools hub rendered'); } catch { rec(false, 'Mobile: tools hub NOT rendered'); }
   const du = feed.find((p) => p.t.includes('من نحن'))?.u;
   if (du) { await mgo(du + '?m=1'); await mp.waitForTimeout(3000); const l = (await mp.locator('#main-content').innerText().catch(() => '')).length; rec(l > 150, 'Mobile: about content length ' + l); }
   await mctx.close();

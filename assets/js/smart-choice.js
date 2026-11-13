@@ -495,7 +495,7 @@
       const annual=(g-ins)*12, taxable=Math.max(0,annual-20000); let tax=0, prev=0, rate=0;
       for(const [cap,r] of B){ if(taxable>prev){ tax+=(Math.min(taxable,cap)-prev)*r; rate=r; } prev=cap; }
       const mt=tax/12, net=g-ins-mt;
-      out.textContent="الدخل الخاضع للضريبة سنوياً: "+fmt(taxable)+" جنيه — الضريبة السنوية: "+fmt(tax)+" (شهرياً ≈ "+fmt(mt)+") — صافي الراتب بعد الضريبة والتأمينات ≈ "+fmt(net)+" جنيه شهرياً — الشريحة الأعلى المطبقة: "+(rate*100)+"%"+(taxable===0?" (دخلك ضمن الحد المعفى)":"")+".";
+      out.textContent="الدخل الخاضع للضريبة سنوياً: "+fmt(taxable)+" جنيه — الضريبة السنوية: "+fmt(tax)+" (شهرياً ≈ "+fmt(mt)+") — الصافي الشهري بعد الضريبة والتأمينات: "+fmt(net)+" جنيه — الشريحة الأعلى المطبقة: "+(rate*100)+"%"+(taxable===0?" (دخلك ضمن الحد المعفى)":"")+".";
     }
     function bankdep() {
       const A=value("sc-bd-amt"), r=value("sc-bd-rate"), m=value("sc-bd-months"), tx=Number.isFinite(value("sc-bd-tax"))?value("sc-bd-tax"):0, out=$("sc-bankdep-result"); if(!out)return;
@@ -554,8 +554,12 @@
         else { d.className = "kpi note"; d.textContent = x; }
         out.appendChild(d);
       });
+      /* أهم رقم يبرز: أول بطاقة تطابق أولوية الكلمات (لا شيء إن لم تتطابق) */
+      const kp = Array.from(out.querySelectorAll(".kpi:not(.note)")); let main = null;
+      [/صافي|بعد الخصم|السعر بعد/, /القسط|الدفعة/, /الإجمالي|التكلفة الكلية/, /التوفير|الوفر/, /العائد|الربح/, /القيمة|السعر/].some(r => (main = kp.find(k => r.test(k.firstChild.textContent))));
+      if (main && kp.length > 1) { main.classList.add("main"); out.insertBefore(main, out.firstChild); }
     }
-    function decorateAll() { root.querySelectorAll(".sc-tool-result").forEach(decorate); }
+    function decorateAll() { root.querySelectorAll(".sc-tool-result").forEach(decorate); root.querySelectorAll(".sc-tool").forEach(sec => { const own = sec.querySelector(".sc-actions"), cp = sec.querySelector(".sc-share-bar [data-a='copy']"); if (cp) cp.hidden = !!own; }); }
     const EXAMPLES = {
       "sc-discount": {"sc-price":2000,"sc-rate":20}, "sc-budget": {"sc-income":10000,"sc-expenses":6500},
       "sc-unit": {"sc-p1":45,"sc-q1":500,"sc-p2":80,"sc-q2":1000}, "sc-percent": {"sc-base":200,"sc-new":250},
@@ -636,6 +640,8 @@
     const convertType=$("sc-convert-type");
     if(convertType) convertType.addEventListener("change", () => { convert(); decorateAll(); });
     root.querySelectorAll("[data-tab]").forEach(b => { if (b.querySelector(".sc-i")) return; const t = b.getAttribute("data-tab"), label = b.textContent.trim(); b.innerHTML = "<span class='sc-ti'>" + window.SCI.svg(window.SCI.tab(t), 24) + "</span><span class='sc-tl'>" + label + "</span>"; b.setAttribute("title", label); });
+    const DESC = {taxeg:"صافي الراتب بعد التأمينات والضريبة",bankdep:"عائد الشهادة على مبلغ ومدة تحددهما",gold:"قيمة القطعة بالجرام والعيار مع المصنعية",rental:"العائد السنوي من إيجار العقار",loan:"القسط الشهري وإجمالي الفوائد",installment:"الفرق بين سعر التقسيط وسعر الكاش",discount:"السعر بعد الخصم وقيمة التوفير",budget:"المتبقي من دخلك بعد بنود الإنفاق",appl:"ما يضيفه الجهاز إلى فاتورة الكهرباء",fx:"تحويل مبلغ بين عملتين مع العمولة",zakat:"تقدير الزكاة من مدخلاتك",unit:"أيهما أرخص بسعر الجرام أو اللتر",compare:"منتجان بالتكلفة الشهرية الحقيقية",decide:"رتّب خياراتك بمعايير وأوزان تحددها",vat:"إضافة الضريبة أو استخراجها من السعر",margin:"هامش الربح وسعر البيع المناسب",split:"تقسيم الفاتورة مع البقشيش",percent:"نسبة من رقم، أو رقم من نسبة",saving:"كم تدخر شهرياً لتبلغ هدفك",total:"السعر النهائي مع الشحن والرسوم",compound:"نمو مبلغ مع إضافة شهرية وفائدة مركبة",breakeven:"المبيعات اللازمة لتغطية تكاليفك",hourly:"كم تساوي ساعة عملك",trip:"تكلفة الوقود ونصيب كل راكب",roi:"عائد استثمارك بالنسبة والمبلغ",inflation:"كيف تُضعف الأسعار قوة مالك الشرائية",stack:"الخصم الحقيقي بعد عدة خصومات",effrate:"التكلفة الحقيقية للتقسيط كنسبة سنوية",sub:"أيهما أوفر: الاشتراك السنوي أم الشهري",rule72:"المدة التقريبية لمضاعفة المال",cashback:"ما تساويه نقاط أو استرداد الشراء",payoff:"ما توفره إذا سدّدت قرضك مبكراً",loancompare:"أي عرضي التمويل أقل فوائد"};
+    root.querySelectorAll(".sc-tabs [data-tab]").forEach(b => { const d = DESC[b.getAttribute("data-tab")]; if (d && !b.querySelector(".sc-td")) { const x = document.createElement("small"); x.className = "sc-td"; x.textContent = d; b.appendChild(x); } });
     root.querySelectorAll(".sc-tool > h2").forEach(h => { if (h.querySelector(".sc-i")) return; const t = h.parentNode.id.replace("sc-", ""); h.innerHTML = "<span class='sc-h2i'>" + window.SCI.svg(window.SCI.tab(t), 22) + "</span>" + h.textContent; });
     /* تصنيفات وبحث الأدوات */
     const CATS = [["all","الكل","all"],["shop","تسوق","cart"],["money","مال","wallet"],["biz","أعمال","chart"]];
@@ -736,7 +742,8 @@
       var home = nav.querySelector("a");
       nav.textContent = "";
       if (home) nav.appendChild(home);
-      list.forEach(function (p, i) { nav.appendChild(link(p.url, p.title)); if (i === 0) nav.appendChild(link("/search", "المقالات")); });
+      var PRIMARY = ["الأدوات الذكية", "أسعار اليوم", "مقارنة المنتجات", "مركز القرار"];
+      list.filter(function (p) { return PRIMARY.indexOf(p.title) !== -1; }).forEach(function (p, i) { nav.appendChild(link(p.url, p.title)); if (i === 0) nav.appendChild(link("/search", "المقالات")); });
       markCurrent();
     }
     var foot = document.querySelector(".sc-footlinks");
@@ -859,25 +866,23 @@
       var FAQ = [["هل الأدوات مجانية وهل أحتاج إلى تسجيل؟", "نعم، كل الأدوات مجانية وتعمل مباشرة دون حساب أو بريد إلكتروني."], ["هل تُرسل أرقامي إلى أي جهة؟", "لا. تُحسب النتائج داخل متصفحك فقط، ولا نحفظ ما تدخله."], ["هل النتائج نصيحة مالية؟", "لا. هي حسابات تقريبية مبنية على أرقامك، وليست نصيحة مالية أو قانونية؛ استشر مختصاً في القرارات الكبيرة."], ["كيف أختار بين التقسيط والكاش؟", "استخدم أداتي «التقسيط مقابل الكاش» و«الفائدة الفعلية للتقسيط» لمعرفة الفرق الحقيقي بالأرقام قبل القرار."], ["ما الأداة المناسبة لمشروعي الصغير؟", "ابدأ بـ«هامش الربح» ثم «نقطة التعادل»، وراجع دليل التسعير في المقالات."]];
       try { var fl = document.createElement("script"); fl.type = "application/ld+json"; fl.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": FAQ.map(function (q) { return { "@type": "Question", "name": q[0], "acceptedAnswer": { "@type": "Answer", "text": q[1] } }; }) }); document.head.appendChild(fl); } catch (e) {}
       var U = window.__scToolUrls || {};
+      var DECISIONS = [["effrate", "هل التقسيط أغلى من الكاش فعلاً؟", "الفائدة الفعلية للتقسيط"], ["discount", "هل هذا الخصم يوفّر لي فعلاً؟", "حاسبة الخصم"], ["loan", "كم قسط القرض وإجمالي فوائده؟", "حاسبة القرض"], ["gold", "كم تكلفة قطعة الذهب مع المصنعية؟", "الذهب والمصنعية"], ["bankdep", "كم يعطيني الادخار في شهادة بنكية؟", "عائد شهادة الادخار"], ["compare", "أي المنتجين أرخص على المدى الطويل؟", "مقارنة المنتجات"]];
       var tl = function (id) { return U[id] || (tools + "#" + id); };
       var html = "<div class='sc-home-root'>" +
         "<section class='sc-h-hero'><div class='sc-h-hero-text'>" +
         "<p class='sc-h-eyebrow'>حاسبات مالية بالجنيه المصري</p>" +
         "<h1>اعرف صافي راتبك وتكلفة قرارك قبل أن توقّع</h1>" +
         "<p class='sc-h-lead'>أدخل أرقامك فتظهر النتيجة والمعادلة المستخدمة. كل الحسابات تتم داخل متصفحك، دون تسجيل ودون إرسال بياناتك لأحد.</p>" +
-        "<div class='sc-h-cta'><a class='sc-btn' href='" + tools + "'>افتح كل الحاسبات</a><a class='sc-h-link' href='/search'>أو اقرأ الأدلة ←</a></div></div>" +
+        "<div class='sc-h-cta'><a class='sc-btn' href='" + tools + "#assistant'>اسأل المساعد بأرقامك</a><a class='sc-btn alt' href='" + tools + "'>تصفّح الحاسبات</a></div></div>" +
         "<form class='sc-h-quick' onsubmit='return false' aria-label='مثال حي: صافي الراتب'><p class='sc-h-qtag'>مثال حي · ضريبة المرتبات</p>" +
         "<label>الراتب الشهري الإجمالي (جنيه)<input id='sc-hq-g' type='number' inputmode='decimal' value='20000' min='0'></label>" +
         "<label>التأمينات الاجتماعية الشهرية<input id='sc-hq-i' type='number' inputmode='decimal' value='1100' min='0'></label>" +
         "<dl class='sc-hq-out'><div><dt>صافي الراتب شهرياً</dt><dd id='sc-hq-net'>—</dd></div><div><dt>الضريبة شهرياً</dt><dd id='sc-hq-tax'>—</dd></div></dl>" +
         "<p class='sc-h-qnote'>شرائح مصراوي المنشورة بتاريخ 2/8/2026 مع إعفاء شخصي 20 ألف جنيه سنوياً. <a href='" + tl("taxeg") + "'>افتح الحاسبة كاملة ←</a></p></form></section>" +
         "<section class='sc-h-sec sc-rates-wrap' hidden><div class='sc-h-head'><h2>أسعار اليوم</h2><a href='" + by("أسعار اليوم") + "'>كل الأسعار</a></div><div id='sc-rates-strip' class='sc-rgrid sc-rs'></div></section>" +
-        "<section class='sc-h-sec'><div class='sc-h-head'><h2>كيف تعمل الحاسبات</h2></div><ol class='sc-h-steps sc-h-steps3'><li><b>أدخل أرقامك</b><span>الراتب أو السعر أو القسط، بما تعرفه أنت.</span></li><li><b>اقرأ المعادلة</b><span>كل حاسبة تشرح كيف وصلت إلى الرقم.</span></li><li><b>قارن وقرر</b><span>استخدم مركز القرار لترتيب خياراتك بأوزانك.</span></li></ol></section>" +
-        "<section class='sc-h-sec'><div class='sc-h-head'><h2>الحاسبات حسب المجال</h2><a href='" + tools + "'>كل الأدوات (34)</a></div><div class='sc-h-cats'>" +
-        CATS_HOME.map(function (c) { return "<a data-cat='" + c[4] + "' href='" + tl(c[3]) + "'><span class='ico'>" + window.SCI.svg(c[0], 22) + "</span><b>" + c[1] + "</b><small>" + c[2] + "</small></a>"; }).join("") + "</div></section>" +
-        "<section class='sc-h-sec'><div class='sc-h-head'><h2>الأكثر استخداماً</h2></div><ul class='sc-h-list'>" +
-        TOOLS.map(function (t) { return "<li><a href='" + tl(t[3]) + "'><span class='ico'>" + window.SCI.svg(t[0], 20) + "</span><span class='tx'><b>" + esc(t[1]) + "</b><small>" + esc(t[2]) + "</small></span></a></li>"; }).join("") +
-        "</ul></section>" +
+        "<section class='sc-h-sec'><div class='sc-h-head'><h2>ابدأ من سؤالك</h2></div><div class='sc-h-ask'>" +
+        DECISIONS.map(function (d) { return "<a href='" + tl(d[0]) + "'><span class='ico'>" + window.SCI.svg(window.SCI.tab(d[0]), 22) + "</span><b>" + d[1] + "</b><small>" + d[2] + "</small></a>"; }).join("") + "</div></section>" +
+        "<section class='sc-h-sec'><div class='sc-h-all'><div><h2>" + ((Object.keys(U).length || 33) + 1) + " حاسبة ومساعد مجاني في مكان واحد</h2><p>مرتّبة حسب القرار: الراتب والضرائب، القروض والتقسيط، الادخار والاستثمار، التسوق، ومشروعك الصغير. تُحسب في متصفحك ولا نحفظ أرقامك.</p></div><a class='sc-btn' href='" + tools + "'>تصفّح كل الحاسبات</a></div></section>" +
         "<section class='sc-h-sec sc-h-caps'><div class='sc-h-head'><h2>ما نلتزم به</h2></div><div class='sc-h-capgrid'><div><b>المعادلة ظاهرة</b><p>لا أرقام مخفية: ترى كيف حُسبت كل نتيجة.</p></div><div><b>أرقامك تبقى عندك</b><p>تُحسب في متصفحك ولا تُرسل إلى أي جهة.</p></div><div><b>مصدر وتاريخ لكل رقم مرجعي</b><p>وما لا نملك له مصدراً موثوقاً تُدخله أنت بدل أن نخمّنه.</p></div></div></section>" +
         "<section class='sc-h-sec'><div class='sc-h-head'><h2>أحدث الأدلة</h2><a href='/search'>كل المقالات</a></div><div class='sc-cards sc-latest-posts sc-h-posts'></div></section>" +
         "<section class='sc-h-sec sc-faq'><div class='sc-h-head'><h2>أسئلة شائعة</h2></div>" +

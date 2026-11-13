@@ -1,0 +1,574 @@
+[
+  {
+    "kind": "blogger#page",
+    "id": "8615614326861686749",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:41:11+02:00",
+    "updated": "2026-11-08T07:41:45+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_0379114834.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/8615614326861686749",
+    "title": "تكلفة تشغيل جهاز كهربائي | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>تكلفة تشغيل جهاز كهربائي</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-appl\">\n<h2>تكلفة تشغيل جهاز كهربائي</h2><p class=\"sc-muted\">كم يكلّفك التكييف أو السخان أو الثلاجة شهرياً؟ احسبها من قدرة الجهاز وساعات تشغيله.</p>\n<div class=\"sc-tool-grid\"><div class=\"sc-field\"><label for=\"sc-ap-w\">قدرة الجهاز (وات)</label><input id=\"sc-ap-w\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-ap-h\">ساعات التشغيل يومياً</label><input id=\"sc-ap-h\" type=\"number\" min=\"0\" max=\"24\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-ap-k\">سعر الكيلووات ساعة (جنيه)</label><input id=\"sc-ap-k\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div></div>\n<div class=\"sc-tool-result\" id=\"sc-appl-result\" aria-live=\"polite\">أدخل القدرة وساعات التشغيل والسعر.</div>\n<p class=\"sc-muted\">تقدير بافتراض تشغيل ثابت 30 يوماً؛ بعض الأجهزة (التكييف والثلاجة) تعمل بقدرة أقل من المكتوبة فترات طويلة. سعر الكيلووات ساعة تأخذه من فاتورتك حسب شريحتك.</p>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_02012375883.html\">تكلفة الرحلة</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01022897461.html\">حاسبة الزكاة</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NTA1ODA2Cm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "6197597023684190352",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:41:04+02:00",
+    "updated": "2026-11-08T07:41:45+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_02012375883.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/6197597023684190352",
+    "title": "تكلفة الرحلة | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>تكلفة الرحلة</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-trip\">\n<h2>تكلفة الرحلة بالسيارة</h2><p class=\"sc-muted\">احسب تكلفة الوقود للرحلة ونصيب كل راكب. استهلاك سيارتك وسعر اللتر من أرقامك أنت.</p>\n<div class=\"sc-tool-grid\"><div class=\"sc-field\"><label for=\"sc-trip-km\">المسافة (كم)</label><input id=\"sc-trip-km\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-trip-cons\">الاستهلاك (لتر/100 كم)</label><input id=\"sc-trip-cons\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-trip-price\">سعر لتر الوقود</label><input id=\"sc-trip-price\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-trip-people\">عدد الركاب (بمن فيهم السائق)</label><input id=\"sc-trip-people\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-trip-way\">نوع الرحلة</label><select id=\"sc-trip-way\"><option value=\"1\">ذهاب فقط</option><option value=\"2\">ذهاب وعودة</option></select></div></div>\n<div class=\"sc-tool-result\" id=\"sc-trip-result\" aria-live=\"polite\">أدخل البيانات.</div>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_01022897461.html\">حاسبة الزكاة</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0379114834.html\">تكلفة تشغيل جهاز كهربائي</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NTA1MDMxCm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "1651854089185742103",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:40:58+02:00",
+    "updated": "2026-11-08T07:41:44+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_01865888670.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/1651854089185742103",
+    "title": "قيمة ساعتك | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>قيمة ساعتك</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-hourly\">\n<h2>قيمة ساعتك وسعر الشراء بساعات العمل</h2><p class=\"sc-muted\">اعرف كم تساوي ساعة عملك، وكم ساعة تحتاج لتدفع ثمن منتج ما.</p>\n<div class=\"sc-tool-grid\"><div class=\"sc-field\"><label for=\"sc-hr-income\">دخلك الشهري الصافي</label><input id=\"sc-hr-income\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-hr-hours\">ساعات العمل في اليوم</label><input id=\"sc-hr-hours\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-hr-days\">أيام العمل في الأسبوع</label><input id=\"sc-hr-days\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-hr-price\">سعر المنتج (اختياري)</label><input id=\"sc-hr-price\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div></div>\n<div class=\"sc-tool-result\" id=\"sc-hourly-result\" aria-live=\"polite\">أدخل البيانات.</div>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_02071192904.html\">الميزانية الشهرية</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0233426229.html\">القرض</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0436573556.html\">النسبة المئوية</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01138239092.html\">هدف الادخار</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0861219334.html\">نمو الادخار</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NTA0MTI3Cm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "2502628530766231308",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:40:51+02:00",
+    "updated": "2026-11-08T07:41:43+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_0991661734.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/2502628530766231308",
+    "title": "قيمة الكاش باك | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>قيمة الكاش باك</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-cashback\">\n<h2>قيمة الكاش باك</h2><p class=\"sc-muted\">هل بطاقة الكاش باك تستحق رسومها؟ احسب العائد السنوي الصافي مع سقف الاسترداد الشهري.</p>\n<div class=\"sc-tool-grid\"><div class=\"sc-field\"><label for=\"sc-cb-spend\">إنفاقك الشهري بالبطاقة</label><input id=\"sc-cb-spend\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-cb-pct\">نسبة الكاش باك %</label><input id=\"sc-cb-pct\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-cb-cap\">سقف الكاش باك الشهري (اختياري)</label><input id=\"sc-cb-cap\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-cb-fee\">الرسوم السنوية</label><input id=\"sc-cb-fee\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div></div>\n<div class=\"sc-tool-result\" id=\"sc-cashback-result\" aria-live=\"polite\">أدخل الإنفاق والنسبة.</div>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_01764616798.html\">حاسبة الخصم</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01428013757.html\">مقارنة سعر الوحدة</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0444906336.html\">الضريبة</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01034158753.html\">مقارنة المنتجات</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01190848683.html\">مركز القرار</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NTAzMjY4Cm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "216184845202213875",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:40:44+02:00",
+    "updated": "2026-11-08T07:41:42+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/72-smart-choice.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/216184845202213875",
+    "title": "مضاعفة المال (قاعدة 72) | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>مضاعفة المال (قاعدة 72)</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-rule72\">\n<h2>مضاعفة المال وقاعدة 72</h2><p class=\"sc-muted\">كم سنة يحتاج مبلغك ليتضاعف (أو يتضاعف أكثر) بعائد سنوي معيّن؟ تعرض النتيجة الدقيقة والتقدير بقاعدة 72.</p>\n<div class=\"sc-tool-grid\"><div class=\"sc-field\"><label for=\"sc-r7-rate\">العائد السنوي %</label><input id=\"sc-r7-rate\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-r7-mult\">كم ضعفاً تريد (مثلاً 2)</label><input id=\"sc-r7-mult\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div></div>\n<div class=\"sc-tool-result\" id=\"sc-rule72-result\" aria-live=\"polite\">أدخل العائد وعدد الأضعاف.</div>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_02071192904.html\">الميزانية الشهرية</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0233426229.html\">القرض</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0436573556.html\">النسبة المئوية</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01138239092.html\">هدف الادخار</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0861219334.html\">نمو الادخار</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NTAyMzgzCm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "7026653249965249407",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:40:37+02:00",
+    "updated": "2026-11-08T07:41:41+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_0981235953.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/7026653249965249407",
+    "title": "اشتراك سنوي أم شهري | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>اشتراك سنوي أم شهري</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-sub\">\n<h2>اشتراك سنوي أم شهري</h2><p class=\"sc-muted\">اعرف هل الاشتراك السنوي يوفر فعلاً، وبعد كم شهر يتعادل مع الدفع الشهري.</p>\n<div class=\"sc-tool-grid\"><div class=\"sc-field\"><label for=\"sc-sb-month\">سعر الاشتراك الشهري</label><input id=\"sc-sb-month\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-sb-year\">سعر الاشتراك السنوي</label><input id=\"sc-sb-year\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div></div>\n<div class=\"sc-tool-result\" id=\"sc-sub-result\" aria-live=\"polite\">أدخل سعر الباقتين.</div>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_01764616798.html\">حاسبة الخصم</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01428013757.html\">مقارنة سعر الوحدة</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0444906336.html\">الضريبة</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01034158753.html\">مقارنة المنتجات</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01190848683.html\">مركز القرار</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NTAxNTc5Cm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "2548102342041932855",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:39:20+02:00",
+    "updated": "2026-11-08T07:41:40+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_01172815406.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/2548102342041932855",
+    "title": "خصومات متتالية | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>خصومات متتالية</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-stack\">\n<h2>خصومات متتالية وكوبون</h2><p class=\"sc-muted\">خصمان متتاليان (مثل 20% ثم 10%) وكوبون ثابت: ما السعر النهائي والخصم الحقيقي؟ الخصمان لا يُجمعان عادةً.</p>\n<div class=\"sc-tool-grid\"><div class=\"sc-field\"><label for=\"sc-st-price\">السعر الأصلي</label><input id=\"sc-st-price\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-st-d1\">الخصم الأول %</label><input id=\"sc-st-d1\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-st-d2\">الخصم الثاني %</label><input id=\"sc-st-d2\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-st-coupon\">كوبون ثابت (اختياري)</label><input id=\"sc-st-coupon\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div></div>\n<div class=\"sc-tool-result\" id=\"sc-stack-result\" aria-live=\"polite\">أدخل السعر والخصومات.</div>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_01764616798.html\">حاسبة الخصم</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01428013757.html\">مقارنة سعر الوحدة</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0444906336.html\">الضريبة</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01034158753.html\">مقارنة المنتجات</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01190848683.html\">مركز القرار</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NTAwNzAyCm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "6635372174063393056",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:39:14+02:00",
+    "updated": "2026-11-08T07:41:39+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_02007406655.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/6635372174063393056",
+    "title": "التضخم والقوة الشرائية | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>التضخم والقوة الشرائية</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-inflation\">\n<h2>التضخم والقوة الشرائية</h2><p class=\"sc-muted\">كم ستكلّف سلعة بسعر اليوم بعد سنوات، وكم ستساوي مدخراتك فعلياً مع ارتفاع الأسعار.</p>\n<div class=\"sc-tool-grid\"><div class=\"sc-field\"><label for=\"sc-inf-amount\">المبلغ اليوم</label><input id=\"sc-inf-amount\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-inf-rate\">معدل التضخم السنوي %</label><input id=\"sc-inf-rate\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-inf-years\">عدد السنوات</label><input id=\"sc-inf-years\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div></div>\n<div class=\"sc-tool-result\" id=\"sc-inflation-result\" aria-live=\"polite\">أدخل المبلغ ومعدل التضخم والمدة.</div>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_02071192904.html\">الميزانية الشهرية</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0233426229.html\">القرض</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0436573556.html\">النسبة المئوية</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01138239092.html\">هدف الادخار</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0861219334.html\">نمو الادخار</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NDk5OTU3Cm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "2397827921396312918",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:39:07+02:00",
+    "updated": "2026-11-08T07:41:39+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_01284747857.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/2397827921396312918",
+    "title": "العائد على الاستثمار | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>العائد على الاستثمار</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-roi\">\n<h2>العائد على الاستثمار (ROI)</h2><p class=\"sc-muted\">اعرف ربحك الفعلي ونسبة العائد الكلية والسنوية لأي استثمار أو مشروع صغير.</p>\n<div class=\"sc-tool-grid\"><div class=\"sc-field\"><label for=\"sc-roi-cost\">المبلغ المستثمر</label><input id=\"sc-roi-cost\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-roi-final\">القيمة النهائية (شاملة الأرباح)</label><input id=\"sc-roi-final\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-roi-years\">المدة بالسنوات</label><input id=\"sc-roi-years\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div></div>\n<div class=\"sc-tool-result\" id=\"sc-roi-result\" aria-live=\"polite\">أدخل المبلغ والقيمة النهائية.</div>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_02071192904.html\">الميزانية الشهرية</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0233426229.html\">القرض</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0436573556.html\">النسبة المئوية</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01138239092.html\">هدف الادخار</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0861219334.html\">نمو الادخار</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NDk5MDg0Cm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "1531562609049657388",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:39:00+02:00",
+    "updated": "2026-11-08T07:41:38+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_01022897461.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/1531562609049657388",
+    "title": "حاسبة الزكاة | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>حاسبة الزكاة</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-zakat\">\n<h2>حاسبة الزكاة على المال</h2><p class=\"sc-muted\">تقدير مبسّط لزكاة المال بنسبة 2.5% إذا بلغ صافي مالك النصاب وحال عليه الحول. أدخل قيمة النصاب الحالية من مصدر موثوق؛ لا نعرض أسعار ذهب. للفتوى في حالتك راجع جهة شرعية.</p>\n<div class=\"sc-tool-grid\"><div class=\"sc-field\"><label for=\"sc-z-cash\">النقد والمدخرات</label><input id=\"sc-z-cash\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-z-gold\">قيمة الذهب والفضة المدّخرة</label><input id=\"sc-z-gold\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-z-trade\">عروض التجارة (بضاعة للبيع)</label><input id=\"sc-z-trade\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-z-debt\">ديون حالّة عليك</label><input id=\"sc-z-debt\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-z-nisab\">قيمة النصاب الحالية</label><input id=\"sc-z-nisab\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div></div>\n<div class=\"sc-tool-result\" id=\"sc-zakat-result\" aria-live=\"polite\">أدخل بياناتك.</div>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_02012375883.html\">تكلفة الرحلة</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0379114834.html\">تكلفة تشغيل جهاز كهربائي</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NDk4MTY0Cm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "7767655531293771576",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:38:53+02:00",
+    "updated": "2026-11-08T07:41:37+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_0821432554.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/7767655531293771576",
+    "title": "تحويل عملة | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>تحويل عملة</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-fx\">\n<h2>تحويل العملة بسعر تحدده أنت</h2><p class=\"sc-muted\">أدخل السعر الذي تراه في بنكك أو تطبيقك، أو اختر سعراً مرجعياً محدّثاً من الأسعار المعروضة أدناه (كم وحدة من العملة الهدف تساوي وحدة واحدة من الأصلية) وأضف عمولة إن وُجدت.</p>\n<div class=\"sc-tool-grid\"><div class=\"sc-field\"><label for=\"sc-fx-amount\">المبلغ بالعملة الأصلية</label><input id=\"sc-fx-amount\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-fx-rate\">سعر الصرف</label><input id=\"sc-fx-rate\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-fx-fee\">عمولة التحويل %</label><input id=\"sc-fx-fee\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div></div>\n<div class=\"sc-tool-result\" id=\"sc-fx-result\" aria-live=\"polite\">أدخل البيانات.</div>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_02071192904.html\">الميزانية الشهرية</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0233426229.html\">القرض</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0436573556.html\">النسبة المئوية</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01138239092.html\">هدف الادخار</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0861219334.html\">نمو الادخار</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NDk3MTM1Cm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "6013384022096969026",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:38:47+02:00",
+    "updated": "2026-11-08T07:41:36+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_0436573556.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/6013384022096969026",
+    "title": "النسبة المئوية | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>النسبة المئوية</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-percent\">\n<h2>حاسبة النسبة المئوية والتغير</h2>\n<div class=\"sc-tool-grid\">\n<div class=\"sc-field\"><label for=\"sc-base\">القيمة الأصلية</label><input id=\"sc-base\" type=\"number\" step=\"any\" inputmode=\"decimal\"></div>\n<div class=\"sc-field\"><label for=\"sc-new\">القيمة الجديدة</label><input id=\"sc-new\" type=\"number\" step=\"any\" inputmode=\"decimal\"></div>\n</div><div class=\"sc-tool-result\" id=\"sc-percent-result\" aria-live=\"polite\">أدخل القيمتين.</div>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_02071192904.html\">الميزانية الشهرية</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0233426229.html\">القرض</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01138239092.html\">هدف الادخار</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0861219334.html\">نمو الادخار</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01865888670.html\">قيمة ساعتك</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NDk2MzM2Cm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "4064120033888825232",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:38:40+02:00",
+    "updated": "2026-11-08T07:41:35+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_01267237524.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/4064120033888825232",
+    "title": "قسمة الفاتورة | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>قسمة الفاتورة</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-split\">\n<h2>قسمة الفاتورة</h2><p class=\"sc-muted\">قسّم إجمالي الفاتورة بين عدة أشخاص مع نسبة إكرامية اختيارية.</p>\n<div class=\"sc-tool-grid\"><div class=\"sc-field\"><label for=\"sc-split-total\">إجمالي الفاتورة</label><input id=\"sc-split-total\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-split-tip\">الإكرامية %</label><input id=\"sc-split-tip\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-split-people\">عدد الأشخاص</label><input id=\"sc-split-people\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\" value=\"2\"></div></div>\n<div class=\"sc-tool-result\" id=\"sc-split-result\" aria-live=\"polite\">أدخل إجمالي الفاتورة.</div>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_01764616798.html\">حاسبة الخصم</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01428013757.html\">مقارنة سعر الوحدة</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0444906336.html\">الضريبة</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01034158753.html\">مقارنة المنتجات</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01190848683.html\">مركز القرار</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NDk1NDA2Cm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "1233245585328148144",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:38:33+02:00",
+    "updated": "2026-11-08T07:41:34+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_01224101055.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/1233245585328148144",
+    "title": "التكلفة الإجمالية | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>التكلفة الإجمالية</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-total\">\n<h2>حاسبة التكلفة الإجمالية</h2>\n<div class=\"sc-tool-grid\">\n<div class=\"sc-field\"><label for=\"sc-item\">السعر الأساسي</label><input id=\"sc-item\" type=\"number\" min=\"0\" step=\"any\"></div>\n<div class=\"sc-field\"><label for=\"sc-shipping\">الشحن</label><input id=\"sc-shipping\" type=\"number\" min=\"0\" step=\"any\"></div>\n<div class=\"sc-field\"><label for=\"sc-fees\">رسوم إضافية</label><input id=\"sc-fees\" type=\"number\" min=\"0\" step=\"any\"></div>\n</div><div class=\"sc-tool-result\" id=\"sc-total-result\" aria-live=\"polite\">أدخل القيم لحساب الإجمالي.</div>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_01764616798.html\">حاسبة الخصم</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01428013757.html\">مقارنة سعر الوحدة</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0444906336.html\">الضريبة</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01034158753.html\">مقارنة المنتجات</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01190848683.html\">مركز القرار</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NDk0NTI1Cm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "7209710739181400244",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:37:16+02:00",
+    "updated": "2026-11-08T07:41:33+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_01428013757.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/7209710739181400244",
+    "title": "مقارنة سعر الوحدة | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>مقارنة سعر الوحدة</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-unit\">\n  <h2>مقارنة سعر الوحدة</h2><p class=\"sc-muted\">قارن منتجين على أساس السعر لكل وحدة قياس. استخدم نفس نوع الوحدة للمنتجين.</p>\n  <div class=\"sc-tool-grid\">\n    <div><h3>المنتج الأول</h3><div class=\"sc-field\"><label for=\"sc-p1\">السعر</label><input id=\"sc-p1\" type=\"number\" min=\"0\" step=\"0.01\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-q1\">الكمية</label><input id=\"sc-q1\" type=\"number\" min=\"0\" step=\"0.01\" inputmode=\"decimal\"></div></div>\n    <div><h3>المنتج الثاني</h3><div class=\"sc-field\"><label for=\"sc-p2\">السعر</label><input id=\"sc-p2\" type=\"number\" min=\"0\" step=\"0.01\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-q2\">الكمية</label><input id=\"sc-q2\" type=\"number\" min=\"0\" step=\"0.01\" inputmode=\"decimal\"></div></div>\n  </div>\n  <div class=\"sc-tool-result\" aria-live=\"polite\" id=\"sc-unit-result\">أدخل الأسعار والكميات للمقارنة.</div>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_01764616798.html\">حاسبة الخصم</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0444906336.html\">الضريبة</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01034158753.html\">مقارنة المنتجات</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01190848683.html\">مركز القرار</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01267237524.html\">قسمة الفاتورة</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NDkzNjgzCm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "963237164092532956",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:37:10+02:00",
+    "updated": "2026-11-08T07:41:32+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_01927696332.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/963237164092532956",
+    "title": "نقطة التعادل | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>نقطة التعادل</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-breakeven\">\n<h2>نقطة التعادل</h2><p class=\"sc-muted\">كم وحدة تبيع حتى تغطي تكاليفك الثابتة؟ مفيد لأي مشروع صغير قبل تحديد السعر.</p>\n<div class=\"sc-tool-grid\"><div class=\"sc-field\"><label for=\"sc-be-fixed\">التكاليف الثابتة الشهرية (إيجار، اشتراكات…)</label><input id=\"sc-be-fixed\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-be-price\">سعر بيع الوحدة</label><input id=\"sc-be-price\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-be-var\">التكلفة المتغيرة للوحدة</label><input id=\"sc-be-var\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div></div>\n<div class=\"sc-tool-result\" id=\"sc-breakeven-result\" aria-live=\"polite\">أدخل البيانات.</div>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_01449217589.html\">هامش الربح</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NDkyNzk3Cm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "328254209949883875",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:37:03+02:00",
+    "updated": "2026-11-08T07:41:31+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_01449217589.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/328254209949883875",
+    "title": "هامش الربح | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>هامش الربح</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-margin\">\n<h2>حاسبة هامش الربح</h2><p class=\"sc-muted\">أدخل التكلفة وسعر البيع لمعرفة الربح والهامش ونسبة الزيادة على التكلفة.</p>\n<div class=\"sc-tool-grid\"><div class=\"sc-field\"><label for=\"sc-margin-cost\">التكلفة</label><input id=\"sc-margin-cost\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-margin-price\">سعر البيع</label><input id=\"sc-margin-price\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div></div>\n<div class=\"sc-tool-result\" id=\"sc-margin-result\" aria-live=\"polite\">أدخل التكلفة وسعر البيع.</div>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_01927696332.html\">نقطة التعادل</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NDkxOTg0Cm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "8718623465331924578",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:36:56+02:00",
+    "updated": "2026-11-08T07:41:31+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_0929469799.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/8718623465331924578",
+    "title": "مقارنة عرضي تمويل | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>مقارنة عرضي تمويل</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-loancompare\">\n<h2>مقارنة عرضي تمويل</h2><p class=\"sc-muted\">قارن عرضين لنفس المبلغ بفائدة ومدة مختلفتين: أيهما أقل في إجمالي الفوائد وأيهما أخف في القسط؟</p>\n<div class=\"sc-tool-grid\"><div class=\"sc-field\"><label for=\"sc-lc-amount\">مبلغ التمويل</label><input id=\"sc-lc-amount\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-lc-ra\">فائدة العرض (أ) سنوياً %</label><input id=\"sc-lc-ra\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-lc-ma\">مدة العرض (أ) بالأشهر</label><input id=\"sc-lc-ma\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-lc-rb\">فائدة العرض (ب) سنوياً %</label><input id=\"sc-lc-rb\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-lc-mb\">مدة العرض (ب) بالأشهر</label><input id=\"sc-lc-mb\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div></div>\n<div class=\"sc-tool-result\" id=\"sc-loancompare-result\" aria-live=\"polite\">أدخل البيانات.</div>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_02071192904.html\">الميزانية الشهرية</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0233426229.html\">القرض</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0436573556.html\">النسبة المئوية</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01138239092.html\">هدف الادخار</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0861219334.html\">نمو الادخار</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NDkxMTMxCm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "4300721538628037149",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:36:49+02:00",
+    "updated": "2026-11-08T07:41:30+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_01632111211.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/4300721538628037149",
+    "title": "الفائدة الفعلية للتقسيط | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>الفائدة الفعلية للتقسيط</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-effrate\">\n<h2>الفائدة الفعلية للتقسيط</h2><p class=\"sc-muted\">كثير من عروض التقسيط تُعلن «بدون فوائد» وسعر الكاش أقل. احسب الفائدة السنوية الحقيقية المخفية في القسط.</p>\n<div class=\"sc-tool-grid\"><div class=\"sc-field\"><label for=\"sc-er-cash\">سعر الكاش</label><input id=\"sc-er-cash\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-er-down\">المقدم (إن وجد)</label><input id=\"sc-er-down\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-er-months\">عدد الأشهر</label><input id=\"sc-er-months\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-er-pay\">القسط الشهري</label><input id=\"sc-er-pay\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div></div>\n<div class=\"sc-tool-result\" id=\"sc-effrate-result\" aria-live=\"polite\">أدخل سعر الكاش والمقدم وعدد الأشهر والقسط.</div>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_02071192904.html\">الميزانية الشهرية</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0233426229.html\">القرض</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0436573556.html\">النسبة المئوية</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01138239092.html\">هدف الادخار</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0861219334.html\">نمو الادخار</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NDkwMDg0Cm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "7252418723905213889",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:36:42+02:00",
+    "updated": "2026-11-08T07:41:29+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_0861219334.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/7252418723905213889",
+    "title": "نمو الادخار | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>نمو الادخار</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-compound\">\n<h2>نمو الادخار والفائدة المركبة</h2><p class=\"sc-muted\">كم يصبح مبلغك بعد سنوات مع إضافة شهرية؟ أدخل معدل عائد سنوي تفترضه أنت؛ لا نعرض معدلات سوق ولا نضمن عائداً.</p>\n<div class=\"sc-tool-grid\"><div class=\"sc-field\"><label for=\"sc-cp-start\">المبلغ الحالي</label><input id=\"sc-cp-start\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-cp-add\">الإضافة الشهرية</label><input id=\"sc-cp-add\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-cp-rate\">العائد السنوي المفترض %</label><input id=\"sc-cp-rate\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-cp-years\">المدة بالسنوات</label><input id=\"sc-cp-years\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div></div>\n<div class=\"sc-tool-result\" id=\"sc-compound-result\" aria-live=\"polite\">أدخل البيانات.</div>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_02071192904.html\">الميزانية الشهرية</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0233426229.html\">القرض</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0436573556.html\">النسبة المئوية</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01138239092.html\">هدف الادخار</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01865888670.html\">قيمة ساعتك</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NDg5MTg5Cm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "4155015740595670519",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:36:36+02:00",
+    "updated": "2026-11-08T07:41:28+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_01197928951.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/4155015740595670519",
+    "title": "سداد القرض مبكراً | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>سداد القرض مبكراً</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-payoff\">\n<h2>سداد القرض مبكراً</h2><p class=\"sc-muted\">كم توفّر من الفوائد وكم شهراً تختصر لو دفعت مبلغاً إضافياً كل شهر؟</p>\n<div class=\"sc-tool-grid\"><div class=\"sc-field\"><label for=\"sc-po-bal\">المتبقي من القرض</label><input id=\"sc-po-bal\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-po-rate\">الفائدة السنوية %</label><input id=\"sc-po-rate\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-po-pay\">القسط الشهري الحالي</label><input id=\"sc-po-pay\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div><div class=\"sc-field\"><label for=\"sc-po-extra\">مبلغ إضافي شهرياً</label><input id=\"sc-po-extra\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div></div>\n<div class=\"sc-tool-result\" id=\"sc-payoff-result\" aria-live=\"polite\">أدخل المتبقي والفائدة والقسط والمبلغ الإضافي.</div>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_02071192904.html\">الميزانية الشهرية</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0233426229.html\">القرض</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0436573556.html\">النسبة المئوية</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01138239092.html\">هدف الادخار</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0861219334.html\">نمو الادخار</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NDg4NDAxCm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "9044902653771098144",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:35:19+02:00",
+    "updated": "2026-11-08T07:41:27+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_0444906336.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/9044902653771098144",
+    "title": "الضريبة | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>الضريبة</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-vat\">\n<h2>حاسبة ضريبة القيمة المضافة</h2><p class=\"sc-muted\">أضف الضريبة إلى سعر، أو استخرجها من سعر نهائي. النسبة تختلف حسب السلعة والبلد، فتأكد منها من مصدر رسمي.</p>\n<div class=\"sc-tool-grid\">\n<div class=\"sc-field\"><label for=\"sc-vat-amount\">المبلغ</label><input id=\"sc-vat-amount\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div>\n<div class=\"sc-field\"><label for=\"sc-vat-rate\">نسبة الضريبة %</label><input id=\"sc-vat-rate\" type=\"number\" min=\"0\" step=\"any\" inputmode=\"decimal\"></div>\n<div class=\"sc-field\"><label for=\"sc-vat-mode\">العملية</label><select id=\"sc-vat-mode\"><option value=\"add\">إضافة الضريبة إلى السعر</option><option value=\"extract\">استخراج الضريبة من السعر النهائي</option></select></div>\n</div><div class=\"sc-tool-result\" id=\"sc-vat-result\" aria-live=\"polite\">أدخل المبلغ والنسبة.</div>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_01764616798.html\">حاسبة الخصم</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01428013757.html\">مقارنة سعر الوحدة</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01034158753.html\">مقارنة المنتجات</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01190848683.html\">مركز القرار</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01267237524.html\">قسمة الفاتورة</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NDg3NDkyCm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "5771012586113794639",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:35:12+02:00",
+    "updated": "2026-11-08T07:41:26+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_01138239092.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/5771012586113794639",
+    "title": "هدف الادخار | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>هدف الادخار</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-saving\">\n<h2>حاسبة هدف الادخار</h2>\n<div class=\"sc-tool-grid\">\n<div class=\"sc-field\"><label for=\"sc-target\">المبلغ المستهدف</label><input id=\"sc-target\" type=\"number\" min=\"0\" step=\"any\"></div>\n<div class=\"sc-field\"><label for=\"sc-saved\">المبلغ الذي ادخرته</label><input id=\"sc-saved\" type=\"number\" min=\"0\" step=\"any\"></div>\n<div class=\"sc-field\"><label for=\"sc-monthly\">الادخار الشهري</label><input id=\"sc-monthly\" type=\"number\" min=\"0\" step=\"any\"></div>\n</div><div class=\"sc-tool-result\" id=\"sc-saving-result\" aria-live=\"polite\">أدخل البيانات لمعرفة المدة المتوقعة.</div>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_02071192904.html\">الميزانية الشهرية</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0233426229.html\">القرض</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0436573556.html\">النسبة المئوية</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0861219334.html\">نمو الادخار</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01865888670.html\">قيمة ساعتك</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NDg2Njk3Cm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "1611237578682996177",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:35:05+02:00",
+    "updated": "2026-11-08T07:41:25+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_02071192904.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/1611237578682996177",
+    "title": "الميزانية الشهرية | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>الميزانية الشهرية</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-budget\">\n  <h2>حاسبة الميزانية الشهرية</h2><p class=\"sc-muted\">اكتب دخلك ومصروفاتك لتعرف المتبقي ونسبة ما تنفقه.</p>\n  <div class=\"sc-tool-grid\">\n    <div class=\"sc-field\"><label for=\"sc-income\">الدخل الشهري</label><input id=\"sc-income\" type=\"number\" min=\"0\" step=\"0.01\" inputmode=\"decimal\"></div>\n    <div class=\"sc-field\"><label for=\"sc-expenses\">إجمالي المصروفات</label><input id=\"sc-expenses\" type=\"number\" min=\"0\" step=\"0.01\" inputmode=\"decimal\"></div>\n  </div>\n  <div class=\"sc-tool-result sc-kpis\" data-static=\"1\" aria-live=\"polite\"><div class=\"kpi\"><span>المتبقي</span><strong id=\"sc-balance\">أدخل البيانات</strong></div><div class=\"kpi\"><span>نسبة الإنفاق</span><b id=\"sc-ratio\">—</b></div></div>\n  <p class=\"sc-muted\">تحب تتابع ميزانيتك على ملف؟ <a href=\"https://raw.githubusercontent.com/tahattaha41/Smart-Choice/main/assets/downloads/monthly-budget-ar.xlsx\" download rel=\"noopener\">حمّل قالب الميزانية الشهرية (Excel) مجاناً</a>: دخل ومصروفات ثابتة ومتغيرة وحساب تلقائي لنسبة الادخار.</p>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_0233426229.html\">القرض</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0436573556.html\">النسبة المئوية</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01138239092.html\">هدف الادخار</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0861219334.html\">نمو الادخار</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01865888670.html\">قيمة ساعتك</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NDg1ODM3Cm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "7946967994577948701",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:34:59+02:00",
+    "updated": "2026-11-08T07:41:25+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_02030036034.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/7946967994577948701",
+    "title": "التقسيط | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>التقسيط</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-installment\">\n<h2>حاسبة التقسيط</h2>\n<div class=\"sc-tool-grid\">\n<div class=\"sc-field\"><label for=\"sc-cash\">السعر النقدي</label><input id=\"sc-cash\" type=\"number\" min=\"0\" step=\"any\"></div>\n<div class=\"sc-field\"><label for=\"sc-down\">المقدم</label><input id=\"sc-down\" type=\"number\" min=\"0\" step=\"any\"></div>\n<div class=\"sc-field\"><label for=\"sc-months\">عدد الشهور</label><input id=\"sc-months\" type=\"number\" min=\"1\" step=\"1\"></div>\n<div class=\"sc-field\"><label for=\"sc-monthpay\">قيمة القسط الشهري</label><input id=\"sc-monthpay\" type=\"number\" min=\"0\" step=\"any\"></div>\n</div><div class=\"sc-tool-result\" id=\"sc-installment-result\" aria-live=\"polite\">أدخل بيانات العرض.</div>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_01764616798.html\">حاسبة الخصم</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01428013757.html\">مقارنة سعر الوحدة</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0444906336.html\">الضريبة</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01034158753.html\">مقارنة المنتجات</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01190848683.html\">مركز القرار</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NDg1MTU2Cm9mZnNldDogNzIwMDAwMAo\""
+  },
+  {
+    "kind": "blogger#page",
+    "id": "7978060533704687658",
+    "blog": {
+      "id": "2035290331054695261"
+    },
+    "published": "2026-11-08T07:34:52+02:00",
+    "updated": "2026-11-08T07:41:24+02:00",
+    "url": "https://smartchoicee1.blogspot.com/p/smart-choice_01764616798.html",
+    "selfLink": "https://blogger.googleapis.com/v3/blogs/2035290331054695261/pages/7978060533704687658",
+    "title": "حاسبة الخصم | Smart Choice",
+    "content": "<div class=\"sc-page sc-toolpage\" dir=\"rtl\" lang=\"ar\">\n<nav class=\"sc-crumbs\" aria-label=\"مسار التصفح\"><a href=\"/\">الرئيسية</a> › <a href=\"/p/smart-choice_02145436434.html\">الأدوات</a> › <span>حاسبة الخصم</span></nav>\n<section class=\"sc-tool-card sc-tool\" id=\"sc-discount\">\n  <h2>حاسبة الخصم والسعر النهائي</h2><p class=\"sc-muted\">أدخل السعر والخصم لمعرفة ما ستدفعه وقيمة التوفير.</p>\n  <div class=\"sc-tool-grid\">\n    <div class=\"sc-field\"><label for=\"sc-price\">السعر الأصلي</label><input id=\"sc-price\" type=\"number\" min=\"0\" step=\"0.01\" inputmode=\"decimal\"></div>\n    <div class=\"sc-field\"><label for=\"sc-rate\">نسبة الخصم %</label><input id=\"sc-rate\" type=\"number\" min=\"0\" max=\"100\" step=\"0.1\" inputmode=\"decimal\"></div>\n  </div>\n  <div class=\"sc-tool-result sc-kpis\" data-static=\"1\" aria-live=\"polite\"><div class=\"kpi\"><span>السعر بعد الخصم</span><strong id=\"sc-final\">أدخل البيانات</strong></div><div class=\"kpi\"><span>قيمة التوفير</span><b id=\"sc-discount-saved\">—</b></div></div>\n</section>\n<section class=\"sc-tool-card sc-prose\"><h2>أدوات ذات صلة</h2><p class=\"sc-relrow\"><a class=\"sc-rel\" href=\"/p/smart-choice_01428013757.html\">مقارنة سعر الوحدة</a> <a class=\"sc-rel\" href=\"/p/smart-choice_0444906336.html\">الضريبة</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01034158753.html\">مقارنة المنتجات</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01190848683.html\">مركز القرار</a> <a class=\"sc-rel\" href=\"/p/smart-choice_01267237524.html\">قسمة الفاتورة</a></p><p><a href=\"/p/smart-choice_02145436434.html\">عرض كل الأدوات ←</a></p></section>\n</div>",
+    "author": {
+      "id": "08220897939551746424",
+      "displayName": "TaHa",
+      "url": "https://www.blogger.com/profile/08220897939551746424",
+      "image": {
+        "url": "//www.blogger.com/img/blogger_logo_round_35.png"
+      }
+    },
+    "etag": "\"dGltZXN0YW1wOiAxNzk0MTE2NDg0MzU5Cm9mZnNldDogNzIwMDAwMAo\""
+  }
+]

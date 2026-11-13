@@ -1,12 +1,12 @@
 OK    Home loads
 OK    Home shows hero
 OK    Design v4 live: hero calculator present (if FAIL: new JS not loading)
-INFO  Home style probe: font=Tajawal, "Segoe UI", Tahoma, Arial, sans | button=rgb(36, 87, 245)
+INFO  Home style probe: font=Tajawal, "Segoe UI", Tahoma, Arial, sans | button=rgb(30, 79, 220)
 OK    Installed theme has the GitHub loader (if FAIL: upload theme/smart-choice-blogger.xml once)
 OK    CDN serves latest front-end JS (self-heal present)
-OK    Nav has no old-brand pages: الرئيسيةالأدوات الذكيةالمقالاتمقارنة المنتجاتمركز القرارمن نحنسياسة المحتوى والتحريرإعلن معنااتصل بناخريطة الموقعسياسة ا
-OK    ads.txt يحتوي معرّف الناشر
-INFO  Pages feed entries: 42
+OK    Nav has no old-brand pages: الرئيسيةالأدوات الذكيةالمقالاتأسعار اليوممقارنة المنتجاتمركز القرار
+WARN  ads.txt غير مفعّل بعد في إعدادات بلوجر
+INFO  Pages feed entries: 43
 OK    Tools page loads
 OK    Hub: assistant visible
 OK    Hub: icon buttons (34)
@@ -17,11 +17,15 @@ OK    Discount tool page loads
 OK    Discount tool visible on its own page
 OK    Discount calculator works -> السعر بعد الخصم ١٬٦٠٠ قيمة التوفير ٤٠٠
 OK    Gold tool page loads
-OK    Gold reference line shown: سعر مرجعي للجرام (GoldAPI.io، آخر تحديث ١٢‏/١١‏/٢٠٢٦، ١٠:٤٨ م): عيار 21 ≈ ٥٬٨٢٣٫٦٤ عيار 24
+OK    Gold reference line shown: سعر مرجعي للجرام (xaus.com، آخر تحديث ١٣‏/١١‏/٢٠٢٦، ١٢:٠٥ م): عيار 21 ≈ ٥٬٨٦٠٫٦ عيار 24 ≈ 
+OK    Rates page loads
+OK    Rates board cards: 15 (عملات + ذهب + فضة؛ أقل من 8 = بيانات قديمة أو مصدر متوقف)
+OK    Rates board has no NaN/undefined
+INFO  Rates board meta: تتجدد تلقائياً | آخر فحص للمصادر: ١٣‏/١١‏/٢٠٢٦، ١٢:٠٦ م
 OK    Tool page opens with its tool visible: taxeg
-OK    Tool page guide text words (taxeg): 664
+OK    Tool page guide text words (taxeg): 660
 OK    Tool page opens with its tool visible: percent
-OK    Tool page guide text words (percent): 480
+OK    Tool page guide text words (percent): 478
 OK    About loads
 OK    About: body text length 1258
 OK    Contact loads
@@ -32,9 +36,9 @@ OK    Privacy: body text length 2162
 OK    Terms loads
 OK    Terms: body text length 1131
 OK    Decision page loads
-OK    Decision page: body text length 2360
+OK    Decision page: body text length 2348
 OK    Compare page loads
-OK    Compare page: body text length 3095
+OK    Compare page: body text length 3083
 OK    Editorial page loads
 OK    Editorial page: body text length 978
 OK    Admin page loads
@@ -44,7 +48,7 @@ OK    Posts in feed: 20
 OK    Latest post body length 4367
 OK    No JS errors
 OK    Mobile: home?m=1 loads
-OK    Mobile: home content length 3008
+OK    Mobile: home content length 2805
 OK    Mobile: tools?m=1 loads
 OK    Mobile: tools hub rendered
 OK    Mobile: about content length 1265

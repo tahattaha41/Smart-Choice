@@ -2,6 +2,7 @@
 """جرد صفحات ومقالات Blogger، وحذف غير المُدارة منها التي تحمل اسماً قديماً القديم عند الطلب فقط.
 
 الوضع الافتراضي: تقرير فقط (reports/blogger-inventory.json) بدون أي حذف.
+--delete-duplicates: يحذف (بعد نسخ احتياطي) الصفحات والمقالات غير المُدارة التي يطابق عنوانها عنوان عنصر مُدار (نسخ قديمة مكررة).
 --delete: ينسخ احتياطياً كل عنصر إلى backup/ ثم يحذفه. لا يحذف أبداً ما هو مسجل في ملفات الحالة
 (.blogger-state.json / .blogger-pages-state.json) ولا ما لا يحتوي العنوان على الكلمة المطلوبة.
 """
@@ -12,6 +13,7 @@ from googleapiclient.discovery import build
 
 PATTERN = re.compile(os.environ.get("CLEANUP_PATTERN", "utilit[y]ra"), re.I)
 DELETE = "--delete" in sys.argv
+DELETE_DUP = "--delete-duplicates" in sys.argv
 
 def managed_ids(file):
     p = Path(file)
@@ -40,20 +42,27 @@ def main():
         pages += list(listing(svc.pages(), blogId=blog, fetchBodies=True, status=st))
         posts += list(listing(svc.posts(), blogId=blog, fetchBodies=True, status=st, maxResults=500))
     managed_titles = {it.get("title") for it in posts if it["id"] in keep_posts}
+    managed_page_titles = {it.get("title") for it in pages if it["id"] in keep_pages}
+    if len(managed_page_titles) < 20:  # حماية: لا نحذف مكررات إن لم نتعرف على الصفحات المُدارة بشكل موثوق
+        managed_page_titles = set()
     inv = {"pages": [], "posts": []}
     targets = []
+    candidates = []
     for kind, items, keep in (("pages", pages, keep_pages), ("posts", posts, keep_posts)):
         for it in items:
             managed = it["id"] in keep
             match = bool(PATTERN.search(it.get("title", "")))
             inv[kind].append({"id": it["id"], "title": it.get("title"), "url": it.get("url"), "status": it.get("status"), "managed": managed, "matches_old_name": match, "has_contact_email": "skyloom32" in (it.get("content") or "")})
-            duplicate = kind == "posts" and not managed and it.get("title") in managed_titles  # نسخة مكررة من مقال مُدار
-            if (match or duplicate) and not managed:
+            duplicate = not managed and it.get("title") in (managed_titles if kind == "posts" else managed_page_titles)  # نسخة مكررة من عنصر مُدار
+            inv[kind][-1]["duplicate_of_managed"] = duplicate
+            if not managed and ((DELETE and (match or (duplicate and kind == "posts"))) or (DELETE_DUP and duplicate)):
                 targets.append((kind, it))
+            elif not managed and (match or duplicate):
+                candidates.append((kind, it))
     Path("reports").mkdir(exist_ok=True)
     Path("reports/blogger-inventory.json").write_text(json.dumps(inv, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"pages={len(pages)} posts={len(posts)} deletion-candidates={len(targets)} delete={DELETE}")
-    if DELETE and targets:
+    print(f"pages={len(pages)} posts={len(posts)} to-delete={len(targets)} candidates-not-deleted={len(candidates)} delete={DELETE} delete-duplicates={DELETE_DUP}")
+    if (DELETE or DELETE_DUP) and targets:
         Path("backup").mkdir(exist_ok=True)
         Path(f"backup/removed-{__import__('datetime').datetime.utcnow():%Y%m%d-%H%M%S}.json").write_text(json.dumps([{"kind": k, **it} for k, it in targets], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         for kind, it in targets:

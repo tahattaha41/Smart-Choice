@@ -7,6 +7,10 @@ on:
         description: "Delete unmanaged pages/posts whose title contains the old name (backup is committed first)"
         type: boolean
         default: false
+      delete_duplicate_items:
+        description: "Delete unmanaged pages/posts whose title duplicates a managed item (backup is committed first)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -34,11 +38,10 @@ jobs:
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
           CLEANUP_PATTERN: "utilit[y]ra|flarivo|toolora"
         run: |
-          if [ "${{ inputs.delete_old_name_items }}" = "true" ]; then
-            python scripts/blogger_cleanup.py --delete
-          else
-            python scripts/blogger_cleanup.py
-          fi
+          ARGS=""
+          [ "${{ inputs.delete_old_name_items }}" = "true" ] && ARGS="$ARGS --delete"
+          [ "${{ inputs.delete_duplicate_items }}" = "true" ] && ARGS="$ARGS --delete-duplicates"
+          python scripts/blogger_cleanup.py $ARGS
       - name: Commit report and backup
         if: always()
         run: |

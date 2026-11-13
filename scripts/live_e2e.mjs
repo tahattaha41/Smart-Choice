@@ -57,7 +57,7 @@ try {
   out.push((fontOk ? 'OK    ' : 'WARN  ') + 'Design font Tajawal loaded');
   await page.fill('#sc-ask', 'خصم 25% على 1800'); await page.click('#sc-ask-go'); await page.waitForTimeout(800);
   const at = await page.locator('#sc-assistant-result').innerText().catch(() => '');
-  rec(/1350|١٣٥٠|1[,٬]350/.test(at) && !/NaN|undefined/.test(at), 'Hub: assistant answers -> ' + at.replace(/\s+/g, ' ').slice(0, 60));
+  rec(/[1١][,٬]?[3٣][5٥][0٠]/.test(at) && !/NaN|undefined/.test(at), 'Hub: assistant answers -> ' + at.replace(/\s+/g, ' ').slice(0, 60));
 } catch (e) { rec(false, 'Hub check error: ' + String(e.message).split('\n')[0]); }
 
 // صفحة كل أداة: الأداة ظاهرة، دليل نصي كافٍ، وسطر الذهب في حاسبة الذهب

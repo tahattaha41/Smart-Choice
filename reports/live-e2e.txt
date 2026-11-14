@@ -17,11 +17,11 @@ OK    Discount tool page loads
 OK    Discount tool visible on its own page
 OK    Discount calculator works -> السعر بعد الخصم ١٬٦٠٠ قيمة التوفير ٤٠٠
 OK    Gold tool page loads
-OK    Gold reference line shown: سعر مرجعي للجرام (xaus.com، آخر تحديث ١٤‏/١١‏/٢٠٢٦، ١٢:٥٢ م): عيار 21 ≈ ٥٬٨٤٤٫١٧ عيار 24 ≈
+OK    Gold reference line shown: سعر مرجعي للجرام (xaus.com، آخر تحديث ١٤‏/١١‏/٢٠٢٦، ٦:٤٦ م): عيار 21 ≈ ٥٬٨٤٤٫١٧ عيار 24 ≈ 
 OK    Rates page loads
 OK    Rates board cards: 15 (عملات + ذهب + فضة؛ أقل من 8 = بيانات قديمة أو مصدر متوقف)
 OK    Rates board has no NaN/undefined
-INFO  Rates board meta: تتجدد تلقائياً | آخر فحص للمصادر: ١٤‏/١١‏/٢٠٢٦، ١٢:٥٢ م
+INFO  Rates board meta: تتجدد تلقائياً | آخر فحص للمصادر: ١٤‏/١١‏/٢٠٢٦، ٦:٤٦ م
 OK    Tool page opens with its tool visible: taxeg
 OK    Tool page guide text words (taxeg): 660
 OK    Tool page opens with its tool visible: percent

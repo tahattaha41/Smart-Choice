@@ -1149,6 +1149,7 @@
   }
   function run() {
     var root = document.getElementById("sc-admin-root");
+    if (root) { try { var nm = document.createElement("meta"); nm.name = "robots"; nm.content = "noindex,nofollow"; document.head.appendChild(nm); } catch (e) {} }
     if (!root || root.dataset.scReady) return;
     root.dataset.scReady = "1";
     var m = document.createElement("meta"); m.name = "robots"; m.content = "noindex,nofollow"; document.head.appendChild(m);

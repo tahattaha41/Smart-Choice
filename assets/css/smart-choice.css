@@ -44,6 +44,7 @@ html body .sc-bottombar{display:none}
 }
 html body .sc-main{padding:18px 0 44px;min-height:60vh}
 html.sc-home-ready body #main-content>*:not(.sc-home-root){display:none!important}
+html.sc-home-ready body .sc-home-static{display:none!important}
 
 /* ---------- عناصر عامة ---------- */
 html body .sc-btn,html body .sc-ghost{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 20px;border-radius:10px;border:1px solid transparent;font:inherit;font-weight:800;font-size:15.5px;cursor:pointer;text-decoration:none;line-height:1.4}

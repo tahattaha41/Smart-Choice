@@ -126,20 +126,17 @@
   <a class='sc-skip' href='#main-content'>تجاوز إلى المحتوى</a>
   <main id='main-content' class='sc-wrap sc-main'>
     <b:if cond='data:blog.url == data:blog.homepageUrl'>
-      <section class='sc-hero'><h1>اختيارات أذكى. قرارات أفضل.</h1><p>احسب ميزانيتك، قارن الأسعار، ونظّم قراراتك اليومية باستخدام أدوات مجانية واضحة وسهلة.</p><a class='sc-btn' href='https://smartchoicee1.blogspot.com/p/smart-choice_02145436434.html'>اكتشف الأدوات</a></section>
-      <h2 class='sc-sectiontitle'>ابدأ من هنا</h2>
+      <section class='sc-hero'><h1>حاسبات مالية بالجنيه المصري، مع شرح لكل معادلة</h1><p>Smart Choice موقع عربي مستقل فيه أكثر من ثلاثين حاسبة لقرارات المال اليومية: صافي المرتب بعد الضريبة والتأمينات، قسط القرض وإجمالي فوائده، الفرق بين التقسيط والكاش، عائد شهادات الادخار، وسعر الذهب والعملات. تحت كل حاسبة شرح للمعادلة ومثال محسوب، وكل الحسابات تتم في متصفحك دون تسجيل.</p><a class='sc-btn' href='https://smartchoicee1.blogspot.com/p/smart-choice_02145436434.html'>كل الحاسبات</a></section>
+      <h2 class='sc-sectiontitle'>الحاسبات حسب الموضوع</h2>
       <div class='sc-cards'>
-        <article class='sc-card'><h3>الحاسبات الذكية</h3><p>احسب الخصومات والميزانية والتكاليف من بياناتك.</p><a class='sc-btn' href='https://smartchoicee1.blogspot.com/p/smart-choice_02145436434.html'>استخدم الحاسبات</a></article>
-        <article class='sc-card'><h3>المقارنات</h3><p>قارن سعر الوحدة والتكلفة الإجمالية قبل الشراء.</p><a class='sc-btn' href='https://smartchoicee1.blogspot.com/p/smart-choice_02145436434.html'>ابدأ المقارنة</a></article>
-        <article class='sc-card'><h3>أدلة ومقالات</h3><p>شروحات عملية تساعدك على استخدام الأدوات واتخاذ قرار أوضح.</p><a class='sc-btn' href='/search'>اقرأ المقالات</a></article>
+        <article class='sc-card'><h3>المال والرواتب</h3><p><a href='https://smartchoicee1.blogspot.com/p/smart-choice_01448156426.html'>ضريبة المرتبات</a> · <a href='https://smartchoicee1.blogspot.com/p/smart-choice_0233426229.html'>القرض</a> · <a href='https://smartchoicee1.blogspot.com/p/smart-choice_091578269.html'>شهادة الادخار</a> · <a href='https://smartchoicee1.blogspot.com/p/smart-choice_0935764383.html'>الميزانية الشهرية</a> · <a href='https://smartchoicee1.blogspot.com/p/smart-choice_0791198856.html'>هدف الادخار</a></p></article>
+        <article class='sc-card'><h3>التسوق والأسعار</h3><p><a href='https://smartchoicee1.blogspot.com/p/smart-choice_02019563632.html'>حاسبة الخصم</a> · <a href='https://smartchoicee1.blogspot.com/p/smart-choice_01508774695.html'>خصومات متتالية</a> · <a href='https://smartchoicee1.blogspot.com/p/smart-choice_0180729854.html'>الفائدة الفعلية للتقسيط</a> · <a href='https://smartchoicee1.blogspot.com/p/smart-choice_01559774815.html'>سعر الوحدة</a> · <a href='https://smartchoicee1.blogspot.com/p/smart-choice_01872826488.html'>التكلفة الإجمالية</a></p></article>
+        <article class='sc-card'><h3>مشروعك الصغير</h3><p><a href='https://smartchoicee1.blogspot.com/p/smart-choice_01704183381.html'>هامش الربح</a> · <a href='https://smartchoicee1.blogspot.com/p/smart-choice_0814919520.html'>نقطة التعادل</a> · <a href='https://smartchoicee1.blogspot.com/p/smart-choice_01226618737.html'>الضريبة المضافة</a> · <a href='https://smartchoicee1.blogspot.com/p/smart-choice_01610293671.html'>العائد على الاستثمار</a></p></article>
+        <article class='sc-card'><h3>حياتك اليومية</h3><p><a href='https://smartchoicee1.blogspot.com/p/smart-choice_0607977130.html'>الذهب والمصنعية</a> · <a href='https://smartchoicee1.blogspot.com/p/smart-choice_0478057747.html'>الزكاة</a> · <a href='https://smartchoicee1.blogspot.com/p/smart-choice_0223493282.html'>تحويل عملة</a> · <a href='https://smartchoicee1.blogspot.com/p/smart-choice_0421431942.html'>التضخم</a> · <a href='https://smartchoicee1.blogspot.com/p/smart-choice_01324700279.html'>تكلفة الرحلة</a></p></article>
       </div>
-      <h2 class='sc-sectiontitle'>أحدث المقالات</h2>
-      <div class='sc-cards sc-latest-posts'>
-        <article class='sc-card'><h3><a href='https://smartchoicee1.blogspot.com/2026/10/blog-post_971.html'>إزاي تحسب الخصم والسعر بعد التخفيض؟</a></h3><p>طريقة سهلة لحساب قيمة الخصم والسعر النهائي قبل الشراء.</p><a class='sc-btn' href='https://smartchoicee1.blogspot.com/2026/10/blog-post_971.html'>اقرأ المقال</a></article>
-        <article class='sc-card'><h3><a href='https://smartchoicee1.blogspot.com/2026/10/blog-post_893.html'>إزاي تنظم ميزانيتك الشهرية؟</a></h3><p>قسّم دخلك ومصروفاتك واعرف المتبقي مع خطوات عملية.</p><a class='sc-btn' href='https://smartchoicee1.blogspot.com/2026/10/blog-post_893.html'>اقرأ المقال</a></article>
-        <article class='sc-card'><h3><a href='https://smartchoicee1.blogspot.com/2026/10/blog-post_82.html'>مقارنة سعر الوحدة قبل الشراء</a></h3><p>قارن العبوات والأحجام المختلفة على أساس سعر الوحدة.</p><a class='sc-btn' href='https://smartchoicee1.blogspot.com/2026/10/blog-post_82.html'>اقرأ المقال</a></article>
-      </div>
-    </b:if>
+      <h2 class='sc-sectiontitle'>لماذا نثق في الأرقام هنا؟</h2>
+      <p>كل أداة تعرض معادلتها وحدود نتيجتها. ما لا نملك له مصدراً موثوقاً وحديثاً، كفوائد الشهادات، تُدخله أنت بدل أن نعرض رقماً قد يكون قديماً. وما نعرضه من أسعار (العملات والذهب والفضة) نذكر مصدره ووقت تحديثه. والنتائج تقديرية وليست نصيحة مالية. اقرأ <a href='https://smartchoicee1.blogspot.com/p/smart-choice.html'>من نحن</a> لتعرف مصادرنا وطريقتنا في المراجعة.</p>
+      </b:if>
   </main>
     <b:section id='main' class='sc-wrap sc-main' maxwidgets='1' showaddelement='yes'>
       <b:widget id='Blog1' type='Blog' title='المحتوى' version='2' locked='false'>
@@ -149,6 +146,16 @@
           <b:widget-setting name='showCommentLink'>false</b:widget-setting>
         </b:widget-settings>
         <b:includable id='main' var='top'>
+          <b:if cond='data:blog.url == data:blog.homepageUrl'>
+            <div class='sc-home-static'>
+              <h2 class='sc-sectiontitle'>أحدث المقالات</h2>
+              <div class='sc-cards'>
+                <b:loop values='data:posts' var='post'>
+                  <article class='sc-card'><h3><a expr:href='data:post.url'><data:post.title/></a></h3><p><data:post.snippet/></p></article>
+                </b:loop>
+              </div>
+            </div>
+          </b:if>
           <b:if cond='data:blog.url != data:blog.homepageUrl'>
           <div class='blog-posts hfeed'>
             <b:loop values='data:posts' var='post'>

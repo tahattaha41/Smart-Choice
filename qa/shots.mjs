@@ -26,6 +26,7 @@ for (const w of [1280, 390]) for (const [name, main, home] of jobs) {
     if (u.includes('/feeds/posts')) return r.fulfill({ json: { feed: { entry: ['كيف تقارن عرضي تقسيط قبل التوقيع', 'ضريبة المرتبات: ماذا يخصم من راتبك فعلاً', 'هل الخصم 30% يوفر لك فعلاً؟'].map((t, i) => ({ title: { $t: t }, summary: { $t: 'ملخص قصير يوضح فكرة المقال وما ستخرج به بعد قراءته.' }, category: [{ term: 'مال' }], link: [{ rel: 'alternate', href: 'https://x.test/a' + i + '.html' }] })) } } });
     return r.fulfill({ contentType: 'text/html; charset=utf-8', body: shell(main, home) }); });
   await p.goto('https://x.test/' + (home ? '?m=1' : 'p/' + name + '.html')); await p.addScriptTag({ content: js }); await p.waitForTimeout(1800);
+  if (!process.env.TOP) { await p.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 500) { scrollTo(0, y); await new Promise(r => setTimeout(r, 120)); } scrollTo(0, 0); }); await p.waitForTimeout(1500); }
   await p.screenshot({ path: `${out}/${label}-${name}-${w}.png`, fullPage: !process.env.TOP }); console.log(name, w, errs.length ? errs : 'ok'); await p.close();
 }
 await b.close();

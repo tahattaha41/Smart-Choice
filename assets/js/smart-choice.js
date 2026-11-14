@@ -1666,3 +1666,23 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
   setTimeout(init, 1500);
 })();
+
+/* حركة الظهور عند التمرير (تتوقف مع prefers-reduced-motion) */
+(function () {
+  try {
+    if (!("IntersectionObserver" in window) || (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) return;
+    var SEL = ".sc-h-sec,.sc-h-ask a,.sc-h-cat,.sc-h-capgrid>div,.sc-tabs button,.sc-tool-card,.sc-rgrid .sc-rcard,.sc-latest-posts>*,.sc-cards>*";
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("sc-in"); io.unobserve(e.target); } }); }, { threshold: .08, rootMargin: "0px 0px -40px 0px" });
+    function scan() {
+      document.querySelectorAll(SEL).forEach(function (el) {
+        if (el.__rv) return; el.__rv = 1; el.classList.add("sc-rv");
+        var i = Array.prototype.indexOf.call(el.parentNode.children, el); el.style.setProperty("--d", Math.min(i, 8));
+        io.observe(el);
+      });
+    }
+    document.documentElement.classList.add("sc-anim");
+    var t; new MutationObserver(function () { clearTimeout(t); t = setTimeout(scan, 80); }).observe(document.body, { childList: true, subtree: true });
+    scan();
+    setTimeout(function () { document.querySelectorAll(".sc-rv:not(.sc-in)").forEach(function (e) { var r = e.getBoundingClientRect(); if (r.top < innerHeight) e.classList.add("sc-in"); }); }, 1800);
+  } catch (e) {}
+})();

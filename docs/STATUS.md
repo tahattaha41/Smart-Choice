@@ -1,6 +1,6 @@
 # حالة المشروع (تُولَّد تلقائياً — لا تعدّل يدوياً)
 
-> آخر توليد: 2026-11-14 08:54 UTC بواسطة scripts/update_status.py. للتفاصيل الثابتة والقرارات: docs/HANDOFF.md.
+> آخر توليد: 2026-11-14 09:01 UTC بواسطة scripts/update_status.py. للتفاصيل الثابتة والقرارات: docs/HANDOFF.md.
 
 ## الأرقام
 - مقالات: 21 (متوسط الكلمات 688)
@@ -19,6 +19,9 @@
 auto-posts.yml، blogger-cleanup.yml، blogger-pages-sync.yml، blogger-sync.yml، content-bundle.yml، frontend-assets.yml، live-e2e.yml، quality-audit.yml، rates.yml، site-review.yml، site-stats.yml، status-doc.yml، theme-validation.yml
 
 ## آخر الكوميتات
+- 38d1e80 2026-11-14 feat: editorial v9 design; gate AdSense to content pages + noindex utility pages
+- 5817091 2026-11-14 chore: reference FX rates [skip ci]
+- 605e3fa 2026-11-14 docs: auto-update STATUS.md [skip ci]
 - 2ef9189 2026-11-14 feat: design v8 Motion (animated) replaces v7; scroll-reveal JS
 - e9053fb 2026-11-14 chore: reference FX rates [skip ci]
 - dafd175 2026-11-14 chore: live browser test report [skip ci]
@@ -28,6 +31,3 @@ auto-posts.yml، blogger-cleanup.yml، blogger-pages-sync.yml، blogger-sync.yml
 - 20c2de2 2026-11-14 chore: reference FX rates [skip ci]
 - 46b3c25 2026-11-14 chore: reference FX rates [skip ci]
 - 52f88be 2026-11-14 chore: reference FX rates [skip ci]
-- ce40730 2026-11-14 chore: reference FX rates [skip ci]
-- 0fd8c3b 2026-11-14 chore: reference FX rates [skip ci]
-- e03f46c 2026-11-14 chore: reference FX rates [skip ci]

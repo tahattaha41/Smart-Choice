@@ -17,11 +17,11 @@ OK    Discount tool page loads
 OK    Discount tool visible on its own page
 OK    Discount calculator works -> السعر بعد الخصم ١٬٦٠٠ قيمة التوفير ٤٠٠
 OK    Gold tool page loads
-OK    Gold reference line shown: سعر مرجعي للجرام (xaus.com، آخر تحديث ١٣‏/١١‏/٢٠٢٦، ١١:٤٣ م): عيار 21 ≈ ٥٬٨٤٥٫٤٦ عيار 24 ≈
+OK    Gold reference line shown: سعر مرجعي للجرام (xaus.com، آخر تحديث ١٤‏/١١‏/٢٠٢٦، ١:٠٠ ص): عيار 21 ≈ ٥٬٨٤٥٫٤٦ عيار 24 ≈ 
 OK    Rates page loads
 OK    Rates board cards: 15 (عملات + ذهب + فضة؛ أقل من 8 = بيانات قديمة أو مصدر متوقف)
 OK    Rates board has no NaN/undefined
-INFO  Rates board meta: تتجدد تلقائياً | آخر فحص للمصادر: ١٣‏/١١‏/٢٠٢٦، ١١:٤٣ م
+INFO  Rates board meta: تتجدد تلقائياً | آخر فحص للمصادر: ١٤‏/١١‏/٢٠٢٦، ١:٠١ ص
 OK    Tool page opens with its tool visible: taxeg
 OK    Tool page guide text words (taxeg): 660
 OK    Tool page opens with its tool visible: percent
@@ -33,9 +33,8 @@ OK    Contact: body text length 787
 OK    Contact shows email
 OK    Privacy loads
 OK    Privacy: body text length 2162
-FAIL  Terms loads
-INFO  Terms url=https://smartchoicee1.blogspot.com/p/smart-choice_01037455191.html status=302
-FAIL  Terms: body text length 0
+OK    Terms loads
+OK    Terms: body text length 1131
 OK    Decision page loads
 OK    Decision page: body text length 2363
 OK    Compare page loads
@@ -46,11 +45,11 @@ OK    Admin page loads
 OK    Admin page: body text length 185
 OK    Admin: password gate shown and no data exposed before login
 OK    Posts in feed: 20
-FAIL  Latest post body length 0
+OK    Latest post body length 4367
 OK    No JS errors
-FAIL  Mobile: home?m=1 loads
-FAIL  Mobile: home content length 0
+OK    Mobile: home?m=1 loads
+OK    Mobile: home content length 3239
 OK    Mobile: tools?m=1 loads
 OK    Mobile: tools hub rendered
 OK    Mobile: about content length 1265
-failed=5
+failed=0

@@ -7,7 +7,12 @@
   <b:include data='blog' name='all-head-content'/>
   <title><data:blog.pageTitle/></title>
   <meta expr:content='data:blog.metaDescription' name='description'/>
-  <meta content='index,follow,max-image-preview:large' name='robots'/>
+  <b:if cond='data:blog.pageType == &quot;error_page&quot; or data:blog.pageType == &quot;archive&quot; or data:blog.searchQuery or data:blog.searchLabel'>
+    <meta content='noindex,follow' name='robots'/>
+  <b:else/>
+    <meta content='index,follow,max-image-preview:large' name='robots'/>
+  </b:if>
+  <meta expr:content='data:blog.pageType' name='sc-pagetype'/>
   <meta expr:content='data:blog.pageTitle' property='og:title'/>
   <meta expr:content='data:blog.url' property='og:url'/>
   <meta content='website' property='og:type'/>
@@ -45,8 +50,27 @@
     gtag('js', new Date());
     gtag('config', 'G-BRZP957SQ4');
   </script>
-  <!-- Google AdSense — site-wide loader -->
-  <script async='async' src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1235197294708204' crossorigin='anonymous'></script>
+  <!-- AdSense: يُحمَّل فقط على صفحات فيها محتوى ناشر كافٍ (مقال أو صفحة أداة/دليل). لا إعلانات على الرئيسية ولا الأدوات الفهرسية ولا البحث ولا الأخطاء ولا الإدارة. -->
+  <script>//<![CDATA[ /*SC-AD-GATE*/
+  (function(){
+    var CLIENT='ca-pub-1235197294708204',MIN=350,tries=0,done=false;
+    function words(el){return (el.innerText||'').split(/\s+/).filter(function(w){return w.length>1;}).length;}
+    function eligible(){
+      var m=document.querySelector('meta[name="sc-pagetype"]'),pt=m?m.getAttribute('content'):'';
+      var path=location.pathname;
+      if(pt!=='item'&&pt!=='static_page')return false;
+      if(path==='/'||/^\/search/.test(path)||/\/404/.test(path))return false;
+      var main=document.querySelector('.sc-main');if(!main)return false;
+      if(main.querySelector('.sc-tabs,#sc-admin,.sc-admin,#sc-rates-board,.sc-h-hero'))return false;
+      if(pt==='static_page'&&!main.querySelector('.sc-tool,.sc-guide,.sc-prose'))return false;
+      var c=main.cloneNode(true);c.querySelectorAll('nav,.sc-share-bar,.sc-related,form,button,script,style').forEach(function(n){n.remove();});
+      return (c.textContent||'').split(/\s+/).filter(function(w){return w.length>1;}).length>=MIN;
+    }
+    function load(){if(done)return;done=true;var s=document.createElement('script');s.async=true;s.crossOrigin='anonymous';s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client='+CLIENT;document.head.appendChild(s);}
+    function check(){if(done)return;tries++;try{if(eligible()){load();return;}}catch(e){}if(tries<8)setTimeout(check,900);}
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(check,600);});else setTimeout(check,600);
+  })();
+  //]]></script>
   <b:skin><![CDATA[
 :root{--navy:#102b50;--blue:#176b87;--ink:#182338;--muted:#607086;--line:#e3eaf0;--paper:#f6f9fc;--white:#fff}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.8}

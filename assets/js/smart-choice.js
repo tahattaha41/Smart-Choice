@@ -74,7 +74,7 @@
         st.textContent = css;
         // أزل ورقة CSS القديمة المخزّنة على CDN حتى لا تتعارض قواعدها مع التصميم الحالي
         try { document.querySelectorAll('link[rel="stylesheet"][href*="assets/css/smart-choice.css"]').forEach(function (l) { l.parentNode.removeChild(l); }); } catch (e) {}
-        if (!document.getElementById("sc-font-live")) { var fl = document.createElement("link"); fl.id = "sc-font-live"; fl.rel = "stylesheet"; fl.href = "https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap"; document.head.appendChild(fl); }
+        if (!document.getElementById("sc-font-live")) { var fl = document.createElement("link"); fl.id = "sc-font-live"; fl.rel = "stylesheet"; fl.href = "https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Amiri:wght@400;700&display=swap"; document.head.appendChild(fl); }
       }).catch(function () {});
   } catch (e) {}
 })();
@@ -871,20 +871,20 @@
       var tl = function (id) { return U[id] || (tools + "#" + id); };
       var html = "<div class='sc-home-root'>" +
         "<section class='sc-h-hero'><div class='sc-h-hero-in'><div class='sc-h-hero-text'>" +
-        "<p class='sc-h-eyebrow'><span class='sc-h-dot'></span>حاسبات مجانية بالجنيه المصري · أسعار تتجدد تلقائياً</p>" +
-        "<h1>قرارك المالي <em>بالأرقام</em> قبل أن توقّع</h1>" +
-        "<p class='sc-h-lead'>اعرف صافي راتبك، وقسط قرضك، وهل الخصم أو التقسيط في صالحك فعلاً. مع كل نتيجة المعادلة والرسم، وتُحسب داخل متصفحك دون تسجيل.</p>" +
-        "<div class='sc-h-cta'><a class='sc-btn' href='" + tools + "#assistant'>اسأل المساعد بأرقامك</a><a class='sc-btn alt' href='" + tools + "'>تصفّح الحاسبات</a></div>" +
+        "<p class='sc-h-eyebrow'><span class='sc-h-dot'></span>حاسبات بالجنيه المصري، وأسعار الذهب والعملات</p>" +
+        "<h1>احسب <em>قبل أن توقّع</em></h1>" +
+        "<p class='sc-h-lead'>صافي المرتب بعد الضريبة، قسط القرض وفوائده، والفرق بين التقسيط والكاش. تحت كل حاسبة شرح للمعادلة ومثال محسوب. الحساب يتم في متصفحك ولا نطلب تسجيلاً.</p>" +
+        "<div class='sc-h-cta'><a class='sc-btn' href='" + tools + "#assistant'>اكتب سؤالك بأرقامك</a><a class='sc-btn alt' href='" + tools + "'>كل الحاسبات</a></div>" +
         "<div class='sc-rates-wrap sc-ticker' hidden><div id='sc-rates-strip' class='sc-rs'></div><a class='sc-ticker-link' href='" + by("أسعار اليوم") + "'>كل الأسعار ←</a></div></div>" +
-        "<form class='sc-h-quick' onsubmit='return false' aria-label='مثال حي: صافي الراتب'><p class='sc-h-qtag'>مثال حي · ضريبة المرتبات</p>" +
+        "<form class='sc-h-quick' onsubmit='return false' aria-label='مثال حي: صافي الراتب'><p class='sc-h-qtag'>مثال: ضريبة المرتبات</p>" +
         "<label>الراتب الشهري الإجمالي (جنيه)<input id='sc-hq-g' type='number' inputmode='decimal' value='20000' min='0'></label>" +
         "<label>التأمينات الاجتماعية الشهرية<input id='sc-hq-i' type='number' inputmode='decimal' value='1100' min='0'></label>" +
         "<dl class='sc-hq-out'><div><dt>صافي الراتب شهرياً</dt><dd id='sc-hq-net'>—</dd></div><div><dt>الضريبة شهرياً</dt><dd id='sc-hq-tax'>—</dd></div></dl>" +
         "<div class='sc-hq-bar' role='img' aria-label='توزيع الراتب بين الصافي والضريبة والتأمينات'><i class='net'></i><i class='tax'></i><i class='ins'></i></div><p class='sc-hq-leg'><span class='net'>الصافي</span><span class='tax'>الضريبة</span><span class='ins'>التأمينات</span></p>" +
         "<p class='sc-h-qnote'>شرائح مصراوي المنشورة بتاريخ 2/8/2026 مع إعفاء شخصي 20 ألف جنيه سنوياً. <a href='" + tl("taxeg") + "'>افتح الحاسبة كاملة ←</a></p></form></div></section>" +
-        "<section class='sc-h-sec'><div class='sc-h-head'><h2>ابدأ من سؤالك</h2></div><div class='sc-h-ask'>" +
+        "<section class='sc-h-sec'><div class='sc-h-head'><h2>أكثر ما يُسأل عنه</h2></div><div class='sc-h-ask'>" +
         DECISIONS.map(function (d) { return "<a data-cat='" + d[3] + "' href='" + tl(d[0]) + "'><span class='ico'>" + window.SCI.svg(window.SCI.tab(d[0]), 22) + "</span><b>" + d[1] + "</b><small>" + d[2] + "</small></a>"; }).join("") + "</div></section>" +
-        "<section class='sc-h-sec'><div class='sc-h-head'><h2>الحاسبات حسب مجالك</h2></div><div class='sc-h-cats'>" +
+        "<section class='sc-h-sec'><div class='sc-h-head'><h2>الحاسبات حسب الموضوع</h2></div><div class='sc-h-cats'>" +
         GROUPS.map(function (g) { return "<div class='sc-h-cat' data-cat='" + g[0] + "'><h3>" + g[1] + "</h3><ul>" + g[2].map(function (t) { return "<li><a href='" + tl(t[0]) + "'>" + t[1] + "</a></li>"; }).join("") + "</ul></div>"; }).join("") + "</div></section>" +
         "<section class='sc-h-sec'><div class='sc-h-all'><div><h2>" + ((Object.keys(U).length || 33) + 1) + " حاسبة ومساعد مجاني في مكان واحد</h2><p>مرتّبة حسب القرار: الراتب والضرائب، القروض والتقسيط، الادخار والاستثمار، التسوق، ومشروعك الصغير. تُحسب في متصفحك ولا نحفظ أرقامك.</p></div><a class='sc-btn' href='" + tools + "'>تصفّح كل الحاسبات</a></div></section>" +
         "<section class='sc-h-sec sc-h-caps'><div class='sc-h-head'><h2>ما نلتزم به</h2></div><div class='sc-h-capgrid'><div><b>المعادلة ظاهرة</b><p>لا أرقام مخفية: ترى كيف حُسبت كل نتيجة.</p></div><div><b>أرقامك تبقى عندك</b><p>تُحسب في متصفحك ولا تُرسل إلى أي جهة.</p></div><div><b>مصدر وتاريخ لكل رقم مرجعي</b><p>وما لا نملك له مصدراً موثوقاً تُدخله أنت بدل أن نخمّنه.</p></div></div></section>" +
@@ -1529,7 +1529,7 @@
    لا تغيّر معادلات الأدوات؛ تعيد حساب الرسم من المدخلات نفسها بالمعادلات نفسها. الرسوم نصوص/أرقام داخلية فقط (لا HTML من مصادر خارجية). */
 (function () {
   var nf = new Intl.NumberFormat("ar-EG", { maximumFractionDigits: 0 }), nf2 = new Intl.NumberFormat("ar-EG", { maximumFractionDigits: 2 });
-  var BLUE = "#3b82ff", GREEN = "#10b981", AMBER = "#f59e0b", VIOLET = "#8b5cf6", GREY = "#94a3b8";
+  var BLUE = "#2b5a4a", GREEN = "#2b5a4a", AMBER = "#a8481f", VIOLET = "#b8891e", GREY = "#9a917c";
   function $(id) { return document.getElementById(id); }
   function val(id) { var e = $(id); return e ? parseFloat(e.value) : NaN; }
   function donut(parts, top, sub) {
@@ -1665,24 +1665,4 @@
   };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
   setTimeout(init, 1500);
-})();
-
-/* حركة الظهور عند التمرير (تتوقف مع prefers-reduced-motion) */
-(function () {
-  try {
-    if (!("IntersectionObserver" in window) || (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) return;
-    var SEL = ".sc-h-sec,.sc-h-ask a,.sc-h-cat,.sc-h-capgrid>div,.sc-tabs button,.sc-tool-card,.sc-rgrid .sc-rcard,.sc-latest-posts>*,.sc-cards>*";
-    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("sc-in"); io.unobserve(e.target); } }); }, { threshold: .08, rootMargin: "0px 0px -40px 0px" });
-    function scan() {
-      document.querySelectorAll(SEL).forEach(function (el) {
-        if (el.__rv) return; el.__rv = 1; el.classList.add("sc-rv");
-        var i = Array.prototype.indexOf.call(el.parentNode.children, el); el.style.setProperty("--d", Math.min(i, 8));
-        io.observe(el);
-      });
-    }
-    document.documentElement.classList.add("sc-anim");
-    var t; new MutationObserver(function () { clearTimeout(t); t = setTimeout(scan, 80); }).observe(document.body, { childList: true, subtree: true });
-    scan();
-    setTimeout(function () { document.querySelectorAll(".sc-rv:not(.sc-in)").forEach(function (e) { var r = e.getBoundingClientRect(); if (r.top < innerHeight) e.classList.add("sc-in"); }); }, 1800);
-  } catch (e) {}
 })();

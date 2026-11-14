@@ -75,7 +75,7 @@ add("pass" if not nolabel else "warn", "كل مقال له تصنيف", "، ".jo
 
 # 4) القالب
 theme = (ROOT / "theme" / "smart-choice-blogger.xml").read_text(encoding="utf-8")
-add("pass" if "adsbygoogle.js?client=ca-" + PUB in theme else "fail", "كود AdSense مثبت في القالب")
+add("pass" if ("adsbygoogle.js" in theme and PUB in theme and "SC-AD-GATE" in theme) else "fail", "كود AdSense مثبت في القالب (مشروط بصفحات المحتوى)")
 add("pass" if "viewport" in theme else "fail", "وسم viewport (متوافق مع الهاتف)")
 add("pass" if "G-" in theme else "warn", "Google Analytics مثبت")
 

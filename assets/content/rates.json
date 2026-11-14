@@ -15,8 +15,8 @@
  "gold": {
   "source": "xaus.com",
   "note": "سعر مرجعي عالمي محوّل للجنيه، لا يشمل المصنعية ولا فرق السوق المحلي",
-  "updated": 1794660758,
-  "fetched": 1794660769,
+  "updated": 1794664468,
+  "fetched": 1794664471,
   "status": "fresh",
   "usd_oz": 3887.6,
   "egp_gram": {
@@ -28,8 +28,8 @@
  "silver": {
   "source": "xaus.com",
   "note": "سعر مرجعي عالمي للفضة الخالصة محوّل للجنيه",
-  "updated": 1794660758,
-  "fetched": 1794660769,
+  "updated": 1794664468,
+  "fetched": 1794664471,
   "status": "fresh",
   "usd_oz": 48.65,
   "egp_gram": {

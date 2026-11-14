@@ -5,7 +5,7 @@ INFO  Home style probe: font=Tajawal, "Segoe UI", Tahoma, Arial, sans | button=r
 OK    Installed theme has the GitHub loader (if FAIL: upload theme/smart-choice-blogger.xml once)
 OK    CDN serves latest front-end JS (self-heal present)
 OK    Nav has no old-brand pages: الرئيسيةالأدوات الذكيةالمقالاتأسعار اليوممقارنة المنتجاتمركز القرار
-WARN  ads.txt غير مفعّل بعد في إعدادات بلوجر
+OK    ads.txt يحتوي معرّف الناشر
 INFO  Pages feed entries: 43
 OK    Tools page loads
 OK    Hub: assistant visible

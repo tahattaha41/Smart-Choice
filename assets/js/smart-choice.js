@@ -866,22 +866,26 @@
       var FAQ = [["هل الأدوات مجانية وهل أحتاج إلى تسجيل؟", "نعم، كل الأدوات مجانية وتعمل مباشرة دون حساب أو بريد إلكتروني."], ["هل تُرسل أرقامي إلى أي جهة؟", "لا. تُحسب النتائج داخل متصفحك فقط، ولا نحفظ ما تدخله."], ["هل النتائج نصيحة مالية؟", "لا. هي حسابات تقريبية مبنية على أرقامك، وليست نصيحة مالية أو قانونية؛ استشر مختصاً في القرارات الكبيرة."], ["كيف أختار بين التقسيط والكاش؟", "استخدم أداتي «التقسيط مقابل الكاش» و«الفائدة الفعلية للتقسيط» لمعرفة الفرق الحقيقي بالأرقام قبل القرار."], ["ما الأداة المناسبة لمشروعي الصغير؟", "ابدأ بـ«هامش الربح» ثم «نقطة التعادل»، وراجع دليل التسعير في المقالات."]];
       try { var fl = document.createElement("script"); fl.type = "application/ld+json"; fl.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": FAQ.map(function (q) { return { "@type": "Question", "name": q[0], "acceptedAnswer": { "@type": "Answer", "text": q[1] } }; }) }); document.head.appendChild(fl); } catch (e) {}
       var U = window.__scToolUrls || {};
-      var DECISIONS = [["effrate", "هل التقسيط أغلى من الكاش فعلاً؟", "الفائدة الفعلية للتقسيط"], ["discount", "هل هذا الخصم يوفّر لي فعلاً؟", "حاسبة الخصم"], ["loan", "كم قسط القرض وإجمالي فوائده؟", "حاسبة القرض"], ["gold", "كم تكلفة قطعة الذهب مع المصنعية؟", "الذهب والمصنعية"], ["bankdep", "كم يعطيني الادخار في شهادة بنكية؟", "عائد شهادة الادخار"], ["compare", "أي المنتجين أرخص على المدى الطويل؟", "مقارنة المنتجات"]];
+      var DECISIONS = [["effrate", "هل التقسيط أغلى من الكاش فعلاً؟", "الفائدة الفعلية للتقسيط", "money"], ["discount", "هل هذا الخصم يوفّر لي فعلاً؟", "حاسبة الخصم", "shop"], ["loan", "كم قسط القرض وإجمالي فوائده؟", "حاسبة القرض", "money"], ["gold", "كم تكلفة قطعة الذهب مع المصنعية؟", "الذهب والمصنعية", "shop"], ["bankdep", "كم يعطيني الادخار في شهادة بنكية؟", "عائد شهادة الادخار", "life"], ["compare", "أي المنتجين أرخص على المدى الطويل؟", "مقارنة المنتجات", "biz"]];
+      var GROUPS = [["money", "المال والرواتب", [["taxeg", "ضريبة المرتبات"], ["loan", "القرض"], ["bankdep", "شهادة الادخار"], ["budget", "الميزانية الشهرية"], ["saving", "هدف الادخار"], ["compound", "نمو الادخار"]]], ["shop", "التسوق والأسعار", [["discount", "حاسبة الخصم"], ["stack", "خصومات متتالية"], ["effrate", "الفائدة الفعلية"], ["unit", "سعر الوحدة"], ["compare", "مقارنة المنتجات"], ["decide", "مركز القرار"]]], ["biz", "مشروعك الصغير", [["margin", "هامش الربح"], ["breakeven", "نقطة التعادل"], ["vat", "الضريبة المضافة"], ["roi", "العائد على الاستثمار"], ["hourly", "قيمة ساعتك"], ["split", "قسمة الفاتورة"]]], ["life", "حياتك اليومية", [["gold", "الذهب والمصنعية"], ["zakat", "الزكاة"], ["fx", "تحويل عملة"], ["inflation", "التضخم"], ["appl", "تشغيل جهاز"], ["trip", "تكلفة الرحلة"]]]];
       var tl = function (id) { return U[id] || (tools + "#" + id); };
       var html = "<div class='sc-home-root'>" +
-        "<section class='sc-h-hero'><div class='sc-h-hero-text'>" +
-        "<p class='sc-h-eyebrow'>حاسبات مالية بالجنيه المصري</p>" +
-        "<h1>اعرف صافي راتبك وتكلفة قرارك قبل أن توقّع</h1>" +
-        "<p class='sc-h-lead'>أدخل أرقامك فتظهر النتيجة والمعادلة المستخدمة. كل الحسابات تتم داخل متصفحك، دون تسجيل ودون إرسال بياناتك لأحد.</p>" +
-        "<div class='sc-h-cta'><a class='sc-btn' href='" + tools + "#assistant'>اسأل المساعد بأرقامك</a><a class='sc-btn alt' href='" + tools + "'>تصفّح الحاسبات</a></div></div>" +
+        "<section class='sc-h-hero'><div class='sc-h-hero-in'><div class='sc-h-hero-text'>" +
+        "<p class='sc-h-eyebrow'><span class='sc-h-dot'></span>حاسبات مجانية بالجنيه المصري · أسعار تتجدد تلقائياً</p>" +
+        "<h1>قرارك المالي <em>بالأرقام</em> قبل أن توقّع</h1>" +
+        "<p class='sc-h-lead'>اعرف صافي راتبك، وقسط قرضك، وهل الخصم أو التقسيط في صالحك فعلاً. مع كل نتيجة المعادلة والرسم، وتُحسب داخل متصفحك دون تسجيل.</p>" +
+        "<div class='sc-h-cta'><a class='sc-btn' href='" + tools + "#assistant'>اسأل المساعد بأرقامك</a><a class='sc-btn alt' href='" + tools + "'>تصفّح الحاسبات</a></div>" +
+        "<div class='sc-rates-wrap sc-ticker' hidden><div id='sc-rates-strip' class='sc-rs'></div><a class='sc-ticker-link' href='" + by("أسعار اليوم") + "'>كل الأسعار ←</a></div></div>" +
         "<form class='sc-h-quick' onsubmit='return false' aria-label='مثال حي: صافي الراتب'><p class='sc-h-qtag'>مثال حي · ضريبة المرتبات</p>" +
         "<label>الراتب الشهري الإجمالي (جنيه)<input id='sc-hq-g' type='number' inputmode='decimal' value='20000' min='0'></label>" +
         "<label>التأمينات الاجتماعية الشهرية<input id='sc-hq-i' type='number' inputmode='decimal' value='1100' min='0'></label>" +
         "<dl class='sc-hq-out'><div><dt>صافي الراتب شهرياً</dt><dd id='sc-hq-net'>—</dd></div><div><dt>الضريبة شهرياً</dt><dd id='sc-hq-tax'>—</dd></div></dl>" +
-        "<p class='sc-h-qnote'>شرائح مصراوي المنشورة بتاريخ 2/8/2026 مع إعفاء شخصي 20 ألف جنيه سنوياً. <a href='" + tl("taxeg") + "'>افتح الحاسبة كاملة ←</a></p></form></section>" +
-        "<section class='sc-h-sec sc-rates-wrap' hidden><div class='sc-h-head'><h2>أسعار اليوم</h2><a href='" + by("أسعار اليوم") + "'>كل الأسعار</a></div><div id='sc-rates-strip' class='sc-rgrid sc-rs'></div></section>" +
+        "<div class='sc-hq-bar' role='img' aria-label='توزيع الراتب بين الصافي والضريبة والتأمينات'><i class='net'></i><i class='tax'></i><i class='ins'></i></div><p class='sc-hq-leg'><span class='net'>الصافي</span><span class='tax'>الضريبة</span><span class='ins'>التأمينات</span></p>" +
+        "<p class='sc-h-qnote'>شرائح مصراوي المنشورة بتاريخ 2/8/2026 مع إعفاء شخصي 20 ألف جنيه سنوياً. <a href='" + tl("taxeg") + "'>افتح الحاسبة كاملة ←</a></p></form></div></section>" +
         "<section class='sc-h-sec'><div class='sc-h-head'><h2>ابدأ من سؤالك</h2></div><div class='sc-h-ask'>" +
-        DECISIONS.map(function (d) { return "<a href='" + tl(d[0]) + "'><span class='ico'>" + window.SCI.svg(window.SCI.tab(d[0]), 22) + "</span><b>" + d[1] + "</b><small>" + d[2] + "</small></a>"; }).join("") + "</div></section>" +
+        DECISIONS.map(function (d) { return "<a data-cat='" + d[3] + "' href='" + tl(d[0]) + "'><span class='ico'>" + window.SCI.svg(window.SCI.tab(d[0]), 22) + "</span><b>" + d[1] + "</b><small>" + d[2] + "</small></a>"; }).join("") + "</div></section>" +
+        "<section class='sc-h-sec'><div class='sc-h-head'><h2>الحاسبات حسب مجالك</h2></div><div class='sc-h-cats'>" +
+        GROUPS.map(function (g) { return "<div class='sc-h-cat' data-cat='" + g[0] + "'><h3>" + g[1] + "</h3><ul>" + g[2].map(function (t) { return "<li><a href='" + tl(t[0]) + "'>" + t[1] + "</a></li>"; }).join("") + "</ul></div>"; }).join("") + "</div></section>" +
         "<section class='sc-h-sec'><div class='sc-h-all'><div><h2>" + ((Object.keys(U).length || 33) + 1) + " حاسبة ومساعد مجاني في مكان واحد</h2><p>مرتّبة حسب القرار: الراتب والضرائب، القروض والتقسيط، الادخار والاستثمار، التسوق، ومشروعك الصغير. تُحسب في متصفحك ولا نحفظ أرقامك.</p></div><a class='sc-btn' href='" + tools + "'>تصفّح كل الحاسبات</a></div></section>" +
         "<section class='sc-h-sec sc-h-caps'><div class='sc-h-head'><h2>ما نلتزم به</h2></div><div class='sc-h-capgrid'><div><b>المعادلة ظاهرة</b><p>لا أرقام مخفية: ترى كيف حُسبت كل نتيجة.</p></div><div><b>أرقامك تبقى عندك</b><p>تُحسب في متصفحك ولا تُرسل إلى أي جهة.</p></div><div><b>مصدر وتاريخ لكل رقم مرجعي</b><p>وما لا نملك له مصدراً موثوقاً تُدخله أنت بدل أن نخمّنه.</p></div></div></section>" +
         "<section class='sc-h-sec'><div class='sc-h-head'><h2>أحدث الأدلة</h2><a href='/search'>كل المقالات</a></div><div class='sc-cards sc-latest-posts sc-h-posts'></div></section>" +
@@ -900,6 +904,7 @@
           var taxable = Math.max(0, (gv - iv) * 12 - 20000), tax = 0, prev = 0;
           B.forEach(function (x) { if (taxable > prev) tax += (Math.min(taxable, x[0]) - prev) * x[1]; prev = x[0]; });
           net.textContent = f.format(gv - iv - tax / 12); tx.textContent = f.format(tax / 12);
+          var bar = document.querySelector('.sc-hq-bar'); if (bar) { var w = [(gv - iv - tax / 12) / gv, tax / 12 / gv, iv / gv]; for (var k = 0; k < 3; k++) bar.children[k].style.width = (w[k] * 100).toFixed(2) + '%'; }
         }
         g.addEventListener("input", up); n.addEventListener("input", up); up();
       })();
@@ -1507,6 +1512,7 @@
     fetch(URL + "?t=" + Math.floor(Date.now() / 300000), { credentials: "omit" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
       if (!d) throw new Error("no data");
       if (b) { var hb = board(d); if (b.__h !== hb) { b.innerHTML = hb; b.__h = hb; } }
+      if (window.__scConvUpdate && document.getElementById("sc-rates-conv")) window.__scConvUpdate(d);
       if (s) { var hs = strip(d), w = s.closest ? s.closest(".sc-rates-wrap") : null; if (s.__h !== hs) { s.innerHTML = hs; s.__h = hs; } if (w) w.hidden = !hs; }
     }).catch(function () {
       if (b && b.__h === undefined) { b.innerHTML = "<p class='sc-muted'>تعذّر تحميل الأسعار الآن. أعد تحميل الصفحة بعد قليل.</p>"; }
@@ -1517,4 +1523,146 @@
   document.addEventListener("visibilitychange", function () { if (!document.hidden) mount(); });
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount); else mount();
   setTimeout(mount, 2500);
+})();
+
+/* Smart Choice — طبقة الأدوات الفعّالة: رسوم بيانية حية + جدول سداد + حفظ الحسابات + محوّل بالأسعار الحية.
+   لا تغيّر معادلات الأدوات؛ تعيد حساب الرسم من المدخلات نفسها بالمعادلات نفسها. الرسوم نصوص/أرقام داخلية فقط (لا HTML من مصادر خارجية). */
+(function () {
+  var nf = new Intl.NumberFormat("ar-EG", { maximumFractionDigits: 0 }), nf2 = new Intl.NumberFormat("ar-EG", { maximumFractionDigits: 2 });
+  var BLUE = "#3b82ff", GREEN = "#10b981", AMBER = "#f59e0b", VIOLET = "#8b5cf6", GREY = "#94a3b8";
+  function $(id) { return document.getElementById(id); }
+  function val(id) { var e = $(id); return e ? parseFloat(e.value) : NaN; }
+  function donut(parts, top, sub) {
+    var tot = parts.reduce(function (a, p) { return a + p.v; }, 0); if (!(tot > 0)) return ""; var off = 0;
+    var segs = parts.map(function (p) { var pc = p.v / tot * 100, o = "<circle cx='21' cy='21' r='15.9155' fill='none' stroke='" + p.c + "' stroke-width='6' stroke-dasharray='" + pc.toFixed(3) + " " + (100 - pc).toFixed(3) + "' stroke-dashoffset='" + (25 - off).toFixed(3) + "'/>"; off += pc; return o; }).join("");
+    return "<svg viewBox='0 0 42 42' class='sc-donut' role='img' aria-label='" + top + " " + sub + "'><circle cx='21' cy='21' r='15.9155' fill='none' stroke='var(--line)' stroke-width='6'/>" + segs + "<text x='21' y='21' text-anchor='middle' class='dt'>" + top + "</text><text x='21' y='26.5' text-anchor='middle' class='ds'>" + sub + "</text></svg>";
+  }
+  function legend(rows) { return "<ul class='sc-legend'>" + rows.map(function (r) { return "<li style='--c:" + r.c + "'><span>" + r.l + "</span><b>" + nf.format(r.v) + "</b></li>"; }).join("") + "</ul>"; }
+  function bars(rows) {
+    var m = Math.max.apply(null, rows.map(function (r) { return r.v; })); if (!(m > 0)) return "";
+    return "<div class='sc-bars'>" + rows.map(function (r) { return "<div class='sc-bar'><span>" + r.l + "</span><i style='width:" + Math.max(3, r.v / m * 100).toFixed(1) + "%;background:" + r.c + "'></i><b>" + nf.format(r.v) + "</b></div>"; }).join("") + "</div>";
+  }
+  function line(dep, bal, Y) {
+    var W = 320, H = 120, pad = 8, max = Math.max.apply(null, bal.concat(dep)); if (!(max > 0) || bal.length < 2) return "";
+    function pts(a) { return a.map(function (v, i) { return (W - pad - i * (W - 2 * pad) / (a.length - 1)).toFixed(1) + "," + (H - pad - v / max * (H - 2 * pad)).toFixed(1); }); }
+    var b = pts(bal), d = pts(dep);
+    return "<svg viewBox='0 0 " + W + " " + H + "' class='sc-line' role='img' aria-label='نمو الرصيد خلال " + nf2.format(Y) + " سنة'><polygon points='" + b.join(" ") + " " + (pad) + "," + (H - pad) + " " + (W - pad) + "," + (H - pad) + "' fill='" + BLUE + "' opacity='.14'/><polyline points='" + d.join(" ") + "' fill='none' stroke='" + GREY + "' stroke-width='2' stroke-dasharray='5 4'/><polyline points='" + b.join(" ") + "' fill='none' stroke='" + BLUE + "' stroke-width='3' stroke-linejoin='round'/></svg>";
+  }
+  var B = [[40000, 0], [55000, 0.10], [70000, 0.15], [200000, 0.20], [400000, 0.225], [1200000, 0.25], [Infinity, 0.275]];
+  var R = {
+    taxeg: function () {
+      var g = val("sc-tx-gross"), ins = isFinite(val("sc-tx-ins")) ? val("sc-tx-ins") : 0; if (!(g > 0) || ins < 0 || ins > g) return "";
+      var taxable = Math.max(0, (g - ins) * 12 - 20000), tax = 0, prev = 0, rows = [];
+      B.forEach(function (x) { if (taxable > prev) { var t = (Math.min(taxable, x[0]) - prev) * x[1]; tax += t; if (x[1] > 0) rows.push({ l: "شريحة " + nf2.format(x[1] * 100) + "٪", v: t, c: BLUE }); } prev = x[0]; });
+      var mt = tax / 12, net = g - ins - mt;
+      return "<div class='sc-viz-row'>" + donut([{ v: net, c: GREEN }, { v: mt, c: AMBER }, { v: ins, c: VIOLET }], nf2.format(net / g * 100) + "٪", "يصلك") + legend([{ l: "الصافي", v: net, c: GREEN }, { l: "الضريبة", v: mt, c: AMBER }, { l: "التأمينات", v: ins, c: VIOLET }]) + "</div>" +
+        (rows.length ? "<p class='sc-viz-h'>الضريبة السنوية موزّعة على الشرائح (جنيه)</p>" + bars(rows) : "<p class='sc-viz-h'>دخلك ضمن الشريحة المعفاة فلا ضريبة عليه.</p>");
+    },
+    loan: function () {
+      var P = val("sc-loan-amount"), ar = val("sc-loan-rate"), n = val("sc-loan-months");
+      if (![P, ar, n].every(isFinite) || P <= 0 || ar < 0 || ar > 100 || n < 1 || n % 1 !== 0 || n > 600) return "";
+      var r = ar / 1200, pay = r === 0 ? P / n : P * r / (1 - Math.pow(1 + r, -n)), total = pay * n, it = total - P, bal = P, yp = 0, yi = 0, rows = "";
+      for (var m = 1; m <= n; m++) { var i = bal * r, pr = pay - i; bal = Math.max(0, bal - pr); yp += pay; yi += i; if (m % 12 === 0 || m === n) { rows += "<tr><td>" + nf.format(Math.ceil(m / 12)) + "</td><td>" + nf.format(yp) + "</td><td>" + nf.format(yi) + "</td><td>" + nf.format(bal < 0.5 ? 0 : bal) + "</td></tr>"; yp = 0; yi = 0; } }
+      return "<div class='sc-viz-row'>" + donut([{ v: P, c: BLUE }, { v: it, c: AMBER }], nf2.format(it / total * 100) + "٪", "فوائد") + legend([{ l: "أصل القرض", v: P, c: BLUE }, { l: "إجمالي الفوائد", v: it, c: AMBER }, { l: "إجمالي المدفوع", v: total, c: GREY }]) + "</div>" +
+        "<details class='sc-sched'><summary>جدول السداد بالسنوات</summary><div class='sc-tw'><table><thead><tr><th>السنة</th><th>المسدَّد</th><th>منه فوائد</th><th>المتبقي</th></tr></thead><tbody>" + rows + "</tbody></table></div></details>";
+    },
+    compound: function () {
+      var P = val("sc-cp-start"), M = isFinite(val("sc-cp-add")) ? val("sc-cp-add") : 0, Rt = val("sc-cp-rate"), Y = val("sc-cp-years");
+      if (![P, Rt, Y].every(isFinite) || P < 0 || M < 0 || Rt < 0 || Y <= 0 || Y > 80) return "";
+      var r = Rt / 1200, dep = [], bal = [], yrs = Math.floor(Y), k, at = function (mo) { var g = r === 0 ? 1 : Math.pow(1 + r, mo); return [P + M * mo, P * g + M * (r === 0 ? mo : (g - 1) / r)]; };
+      for (k = 0; k <= yrs; k++) { var q = at(k * 12); dep.push(q[0]); bal.push(q[1]); } if (Y > yrs) { var z = at(Math.round(Y * 12)); dep.push(z[0]); bal.push(z[1]); }
+      var last = bal[bal.length - 1], ld = dep[dep.length - 1];
+      return "<div class='sc-viz-row col'>" + line(dep, bal, Y) + "<ul class='sc-legend'><li style='--c:" + BLUE + "'><span>الرصيد بعد المدة</span><b>" + nf.format(last) + "</b></li><li style='--c:" + GREY + "'><span>إجمالي ما أودعته</span><b>" + nf.format(ld) + "</b></li><li style='--c:" + GREEN + "'><span>العائد المفترض</span><b>" + nf.format(last - ld) + "</b></li></ul></div>";
+    },
+    bankdep: function () {
+      var A = val("sc-bd-amt"), r = val("sc-bd-rate"), m = val("sc-bd-months"), tx = isFinite(val("sc-bd-tax")) ? val("sc-bd-tax") : 0;
+      if (!(A > 0) || !(r >= 0) || !(m > 0) || tx < 0 || tx > 100) return "";
+      var gross = A * r / 1200 * m, tax = gross * tx / 100;
+      return "<p class='sc-viz-h'>عائد الشهادة خلال المدة (جنيه)</p>" + bars([{ l: "قبل الضريبة", v: gross, c: BLUE }, { l: "الضريبة", v: tax, c: AMBER }, { l: "الصافي", v: gross - tax, c: GREEN }].filter(function (x) { return x.v > 0; }));
+    },
+    saving: function () {
+      var t = val("sc-target"), sv = val("sc-saved"), mo = val("sc-monthly"); if ([t, sv, mo].some(function (n) { return !isFinite(n) || n < 0; }) || !(t > 0)) return "";
+      var pc = Math.min(100, sv / t * 100), rem = Math.max(0, t - sv);
+      return "<p class='sc-viz-h'>تقدّمك نحو الهدف: " + nf2.format(pc) + "٪</p><div class='sc-prog' role='progressbar' aria-valuemin='0' aria-valuemax='100' aria-valuenow='" + pc.toFixed(0) + "'><i style='width:" + pc.toFixed(1) + "%'></i></div>" + (rem > 0 && mo > 0 ? "<p class='sc-viz-h'>متبقي " + nf.format(rem) + " جنيه، أي نحو " + nf.format(Math.ceil(rem / mo)) + " شهراً بالمعدل الحالي.</p>" : "");
+    },
+    discount: function () {
+      var p = val("sc-price"), r = val("sc-rate"); if (!(p > 0) || !(r >= 0) || r > 100) return "";
+      var f = p * (1 - r / 100);
+      return "<p class='sc-viz-h'>السعر قبل وبعد الخصم (جنيه)</p>" + bars([{ l: "السعر الأصلي", v: p, c: GREY }, { l: "بعد الخصم", v: f, c: BLUE }, { l: "قيمة التوفير", v: p - f, c: GREEN }].filter(function (x) { return x.v > 0; }));
+    }
+  };
+  var pend = {};
+  function render(sec) {
+    var id = sec.id.replace(/^sc-/, ""), fn = R[id]; if (!fn) return;
+    var res = sec.querySelector(".sc-tool-result"); if (!res) return;
+    var box = sec.querySelector(".sc-viz"); if (!box) { box = document.createElement("div"); box.className = "sc-viz"; box.setAttribute("aria-live", "polite"); res.parentNode.insertBefore(box, res.nextSibling); }
+    var h = ""; try { h = fn() || ""; } catch (e) { h = ""; }
+    if (box.__h !== h) { box.innerHTML = h; box.__h = h; } box.hidden = !h;
+  }
+  function schedule(sec) { if (pend[sec.id]) return; pend[sec.id] = 1; requestAnimationFrame(function () { pend[sec.id] = 0; render(sec); }); }
+
+  /* حفظ الحسابات في المتصفح (localStorage) */
+  var KEY = "sc-saved-v1";
+  function load() { try { return JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { return {}; } }
+  function store(o) { try { localStorage.setItem(KEY, JSON.stringify(o)); return true; } catch (e) { return false; } }
+  function setupSave(sec) {
+    var id = sec.id.replace(/^sc-/, ""); if (id === "assistant" || sec.__sv) return;
+    var fields = Array.prototype.slice.call(sec.querySelectorAll("input[id],select[id]")); if (!fields.length || !sec.querySelector(".sc-tool-result")) return; sec.__sv = 1;
+    var box = document.createElement("div"); box.className = "sc-saved"; box.hidden = true; sec.appendChild(box);
+    var btn = document.createElement("button"); btn.type = "button"; btn.className = "sc-ghost sc-save-btn"; btn.textContent = "حفظ هذا الحساب";
+    (sec.querySelector(".sc-actions") || sec).appendChild(btn);
+    function draw() {
+      var list = load()[id] || []; box.textContent = ""; box.hidden = !list.length; if (!list.length) return;
+      var h = document.createElement("p"); h.className = "sc-viz-h"; h.textContent = "حساباتك المحفوظة على هذا الجهاز"; box.appendChild(h);
+      var ul = document.createElement("ul"); list.forEach(function (it, i) {
+        var li = document.createElement("li"), t = document.createElement("span"), r = document.createElement("button"), d = document.createElement("button");
+        t.textContent = new Date(it.t).toLocaleDateString("ar-EG", { day: "numeric", month: "short" }) + " · " + it.s; r.type = d.type = "button"; r.className = "sc-ghost"; d.className = "sc-ghost"; r.textContent = "استعادة"; d.textContent = "حذف"; d.setAttribute("aria-label", "حذف الحساب المحفوظ");
+        r.onclick = function () { Object.keys(it.v).forEach(function (k) { var e = $(k); if (e) { e.value = it.v[k]; e.dispatchEvent(new Event("input", { bubbles: true })); e.dispatchEvent(new Event("change", { bubbles: true })); } }); };
+        d.onclick = function () { var all = load(); (all[id] || []).splice(i, 1); store(all); draw(); };
+        li.appendChild(t); li.appendChild(r); li.appendChild(d); ul.appendChild(li);
+      }); box.appendChild(ul);
+    }
+    btn.onclick = function () {
+      var v = {}, sum = []; fields.forEach(function (e) { v[e.id] = e.value; if (sum.length < 2 && e.value !== "") sum.push(e.value); });
+      var all = load(); all[id] = [{ t: Date.now(), v: v, s: sum.join(" / ") || "—" }].concat(all[id] || []).slice(0, 5);
+      var ok = store(all); btn.textContent = ok ? "تم الحفظ على جهازك ✓" : "تعذّر الحفظ في هذا المتصفح"; setTimeout(function () { btn.textContent = "حفظ هذا الحساب"; }, 2200); draw();
+    };
+    draw();
+  }
+  function init() {
+    document.querySelectorAll(".sc-tool[id^='sc-']").forEach(function (sec) {
+      setupSave(sec);
+      if (R[sec.id.replace(/^sc-/, "")] && !sec.__vz) {
+        sec.__vz = 1; var res = sec.querySelector(".sc-tool-result");
+        if (res && window.MutationObserver) new MutationObserver(function () { schedule(sec); }).observe(res, { childList: true, characterData: true, subtree: true });
+        sec.addEventListener("input", function () { schedule(sec); }); sec.addEventListener("change", function () { schedule(sec); }); schedule(sec);
+      }
+    });
+  }
+  /* محوّل العملات والمعادن بالأسعار الحية (في صفحة أسعار اليوم) */
+  var CN = { USD: "دولار أمريكي", EUR: "يورو", GBP: "جنيه إسترليني", SAR: "ريال سعودي", AED: "درهم إماراتي", KWD: "دينار كويتي", QAR: "ريال قطري" }, units = {}, keys = "";
+  function liveB(b) { return !!b && Date.now() / 1000 - (b.fetched || b.updated || 0) < 36 * 3600; }
+  function conv() {
+    var a = $("sc-cv-a"), f = $("sc-cv-f"), t = $("sc-cv-t"), o = $("sc-cv-out"); if (!a || !f || !t || !o) return;
+    var x = parseFloat(a.value), uf = units[f.value], ut = units[t.value];
+    if (!(x >= 0) || !uf || !ut) { o.textContent = "أدخل مبلغاً صحيحاً."; return; }
+    o.textContent = nf2.format(x) + " " + uf.n + " ≈ " + nf2.format(x * uf.v / ut.v) + " " + ut.n + (/ذهب|فضة/.test(uf.n + ut.n) ? " (سعر مرجعي دون مصنعية)" : "");
+  }
+  window.__scConvUpdate = function (d) {
+    var host = $("sc-rates-conv"); if (!host) return; units = { EGP: { n: "جنيه مصري", v: 1 } };
+    if (d.egp && liveB(d)) Object.keys(CN).forEach(function (k) { if (d.egp[k] > 0) units[k] = { n: CN[k], v: d.egp[k] }; });
+    if (d.gold && d.gold.egp_gram && liveB(d.gold)) ["24", "21", "18"].forEach(function (k) { if (d.gold.egp_gram[k] > 0) units["g" + k] = { n: "جرام ذهب عيار " + k, v: d.gold.egp_gram[k] }; });
+    if (d.silver && d.silver.egp_gram && liveB(d.silver)) ["999", "925"].forEach(function (k) { if (d.silver.egp_gram[k] > 0) units["s" + k] = { n: "جرام فضة " + k, v: d.silver.egp_gram[k] }; });
+    var nk = Object.keys(units).join(",");
+    if (nk !== keys || !$("sc-cv-a")) {
+      keys = nk; var opt = Object.keys(units).map(function (k) { return "<option value='" + k + "'>" + units[k].n + "</option>"; }).join("");
+      host.innerHTML = "<div class='sc-conv'><label>المبلغ<input id='sc-cv-a' type='number' inputmode='decimal' min='0' value='1000'></label><label>من<select id='sc-cv-f'>" + opt + "</select></label><button type='button' id='sc-cv-sw' class='sc-ghost' aria-label='تبديل الاتجاه'>⇄</button><label>إلى<select id='sc-cv-t'>" + opt + "</select></label></div><p id='sc-cv-out' class='sc-conv-out' aria-live='polite'></p>";
+      $("sc-cv-f").value = units.USD ? "USD" : "EGP"; $("sc-cv-t").value = "EGP";
+      ["sc-cv-a", "sc-cv-f", "sc-cv-t"].forEach(function (i) { $(i).addEventListener("input", conv); $(i).addEventListener("change", conv); });
+      $("sc-cv-sw").addEventListener("click", function () { var f = $("sc-cv-f"), t = $("sc-cv-t"), v = f.value; f.value = t.value; t.value = v; conv(); });
+    }
+    conv();
+  };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
+  setTimeout(init, 1500);
 })();

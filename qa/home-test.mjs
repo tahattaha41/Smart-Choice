@@ -12,5 +12,5 @@ await p.goto('https://x.test/?m=1'); await p.addScriptTag({content:js});
 await p.waitForSelector('.sc-latest-posts h3');
 console.log('hero:',await p.textContent('.sc-h-hero h1'),'| cards:',await p.$$eval('.sc-latest-posts .sc-card',e=>e.length),'| first link:',await p.getAttribute('.sc-latest-posts .sc-card a','href'),'| errors',errs.length?errs:'none');
 await p.waitForSelector('#sc-rates-strip .sc-rcard');
-console.log('strip: cards',await p.$$eval('#sc-rates-strip .sc-rcard',e=>e.length),'| visible',await p.isVisible('#sc-rates-strip'),'| link',await p.getAttribute('.sc-rates-wrap .sc-h-head a','href'),'| nav',await p.$$eval('.sc-nav a',e=>e.map(x=>x.textContent).join(',')));
+console.log('strip: cards',await p.$$eval('#sc-rates-strip .sc-rcard',e=>e.length),'| visible',await p.isVisible('#sc-rates-strip'),'| link',await p.getAttribute('.sc-rates-wrap .sc-ticker-link','href'),'| nav',await p.$$eval('.sc-nav a',e=>e.map(x=>x.textContent).join(',')));
 await b.close();

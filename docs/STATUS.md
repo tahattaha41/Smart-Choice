@@ -1,6 +1,6 @@
 # حالة المشروع (تُولَّد تلقائياً — لا تعدّل يدوياً)
 
-> آخر توليد: 2026-11-14 09:37 UTC بواسطة scripts/update_status.py. للتفاصيل الثابتة والقرارات: docs/HANDOFF.md.
+> آخر توليد: 2026-11-14 13:24 UTC بواسطة scripts/update_status.py. للتفاصيل الثابتة والقرارات: docs/HANDOFF.md.
 
 ## الأرقام
 - مقالات: 24 (متوسط الكلمات 709)
@@ -19,15 +19,15 @@
 auto-posts.yml، blogger-cleanup.yml، blogger-pages-sync.yml، blogger-sync.yml، content-bundle.yml، frontend-assets.yml، live-e2e.yml، quality-audit.yml، rates.yml، site-review.yml، site-stats.yml، status-doc.yml، theme-validation.yml
 
 ## آخر الكوميتات
+- 977b280 2026-11-14 chore: live browser test report [skip ci]
+- 0b58da0 2026-11-14 chore: visitor stats [skip ci]
+- 6d52c91 2026-11-14 chore: periodic site review [skip ci]
+- 3d67674 2026-11-14 chore: reference FX rates [skip ci]
+- bbd0d38 2026-11-14 chore: reference FX rates [skip ci]
+- d89cb4e 2026-11-14 chore: reference FX rates [skip ci]
+- af7a1e8 2026-11-14 chore: reference FX rates [skip ci]
+- 9c32ef1 2026-11-14 chore(smart-choice): update Blogger pages sync state [skip ci]
+- e418551 2026-11-14 chore: quality audit reports [skip ci]
+- f1c9bba 2026-11-14 docs: auto-update STATUS.md [skip ci]
+- ba50fbb 2026-11-14 chore: update content bundle [skip ci]
 - 9e5b8c9 2026-11-14 content+theme: rebuild server-side home, 3 data-rich articles, internal tool links, expand about/editorial/contact, noindex admin
-- 6048460 2026-11-14 docs: auto-update STATUS.md [skip ci]
-- 45cdd42 2026-11-14 style: hub tool list as bordered cards with icons (v9 polish)
-- e5d90c4 2026-11-14 chore: live browser test report [skip ci]
-- 6c0b270 2026-11-14 chore: quality audit reports [skip ci]
-- 310bc9c 2026-11-14 docs: auto-update STATUS.md [skip ci]
-- 38d1e80 2026-11-14 feat: editorial v9 design; gate AdSense to content pages + noindex utility pages
-- 5817091 2026-11-14 chore: reference FX rates [skip ci]
-- 605e3fa 2026-11-14 docs: auto-update STATUS.md [skip ci]
-- 2ef9189 2026-11-14 feat: design v8 Motion (animated) replaces v7; scroll-reveal JS
-- e9053fb 2026-11-14 chore: reference FX rates [skip ci]
-- dafd175 2026-11-14 chore: live browser test report [skip ci]
